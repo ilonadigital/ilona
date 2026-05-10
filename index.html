@@ -3,388 +3,652 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ilona Digital — Creative Agency</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<title>Ilona Digital — Creative Agency Bandung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-:root {
-  --coral: #E8522A;
-  --coral-dark: #C4421C;
-  --navy: #1B3A8C;
-  --white: #FAFAF8;
-  --dark: #0A0A0A;
-  --gray: #888;
-  --line: rgba(255,255,255,0.08);
+/* ─────────────── TOKENS ─────────────── */
+:root{
+  --c:#0C0C0C;
+  --c2:#111111;
+  --w:#F0EDE6;
+  --coral:#E8522A;
+  --coral2:#FF6B3D;
+  --navy:#1B3A8C;
+  --navy2:#243FAA;
+  --line:rgba(240,237,230,0.07);
+  --muted:rgba(240,237,230,0.35);
+  --ease:cubic-bezier(0.76,0,0.24,1);
 }
+
+/* ─────────────── RESET ─────────────── */
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--dark);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--c);
+  color:var(--w);
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+}
 
-/* CURSOR */
-.cursor{position:fixed;z-index:9999;pointer-events:none;mix-blend-mode:difference;}
-.cursor-dot{width:8px;height:8px;background:var(--white);border-radius:50%;position:fixed;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;top:0;left:0;}
-.cursor-ring{width:40px;height:40px;border:1px solid rgba(255,255,255,0.5);border-radius:50%;position:fixed;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s,background 0.2s;top:0;left:0;}
-body:hover .cursor-dot{opacity:1;}
+/* ─────────────── GRAIN ─────────────── */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:9998;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.55;
+  mix-blend-mode:overlay;
+}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 3.5rem;mix-blend-mode:normal;}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--white);text-decoration:none;}
-.nav-logo span{color:var(--coral);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
-.nav-links a{font-size:0.75rem;font-weight:400;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s;}
-.nav-links a:hover{color:var(--white);}
-.nav-cta{background:var(--coral)!important;color:var(--white)!important;opacity:1!important;padding:0.55rem 1.5rem;letter-spacing:2px;transition:background 0.2s!important;}
-.nav-cta:hover{background:var(--coral-dark)!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px;}
-.hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:all 0.3s;}
-.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:4px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
-.mobile-menu a:hover{color:var(--coral);}
+/* ─────────────── CURSOR ─────────────── */
+#cur{position:fixed;z-index:9997;pointer-events:none;top:0;left:0;}
+#cur-dot{
+  width:5px;height:5px;background:var(--w);border-radius:50%;
+  position:fixed;top:0;left:0;transform:translate(-50%,-50%);
+  transition:width 0.25s var(--ease),height 0.25s var(--ease),background 0.25s;
+}
+#cur-ring{
+  width:36px;height:36px;border:1px solid rgba(240,237,230,0.3);border-radius:50%;
+  position:fixed;top:0;left:0;transform:translate(-50%,-50%);
+  transition:width 0.4s var(--ease),height 0.4s var(--ease),border-color 0.3s,background 0.3s;
+}
+body.cur-hover #cur-dot{width:8px;height:8px;background:var(--coral);}
+body.cur-hover #cur-ring{width:64px;height:64px;border-color:rgba(232,82,42,0.4);}
+body.cur-text #cur-ring{width:100px;height:100px;background:rgba(232,82,42,0.08);border-color:rgba(232,82,42,0.3);}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3.5rem 4rem;position:relative;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;z-index:0;}
-.hero-bg-text{position:absolute;bottom:-2rem;left:-1rem;font-family:'Bebas Neue',sans-serif;font-size:clamp(15rem,25vw,32rem);color:rgba(255,255,255,0.025);line-height:1;pointer-events:none;white-space:nowrap;letter-spacing:-5px;}
-.hero-line{position:absolute;top:0;right:25%;width:1px;height:100%;background:var(--line);}
-.hero-tag{position:absolute;top:50%;right:3.5rem;transform:translateY(-50%);writing-mode:vertical-rl;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
-.hero-content{position:relative;z-index:1;}
-.hero-sub{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
-.hero-sub-dot{width:6px;height:6px;background:var(--coral);border-radius:50%;}
-.hero-sub span{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--coral);}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,13vw,17rem);line-height:0.88;letter-spacing:-2px;margin-bottom:2.5rem;color:var(--white);}
-.hero h1 em{font-family:'Playfair Display',serif;font-style:italic;color:var(--coral);font-size:0.85em;}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
-.hero-desc{font-size:1rem;line-height:1.8;color:rgba(255,255,255,0.5);max-width:380px;font-weight:300;}
-.hero-cta{display:flex;gap:1.2rem;align-items:center;}
-.btn-coral{background:var(--coral);color:white;padding:1rem 2.5rem;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:500;transition:all 0.3s;display:inline-block;}
-.btn-coral:hover{background:var(--coral-dark);transform:translateY(-2px);}
-.btn-ghost{color:rgba(255,255,255,0.5);font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:0.6rem;transition:color 0.2s;}
-.btn-ghost:hover{color:white;}
-.hero-stats{display:flex;gap:3rem;}
-.hstat .n{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--coral);line-height:1;}
-.hstat .t{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:0.2rem;}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.8rem;}
-.hero-scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--coral),transparent);animation:scrollpulse 2s ease infinite;}
-@keyframes scrollpulse{0%,100%{opacity:1;transform:scaleY(1);}50%{opacity:0.4;transform:scaleY(0.7);}}
-.hero-scroll span{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+/* ─────────────── NAV ─────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem 4rem;
+  transition:background 0.4s,backdrop-filter 0.4s,padding 0.3s;
+}
+nav.scrolled{background:rgba(12,12,12,0.9);backdrop-filter:blur(20px);padding:1.1rem 4rem;border-bottom:1px solid var(--line);}
+.logo{
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;
+  letter-spacing:4px;text-decoration:none;color:var(--w);text-transform:uppercase;
+}
+.logo-dot{color:var(--coral);}
+.nav-r{display:flex;align-items:center;gap:3rem;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:0.7rem;font-weight:400;color:var(--muted);text-decoration:none;
+  letter-spacing:2.5px;text-transform:uppercase;transition:color 0.25s;
+}
+.nav-links a:hover{color:var(--w);}
+.nav-btn{
+  background:transparent;border:1px solid rgba(240,237,230,0.2);
+  color:var(--w);padding:0.55rem 1.4rem;font-size:0.68rem;
+  letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;
+  font-family:'DM Sans',sans-serif;font-weight:400;
+  transition:all 0.3s var(--ease);display:inline-block;
+}
+.nav-btn:hover{background:var(--coral);border-color:var(--coral);}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:none;background:none;border:none;padding:4px;}
+.hbg span{display:block;width:24px;height:1px;background:var(--w);transition:all 0.35s var(--ease);}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-/* MARQUEE */
-.marquee-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.2rem 0;overflow:hidden;background:rgba(255,255,255,0.02);}
-.marquee-track{display:flex;gap:3rem;white-space:nowrap;width:max-content;animation:marquee 30s linear infinite;}
-.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:rgba(255,255,255,0.2);flex-shrink:0;}
-.marquee-sep{color:var(--coral);opacity:0.6;}
+/* ─────────────── MOBILE MENU ─────────────── */
+.mob-menu{
+  display:none;position:fixed;inset:0;z-index:450;
+  background:var(--c);flex-direction:column;
+  align-items:flex-start;justify-content:flex-end;
+  padding:6rem 4rem 4rem;gap:0;
+}
+.mob-menu.open{display:flex;}
+.mob-link{
+  font-family:'Syne',sans-serif;font-size:clamp(2.5rem,8vw,5rem);
+  font-weight:800;letter-spacing:-1px;text-decoration:none;
+  color:rgba(240,237,230,0.15);text-transform:uppercase;
+  display:block;padding:0.4rem 0;border-bottom:1px solid var(--line);
+  width:100%;transition:color 0.25s;
+}
+.mob-link:hover{color:var(--coral);}
+.mob-menu-foot{margin-top:3rem;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+/* ─────────────── HERO ─────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-rows:1fr auto;
+  padding:0 4rem 3.5rem;
+  position:relative;overflow:hidden;
+}
+/* animated gradient orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(120px);
+  pointer-events:none;animation:orb-float 12s ease-in-out infinite;
+}
+.orb-1{width:600px;height:600px;background:rgba(232,82,42,0.12);top:-15%;left:-10%;animation-delay:0s;}
+.orb-2{width:500px;height:500px;background:rgba(27,58,140,0.15);bottom:0;right:-5%;animation-delay:-5s;}
+.orb-3{width:300px;height:300px;background:rgba(232,82,42,0.06);top:40%;left:40%;animation-delay:-8s;}
+@keyframes orb-float{
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(30px,-20px) scale(1.05);}
+  66%{transform:translate(-20px,30px) scale(0.97);}
+}
+/* grid overlay */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
+  pointer-events:none;
+}
+.hero-content{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;z-index:1;padding-top:10rem;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:1.2rem;margin-bottom:3rem;
+  opacity:0;animation:fadeup 0.8s var(--ease) 0.3s forwards;
+}
+.hero-eyebrow-line{width:50px;height:1px;background:var(--coral);}
+.hero-eyebrow span{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--coral);}
+.hero-tag{
+  position:absolute;top:1.5rem;right:0;
+  font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(240,237,230,0.2);writing-mode:vertical-rl;
+}
+.hero-h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(5rem,12vw,16rem);line-height:0.85;
+  letter-spacing:-4px;text-transform:uppercase;
+  overflow:hidden;
+}
+.hero-h1-line{
+  display:block;overflow:hidden;
+  opacity:0;transform:translateY(100%);
+  animation:slide-up 0.9s var(--ease) forwards;
+}
+.hero-h1-line:nth-child(1){animation-delay:0.4s;}
+.hero-h1-line:nth-child(2){animation-delay:0.55s;}
+.hero-h1-line:nth-child(3){animation-delay:0.7s;}
+.hero-h1-line span{display:block;}
+.h1-accent{
+  font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px var(--coral);font-size:0.9em;
+  letter-spacing:-2px;
+}
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;margin-top:3.5rem;
+  border-top:1px solid var(--line);padding-top:2rem;
+  opacity:0;animation:fadeup 0.8s var(--ease) 1s forwards;
+}
+.hero-desc{font-size:0.95rem;line-height:1.9;color:var(--muted);max-width:340px;}
+.hero-cta-group{display:flex;gap:1rem;align-items:center;}
+.btn-primary{
+  background:var(--coral);color:var(--w);
+  padding:1rem 2.5rem;font-size:0.72rem;letter-spacing:2.5px;
+  text-transform:uppercase;text-decoration:none;font-weight:400;
+  transition:all 0.35s var(--ease);display:inline-block;
+  font-family:'DM Sans',sans-serif;position:relative;overflow:hidden;
+}
+.btn-primary::after{content:'';position:absolute;inset:0;background:var(--coral2);transform:translateX(-101%);transition:transform 0.4s var(--ease);}
+.btn-primary:hover::after{transform:translateX(0);}
+.btn-primary span{position:relative;z-index:1;}
+.btn-secondary{
+  color:var(--muted);font-size:0.72rem;letter-spacing:2px;
+  text-transform:uppercase;text-decoration:none;
+  display:flex;align-items:center;gap:0.7rem;transition:color 0.25s;
+}
+.btn-secondary:hover{color:var(--w);}
+.btn-secondary svg{transition:transform 0.3s var(--ease);}
+.btn-secondary:hover svg{transform:translateX(5px);}
+.hero-stats{display:flex;gap:3.5rem;}
+.hstat-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--w);line-height:1;}
+.hstat-n em{color:var(--coral);font-style:normal;}
+.hstat-t{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:0.25rem;}
+.hero-scroll{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  opacity:0;animation:fadeup 0.8s var(--ease) 1.3s forwards;
+}
+.scroll-track{width:1px;height:80px;background:var(--line);position:relative;overflow:hidden;}
+.scroll-fill{position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--coral);animation:scrolldown 2s ease infinite;}
+@keyframes scrolldown{to{top:200%;}}
+.scroll-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.2);}
+
+/* ─────────────── MARQUEE ─────────────── */
+.marquee-wrap{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:1.1rem 0;overflow:hidden;position:relative;
+}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:150px;z-index:1;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--c),transparent);}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--c),transparent);}
+.marquee-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:marquee 35s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.mi{
+  display:flex;align-items:center;gap:2.5rem;padding:0 2.5rem;
+  font-size:0.68rem;letter-spacing:3.5px;text-transform:uppercase;color:rgba(240,237,230,0.18);
+  flex-shrink:0;transition:color 0.25s;
+}
+.mi:hover{color:rgba(240,237,230,0.5);}
+.mi-sep{color:var(--coral);font-size:0.5rem;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ABOUT */
-.about{padding:8rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;}
-.about::before{content:'02';position:absolute;top:4rem;right:3.5rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(255,255,255,0.03);line-height:1;}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:3px;color:var(--coral);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
-.section-num::after{content:'';flex:1;height:1px;background:var(--coral);opacity:0.3;max-width:60px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,7rem);line-height:0.9;letter-spacing:-1px;margin-bottom:2.5rem;}
-.section-title em{font-family:'Playfair Display',serif;font-style:italic;color:var(--coral);}
-.about-text p{font-size:1rem;line-height:1.9;color:rgba(255,255,255,0.5);margin-bottom:1.2rem;font-weight:300;}
-.about-pills{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:2rem;}
-.pill{border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);padding:0.4rem 1rem;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s;}
+/* ─────────────── SECTION BASE ─────────────── */
+.section{padding:10rem 4rem;position:relative;}
+.s-num{
+  font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:800;
+  letter-spacing:4px;color:var(--coral);text-transform:uppercase;
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;
+}
+.s-num::after{content:'';flex:none;width:40px;height:1px;background:var(--coral);opacity:0.4;}
+.s-ghost{
+  position:absolute;font-family:'Syne',sans-serif;font-size:clamp(8rem,18vw,22rem);
+  font-weight:800;letter-spacing:-6px;color:rgba(240,237,230,0.02);
+  line-height:1;pointer-events:none;text-transform:uppercase;
+  right:-2rem;top:5rem;user-select:none;
+}
+.s-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3rem,7vw,8rem);line-height:0.87;
+  letter-spacing:-3px;text-transform:uppercase;
+}
+.s-title em{
+  font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px var(--coral);letter-spacing:-1px;
+}
+
+/* ─────────────── ABOUT ─────────────── */
+.about{background:var(--c2);}
+.about-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:8rem;align-items:center;}
+.about-text p{font-size:1rem;line-height:2;color:var(--muted);margin-bottom:1.4rem;}
+.about-text p strong{color:var(--w);font-weight:400;}
+.about-pills{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:2.5rem;}
+.pill{
+  border:1px solid var(--line);color:rgba(240,237,230,0.3);
+  padding:0.45rem 1.1rem;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  transition:all 0.25s;
+}
 .pill:hover{border-color:var(--coral);color:var(--coral);}
-.about-right{position:relative;}
-.about-card{background:rgba(255,255,255,0.03);border:1px solid var(--line);padding:3rem;position:relative;overflow:hidden;}
-.about-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--coral);}
-.about-big-num{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:var(--coral);line-height:1;margin-bottom:0.5rem;opacity:0.8;}
-.about-card-label{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:3rem;}
-.about-card-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding-top:2rem;border-top:1px solid var(--line);}
-.astat .n{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--white);line-height:1;}
-.astat .t{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:0.3rem;}
-.about-tag{position:absolute;bottom:-1px;right:-1px;background:var(--navy);padding:0.8rem 1.5rem;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+.about-visual{position:relative;}
+.about-card{
+  background:var(--c);border:1px solid var(--line);padding:3.5rem;
+  position:relative;overflow:hidden;
+}
+.about-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(to bottom,var(--coral),var(--navy));}
+.about-num{font-family:'Syne',sans-serif;font-size:7rem;font-weight:800;color:var(--coral);line-height:1;opacity:0.7;margin-bottom:0.5rem;}
+.about-label{font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:3rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding-top:2.5rem;border-top:1px solid var(--line);}
+.ag-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--w);}
+.ag-t{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:0.3rem;}
+.about-badge{
+  position:absolute;bottom:-1px;right:-1px;
+  background:var(--navy);padding:0.9rem 1.8rem;
+  font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.6);
+}
+.about-accent{
+  position:absolute;top:-3rem;right:-3rem;
+  width:180px;height:180px;border:1px solid var(--line);border-radius:50%;
+  pointer-events:none;
+}
+.about-accent::after{
+  content:'';position:absolute;inset:20px;border:1px solid rgba(232,82,42,0.2);border-radius:50%;
+}
 
-/* SERVICES */
-.services{padding:8rem 3.5rem;position:relative;}
-.services::before{content:'03';position:absolute;top:4rem;right:3.5rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(255,255,255,0.03);line-height:1;}
-.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;gap:2rem;flex-wrap:wrap;}
-.svc-header-right{font-size:0.9rem;color:rgba(255,255,255,0.4);line-height:1.8;max-width:300px;font-weight:300;}
-.svc-list{display:flex;flex-direction:column;}
-.svc-item{display:flex;align-items:center;gap:3rem;padding:2rem 0;border-bottom:1px solid var(--line);cursor:default;transition:all 0.3s;position:relative;overflow:hidden;}
-.svc-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(232,82,42,0.05);transition:width 0.4s ease;}
+/* ─────────────── SERVICES ─────────────── */
+.services{background:var(--c);}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6rem;gap:3rem;flex-wrap:wrap;}
+.svc-head-right{font-size:0.9rem;color:var(--muted);line-height:1.9;max-width:280px;}
+.svc-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+.svc-item{
+  display:grid;grid-template-columns:60px 1fr auto auto;
+  align-items:center;gap:3rem;
+  padding:2.2rem 0;border-bottom:1px solid var(--line);
+  cursor:none;position:relative;overflow:hidden;
+  transition:padding 0.35s var(--ease);
+}
+.svc-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:rgba(232,82,42,0.04);transition:width 0.5s var(--ease);
+}
 .svc-item:hover::before{width:100%;}
+.svc-item:hover{padding-left:1.5rem;}
 .svc-item:hover .svc-name{color:var(--coral);}
-.svc-item:hover .svc-arrow{transform:translateX(5px);opacity:1;}
-.svc-n{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:rgba(255,255,255,0.15);letter-spacing:2px;min-width:50px;}
-.svc-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);letter-spacing:1px;color:var(--white);flex:1;transition:color 0.3s;}
-.svc-tag{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);min-width:200px;text-align:right;}
-.svc-arrow{font-size:1.5rem;color:var(--coral);opacity:0;transition:all 0.3s;}
+.svc-item:hover .svc-arr{opacity:1;transform:translateX(0);}
+.svc-n{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:800;color:rgba(240,237,230,0.12);letter-spacing:2px;}
+.svc-name{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.8rem);font-weight:700;letter-spacing:-0.5px;color:var(--w);transition:color 0.3s;text-transform:uppercase;}
+.svc-tags{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.svc-tag{
+  font-size:0.6rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(240,237,230,0.2);border:1px solid var(--line);padding:0.3rem 0.7rem;
+}
+.svc-arr{opacity:0;transform:translateX(-10px);color:var(--coral);font-size:1.2rem;transition:all 0.3s var(--ease);}
 
-/* PORTFOLIO */
-.portfolio{padding:8rem 3.5rem;position:relative;}
-.portfolio::before{content:'04';position:absolute;top:4rem;right:3.5rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(255,255,255,0.03);line-height:1;}
-.port-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap;}
-.port-tabs{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:3rem;}
-.tab{padding:0.5rem 1.2rem;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;cursor:none;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.35);font-family:'DM Sans',sans-serif;transition:all 0.2s;}
-.tab.active{background:var(--coral);border-color:var(--coral);color:white;}
-.tab:hover:not(.active){border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);}
+/* ─────────────── PORTFOLIO ─────────────── */
+.portfolio{background:var(--c2);}
+.port-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1.5rem;}
+.port-tabs{display:flex;gap:0.4rem;margin-bottom:3rem;flex-wrap:wrap;}
+.tab{
+  padding:0.5rem 1.2rem;font-size:0.62rem;letter-spacing:2.5px;
+  text-transform:uppercase;cursor:none;border:1px solid var(--line);
+  background:transparent;color:rgba(240,237,230,0.25);font-family:'DM Sans',sans-serif;
+  transition:all 0.25s;
+}
+.tab.active{background:var(--coral);border-color:var(--coral);color:var(--w);}
+.tab:hover:not(.active){border-color:rgba(240,237,230,0.2);color:rgba(240,237,230,0.6);}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
-.pcard{background:var(--dark);overflow:hidden;cursor:none;position:relative;group:true;}
-.pcard:hover .pimg{transform:scale(1.06);}
-.pcard:hover .pbody{background:rgba(232,82,42,0.1);}
-.pimg-wrap{overflow:hidden;height:220px;position:relative;}
-.pimg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;transition:transform 0.5s ease;}
-.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,0.6));opacity:0;transition:opacity 0.3s;}
-.pcard:hover .pcard-overlay{opacity:1;}
-.pbody{padding:1.5rem;border-top:1px solid var(--line);transition:background 0.3s;}
-.pcat{font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--coral);margin-bottom:0.4rem;}
-.pname{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:var(--white);}
+.pcard{background:var(--c);overflow:hidden;position:relative;}
+.pcard:first-child{grid-column:span 2;}
+.pcard:hover .pimg{transform:scale(1.07);}
+.pcard:hover .p-overlay{opacity:1;}
+.pcard:hover .p-info{transform:translateY(0);opacity:1;}
+.pimg-wrap{overflow:hidden;height:280px;position:relative;}
+.pcard:first-child .pimg-wrap{height:380px;}
+.pimg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:transform 0.6s var(--ease);}
+.p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 60%);opacity:0;transition:opacity 0.4s;}
+.p-info{
+  position:absolute;bottom:0;left:0;right:0;padding:2rem;
+  transform:translateY(15px);opacity:0;transition:all 0.4s var(--ease);
+}
+.p-cat{font-size:0.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--coral);margin-bottom:0.4rem;}
+.p-name{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;color:var(--w);text-transform:uppercase;}
+.port-more{margin-top:3rem;text-align:center;}
+.port-more-btn{
+  display:inline-flex;align-items:center;gap:1rem;
+  font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+  text-decoration:none;border:1px solid var(--line);padding:1rem 2rem;transition:all 0.3s var(--ease);
+}
+.port-more-btn:hover{color:var(--w);border-color:rgba(240,237,230,0.3);}
 
-/* CLIENTS */
-.clients{padding:8rem 3.5rem;position:relative;}
-.clients::before{content:'05';position:absolute;top:4rem;right:3.5rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(255,255,255,0.03);line-height:1;}
-.cl-header{margin-bottom:4rem;}
+/* ─────────────── CLIENTS ─────────────── */
+.clients{background:var(--c);}
+.cl-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;flex-wrap:wrap;gap:2rem;}
 .cl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:700px;}
-.cl-item{background:var(--dark);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;padding:1.5rem;transition:background 0.3s;}
-.cl-item:hover{background:rgba(255,255,255,0.03);}
-.cl-item img{width:100%;height:100%;object-fit:contain;filter:grayscale(100%) brightness(0.4) invert(1);mix-blend-mode:screen;transition:filter 0.3s;opacity:0.5;}
+.cl-item{
+  background:var(--c);aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  position:relative;overflow:hidden;transition:background 0.3s;
+}
+.cl-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--coral);transform:scaleX(0);transition:transform 0.4s var(--ease);transform-origin:left;}
+.cl-item:hover{background:rgba(240,237,230,0.02);}
+.cl-item:hover::after{transform:scaleX(1);}
+.cl-item img{width:100%;height:100%;object-fit:contain;filter:grayscale(100%) brightness(0.4) invert(1);mix-blend-mode:screen;transition:filter 0.4s,opacity 0.4s;opacity:0.4;}
 .cl-item:hover img{filter:grayscale(0%) brightness(1) invert(0);opacity:1;}
 
-/* CONTACT */
-.contact-section{padding:8rem 3.5rem;position:relative;}
-.contact-section::before{content:'06';position:absolute;top:4rem;right:3.5rem;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(255,255,255,0.03);line-height:1;}
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
-.contact-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,9rem);line-height:0.88;letter-spacing:-2px;margin-bottom:2rem;}
-.contact-big em{font-family:'Playfair Display',serif;font-style:italic;color:var(--coral);}
-.contact-sub{font-size:0.95rem;color:rgba(255,255,255,0.4);line-height:1.8;font-weight:300;max-width:380px;}
-.cform{background:rgba(255,255,255,0.03);border:1px solid var(--line);padding:3rem;}
-.ftitle{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;color:var(--white);margin-bottom:0.3rem;}
-.fsubtitle{font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:2.5rem;}
+/* ─────────────── CONTACT ─────────────── */
+.contact{background:var(--c2);overflow:hidden;}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
+.contact-left{position:sticky;top:10rem;}
+.contact-big{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(4rem,8vw,9rem);line-height:0.85;letter-spacing:-4px;text-transform:uppercase;margin-bottom:2rem;}
+.contact-big em{
+  font-family:'DM Sans',sans-serif;font-weight:300;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px var(--coral);letter-spacing:-2px;
+}
+.contact-sub{font-size:0.95rem;color:var(--muted);line-height:1.9;max-width:360px;margin-bottom:3rem;}
+.contact-info{display:flex;flex-direction:column;gap:0.8rem;}
+.cinfo{display:flex;align-items:center;gap:1rem;font-size:0.78rem;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.cinfo:hover{color:var(--w);}
+.cinfo-dot{width:4px;height:4px;background:var(--coral);border-radius:50%;flex-shrink:0;}
+/* Form */
+.cform{background:var(--c);border:1px solid var(--line);padding:3.5rem;position:relative;}
+.cform::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(to right,var(--coral),var(--navy));}
+.ftitle{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.3rem;}
+.fsub{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3rem;}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.fg{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.2rem;}
-.fg label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
-.fg input,.fg select,.fg textarea{border:none;border-bottom:1px solid rgba(255,255,255,0.1);padding:0.7rem 0;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--white);background:transparent;outline:none;transition:border-color 0.2s;width:100%;}
+.fg{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+.fg label{font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
+.fg input,.fg select,.fg textarea{
+  border:none;border-bottom:1px solid var(--line);padding:0.8rem 0;
+  font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--w);
+  background:transparent;outline:none;width:100%;
+  transition:border-color 0.3s;
+}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:var(--coral);}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,0.2);}
-.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.5rem center;cursor:none;}
-.fg select option{background:var(--dark);color:var(--white);}
-.fg textarea{resize:vertical;min-height:80px;}
-.btn-submit{width:100%;background:var(--coral);color:white;border:none;padding:1rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;cursor:none;transition:background 0.2s;margin-top:0.5rem;}
-.btn-submit:hover{background:var(--coral-dark);}
-.fnote{font-size:0.65rem;letter-spacing:1px;color:rgba(255,255,255,0.2);text-align:center;margin-top:1rem;}
-.fsuccess{display:none;text-align:center;padding:3rem 1rem;}
-.fsuccess h3{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:3px;color:var(--coral);margin-bottom:0.8rem;}
-.fsuccess p{font-size:0.9rem;color:rgba(255,255,255,0.4);line-height:1.8;}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(240,237,230,0.15);}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.5rem center;cursor:none;}
+.fg select option{background:var(--c);color:var(--w);}
+.fg textarea{resize:vertical;min-height:90px;}
+.btn-send{
+  width:100%;background:var(--coral);color:var(--w);border:none;
+  padding:1.1rem;font-family:'Syne',sans-serif;font-size:0.9rem;
+  font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  cursor:none;transition:all 0.35s var(--ease);margin-top:0.5rem;
+  position:relative;overflow:hidden;
+}
+.btn-send::after{content:'';position:absolute;inset:0;background:var(--coral2);transform:translateX(-101%);transition:transform 0.4s var(--ease);}
+.btn-send:hover::after{transform:translateX(0);}
+.btn-send span{position:relative;z-index:1;}
+.fnote{font-size:0.6rem;letter-spacing:1px;color:rgba(240,237,230,0.15);text-align:center;margin-top:1.2rem;line-height:1.6;}
+.fsuccess{display:none;text-align:center;padding:4rem 1rem;}
+.fsuccess h3{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--coral);margin-bottom:1rem;}
+.fsuccess p{font-size:0.9rem;color:var(--muted);line-height:1.8;}
 
-/* FOOTER */
-footer{border-top:1px solid var(--line);padding:2.5rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;color:rgba(255,255,255,0.2);}
+/* ─────────────── FOOTER ─────────────── */
+footer{
+  background:var(--c);border-top:1px solid var(--line);
+  padding:2.5rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-logo{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;letter-spacing:4px;color:rgba(240,237,230,0.2);text-transform:uppercase;}
 .footer-logo span{color:var(--coral);}
-footer p{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.2);}
-.footer-links{display:flex;gap:2rem;}
-.footer-links a{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 0.2s;}
-.footer-links a:hover{color:var(--coral);}
+footer p{font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,0.15);}
+.footer-socials{display:flex;gap:2rem;}
+.footer-socials a{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.2);text-decoration:none;transition:color 0.25s;}
+.footer-socials a:hover{color:var(--coral);}
 
-/* RESPONSIVE */
-@media(max-width:900px){
+/* ─────────────── ANIMATIONS ─────────────── */
+@keyframes fadeup{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slide-up{from{opacity:0;transform:translateY(100%);}to{opacity:1;transform:translateY(0);}}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─────────────── RESPONSIVE ─────────────── */
+@media(max-width:1024px){
+  nav{padding:1.4rem 2rem;}
+  nav.scrolled{padding:1rem 2rem;}
+  .hero{padding:0 2rem 3rem;}
+  .section{padding:7rem 2rem;}
+  .about-inner{grid-template-columns:1fr;gap:4rem;}
+  .svc-item{grid-template-columns:40px 1fr auto;gap:1.5rem;}
+  .svc-tags{display:none;}
+  .contact-inner{grid-template-columns:1fr;gap:4rem;}
+  .contact-left{position:static;}
+  footer{padding:2rem;}
+}
+@media(max-width:768px){
   body{cursor:auto;}
-  .cursor-dot,.cursor-ring{display:none;}
-  nav{padding:1.2rem 1.5rem;}
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
-  .hamburger span{cursor:pointer;}
-  .hero{padding:0 1.5rem 3.5rem;}
-  .hero h1{font-size:clamp(4rem,15vw,8rem);}
+  #cur-dot,#cur-ring{display:none;}
+  .nav-r .nav-links,.nav-r .nav-btn{display:none;}
+  .hbg{display:flex;}
+  .hero-h1{font-size:clamp(4rem,14vw,8rem);}
+  .hero-bottom{flex-direction:column;align-items:flex-start;}
   .hero-stats{gap:2rem;}
-  .hero-tag{display:none;}
-  section,.about,.services,.portfolio,.clients,.contact-section{padding:5rem 1.5rem;}
-  .about{grid-template-columns:1fr;gap:3rem;}
-  .svc-tag{display:none;}
   .pgrid{grid-template-columns:1fr 1fr;}
+  .pcard:first-child{grid-column:span 2;}
   .cl-grid{grid-template-columns:repeat(2,1fr);max-width:100%;}
-  .contact-inner{grid-template-columns:1fr;gap:3rem;}
   .frow{grid-template-columns:1fr;}
   .cform{padding:2rem 1.5rem;}
-  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
-  .hero-bottom{flex-direction:column;align-items:flex-start;}
-  .svc-header{flex-direction:column;align-items:flex-start;}
-  .port-header{flex-direction:column;align-items:flex-start;}
 }
 @media(max-width:520px){
-  .hero h1{font-size:4rem;}
+  .hero-h1{font-size:clamp(3.2rem,13vw,5rem);}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem;}
   .pgrid{grid-template-columns:1fr;}
-  .hero-stats{gap:1.5rem;}
-  .hstat .n{font-size:2.2rem;}
+  .pcard:first-child{grid-column:span 1;}
+  .pcard:first-child .pimg-wrap{height:280px;}
 }
 </style>
 </head>
 <body>
 
 <!-- CURSOR -->
-<div class="cursor-dot" id="cdot"></div>
-<div class="cursor-ring" id="cring"></div>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">ILO<span>N</span>A</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#clients">Clients</a></li>
-    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
-  </ul>
-  <button class="hamburger" id="hbg" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+<nav id="nav">
+  <a href="#" class="logo">ILO<span class="logo-dot">N</span>A</a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#clients">Clients</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Let's Talk</a>
+    <button class="hbg" id="hbg" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mmenu">
-  <a href="#about" onclick="closeMM()">About</a>
-  <a href="#services" onclick="closeMM()">Services</a>
-  <a href="#portfolio" onclick="closeMM()">Work</a>
-  <a href="#clients" onclick="closeMM()">Clients</a>
-  <a href="#contact" onclick="closeMM()">Let's Talk</a>
+<div class="mob-menu" id="mobmenu">
+  <a href="#about" class="mob-link" onclick="closeMM()">About</a>
+  <a href="#services" class="mob-link" onclick="closeMM()">Services</a>
+  <a href="#portfolio" class="mob-link" onclick="closeMM()">Work</a>
+  <a href="#clients" class="mob-link" onclick="closeMM()">Clients</a>
+  <a href="#contact" class="mob-link" onclick="closeMM()" style="color:var(--coral);">Let's Talk →</a>
+  <div class="mob-menu-foot">Bandung · Since 2021 · #LetsGrow!</div>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="hero-bg-text">ILONA</div>
-    <div class="hero-line"></div>
-  </div>
-  <div class="hero-tag">Digital Creative Agency — Bandung 2021</div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Est. 2021 — Bandung, West Java, Indonesia</div>
   <div class="hero-content">
-    <div class="hero-sub">
-      <div class="hero-sub-dot"></div>
-      <span>Creative Agency — Bandung</span>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Social Media Agency & Creative Strategist</span>
     </div>
-    <h1>WE<br>MAKE<br><em>Brands</em><br>GROW</h1>
+    <h1 class="hero-h1">
+      <span class="hero-h1-line"><span>WE</span></span>
+      <span class="hero-h1-line"><span>MAKE</span></span>
+      <span class="hero-h1-line"><span class="h1-accent">Brands</span></span>
+    </h1>
     <div class="hero-bottom">
-      <p class="hero-desc">Social media agency & creative marketing strategist. Kami humanize brands lewat konten yang authentic, inovatif, dan resonan.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn-coral">Mulai Sekarang</a>
-        <a href="#portfolio" class="btn-ghost">Lihat Karya →</a>
+      <p class="hero-desc">Humanizing brands lewat konten yang authentic, inovatif, dan resonan. Karena brand yang tumbuh adalah brand yang terasa nyata.</p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-primary"><span>Mulai Sekarang</span></a>
+        <a href="#portfolio" class="btn-secondary">Lihat Karya <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
       </div>
       <div class="hero-stats">
-        <div class="hstat"><div class="n">50+</div><div class="t">Clients</div></div>
-        <div class="hstat"><div class="n">3+</div><div class="t">Years</div></div>
-        <div class="hstat"><div class="n">7</div><div class="t">Services</div></div>
+        <div><div class="hstat-n">50<em>+</em></div><div class="hstat-t">Clients</div></div>
+        <div><div class="hstat-n">3<em>+</em></div><div class="hstat-t">Years</div></div>
+        <div><div class="hstat-n">7</div><div class="hstat-t">Services</div></div>
       </div>
     </div>
   </div>
   <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
+    <div class="scroll-track"><div class="scroll-fill"></div></div>
+    <span class="scroll-label">Scroll</span>
   </div>
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">BANK BRI</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">BANK BJB</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">MAXIM</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">RESSO</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">NATASHA</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">SCARLETT</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">WARDAH</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">VIU</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">MERAKI CAFE</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">NOKIA</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">BANK BRI</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">BANK BJB</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">MAXIM</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">RESSO</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">NATASHA</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">SCARLETT</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">WARDAH</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">VIU</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">MERAKI CAFE</span><span class="marquee-item marquee-sep"> ✦ </span>
-    <span class="marquee-item">NOKIA</span><span class="marquee-item marquee-sep"> ✦ </span>
+    <div class="mi">Bank BRI <span class="mi-sep">✦</span></div><div class="mi">Bank BJB <span class="mi-sep">✦</span></div><div class="mi">Maxim <span class="mi-sep">✦</span></div><div class="mi">Resso <span class="mi-sep">✦</span></div><div class="mi">Natasha <span class="mi-sep">✦</span></div><div class="mi">Scarlett <span class="mi-sep">✦</span></div><div class="mi">Wardah <span class="mi-sep">✦</span></div><div class="mi">Viu <span class="mi-sep">✦</span></div><div class="mi">Nokia <span class="mi-sep">✦</span></div><div class="mi">Meraki Cafe <span class="mi-sep">✦</span></div><div class="mi">Complete Me <span class="mi-sep">✦</span></div><div class="mi">Duamata <span class="mi-sep">✦</span></div>
+    <div class="mi">Bank BRI <span class="mi-sep">✦</span></div><div class="mi">Bank BJB <span class="mi-sep">✦</span></div><div class="mi">Maxim <span class="mi-sep">✦</span></div><div class="mi">Resso <span class="mi-sep">✦</span></div><div class="mi">Natasha <span class="mi-sep">✦</span></div><div class="mi">Scarlett <span class="mi-sep">✦</span></div><div class="mi">Wardah <span class="mi-sep">✦</span></div><div class="mi">Viu <span class="mi-sep">✦</span></div><div class="mi">Nokia <span class="mi-sep">✦</span></div><div class="mi">Meraki Cafe <span class="mi-sep">✦</span></div><div class="mi">Complete Me <span class="mi-sep">✦</span></div><div class="mi">Duamata <span class="mi-sep">✦</span></div>
   </div>
 </div>
 
 <!-- ABOUT -->
-<section class="about" id="about">
-  <div>
-    <div class="section-num">02 — About Us</div>
-    <h2 class="section-title">WE<br>HUMAN<br>IZE<br><em>Brands</em></h2>
-    <div class="about-text">
-      <p>Kami adalah Ilona — social media agency dan creative marketing strategist yang berbasis di Bandung, berdiri sejak 2021.</p>
-      <p>Kami percaya bahwa humanizing brands adalah kunci untuk menciptakan brand image yang inovatif, authentic, dan honest.</p>
-    </div>
-    <div class="about-pills">
-      <span class="pill">Authentic</span>
-      <span class="pill">Innovative</span>
-      <span class="pill">Honest</span>
-      <span class="pill">Creative</span>
-      <span class="pill">#LetsGrow!</span>
-    </div>
-  </div>
-  <div class="about-right">
-    <div class="about-card">
-      <div class="about-big-num">21</div>
-      <div class="about-card-label">Founded in Bandung — 2021</div>
-      <div class="about-card-stats">
-        <div class="astat"><div class="n">50+</div><div class="t">Happy Clients</div></div>
-        <div class="astat"><div class="n">7</div><div class="t">Services</div></div>
-        <div class="astat"><div class="n">3+</div><div class="t">Years Exp.</div></div>
-        <div class="astat"><div class="n">∞</div><div class="t">#LetsGrow!</div></div>
+<section class="section about" id="about">
+  <div class="s-ghost">ILONA</div>
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="s-num">02 — About Us</div>
+      <h2 class="s-title" style="margin-bottom:2.5rem;">WE<br>HUMAN<br>IZE<br><em>Brands.</em></h2>
+      <div class="about-text">
+        <p>Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist yang berbasis di Bandung, berdiri sejak 2021.</p>
+        <p>Kami percaya bahwa <strong>humanizing brands</strong> adalah kunci untuk menciptakan brand image yang inovatif, authentic, dan honest — yang benar-benar resonan dengan target audiens kamu.</p>
+        <p>Dengan lingkungan yang kreatif dan semangat muda, kami bantu brand kamu tampil beda dan terus berkembang bersama kami.</p>
       </div>
-      <div class="about-tag">West Java, Indonesia</div>
+      <div class="about-pills">
+        <span class="pill">Authentic</span><span class="pill">Innovative</span><span class="pill">Honest</span><span class="pill">Creative</span><span class="pill">#LetsGrow</span>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-accent"></div>
+      <div class="about-card">
+        <div class="about-num">21</div>
+        <div class="about-label">Founded in Bandung — 2021</div>
+        <div class="about-grid">
+          <div><div class="ag-n">50+</div><div class="ag-t">Happy Clients</div></div>
+          <div><div class="ag-n">7</div><div class="ag-t">Services</div></div>
+          <div><div class="ag-n">3+</div><div class="ag-t">Years Active</div></div>
+          <div><div class="ag-n">∞</div><div class="ag-t">#LetsGrow!</div></div>
+        </div>
+        <div class="about-badge">Bandung · West Java</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services" id="services">
-  <div class="svc-header">
+<section class="section services" id="services">
+  <div class="s-ghost">SVC</div>
+  <div class="svc-head reveal">
     <div>
-      <div class="section-num">03 — Services</div>
-      <h2 class="section-title" style="font-size:clamp(3rem,6vw,6rem);">WHAT<br>WE DO</h2>
+      <div class="s-num">03 — Services</div>
+      <h2 class="s-title">WHAT<br>WE DO</h2>
     </div>
-    <p class="svc-header-right">Solusi kreatif lengkap untuk brand kamu berkembang di era digital.</p>
+    <p class="svc-head-right">Solusi kreatif lengkap untuk brand kamu berkembang di era digital — dari konten hingga produksi.</p>
   </div>
-  <div class="svc-list">
-    <div class="svc-item"><span class="svc-n">01</span><span class="svc-name">Social Media Management</span><span class="svc-tag">Content · Strategy · Engagement</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">02</span><span class="svc-name">Brand Identity</span><span class="svc-tag">Logo · Visual · Guidelines</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">03</span><span class="svc-name">Ads Placement</span><span class="svc-tag">Meta · Google · Performance</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">04</span><span class="svc-name">Photo & Video Production</span><span class="svc-tag">Photo · Video · Content</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">05</span><span class="svc-name">Graphic Design</span><span class="svc-tag">Digital · Print · Creative</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">06</span><span class="svc-name">Motion & 3D Visual</span><span class="svc-tag">Animation · 3D · Motion</span><span class="svc-arrow">→</span></div>
-    <div class="svc-item"><span class="svc-n">07</span><span class="svc-name">Website Development</span><span class="svc-tag">Design · Dev · Deploy</span><span class="svc-arrow">→</span></div>
+  <div class="svc-list reveal">
+    <div class="svc-item"><span class="svc-n">01</span><span class="svc-name">Social Media Management</span><div class="svc-tags"><span class="svc-tag">Content</span><span class="svc-tag">Strategy</span><span class="svc-tag">Growth</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">02</span><span class="svc-name">Brand Identity</span><div class="svc-tags"><span class="svc-tag">Logo</span><span class="svc-tag">Visual</span><span class="svc-tag">Guidelines</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">03</span><span class="svc-name">Ads Placement</span><div class="svc-tags"><span class="svc-tag">Meta</span><span class="svc-tag">Google</span><span class="svc-tag">ROI</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">04</span><span class="svc-name">Photo & Video Production</span><div class="svc-tags"><span class="svc-tag">Photo</span><span class="svc-tag">Video</span><span class="svc-tag">Story</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">05</span><span class="svc-name">Graphic Design</span><div class="svc-tags"><span class="svc-tag">Digital</span><span class="svc-tag">Print</span><span class="svc-tag">Creative</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">06</span><span class="svc-name">Motion & 3D Visual</span><div class="svc-tags"><span class="svc-tag">Animation</span><span class="svc-tag">3D</span><span class="svc-tag">Motion</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-item"><span class="svc-n">07</span><span class="svc-name">Website Development</span><div class="svc-tags"><span class="svc-tag">Design</span><span class="svc-tag">Dev</span><span class="svc-tag">Deploy</span></div><span class="svc-arr">→</span></div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-  <div class="port-header">
+<section class="section portfolio" id="portfolio">
+  <div class="s-ghost">WORK</div>
+  <div class="port-head reveal">
     <div>
-      <div class="section-num">04 — Selected Work</div>
-      <h2 class="section-title" style="font-size:clamp(3rem,6vw,6rem);">OUR<br>WORK</h2>
+      <div class="s-num">04 — Selected Work</div>
+      <h2 class="s-title">OUR<br>WORK</h2>
     </div>
   </div>
-  <div class="port-tabs">
+  <div class="port-tabs reveal">
     <button class="tab active" onclick="filterP('all',this)">All</button>
     <button class="tab" onclick="filterP('sosmed',this)">Social Media</button>
     <button class="tab" onclick="filterP('brand',this)">Branding</button>
     <button class="tab" onclick="filterP('foto',this)">Photography</button>
     <button class="tab" onclick="filterP('video',this)">Videography</button>
   </div>
-  <div class="pgrid" id="pgrid">
-    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:#1a2a4a;color:#EDD5BB;">DUAMATA</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Social Media</div><div class="pname">Duamata Residence</div></div></div>
-    <div class="pcard" data-cat="brand"><div class="pimg-wrap"><div class="pimg" style="background:#8B0000;color:white;">RAOS</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Brand Identity</div><div class="pname">Raos Pangsit</div></div></div>
-    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:#1a1a1a;color:#E8522A;">MERAKI</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Social Media</div><div class="pname">Meraki Cafe & Coffee</div></div></div>
-    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:#2a1a0a;color:#E8522A;">HYANGYU</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Photography</div><div class="pname">Hyangyu Korean Food</div></div></div>
-    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:#1a1a2a;color:#aaa;">DEJAFU</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Photography</div><div class="pname">Dejafu Parfum</div></div></div>
-    <div class="pcard" data-cat="video"><div class="pimg-wrap"><div class="pimg" style="background:#0a1a2a;color:white;">NOKIA</div><div class="pcard-overlay"></div></div><div class="pbody"><div class="pcat">Videography</div><div class="pname">Nokia — #LoveitTrusitKeepit</div></div></div>
+  <div class="pgrid reveal" id="pgrid">
+    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0d1a2e,#1b3a8c);color:rgba(255,255,255,0.15);">DUAMATA</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Duamata Residence</div></div></div></div>
+    <div class="pcard" data-cat="brand"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#1a0505,#5a0a0a);color:rgba(255,255,255,0.12);">RAOS</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Brand Identity</div><div class="p-name">Raos Pangsit</div></div></div></div>
+    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#1a0800,#e8522a22);color:rgba(232,82,42,0.3);">MERAKI</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Meraki Cafe & Coffee</div></div></div></div>
+    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0a0a0a,#1a1008);color:rgba(240,200,100,0.2);">HYANGYU</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Hyangyu Korean Food</div></div></div></div>
+    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0a0a1a,#10102a);color:rgba(150,150,255,0.2);">DEJAFU</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Dejafu Parfum</div></div></div></div>
+    <div class="pcard" data-cat="video"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#040810,#0d1a3a);color:rgba(100,150,255,0.2);">NOKIA</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Videography</div><div class="p-name">Nokia — #LoveitTrusitKeepit</div></div></div></div>
+  </div>
+  <div class="port-more reveal">
+    <a href="#contact" class="port-more-btn">Lihat Semua Project <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
   </div>
 </section>
 
 <!-- CLIENTS -->
-<section class="clients" id="clients">
-  <div class="cl-header">
-    <div class="section-num">05 — Clients</div>
-    <h2 class="section-title" style="font-size:clamp(3rem,6vw,6rem);margin-bottom:1rem;">TRUSTED<br>BY GREAT<br>BRANDS</h2>
+<section class="section clients" id="clients">
+  <div class="s-ghost">CLT</div>
+  <div class="cl-head reveal">
+    <div>
+      <div class="s-num">05 — Our Clients</div>
+      <h2 class="s-title">TRUSTED<br>BY GREAT<br><em>Brands.</em></h2>
+    </div>
   </div>
-  <div class="cl-grid" id="clgrid">
+  <div class="cl-grid reveal" id="clgrid">
     <div class="cl-item"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABkAQQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEI/8QAGRABAQEBAQEAAAAAAAAAAAAAAAExQRFh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATQUQAAAAAFuoAAALUAX35EAAAAugAAAAAALUAAAF4i8QAAAABZqAAALUACgAAAAAsQAAAWpAAAAVAAAAAAAF4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" alt="Logo 1" loading="lazy"></div>
     <div class="cl-item"><img src="data:image/png;base64,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" alt="Bank BJB" loading="lazy"></div>
     <div class="cl-item"><img src="data:image/png;base64,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" alt="Gonegani" loading="lazy"></div>
@@ -392,69 +656,70 @@ footer p{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rg
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section" id="contact">
+<section class="section contact" id="contact">
+  <div class="s-ghost">HI!</div>
   <div class="contact-inner">
-    <div>
-      <div class="section-num">06 — Contact</div>
+    <div class="contact-left reveal">
+      <div class="s-num">06 — Let's Talk</div>
       <h2 class="contact-big">READY<br>TO<br><em>Grow?</em></h2>
-      <p class="contact-sub">Ceritakan kebutuhan brand kamu. Isi form dan tim kami akan segera menghubungi kamu dalam 1×24 jam kerja.</p>
-    </div>
-    <div class="cform" id="cformWrap">
-      <div id="formBody">
-        <div class="ftitle">LET'S TALK</div>
-        <div class="fsubtitle">Response within 24 hours</div>
-        <div class="frow">
-          <div class="fg"><label>Nama Lengkap *</label><input type="text" id="f-nama" placeholder="Nama kamu"></div>
-          <div class="fg"><label>Brand / Perusahaan</label><input type="text" id="f-brand" placeholder="Nama brand"></div>
-        </div>
-        <div class="frow">
-          <div class="fg"><label>No. WhatsApp *</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div>
-          <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="email@kamu.com"></div>
-        </div>
-        <div class="fg"><label>Sosial Media Bisnis</label><input type="text" id="f-sosmed" placeholder="@namaakun"></div>
-        <div class="fg">
-          <label>Kebutuhan Utama *</label>
-          <select id="f-service">
-            <option value="" disabled selected>— Pilih layanan —</option>
-            <option>Social Media Management</option>
-            <option>Brand Identity</option>
-            <option>Ads Placement (Meta / Google)</option>
-            <option>Photo & Video Production</option>
-            <option>Graphic Design</option>
-            <option>Motion & 3D Visual</option>
-            <option>Website Development</option>
-            <option>Paket Bundling</option>
-            <option>Konsultasi Dulu</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Estimasi Budget</label>
-          <select id="f-budget">
-            <option value="" disabled selected>— Range budget —</option>
-            <option>Di bawah Rp 1 juta</option>
-            <option>Rp 1 – 3 juta</option>
-            <option>Rp 3 – 5 juta</option>
-            <option>Rp 5 – 10 juta</option>
-            <option>Di atas Rp 10 juta</option>
-            <option>Fleksibel</option>
-          </select>
-        </div>
-        <div class="fg"><label>Pesan</label><textarea id="f-pesan" placeholder="Ceritakan singkat kebutuhan kamu..."></textarea></div>
-        <button class="btn-submit" onclick="kirim()">SEND MESSAGE →</button>
-        <div class="fnote">Dengan mengisi form ini, kamu setuju dihubungi oleh tim Ilona Digital.</div>
+      <p class="contact-sub">Ceritakan kebutuhan brand kamu. Tim kami akan merespons dalam 1×24 jam kerja.</p>
+      <div class="contact-info">
+        <a href="https://www.instagram.com/ilonadigital/" target="_blank" class="cinfo"><span class="cinfo-dot"></span>@ilonadigital</a>
+        <a href="https://wa.me/6283838848606" target="_blank" class="cinfo"><span class="cinfo-dot"></span>083838848606</a>
+        <a href="mailto:kontak.ilona@gmail.com" class="cinfo"><span class="cinfo-dot"></span>kontak.ilona@gmail.com</a>
       </div>
-      <div class="fsuccess" id="fsuccess">
-        <h3>SENT!</h3>
-        <p>Makasih sudah menghubungi Ilona Digital.<br>Tim kami akan segera balas.<br><br>#LetsGrow! 🚀</p>
+    </div>
+    <div class="reveal">
+      <div class="cform" id="cformWrap">
+        <div id="formBody">
+          <div class="ftitle">Let's Talk</div>
+          <div class="fsub">Response within 24 working hours</div>
+          <div class="frow">
+            <div class="fg"><label>Nama Lengkap *</label><input type="text" id="f-nama" placeholder="Nama kamu"></div>
+            <div class="fg"><label>Brand / Perusahaan</label><input type="text" id="f-brand" placeholder="Nama brand"></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label>No. WhatsApp *</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div>
+            <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="email@kamu.com"></div>
+          </div>
+          <div class="fg"><label>Social Media Bisnis</label><input type="text" id="f-sosmed" placeholder="@namaakun"></div>
+          <div class="fg">
+            <label>Kebutuhan Utama *</label>
+            <select id="f-service">
+              <option value="" disabled selected>— Pilih layanan —</option>
+              <option>Social Media Management</option><option>Brand Identity</option>
+              <option>Ads Placement (Meta / Google)</option><option>Photo & Video Production</option>
+              <option>Graphic Design</option><option>Motion & 3D Visual</option>
+              <option>Website Development</option><option>Paket Bundling</option><option>Konsultasi Dulu</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Estimasi Budget</label>
+            <select id="f-budget">
+              <option value="" disabled selected>— Range budget —</option>
+              <option>Di bawah Rp 1 juta</option><option>Rp 1 – 3 juta</option>
+              <option>Rp 3 – 5 juta</option><option>Rp 5 – 10 juta</option>
+              <option>Di atas Rp 10 juta</option><option>Fleksibel</option>
+            </select>
+          </div>
+          <div class="fg"><label>Pesan</label><textarea id="f-pesan" placeholder="Ceritakan singkat kebutuhan kamu..."></textarea></div>
+          <button class="btn-send" onclick="kirim()"><span>SEND MESSAGE →</span></button>
+          <div class="fnote">Dengan mengisi form ini, kamu setuju untuk dihubungi oleh tim Ilona Digital melalui WhatsApp.</div>
+        </div>
+        <div class="fsuccess" id="fsuccess">
+          <h3>SENT! 🚀</h3>
+          <p>Makasih sudah menghubungi Ilona Digital.<br>Tim kami akan segera balas kamu.<br><br><em>#LetsGrow!</em></p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <span class="footer-logo">ILO<span>N</span>A</span>
-  <p>© 2024 Ilona Digital Creative Agency · Bandung</p>
-  <div class="footer-links">
+  <p>© 2024 Ilona Digital Creative Agency · Bandung, Indonesia</p>
+  <div class="footer-socials">
     <a href="https://www.instagram.com/ilonadigital/" target="_blank">Instagram</a>
     <a href="https://wa.me/6283838848606" target="_blank">WhatsApp</a>
     <a href="mailto:kontak.ilona@gmail.com">Email</a>
@@ -462,34 +727,41 @@ footer p{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rg
 </footer>
 
 <script>
-// Custom cursor
-const dot = document.getElementById('cdot');
-const ring = document.getElementById('cring');
+/* ── Cursor ── */
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
-animRing();
-document.querySelectorAll('a,button,.tab,.svc-item,.pcard').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='70px';ring.style.height='70px';ring.style.background='rgba(232,82,42,0.15)';ring.style.borderColor='rgba(232,82,42,0.5)';});
-  el.addEventListener('mouseleave',()=>{ring.style.width='40px';ring.style.height='40px';ring.style.background='transparent';ring.style.borderColor='rgba(255,255,255,0.5)';});
+(function anim(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button,.svc-item,.pcard,.cl-item,.tab').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));
 });
 
-// Hamburger
-const hbg=document.getElementById('hbg');
-const mmenu=document.getElementById('mmenu');
-hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mmenu.classList.toggle('open');});
-function closeMM(){hbg.classList.remove('open');mmenu.classList.remove('open');}
+/* ── Nav scroll ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>80);});
 
-// Portfolio filter
+/* ── Hamburger ── */
+const hbg=document.getElementById('hbg'),mm=document.getElementById('mobmenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mm.classList.toggle('open');});
+function closeMM(){hbg.classList.remove('open');mm.classList.remove('open');}
+
+/* ── Scroll reveal ── */
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ── Portfolio filter ── */
 function filterP(cat,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  document.querySelectorAll('.pcard').forEach(c=>{
-    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  document.querySelectorAll('.pcard').forEach((c,i)=>{
+    const show=cat==='all'||c.dataset.cat===cat;
+    c.style.display=show?'block':'none';
+    if(i===0)c.style.gridColumn=show?'span 2':'span 1';
   });
 }
 
-// Form
+/* ── WhatsApp form ── */
 function kirim(){
   const nama=document.getElementById('f-nama').value.trim();
   const wa=document.getElementById('f-wa').value.trim();
@@ -502,7 +774,7 @@ function kirim(){
   const sosmed=document.getElementById('f-sosmed').value.trim();
   const budget=document.getElementById('f-budget').value||'-';
   const pesan=document.getElementById('f-pesan').value.trim();
-  const msg=`Halo Ilona Digital! 👋 #LetsGrow!\n\nNama: ${nama}\nBrand: ${brand||'-'}\nWA: ${wa}\nEmail: ${email||'-'}\nSosmed: ${sosmed||'-'}\n\nLayanan: ${service}\nBudget: ${budget}${pesan?'\n\nPesan:\n'+pesan:''}`;
+  const msg=`Halo Ilona Digital! 👋 #LetsGrow!\n\n👤 Nama: ${nama}\n🏢 Brand: ${brand||'-'}\n📱 WA: ${wa}\n📧 Email: ${email||'-'}\n📸 Sosmed: ${sosmed||'-'}\n\n🎯 Layanan: ${service}\n💰 Budget: ${budget}${pesan?'\n\n💬 Pesan:\n'+pesan:''}`;
   window.open('https://wa.me/6283838848606?text='+encodeURIComponent(msg),'_blank');
   document.getElementById('formBody').style.display='none';
   document.getElementById('fsuccess').style.display='block';
