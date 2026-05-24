@@ -3,285 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ilona Digital — Creative Agency Bandung</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
-
+<title>Ilona Digital — Creative Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS ─── */
-:root{
-  --cream:#F5F0E8;
-  --cream2:#EDE7DA;
-  --coral:#E8522A;
-  --coral-light:#FFF0EB;
-  --coral-mid:#F97A52;
-  --navy:#1B3A8C;
-  --navy-dark:#0F2260;
-  --navy-light:#EEF2FF;
-  --white:#FFFFFF;
-  --dark:#0E0E0E;
-  --muted:#7A7570;
-  --ease:cubic-bezier(0.76,0,0.24,1);
-}
-
-/* ─── RESET ─── */
+/* ── RESET & BASE ── */
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--dark);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:#0A0A0A;color:#F0EDE6;font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
 
-/* ─── GRAIN ─── */
-body::after{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  opacity:0.5;mix-blend-mode:multiply;}
+/* ── CURSOR ── */
+#cur{position:fixed;z-index:9999;pointer-events:none;mix-blend-mode:difference;}
+#cdot{width:8px;height:8px;background:#F0EDE6;border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+#cring{width:32px;height:32px;border:1px solid rgba(240,237,230,0.4);border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);transition:width .4s cubic-bezier(0.76,0,0.24,1),height .4s cubic-bezier(0.76,0,0.24,1),opacity .3s;}
+body.hov #cdot{width:12px;height:12px;}
+body.hov #cring{width:60px;height:60px;opacity:.6;}
 
-/* ─── CURSOR ─── */
-#cdot{width:6px;height:6px;background:var(--coral);border-radius:50%;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
-#cring{width:38px;height:38px;border:1.5px solid rgba(232,82,42,0.35);border-radius:50%;position:fixed;top:0;left:0;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .4s var(--ease),height .4s var(--ease),border-color .3s,background .3s;}
-body.ch #cdot{width:10px;height:10px;}
-body.ch #cring{width:70px;height:70px;background:rgba(232,82,42,0.06);border-color:rgba(232,82,42,0.5);}
-
-/* ─── NAV ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 5rem;transition:all .4s var(--ease);}
-nav.scrolled{background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);padding:1.1rem 5rem;border-bottom:1px solid rgba(0,0,0,0.06);}
-.logo{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;letter-spacing:5px;text-decoration:none;color:var(--dark);text-transform:uppercase;}
-.logo span{color:var(--coral);}
-.nav-r{display:flex;align-items:center;gap:3rem;}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;mix-blend-mode:difference;}
+.logo{font-family:'Instrument Serif',serif;font-size:1.2rem;font-style:italic;color:#F0EDE6;text-decoration:none;letter-spacing:.5px;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:0.68rem;font-weight:400;color:rgba(14,14,14,0.45);text-decoration:none;letter-spacing:2.5px;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--coral);}
-.nav-cta{background:var(--coral);color:var(--white)!important;padding:.6rem 1.6rem;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-family:'DM Sans',sans-serif;transition:background .3s,transform .2s;display:inline-block;}
-.nav-cta:hover{background:var(--navy);}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px;}
-.hbg span{display:block;width:22px;height:1.5px;background:var(--dark);transition:all .35s var(--ease);}
-.hbg.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-links a{font-size:.72rem;color:rgba(240,237,230,0.6);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:#F0EDE6;}
+.nav-cta{font-size:.72rem;color:rgba(240,237,230,0.6);text-decoration:none;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(240,237,230,0.25);padding:.5rem 1.2rem;transition:all .2s;}
+.nav-cta:hover{color:#F0EDE6;border-color:#F0EDE6;}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;}
+.hbg span{display:block;width:22px;height:1px;background:#F0EDE6;transition:all .3s;}
+.hbg.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
 .hbg.open span:nth-child(2){opacity:0;}
-.hbg.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.hbg.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 
-/* ─── MOBILE MENU ─── */
-.mob{display:none;position:fixed;inset:0;z-index:450;background:var(--navy);flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:5rem 3rem 4rem;}
+/* ── MOBILE MENU ── */
+.mob{display:none;position:fixed;inset:0;z-index:90;background:#0A0A0A;flex-direction:column;justify-content:flex-end;padding:4rem 3rem;gap:0;}
 .mob.open{display:flex;}
-.mob a{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,10vw,5rem);font-weight:800;text-decoration:none;color:rgba(255,255,255,0.2);text-transform:uppercase;display:block;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;transition:color .2s;}
-.mob a:hover{color:var(--coral);}
-.mob-foot{margin-top:2.5rem;font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.mob a{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,8vw,5rem);font-style:italic;color:rgba(240,237,230,0.2);text-decoration:none;display:block;padding:.3rem 0;border-bottom:1px solid rgba(240,237,230,0.06);transition:color .2s;}
+.mob a:hover{color:#F0EDE6;}
+.mob-foot{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.2);margin-top:2rem;}
 
-/* ─── HERO ─── */
-.hero{min-height:100vh;background:var(--cream);display:flex;flex-direction:column;justify-content:flex-end;padding:0 5rem 5rem;position:relative;overflow:hidden;}
-.hero-noise{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 20%, rgba(232,82,42,0.08) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 10% 80%, rgba(27,58,140,0.07) 0%, transparent 70%);pointer-events:none;}
-/* diagonal stripe accent */
-.hero-stripe{position:absolute;top:0;right:0;width:38%;height:100%;background:var(--coral);clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);z-index:0;overflow:hidden;}
-.hero-stripe-txt{position:absolute;top:50%;left:50%;transform:translate(-40%,-50%) rotate(90deg);font-family:'Syne',sans-serif;font-size:clamp(3rem,6vw,7rem);font-weight:800;letter-spacing:-3px;color:rgba(255,255,255,0.08);white-space:nowrap;text-transform:uppercase;}
-.hero-tag{position:absolute;top:50%;right:calc(38% - 1rem);transform:translateY(-50%) rotate(90deg);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);z-index:2;white-space:nowrap;}
-.hero-content{position:relative;z-index:1;max-width:62%;}
-.hero-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;opacity:0;animation:fadeup .8s var(--ease) .3s forwards;}
-.hero-eyebrow-pill{background:var(--coral);color:var(--white);padding:.35rem 1rem;font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;}
-.hero-eyebrow-txt{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(5rem,11vw,14rem);font-weight:800;line-height:.85;letter-spacing:-5px;text-transform:uppercase;color:var(--dark);margin-bottom:4rem;}
-.hero h1 .line{display:block;overflow:hidden;}
-.hero h1 .line span{display:block;opacity:0;transform:translateY(105%);animation:slide-up .9s var(--ease) forwards;}
-.hero h1 .line:nth-child(1) span{animation-delay:.35s;}
-.hero h1 .line:nth-child(2) span{animation-delay:.5s;}
-.hero h1 .line:nth-child(3) span{animation-delay:.65s;}
-.h1-italic{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:var(--coral);letter-spacing:-3px;}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-top:2.5rem;border-top:1px solid rgba(14,14,14,0.1);opacity:0;animation:fadeup .8s var(--ease) 1s forwards;}
-.hero-desc{font-size:.95rem;line-height:1.9;color:var(--muted);max-width:360px;}
-.hero-btns{display:flex;gap:1rem;align-items:center;}
-.btn-fill{background:var(--dark);color:var(--white);padding:1rem 2.5rem;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:400;font-family:'DM Sans',sans-serif;transition:all .35s var(--ease);display:inline-block;}
-.btn-fill:hover{background:var(--coral);}
-.btn-outline{border:1.5px solid rgba(14,14,14,0.2);color:var(--dark);padding:1rem 2rem;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-family:'DM Sans',sans-serif;transition:all .3s;}
-.btn-outline:hover{border-color:var(--coral);color:var(--coral);}
-.hero-stats{display:flex;gap:3rem;}
-.hstat-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--dark);line-height:1;}
-.hstat-n em{color:var(--coral);font-style:normal;}
-.hstat-t{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:.2rem;}
-.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.8rem;opacity:0;animation:fadeup .8s var(--ease) 1.4s forwards;}
-.scroll-line{width:1px;height:70px;background:rgba(14,14,14,0.1);position:relative;overflow:hidden;}
-.scroll-fill{position:absolute;top:-100%;width:100%;height:100%;background:var(--coral);animation:scrl 2s ease infinite;}
+/* ── HERO ── */
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-video{position:absolute;inset:0;z-index:0;}
+.hero-video video,.hero-video-placeholder{width:100%;height:100%;object-fit:cover;}
+.hero-video-placeholder{background:linear-gradient(135deg,#0d0d0d 0%,#1a1a2e 40%,#0d0d0d 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
+.hero-video-placeholder-icon{width:70px;height:70px;border:1px solid rgba(240,237,230,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;}
+.hero-video-placeholder-icon:hover{border-color:rgba(240,237,230,0.5);}
+.hero-video-placeholder-icon svg{margin-left:4px;}
+.hero-video-lbl{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.85) 0%,rgba(10,10,10,0.1) 60%,transparent 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;padding:0 3rem 4rem;width:100%;}
+.hero-tag{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
+.hero-tag::before{content:'';display:block;width:30px;height:1px;background:rgba(240,237,230,0.3);}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(3.5rem,9vw,12rem);font-style:italic;font-weight:300;line-height:.9;letter-spacing:-3px;color:#F0EDE6;margin-bottom:2.5rem;max-width:900px;}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-desc{font-size:.9rem;line-height:1.8;color:rgba(240,237,230,0.5);max-width:340px;}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:.8rem;}
+.scroll-line{width:1px;height:60px;background:rgba(240,237,230,0.15);position:relative;overflow:hidden;}
+.scroll-fill{position:absolute;top:-100%;width:100%;height:100%;background:rgba(240,237,230,0.5);animation:scrl 2s ease infinite;}
 @keyframes scrl{to{top:200%;}}
-.scroll-lbl{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(14,14,14,0.3);}
+.scroll-lbl{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
 
-/* ─── MARQUEE ─── */
-.marquee-wrap{background:var(--navy);overflow:hidden;padding:.9rem 0;position:relative;}
-.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 30s linear infinite;}
+/* ── MARQUEE ── */
+.marquee{border-top:1px solid rgba(240,237,230,0.07);border-bottom:1px solid rgba(240,237,230,0.07);padding:.9rem 0;overflow:hidden;background:rgba(240,237,230,0.02);position:relative;}
+.marquee::before,.marquee::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:1;pointer-events:none;}
+.marquee::before{left:0;background:linear-gradient(to right,#0A0A0A,transparent);}
+.marquee::after{right:0;background:linear-gradient(to left,#0A0A0A,transparent);}
+.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:mq 30s linear infinite;}
 .marquee-track:hover{animation-play-state:paused;}
-.mi{display:flex;align-items:center;gap:2.5rem;padding:0 2.5rem;font-family:'Syne',sans-serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);flex-shrink:0;transition:color .2s;}
-.mi:hover{color:rgba(255,255,255,.7);}
-.mi-sep{color:var(--coral);}
-@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.mi{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.2);padding:0 2.5rem;flex-shrink:0;transition:color .2s;}
+.mi:hover{color:rgba(240,237,230,0.6);}
+.mi-sep{color:rgba(240,237,230,0.1);}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ─── SECTION ─── */
-.s-eyebrow{display:flex;align-items:center;gap:.8rem;margin-bottom:1.5rem;}
-.s-badge{background:var(--coral);color:var(--white);padding:.25rem .8rem;font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;}
-.s-num{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
-.s-title-lg{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,7vw,8rem);line-height:.88;letter-spacing:-3px;text-transform:uppercase;}
-.s-title-lg em{font-family:'Fraunces',serif;font-style:italic;font-weight:300;}
-.reveal{opacity:0;transform:translateY(35px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
-.reveal.visible{opacity:1;transform:translateY(0);}
+/* ── SERVICES ── */
+.services{padding:8rem 3rem;}
+.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6rem;padding-bottom:3rem;border-bottom:1px solid rgba(240,237,230,0.07);}
+.svc-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.3);}
+.svc-title{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,6vw,6rem);font-style:italic;font-weight:300;letter-spacing:-2px;color:#F0EDE6;line-height:.9;}
+.svc-desc{font-size:.88rem;color:rgba(240,237,230,0.45);line-height:1.8;max-width:280px;}
+/* Sub-brand cards like 02PX */
+.svc-brands{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(240,237,230,0.07);margin-bottom:1px;}
+.svc-brand{background:#0A0A0A;padding:3.5rem;cursor:none;position:relative;overflow:hidden;transition:background .4s;}
+.svc-brand::before{content:'';position:absolute;inset:0;background:rgba(240,237,230,0.03);opacity:0;transition:opacity .4s;}
+.svc-brand:hover::before{opacity:1;}
+.svc-brand:hover .sb-arrow{transform:translateX(5px);opacity:1;}
+.sb-num{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.2);margin-bottom:3rem;}
+.sb-name{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,3vw,3rem);font-style:italic;font-weight:300;color:#F0EDE6;line-height:1;margin-bottom:1rem;letter-spacing:-1px;}
+.sb-desc{font-size:.78rem;color:rgba(240,237,230,0.4);line-height:1.7;margin-bottom:2rem;}
+.sb-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+.sb-tag{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);border:1px solid rgba(240,237,230,0.1);padding:.25rem .6rem;}
+.sb-arrow{color:rgba(240,237,230,0.3);font-size:.8rem;opacity:0;transform:translateX(-5px);transition:all .35s;margin-top:2rem;display:block;letter-spacing:2px;font-size:.65rem;text-transform:uppercase;}
 
-/* ─── ABOUT — cream bg ─── */
-.about{background:var(--cream);padding:10rem 5rem;}
-.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;}
-.about-text{color:var(--muted);}
-.about-text p{font-size:1rem;line-height:2;margin-bottom:1.3rem;}
-.about-text p strong{color:var(--dark);font-weight:400;}
-.about-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem;}
-.pill{border:1.5px solid rgba(14,14,14,0.12);color:rgba(14,14,14,0.4);padding:.4rem 1rem;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;transition:all .25s;}
-.pill:hover{border-color:var(--coral);color:var(--coral);}
-/* about visual — navy card */
-.about-card{background:var(--navy);padding:4rem;position:relative;overflow:hidden;}
-.about-card::before{content:'';position:absolute;top:-3rem;right:-3rem;width:200px;height:200px;border-radius:50%;background:rgba(232,82,42,0.15);}
-.about-card::after{content:'';position:absolute;bottom:-4rem;left:-4rem;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,0.03);}
-.about-num-big{font-family:'Syne',sans-serif;font-size:6rem;font-weight:800;color:var(--coral);line-height:1;margin-bottom:.4rem;}
-.about-num-lbl{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:3rem;}
-.about-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:1;}
-.ast-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--white);line-height:1;}
-.ast-t{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.25rem;}
-.about-flag{position:absolute;bottom:0;right:0;background:var(--coral);padding:1rem 2rem;font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--white);}
-
-/* ─── SERVICES — dark bg ─── */
-.services{background:var(--dark);padding:10rem 5rem;}
-.svc-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6rem;gap:3rem;flex-wrap:wrap;}
-.svc-head .s-title-lg{color:var(--white);}
-.svc-head .s-title-lg em{color:var(--coral);}
-.svc-head-r{font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.9;max-width:280px;font-weight:300;}
-.svc-list{border-top:1px solid rgba(255,255,255,.07);}
-.svc-row{display:grid;grid-template-columns:55px 1fr auto auto;align-items:center;gap:3rem;padding:2rem 0;border-bottom:1px solid rgba(255,255,255,.07);cursor:none;position:relative;transition:padding .4s var(--ease);}
-.svc-row::before{content:'';position:absolute;inset:0;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);z-index:0;}
-.svc-row:hover::before{transform:scaleX(1);}
-.svc-row:hover .svc-row-n{color:rgba(255,255,255,.3);}
-.svc-row:hover .svc-row-name{color:var(--white);}
-.svc-row:hover .svc-row-tag{color:rgba(255,255,255,.5);}
-.svc-row:hover .svc-arr{opacity:1;transform:translateX(0);}
-.svc-row>*{position:relative;z-index:1;}
-.svc-row-n{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:800;color:rgba(255,255,255,.12);letter-spacing:2px;}
-.svc-row-name{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2.6rem);font-weight:700;letter-spacing:-1px;color:rgba(255,255,255,.75);text-transform:uppercase;transition:color .3s;}
-.svc-row-tag{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .3s;}
-.svc-arr{color:var(--white);font-size:1.2rem;opacity:0;transform:translateX(-8px);transition:all .35s var(--ease);}
-
-/* ─── PORTFOLIO — coral bg ─── */
-.portfolio{background:var(--coral);padding:10rem 5rem;}
-.port-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:2rem;}
-.port-head .s-title-lg{color:var(--white);}
-.port-head .s-title-lg em{color:var(--dark);}
-.port-badge{background:var(--white);color:var(--coral);}
-.port-tabs{display:flex;gap:.4rem;margin-bottom:3rem;flex-wrap:wrap;}
-.tab{padding:.5rem 1.2rem;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:none;border:1.5px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;transition:all .25s;}
-.tab.active{background:var(--white);border-color:var(--white);color:var(--coral);}
-.tab:hover:not(.active){border-color:rgba(255,255,255,.6);color:rgba(255,255,255,.9);}
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.15);}
-.pcard{background:var(--dark);overflow:hidden;position:relative;cursor:none;}
+/* ── PORTFOLIO ── */
+.portfolio{padding:0 3rem 8rem;}
+.port-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
+.port-title{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,5rem);font-style:italic;font-weight:300;letter-spacing:-2px;color:#F0EDE6;}
+.port-link{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.35);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.port-link:hover{color:#F0EDE6;}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(240,237,230,0.07);}
+.pcard{background:#0A0A0A;overflow:hidden;position:relative;cursor:none;}
 .pcard:first-child{grid-column:span 2;}
-.pcard:hover .pimg{transform:scale(1.06);}
+.pcard:hover .p-thumb{transform:scale(1.04);}
 .pcard:hover .p-overlay{opacity:1;}
 .pcard:hover .p-info{transform:translateY(0);opacity:1;}
-.pimg-wrap{height:260px;overflow:hidden;position:relative;}
-.pcard:first-child .pimg-wrap{height:380px;}
-.pimg{height:100%;width:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:transform .6s var(--ease);}
-.p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);opacity:0;transition:opacity .4s;}
-.p-info{position:absolute;bottom:0;left:0;right:0;padding:2rem;transform:translateY(12px);opacity:0;transition:all .4s var(--ease);}
-.p-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--coral);margin-bottom:.4rem;}
-.p-name{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:-0.3px;color:var(--white);text-transform:uppercase;}
+.p-thumb-wrap{overflow:hidden;aspect-ratio:16/9;position:relative;}
+.pcard:first-child .p-thumb-wrap{aspect-ratio:16/7;}
+.p-thumb{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(0.76,0,0.24,1);background:linear-gradient(135deg,#111,#1a1a2e);}
+.p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 50%);opacity:0;transition:opacity .4s;}
+.p-info{position:absolute;bottom:0;left:0;right:0;padding:2rem;transform:translateY(10px);opacity:0;transition:all .4s cubic-bezier(0.76,0,0.24,1);}
+.p-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.5);margin-bottom:.4rem;}
+.p-name{font-family:'Instrument Serif',serif;font-size:1.3rem;font-style:italic;color:#F0EDE6;}
+/* placeholder colors for cards */
+.p-c1{background:linear-gradient(135deg,#0d1a2e,#1a0d2e);}
+.p-c2{background:linear-gradient(135deg,#1a0d0d,#2e1a0d);}
+.p-c3{background:linear-gradient(135deg,#0d1a0d,#1a1a0d);}
+.p-c4{background:linear-gradient(135deg,#1a1a1a,#0d0d1a);}
+.p-c5{background:linear-gradient(135deg,#1a0d1a,#0d1a1a);}
 
-/* ─── CLIENTS — navy bg ─── */
-.clients{background:var(--navy);padding:10rem 5rem;}
-.cl-head{margin-bottom:5rem;}
-.cl-head .s-title-lg{color:var(--white);}
-.cl-head .s-title-lg em{color:var(--coral);}
-.cl-badge{background:var(--coral);color:var(--white);}
-.cl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);max-width:700px;}
-.cl-item{background:var(--navy);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;padding:1.5rem;position:relative;overflow:hidden;transition:background .3s;}
-.cl-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--coral);transform:scaleX(0);transition:transform .4s var(--ease);transform-origin:left;}
-.cl-item:hover{background:rgba(255,255,255,.04);}
-.cl-item:hover::after{transform:scaleX(1);}
-.cl-item img{width:100%;height:100%;object-fit:contain;filter:grayscale(100%) brightness(.5) invert(1);mix-blend-mode:screen;opacity:.45;transition:filter .4s,opacity .4s;}
-.cl-item:hover img{filter:grayscale(0%) brightness(1) invert(0);opacity:1;}
+/* ── ABOUT ── */
+.about{padding:8rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;border-top:1px solid rgba(240,237,230,0.07);}
+.about-left{}
+.about-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.3);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
+.about-label::before{content:'';display:block;width:20px;height:1px;background:rgba(240,237,230,0.3);}
+.about-title{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,5vw,6rem);font-style:italic;font-weight:300;letter-spacing:-2px;line-height:.9;color:#F0EDE6;margin-bottom:3rem;}
+.about-text{font-size:.92rem;color:rgba(240,237,230,0.5);line-height:1.9;margin-bottom:1.2rem;}
+.about-text strong{color:#F0EDE6;font-weight:400;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(240,237,230,0.07);}
+.astat-n{font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;color:#F0EDE6;line-height:1;}
+.astat-t{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.3);margin-top:.3rem;}
+.about-right{position:relative;}
+.about-img{aspect-ratio:3/4;background:linear-gradient(135deg,#111,#0d1a2e);border:1px solid rgba(240,237,230,0.07);display:flex;align-items:center;justify-content:center;}
+.about-img-txt{font-family:'Instrument Serif',serif;font-size:6rem;font-style:italic;color:rgba(240,237,230,0.04);}
+.about-tag{position:absolute;bottom:2rem;left:-2rem;background:#0A0A0A;border:1px solid rgba(240,237,230,0.1);padding:1.2rem 1.8rem;}
+.about-tag-n{font-family:'Instrument Serif',serif;font-size:1.8rem;font-style:italic;color:#F0EDE6;line-height:1;}
+.about-tag-t{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.3);}
 
-/* ─── CONTACT — cream bg ─── */
-.contact{background:var(--cream);padding:10rem 5rem;}
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
-.contact-left{position:sticky;top:9rem;}
-.contact-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.5rem,7vw,8rem);line-height:.87;letter-spacing:-4px;text-transform:uppercase;color:var(--dark);margin-bottom:2rem;}
-.contact-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:var(--coral);}
-.contact-sub{font-size:.95rem;color:var(--muted);line-height:1.9;max-width:360px;margin-bottom:3rem;}
-.contact-links{display:flex;flex-direction:column;gap:.8rem;}
-.clink{display:flex;align-items:center;gap:.9rem;font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s;}
-.clink:hover{color:var(--coral);}
-.clink-dot{width:5px;height:5px;background:var(--coral);border-radius:50%;flex-shrink:0;}
-/* form — navy card */
-.cform-wrap{background:var(--navy);padding:3.5rem;position:relative;overflow:hidden;}
-.cform-wrap::before{content:'';position:absolute;top:-4rem;right:-4rem;width:200px;height:200px;border-radius:50%;background:rgba(232,82,42,0.12);}
-.cform-wrap::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--coral),var(--coral-mid));}
-.ftitle{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:.3rem;position:relative;z-index:1;}
-.fsub{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3rem;position:relative;z-index:1;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.fg{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem;position:relative;z-index:1;}
-.fg label{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);}
-.fg input,.fg select,.fg textarea{border:none;border-bottom:1px solid rgba(255,255,255,.1);padding:.8rem 0;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--white);background:transparent;outline:none;width:100%;transition:border-color .3s;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:var(--coral);}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.15);}
-.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .5rem center;cursor:none;}
-.fg select option{background:var(--navy-dark);color:var(--white);}
+/* ── CLIENTS ── */
+.clients{padding:6rem 3rem;border-top:1px solid rgba(240,237,230,0.07);}
+.cl-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4rem;}
+.cl-title{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,4rem);font-style:italic;font-weight:300;letter-spacing:-1px;color:#F0EDE6;}
+.cl-sub{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
+.cl-marquee{overflow:hidden;position:relative;}
+.cl-marquee::before,.cl-marquee::after{content:'';position:absolute;top:0;bottom:0;width:150px;z-index:1;pointer-events:none;}
+.cl-marquee::before{left:0;background:linear-gradient(to right,#0A0A0A,transparent);}
+.cl-marquee::after{right:0;background:linear-gradient(to left,#0A0A0A,transparent);}
+.cl-track{display:flex;align-items:center;gap:5rem;white-space:nowrap;width:max-content;animation:mq 25s linear infinite;}
+.cl-track:hover{animation-play-state:paused;}
+.cl-item{height:45px;display:flex;align-items:center;flex-shrink:0;opacity:0.5;transition:opacity .3s;filter:brightness(0) invert(1);}
+.cl-item:hover{opacity:1;}
+.cl-item img{height:100%;width:auto;object-fit:contain;}
+
+/* ── CONTACT ── */
+.contact{background:#F0EDE6;color:#0A0A0A;padding:8rem 3rem;position:relative;overflow:hidden;}
+.contact-noise{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;}
+.contact-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
+.contact-left{}
+.contact-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
+.contact-label::before{content:'';display:block;width:20px;height:1px;background:rgba(10,10,10,0.25);}
+.contact-title{font-family:'Instrument Serif',serif;font-size:clamp(3rem,7vw,8rem);font-style:italic;font-weight:300;letter-spacing:-4px;line-height:.88;color:#0A0A0A;margin-bottom:2rem;}
+.contact-sub{font-size:.9rem;color:rgba(10,10,10,0.5);line-height:1.8;max-width:350px;margin-bottom:3rem;}
+.contact-links{display:flex;flex-direction:column;gap:.6rem;}
+.clink{font-size:.78rem;color:rgba(10,10,10,0.4);text-decoration:none;display:flex;align-items:center;gap:.7rem;transition:color .2s;}
+.clink::before{content:'';width:4px;height:4px;background:#0A0A0A;border-radius:50%;opacity:.3;flex-shrink:0;}
+.clink:hover{color:#0A0A0A;}
+/* Form */
+.cform{padding:0;}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.4rem;}
+.fg label{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(10,10,10,0.3);}
+.fg input,.fg select,.fg textarea{border:none;border-bottom:1px solid rgba(10,10,10,0.15);padding:.7rem 0;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#0A0A0A;background:transparent;outline:none;width:100%;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:#0A0A0A;}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(10,10,10,0.2);}
+.fg select{appearance:none;cursor:none;}
+.fg select option{background:#F0EDE6;color:#0A0A0A;}
 .fg textarea{resize:vertical;min-height:80px;}
-.btn-send{width:100%;background:var(--coral);color:var(--white);border:none;padding:1.1rem;font-family:'Syne',sans-serif;font-size:.88rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:none;transition:background .35s;margin-top:.5rem;position:relative;z-index:1;}
-.btn-send:hover{background:var(--coral-mid);}
-.fnote{font-size:.58rem;letter-spacing:1px;color:rgba(255,255,255,.15);text-align:center;margin-top:1rem;line-height:1.6;position:relative;z-index:1;}
-.fsuccess{display:none;text-align:center;padding:4rem 1rem;position:relative;z-index:1;}
-.fsuccess h3{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--coral);margin-bottom:1rem;}
-.fsuccess p{font-size:.88rem;color:rgba(255,255,255,.4);line-height:1.8;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.btn-send{width:100%;background:#0A0A0A;color:#F0EDE6;border:none;padding:1rem;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:none;transition:background .3s;margin-top:.5rem;}
+.btn-send:hover{background:#1a1a1a;}
+.fnote{font-size:.6rem;color:rgba(10,10,10,0.25);text-align:center;margin-top:.8rem;line-height:1.5;}
+.fsuccess{display:none;text-align:center;padding:4rem 1rem;}
+.fsuccess h3{font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;font-weight:300;color:#0A0A0A;margin-bottom:.5rem;}
+.fsuccess p{font-size:.88rem;color:rgba(10,10,10,0.5);line-height:1.8;}
 
-/* ─── CTA BANNER — coral ─── */
-.cta-banner{background:var(--coral);padding:6rem 5rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap;}
-.cta-banner h2{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,5rem);font-weight:800;letter-spacing:-2px;text-transform:uppercase;color:var(--white);line-height:.9;}
-.cta-banner h2 em{font-family:'Fraunces',serif;font-style:italic;font-weight:300;}
-.cta-banner-btn{background:var(--white);color:var(--coral);padding:1.1rem 3rem;font-family:'Syne',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;transition:all .3s;display:inline-block;white-space:nowrap;}
-.cta-banner-btn:hover{background:var(--dark);color:var(--white);}
-
-/* ─── FOOTER — dark ─── */
-footer{background:var(--dark);padding:2.5rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(255,255,255,.05);}
-.footer-logo{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;letter-spacing:5px;color:rgba(255,255,255,.2);text-transform:uppercase;}
-.footer-logo span{color:var(--coral);}
-footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.15);}
+/* ── FOOTER ── */
+footer{background:#0A0A0A;border-top:1px solid rgba(240,237,230,0.07);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:rgba(240,237,230,0.2);}
+footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,0.15);}
 .footer-links{display:flex;gap:2rem;}
-.footer-links a{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:var(--coral);}
+.footer-links a{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.2);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:rgba(240,237,230,0.7);}
 
-/* ─── ANIMATIONS ─── */
-@keyframes fadeup{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes slide-up{from{opacity:0;transform:translateY(105%);}to{opacity:1;transform:translateY(0);}}
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.76,0,0.24,1),transform .9s cubic-bezier(0.76,0,0.24,1);}
+.rev.vis{opacity:1;transform:translateY(0);}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:1024px){
-  nav,nav.scrolled{padding:1.4rem 2.5rem;}
-  .hero{padding:0 2.5rem 4rem;}
-  .about,.services,.portfolio,.clients,.contact,.cta-banner{padding:7rem 2.5rem;}
-  .about-inner,.contact-inner{grid-template-columns:1fr;gap:4rem;}
-  .contact-left{position:static;}
-  .svc-row{grid-template-columns:40px 1fr auto;gap:1.5rem;}
-  .svc-row-tag{display:none;}
-  footer{padding:2rem 2.5rem;}
-}
-@media(max-width:768px){
-  body{cursor:auto;}
-  #cdot,#cring{display:none;}
-  .nav-r .nav-links,.nav-r .nav-cta{display:none;}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem;}
+  nav .nav-links, nav .nav-cta{display:none;}
   .hbg{display:flex;}
-  .hero-stripe{width:0;display:none;}
-  .hero-content{max-width:100%;}
-  .hero h1{letter-spacing:-3px;}
-  .hero-bottom{flex-direction:column;align-items:flex-start;}
-  .hero-stats{gap:2rem;}
-  .pgrid{grid-template-columns:1fr 1fr;}
-  .pcard:first-child{grid-column:span 2;}
-  .cl-grid{grid-template-columns:1fr 1fr;max-width:100%;}
-  .frow{grid-template-columns:1fr;}
-  .cform-wrap{padding:2.5rem 1.5rem;}
-}
-@media(max-width:520px){
-  .hero h1{font-size:clamp(3.5rem,13vw,5rem);letter-spacing:-2px;}
-  .pgrid{grid-template-columns:1fr;}
+  .hero-content{padding:0 1.5rem 3rem;}
+  .hero h1{font-size:clamp(3rem,12vw,6rem);letter-spacing:-2px;}
+  .services,.portfolio,.about,.clients,.contact{padding:5rem 1.5rem;}
+  .svc-brands{grid-template-columns:1fr;}
+  .port-grid{grid-template-columns:1fr;}
   .pcard:first-child{grid-column:span 1;}
-  .pcard:first-child .pimg-wrap{height:260px;}
-  .hero-stats{flex-wrap:wrap;gap:1.5rem;}
-  .cta-banner{text-align:center;flex-direction:column;align-items:center;}
+  .about{grid-template-columns:1fr;gap:3rem;}
+  .about-right{display:none;}
+  .contact-inner{grid-template-columns:1fr;gap:3rem;}
+  .frow{grid-template-columns:1fr;}
+  footer{padding:1.5rem;flex-direction:column;text-align:center;}
+  .svc-header{flex-direction:column;align-items:flex-start;gap:1.5rem;}
 }
 </style>
 </head>
@@ -291,219 +220,284 @@ footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rg
 <div id="cring"></div>
 
 <!-- NAV -->
-<nav id="nav">
-  <a href="#" class="logo">ILO<span>N</span>A</a>
-  <div class="nav-r">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Work</a></li>
-      <li><a href="#clients">Clients</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Let's Talk</a>
-    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
-  </div>
+<nav>
+  <a href="#" class="logo">Ilona</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mob" id="mob">
-  <a href="#about" onclick="closeMM()">About</a>
   <a href="#services" onclick="closeMM()">Services</a>
   <a href="#portfolio" onclick="closeMM()">Work</a>
-  <a href="#clients" onclick="closeMM()">Clients</a>
-  <a href="#contact" onclick="closeMM()" style="color:var(--coral)">Let's Talk →</a>
-  <div class="mob-foot">Bandung · Est. 2021 · #LetsGrow!</div>
+  <a href="#about" onclick="closeMM()">About</a>
+  <a href="#contact" onclick="closeMM()">Get in Touch</a>
+  <div class="mob-foot">Bandung · Since 2021 · #LetsGrow!</div>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-noise"></div>
-  <div class="hero-stripe"><div class="hero-stripe-txt">ILONA ILONA ILONA</div></div>
-  <div class="hero-tag">Est. 2021 · Creative Agency · Bandung</div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-pill">Social Media Agency</div>
-      <span class="hero-eyebrow-txt">Creative Marketing Strategist</span>
-    </div>
-    <h1>
-      <span class="line"><span>WE</span></span>
-      <span class="line"><span>MAKE</span></span>
-      <span class="line"><span class="h1-italic">Brands</span></span>
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">Humanizing brands lewat konten yang authentic, inovatif, dan resonan. Karena brand yang tumbuh adalah brand yang terasa nyata.</p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn-fill">Mulai Sekarang</a>
-        <a href="#portfolio" class="btn-outline">Lihat Karya →</a>
+  <div class="hero-video">
+    <div class="hero-video-placeholder">
+      <div class="hero-video-placeholder-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(240,237,230,0.6)"><path d="M8 5v14l11-7z"/></svg>
       </div>
-      <div class="hero-stats">
-        <div><div class="hstat-n">50<em>+</em></div><div class="hstat-t">Clients</div></div>
-        <div><div class="hstat-n">3<em>+</em></div><div class="hstat-t">Years</div></div>
-        <div><div class="hstat-n">7</div><div class="hstat-t">Services</div></div>
-      </div>
+      <div class="hero-video-lbl">Play Showreel</div>
     </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"><div class="scroll-fill"></div></div>
-    <span class="scroll-lbl">Scroll</span>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Creative Agency — Bandung, 2021</div>
+    <h1>We make<br>brands grow.</h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">Social media agency & creative marketing strategist. Kami humanize brands lewat konten yang authentic dan resonan.</p>
+      <div class="hero-scroll">
+        <div class="scroll-line"><div class="scroll-fill"></div></div>
+        <span class="scroll-lbl">Scroll</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- MARQUEE — navy -->
-<div class="marquee-wrap">
+<!-- MARQUEE -->
+<div class="marquee">
   <div class="marquee-track">
-    <div class="mi">Bank BRI <span class="mi-sep">✦</span></div><div class="mi">Bank BJB <span class="mi-sep">✦</span></div><div class="mi">Maxim <span class="mi-sep">✦</span></div><div class="mi">Resso <span class="mi-sep">✦</span></div><div class="mi">Natasha <span class="mi-sep">✦</span></div><div class="mi">Scarlett <span class="mi-sep">✦</span></div><div class="mi">Wardah <span class="mi-sep">✦</span></div><div class="mi">Viu <span class="mi-sep">✦</span></div><div class="mi">Nokia <span class="mi-sep">✦</span></div><div class="mi">Meraki Cafe <span class="mi-sep">✦</span></div><div class="mi">Complete Me <span class="mi-sep">✦</span></div><div class="mi">Gonegani <span class="mi-sep">✦</span></div>
-    <div class="mi">Bank BRI <span class="mi-sep">✦</span></div><div class="mi">Bank BJB <span class="mi-sep">✦</span></div><div class="mi">Maxim <span class="mi-sep">✦</span></div><div class="mi">Resso <span class="mi-sep">✦</span></div><div class="mi">Natasha <span class="mi-sep">✦</span></div><div class="mi">Scarlett <span class="mi-sep">✦</span></div><div class="mi">Wardah <span class="mi-sep">✦</span></div><div class="mi">Viu <span class="mi-sep">✦</span></div><div class="mi">Nokia <span class="mi-sep">✦</span></div><div class="mi">Meraki Cafe <span class="mi-sep">✦</span></div><div class="mi">Complete Me <span class="mi-sep">✦</span></div><div class="mi">Gonegani <span class="mi-sep">✦</span></div>
+    <span class="mi">Bank BRI <span class="mi-sep">·</span></span>
+    <span class="mi">Bank BJB <span class="mi-sep">·</span></span>
+    <span class="mi">Maxim <span class="mi-sep">·</span></span>
+    <span class="mi">Resso <span class="mi-sep">·</span></span>
+    <span class="mi">Natasha <span class="mi-sep">·</span></span>
+    <span class="mi">Scarlett <span class="mi-sep">·</span></span>
+    <span class="mi">Wardah <span class="mi-sep">·</span></span>
+    <span class="mi">Viu <span class="mi-sep">·</span></span>
+    <span class="mi">Nokia <span class="mi-sep">·</span></span>
+    <span class="mi">Meraki Cafe <span class="mi-sep">·</span></span>
+    <span class="mi">Duamata <span class="mi-sep">·</span></span>
+    <span class="mi">Complete Me <span class="mi-sep">·</span></span>
+    <span class="mi">Bank BRI <span class="mi-sep">·</span></span>
+    <span class="mi">Bank BJB <span class="mi-sep">·</span></span>
+    <span class="mi">Maxim <span class="mi-sep">·</span></span>
+    <span class="mi">Resso <span class="mi-sep">·</span></span>
+    <span class="mi">Natasha <span class="mi-sep">·</span></span>
+    <span class="mi">Scarlett <span class="mi-sep">·</span></span>
+    <span class="mi">Wardah <span class="mi-sep">·</span></span>
+    <span class="mi">Viu <span class="mi-sep">·</span></span>
+    <span class="mi">Nokia <span class="mi-sep">·</span></span>
+    <span class="mi">Meraki Cafe <span class="mi-sep">·</span></span>
+    <span class="mi">Duamata <span class="mi-sep">·</span></span>
+    <span class="mi">Complete Me <span class="mi-sep">·</span></span>
   </div>
 </div>
 
-<!-- ABOUT — cream -->
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="reveal">
-      <div class="s-eyebrow"><div class="s-badge">02</div><span class="s-num">Who We Are</span></div>
-      <h2 class="s-title-lg" style="margin-bottom:2.5rem;">WE<br>HUMAN<br>IZE<br><em>Brands.</em></h2>
-      <div class="about-text">
-        <p>Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist yang berbasis di Bandung, berdiri sejak 2021.</p>
-        <p>Kami percaya bahwa <strong>humanizing brands</strong> adalah kunci untuk menciptakan brand image yang inovatif, authentic, dan honest — yang benar-benar resonan dengan audiens.</p>
-        <p>Dengan lingkungan yang kreatif dan semangat muda, kami bantu brand kamu tampil beda dan terus berkembang bersama kami.</p>
-      </div>
-      <div class="about-pills">
-        <span class="pill">Authentic</span><span class="pill">Innovative</span><span class="pill">Honest</span><span class="pill">Creative</span><span class="pill">#LetsGrow</span>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="about-card">
-        <div class="about-num-big">21</div>
-        <div class="about-num-lbl">Founded in Bandung — 2021</div>
-        <div class="about-stats-grid">
-          <div><div class="ast-n">50+</div><div class="ast-t">Happy Clients</div></div>
-          <div><div class="ast-n">7</div><div class="ast-t">Services</div></div>
-          <div><div class="ast-n">3+</div><div class="ast-t">Years Active</div></div>
-          <div><div class="ast-n">∞</div><div class="ast-t">#LetsGrow!</div></div>
-        </div>
-        <div class="about-flag">Bandung · West Java</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES — dark -->
+<!-- SERVICES -->
 <section class="services" id="services">
-  <div class="svc-head reveal">
+  <div class="svc-header rev">
     <div>
-      <div class="s-eyebrow"><div class="s-badge">03</div><span class="s-num" style="color:rgba(255,255,255,.35);">What We Do</span></div>
-      <h2 class="s-title-lg" style="color:var(--white);margin-top:.5rem;">WHAT<br>WE <em style="color:var(--coral)">DO</em></h2>
+      <div class="svc-label">What We Do</div>
+      <h2 class="svc-title">Our<br>Services</h2>
     </div>
-    <p class="svc-head-r">Solusi kreatif lengkap untuk brand kamu berkembang di era digital — dari konten hingga produksi.</p>
+    <p class="svc-desc">Solusi kreatif lengkap untuk brand kamu berkembang — dari konten harian hingga kampanye besar.</p>
   </div>
-  <div class="svc-list reveal">
-    <div class="svc-row"><span class="svc-row-n">01</span><span class="svc-row-name">Social Media Management</span><div class="svc-row-tag">Content · Strategy · Growth</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">02</span><span class="svc-row-name">Brand Identity</span><div class="svc-row-tag">Logo · Visual · Guidelines</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">03</span><span class="svc-row-name">Ads Placement</span><div class="svc-row-tag">Meta · Google · ROI</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">04</span><span class="svc-row-name">Photo & Video Production</span><div class="svc-row-tag">Photo · Video · Story</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">05</span><span class="svc-row-name">Graphic Design</span><div class="svc-row-tag">Digital · Print · Creative</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">06</span><span class="svc-row-name">Motion & 3D Visual</span><div class="svc-row-tag">Animation · 3D · Motion</div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-row-n">07</span><span class="svc-row-name">Website Development</span><div class="svc-row-tag">Design · Dev · Deploy</div><span class="svc-arr">→</span></div>
+  <div class="svc-brands rev">
+    <div class="svc-brand">
+      <div class="sb-num">01</div>
+      <div class="sb-name">Social &<br>Content</div>
+      <div class="sb-desc">Strategi, produksi, dan manajemen konten sosial media yang konsisten dan berdampak untuk brand kamu.</div>
+      <div class="sb-tags">
+        <span class="sb-tag">Social Media Management</span>
+        <span class="sb-tag">Content Strategy</span>
+        <span class="sb-tag">Copywriting</span>
+      </div>
+      <span class="sb-arrow">Explore →</span>
+    </div>
+    <div class="svc-brand">
+      <div class="sb-num">02</div>
+      <div class="sb-name">Brand &<br>Visual</div>
+      <div class="sb-desc">Identitas visual yang kuat, graphic design, motion, dan 3D yang membuat brand kamu unforgettable.</div>
+      <div class="sb-tags">
+        <span class="sb-tag">Brand Identity</span>
+        <span class="sb-tag">Graphic Design</span>
+        <span class="sb-tag">Motion & 3D</span>
+      </div>
+      <span class="sb-arrow">Explore →</span>
+    </div>
+    <div class="svc-brand">
+      <div class="sb-num">03</div>
+      <div class="sb-name">Ads &<br>Production</div>
+      <div class="sb-desc">Iklan yang perform, produksi foto & video profesional, dan website yang mencerminkan brand kamu.</div>
+      <div class="sb-tags">
+        <span class="sb-tag">Meta & Google Ads</span>
+        <span class="sb-tag">Photo & Video</span>
+        <span class="sb-tag">Web Development</span>
+      </div>
+      <span class="sb-arrow">Explore →</span>
+    </div>
   </div>
 </section>
 
-<!-- PORTFOLIO — coral -->
+<!-- PORTFOLIO -->
 <section class="portfolio" id="portfolio">
-  <div class="port-head reveal">
-    <div>
-      <div class="s-eyebrow"><div class="s-badge port-badge">04</div><span class="s-num" style="color:rgba(255,255,255,.6);">Selected Work</span></div>
-      <h2 class="s-title-lg" style="margin-top:.5rem;">OUR<br><em>Work.</em></h2>
+  <div class="port-header rev">
+    <h2 class="port-title">Selected Work</h2>
+    <a href="#contact" class="port-link">View All Projects →</a>
+  </div>
+  <div class="port-grid rev">
+    <div class="pcard">
+      <div class="p-thumb-wrap">
+        <div class="p-thumb p-c1" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;color:rgba(240,237,230,0.08);">Duamata</div>
+        <div class="p-overlay"></div>
+        <div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Duamata Residence</div></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="p-thumb-wrap">
+        <div class="p-thumb p-c2" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Raos</div>
+        <div class="p-overlay"></div>
+        <div class="p-info"><div class="p-cat">Brand Identity</div><div class="p-name">Raos Pangsit</div></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="p-thumb-wrap">
+        <div class="p-thumb p-c3" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Nokia</div>
+        <div class="p-overlay"></div>
+        <div class="p-info"><div class="p-cat">Videography</div><div class="p-name">Nokia — #LoveitTrusitKeepit</div></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="p-thumb-wrap">
+        <div class="p-thumb p-c4" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Meraki</div>
+        <div class="p-overlay"></div>
+        <div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Meraki Cafe & Coffee</div></div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="p-thumb-wrap">
+        <div class="p-thumb p-c5" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Dejafu</div>
+        <div class="p-overlay"></div>
+        <div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Dejafu Parfum</div></div>
+      </div>
     </div>
   </div>
-  <div class="port-tabs reveal">
-    <button class="tab active" onclick="fp('all',this)">All</button>
-    <button class="tab" onclick="fp('sosmed',this)">Social Media</button>
-    <button class="tab" onclick="fp('brand',this)">Branding</button>
-    <button class="tab" onclick="fp('foto',this)">Photography</button>
-    <button class="tab" onclick="fp('video',this)">Videography</button>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="rev">
+    <div class="about-label">Who We Are</div>
+    <h2 class="about-title">Humanizing<br>brands.</h2>
+    <p class="about-text">Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist berbasis di Bandung, berdiri sejak 2021.</p>
+    <p class="about-text">Kami percaya bahwa <strong>humanizing brands</strong> adalah kunci untuk menciptakan brand image yang authentic, inovatif, dan honest — yang benar-benar resonan.</p>
+    <div class="about-stats">
+      <div><div class="astat-n">50+</div><div class="astat-t">Happy Clients</div></div>
+      <div><div class="astat-n">3+</div><div class="astat-t">Years Active</div></div>
+      <div><div class="astat-n">7</div><div class="astat-t">Services</div></div>
+      <div><div class="astat-n">∞</div><div class="astat-t">#LetsGrow!</div></div>
+    </div>
   </div>
-  <div class="pgrid reveal" id="pgrid">
-    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0d1a2e,#1b3a8c);color:rgba(255,255,255,.08);">DUAMATA</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Duamata Residence</div></div></div></div>
-    <div class="pcard" data-cat="brand"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#1a0505,#5a0a0a);color:rgba(255,255,255,.08);">RAOS</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Brand Identity</div><div class="p-name">Raos Pangsit</div></div></div></div>
-    <div class="pcard" data-cat="sosmed"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#1a0a00,#3a1500);color:rgba(255,255,255,.08);">MERAKI</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Meraki Cafe & Coffee</div></div></div></div>
-    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0a0a0a,#111);color:rgba(255,255,255,.08);">HYANGYU</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Hyangyu Korean Food</div></div></div></div>
-    <div class="pcard" data-cat="foto"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#0a0a1a,#10102a);color:rgba(255,255,255,.08);">DEJAFU</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Dejafu Parfum</div></div></div></div>
-    <div class="pcard" data-cat="video"><div class="pimg-wrap"><div class="pimg" style="background:linear-gradient(135deg,#040810,#0d1a3a);color:rgba(255,255,255,.08);">NOKIA</div><div class="p-overlay"></div><div class="p-info"><div class="p-cat">Videography</div><div class="p-name">Nokia — #LoveitTrusitKeepit</div></div></div></div>
+  <div class="rev">
+    <div class="about-img">
+      <div class="about-img-txt">Ilona</div>
+    </div>
+    <div class="about-tag">
+      <div class="about-tag-n">2021</div>
+      <div class="about-tag-t">Founded · Bandung</div>
+    </div>
   </div>
 </section>
 
-<!-- CLIENTS — navy -->
+<!-- CLIENTS -->
 <section class="clients" id="clients">
-  <div class="cl-head reveal">
-    <div class="s-eyebrow"><div class="s-badge cl-badge">05</div><span class="s-num" style="color:rgba(255,255,255,.35)">Our Clients</span></div>
-    <h2 class="s-title-lg" style="margin-top:.5rem;">TRUSTED<br>BY <em>Great</em><br>BRANDS.</h2>
+  <div class="cl-header rev">
+    <h2 class="cl-title">Trusted by<br>great brands.</h2>
+    <div class="cl-sub">50+ Clients · Since 2021</div>
   </div>
-  <div class="cl-grid reveal" id="clgrid">
-    <div class="cl-item"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABkAQQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEI/8QAGRABAQEBAQEAAAAAAAAAAAAAAAExQRFh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATQUQAAAAAFuoAAALUAX35EAAAAugAAAAAALUAAAF4i8QAAAABZqAAALUACgAAAAAsQAAAWpAAAAVAAAAAAAF4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" alt="Logo 1" loading="lazy"></div>
-    <div class="cl-item"><img src="data:image/png;base64,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" alt="Bank BJB" loading="lazy"></div>
-    <div class="cl-item"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAH0AfQDASIAAhEBAxEB/8QAGQABAQEBAQEAAAAAAAAAAAAAAAIDAQQI/8QAPBABAQACAAQCBwUGBQMFAAAAAAECEQMSITFBUQQiMmGBkbETM3FyoVKywdHw8QUUIzVzQmKCJDSSlNL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+MgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVjjllLccbZO912BIqY7xt3Onh4lxmu/49ASNM/s7hjy45TKe1blLL+E10TJPxBIvWOu0TJAcGvEnBuX+ljnhj4zLKZX6RPLOaSZdPG2dgQLx4Wed1hOe7kkne78p3qcpccrjlLLO8oOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7JsHFzh6y1xLcJ49Ovydtxx6Yb/ADdqzBd5ZNYzr42u55ZZWXK22STdu+zMAVjjcspJN29orl6byupZvt36oyst6TUBfJJjMrnhNzcm9/Tt8U2zeu/vSA9GU9E1bjx+PctdJeDJLf8A5POANZMdW8+O/Lru/wAHPs8rncMZz5Tp6t39GYDtll1elXjnlj2s1vdlm5de7x7oxysss1085tpwtZ52ZT/pt6dOsmwTeW73j191MsZzawy5pvpuaqAHbLLqyy+9xpjlqSXGZSeF7OXGWTlvW95e3zBA7ZZbLLLO8rgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKwk75fCeYGOPa2dPq7bzXrry90Lea3zQAAA0vqSZXVt68vu95LMZu4731x/n70W222223vaBlbllbe9cAAAAAAABp6P97/45fSs2no/3l/Ll+7QZgAAAUKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATrdQFYTd3e07u3r5dPF3LU1jN9O/XfVmAAAvXS5a6IVnZ0xnh3/EHLbbuuAAAAAAAAAA09H+8v5cv3azaej/eX8uX7tBmAAABQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArGTVt/CJa8WY42YSXeM1l01d978u3wBkAAAC5vH1pL08deKFZWcuMnfxSAAAAAAAAAAA09H+8v5cv3azaej/AHl/Ll+7QZgAAAUKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgzfFx9Tnk63Hzk61zK3K7ttt7213DpMrcd9NS+V/raAAAAXw563WyalvWeXgCc+XnvLvl3035OAAAAAAAAAAAA09H+8v5cv3azaej9OJ/wCOX0oMwAAAKNvTcOFw/TONhwMufhY8TKYZb3vHfSsQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaS5Tg2c3qZZdZ75O/6s2kuN4OOPbKZW2/JmAAA1ww5sOJlzycmPNrz6ya/Vk711467UHAAAAAAAAAAAAF4TWNyve9J1McLrd326aVlzZd8b08NdvwBkK5cv2b8jly/ZvyBIrly/ZvyOXL9m/IHeLq6smumr+KGnLdezfk5nhqbm9eMs7AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVJeWZa6W2bSAAA1xv/AKbiT/vx+mTJpcpOFlhq7uUs+GwZgAAAAAAAAAAACuS8nPua3rv1SAAAAACrhZjLekvb3gkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGkv+jjNy6yvT4Rm0w5fsspybz3LMvKdd/WMwAAF8Ph5Z4cTLGdOHjzZfhuT+MQ0wlyuUxtm8bbrx11/gDMAAAAAAAAAAACNLq482O55zyrNfC1zWXtq+G/AEAAAAuXksuuvhtDuVtvXw6OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArh3rZvUs8ku45XHKZTW5d9ZtfEx5MtetrvLZq68L8tAzAAXjfdtADtllsveOKz5t82W/W67vj70gAAAAAAAAAAK4ft/C/RKuH7fwv0BIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTpeHL09XprWv7/2Zq4eVxtnNZjlNZa8gSLzlwtlmr754IAABWU9VK8Nb69Je90nLG43VgOAAAAAAAAAAK4ft/C/RKuH7fwv0BIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANObmxks9aeO+8Zuy2Xc6VXq2Sy9fLyBAADTLrhOnWfrGa5rpboECs8enNJNXw8kgAAAAAAAAK4ft/C/RKuH7fwv0BIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALxly3qXpOvu8EOy2XculTWU1J18gQO683AXO/8ABzPHXWXcvZLTG8vXpfDVBmKuPTeN306pAAAAAAAVw/b+F+iVcP2vhfoCQAAaTG2XLprHv1BmO3v0cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABXPbPWnNdSS3vHdbm51+qAAXOJeu5Mu/W9zeF1q2db37Sf17gTvVVdW3ey63ZuXw6eJlLjdWWXysA5L11ljdTd66+rs4PFs3OFnZrfs3t5swHZLbqS7XeBx5dXg8Tet+zezMBXLeXm6a3rv1+TvJOWZXOfhO6F3GzGZctmN7XXSgakx6y2/ibmtakh0su8pHN468bdfqCWlxskuWpNTv/Xucyztu8ZMNXc5fD490Armxk6S2+drltveuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADstnauAO81822HpXFwmpjwPjwML9YwAeq+ncb9j0b/63D/8Ayx4vGz4ntThz8vDxx+kZgO3LK97b8XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB3GW/wAb5A4NuHOBN3i48TLHw1lMb9K5nhjcpydMb23lv9QZAADuM3+DXD/L4y/aYcTPr05c5j+mqDEaXDeV5ZZPCW738fFmADsBwdzmsrJdzwutbcAGvpXC+w9J4nB5ubkzuO9a3q6ZADuM5spj53TvJ6vNvpvQJG3C4GXEwyyxy4c5e/NxMcflLerEAF4Yc1m9yb10m78AQN8J6PMP9XHO5+GuJJ4+Wqzyw1vr2vbe/wBfEEAAAvLDW9WXlnUEAAAqz1dy784CQaXha9Gx43N7WeWOvwk/mDMAAXMJqXLPllxt7fj0/RAAAAAAAAAAAAAAAAAAAAAAAAAAAC9SYy73ub15XaFXfLOnTv8AiCXZbLuXVcdk3QcHcpy5XHyunAa8usOvLOXHm1vvv+/6Mm/Fm92WTXDx8Z16RgC8L0uOuaXt7vecXrlMunrTd1d9ff8AU4XXPrly9L1+HZzOamN3Os30BLs7uOwF8sy1J49renVmrCyXWXa9/c7n17SdIDX/ABP/AHL0n/mz+ted6P8AE/8AcvSf+bP615wXwfvcPzRWf/t8J/35fSI4V1xcLe3NGmOfE4XDmfD4mWFytl5bZ21/MGI14npHH4mHJxOLnnj5XK1kA0yupceaW49JryZqzxuO5ZrV1fcCXZbJZLdXvHGl4VnAx425rLLLGT8JP5wGYANOB0z59W8vbXn4f29ztmNxuterdXV9qe75fqrg8Pi543Dh8HiZ5d/Vl+H9e9eHonpOO7n6Nx+Wyy6wvw8PMHlvS6FZTpLve0gLx1fDevDziHb0oO5TV3O17Ns/9u4X/LxPpgztmUt1qXw8r7vc14nT/D+FL3+14n0wB5gAXl7GH5f41C8/Zw/L/GoAAAAAAAAAAAAAAAAAAAAAAAAAAAXjbZrd3JZOvggBePDuUtlx1O+8pDLDLG6tx6zwyl+iea+e/wAepcrfHv5A7xfvcvzVIA1wu8Z7O8Zqzzl/j1/rSfs7ZuXHW9dcpL8kL+0z5ua3d3u2ze6Dsx5eeWY29t73J180ZXd2W293AHY4ANMLOXX/AFT2ev6MwFcTLLPO5523LK7tvjUu223dtt97gKwkueMvSWrzsvBxx8Zllf0n8mU6XcAHc8csM7hlLMsbqy+Fcdttttttve0HF9Ljbu6116+KHZbLudKCpwsrJZcNW6m8pP7NcrP8pjwdbzw4meV11mrMe1+DCZWeXyLbfEHFYY82Unz/AASAvi2erJLLrr18f7aQ7bbd27tcBvlftN+tzXOc13evNN7+fX5xg7jlljrWVmruavauAAA7jZMpvdnjJdL4mWXJMObeM6zXv1/KM3d3Wt3XkDgALys5MPdOvzqHd2eLgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="Gonegani" loading="lazy"></div>
+  <div class="cl-marquee rev">
+    <div class="cl-track">
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BRI</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Maxim</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Scarlett</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Wardah</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Viu</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Nokia</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Natasha</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Resso</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BJB</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Meraki Cafe</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BRI</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Maxim</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Scarlett</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Wardah</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Viu</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Nokia</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Natasha</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Resso</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BJB</div>
+      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Meraki Cafe</div>
+    </div>
   </div>
 </section>
 
-<!-- CONTACT — cream -->
+<!-- CONTACT -->
 <section class="contact" id="contact">
+  <div class="contact-noise"></div>
   <div class="contact-inner">
-    <div class="contact-left reveal">
-      <div class="s-eyebrow"><div class="s-badge">06</div><span class="s-num">Let's Talk</span></div>
-      <h2 class="contact-title" style="margin-top:.8rem;">READY<br>TO<br><em>Grow?</em></h2>
+    <div class="rev">
+      <div class="contact-label">Get In Touch</div>
+      <h2 class="contact-title">Let's<br>grow<br>together.</h2>
       <p class="contact-sub">Ceritakan kebutuhan brand kamu. Tim kami akan merespons dalam 1×24 jam kerja.</p>
       <div class="contact-links">
-        <a href="https://instagram.com/ilonadigital" target="_blank" class="clink"><span class="clink-dot"></span>@ilonadigital</a>
-        <a href="https://wa.me/6283838848606" target="_blank" class="clink"><span class="clink-dot"></span>083838848606</a>
-        <a href="mailto:kontak.ilona@gmail.com" class="clink"><span class="clink-dot"></span>kontak.ilona@gmail.com</a>
+        <a href="https://instagram.com/ilonadigital" target="_blank" class="clink">@ilonadigital</a>
+        <a href="https://wa.me/6283838848606" target="_blank" class="clink">083838848606</a>
+        <a href="mailto:kontak.ilona@gmail.com" class="clink">kontak.ilona@gmail.com</a>
       </div>
     </div>
-    <div class="reveal">
-      <div class="cform-wrap" id="cformWrap">
+    <div class="rev">
+      <div id="cformWrap">
         <div id="formBody">
-          <div class="ftitle">Let's Talk</div>
-          <div class="fsub">Response within 24 working hours</div>
           <div class="frow">
             <div class="fg"><label>Nama Lengkap *</label><input type="text" id="f-nama" placeholder="Nama kamu"></div>
             <div class="fg"><label>Brand / Perusahaan</label><input type="text" id="f-brand" placeholder="Nama brand"></div>
           </div>
           <div class="frow">
-            <div class="fg"><label>No. WhatsApp *</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div>
+            <div class="fg"><label>WhatsApp *</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div>
             <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="email@kamu.com"></div>
           </div>
-          <div class="fg"><label>Sosial Media Bisnis</label><input type="text" id="f-sosmed" placeholder="@namaakun"></div>
+          <div class="fg"><label>Sosial Media</label><input type="text" id="f-sosmed" placeholder="@namaakun"></div>
           <div class="fg">
             <label>Kebutuhan Utama *</label>
-            <select id="f-service"><option value="" disabled selected>— Pilih layanan —</option><option>Social Media Management</option><option>Brand Identity</option><option>Ads Placement (Meta / Google)</option><option>Photo & Video Production</option><option>Graphic Design</option><option>Motion & 3D Visual</option><option>Website Development</option><option>Paket Bundling</option><option>Konsultasi Dulu</option></select>
+            <select id="f-service">
+              <option value="" disabled selected>— Pilih layanan —</option>
+              <option>Social Media Management</option>
+              <option>Brand Identity</option>
+              <option>Ads Placement</option>
+              <option>Photo & Video Production</option>
+              <option>Graphic Design</option>
+              <option>Motion & 3D Visual</option>
+              <option>Website Development</option>
+              <option>Konsultasi Dulu</option>
+            </select>
           </div>
-          <div class="fg">
-            <label>Estimasi Budget</label>
-            <select id="f-budget"><option value="" disabled selected>— Range budget —</option><option>Di bawah Rp 1 juta</option><option>Rp 1 – 3 juta</option><option>Rp 3 – 5 juta</option><option>Rp 5 – 10 juta</option><option>Di atas Rp 10 juta</option><option>Fleksibel</option></select>
-          </div>
-          <div class="fg"><label>Pesan</label><textarea id="f-pesan" placeholder="Ceritakan singkat kebutuhan kamu..."></textarea></div>
-          <button class="btn-send" onclick="kirim()">SEND MESSAGE →</button>
-          <div class="fnote">Dengan mengisi form ini, kamu setuju dihubungi oleh tim Ilona Digital melalui WhatsApp.</div>
+          <div class="fg"><label>Pesan</label><textarea id="f-pesan" placeholder="Ceritakan kebutuhan kamu..."></textarea></div>
+          <button class="btn-send" onclick="kirim()">Send Message →</button>
+          <div class="fnote">Dengan mengisi form ini, kamu setuju dihubungi oleh tim Ilona Digital.</div>
         </div>
         <div class="fsuccess" id="fsuccess">
-          <h3>SENT! 🚀</h3>
-          <p>Makasih sudah menghubungi Ilona Digital.<br>Tim kami akan segera balas kamu.<br><br><em>#LetsGrow!</em></p>
+          <h3>Sent!</h3>
+          <p>Makasih sudah menghubungi Ilona Digital.<br>Tim kami akan segera balas.<br><br>#LetsGrow!</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <h2>#LETS<br><em>Grow!</em></h2>
-  <a href="#contact" class="cta-banner-btn">Mulai Konsultasi Sekarang →</a>
-</div>
-
-<!-- FOOTER -->
 <footer>
-  <span class="footer-logo">ILO<span>N</span>A</span>
-  <p>© 2024 Ilona Digital Creative Agency · Bandung, Indonesia</p>
+  <span class="footer-logo">Ilona</span>
+  <p>© 2024 Ilona Digital Creative Agency · Bandung</p>
   <div class="footer-links">
     <a href="https://instagram.com/ilonadigital" target="_blank">Instagram</a>
     <a href="https://wa.me/6283838848606" target="_blank">WhatsApp</a>
@@ -512,40 +506,26 @@ footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rg
 </footer>
 
 <script>
-/* cursor */
+// Cursor
 const cd=document.getElementById('cdot'),cr=document.getElementById('cring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
 (function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
-document.querySelectorAll('a,button,.svc-row,.pcard,.cl-item,.tab').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+document.querySelectorAll('a,button,.svc-brand,.pcard').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });
 
-/* nav scroll */
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
-
-/* hamburger */
+// Hamburger
 const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
 hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
 function closeMM(){hbg.classList.remove('open');mob.classList.remove('open');}
 
-/* reveal */
-new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');} });},{threshold:.08}).observe.call(new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:.08}),document.querySelector('.reveal'));
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// Scroll reveal
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 
-/* portfolio filter */
-function fp(cat,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
-  document.querySelectorAll('.pcard').forEach((c,i)=>{
-    const show=cat==='all'||c.dataset.cat===cat;
-    c.style.display=show?'block':'none';
-    if(i===0)c.style.gridColumn=show&&cat==='all'?'span 2':'span 1';
-  });
-}
-
-/* form */
+// Form
 function kirim(){
   const nama=document.getElementById('f-nama').value.trim();
   const wa=document.getElementById('f-wa').value.trim();
@@ -556,9 +536,8 @@ function kirim(){
   const brand=document.getElementById('f-brand').value.trim();
   const email=document.getElementById('f-email').value.trim();
   const sosmed=document.getElementById('f-sosmed').value.trim();
-  const budget=document.getElementById('f-budget').value||'-';
   const pesan=document.getElementById('f-pesan').value.trim();
-  const msg=`Halo Ilona Digital! 👋 #LetsGrow!\n\n👤 Nama: ${nama}\n🏢 Brand: ${brand||'-'}\n📱 WA: ${wa}\n📧 Email: ${email||'-'}\n📸 Sosmed: ${sosmed||'-'}\n\n🎯 Layanan: ${svc}\n💰 Budget: ${budget}${pesan?'\n\n💬 Pesan:\n'+pesan:''}`;
+  const msg=`Halo Ilona Digital! 👋 #LetsGrow!\n\n👤 Nama: ${nama}\n🏢 Brand: ${brand||'-'}\n📱 WA: ${wa}\n📧 Email: ${email||'-'}\n📸 Sosmed: ${sosmed||'-'}\n\n🎯 Layanan: ${svc}${pesan?'\n\n💬 Pesan:\n'+pesan:''}`;
   window.open('https://wa.me/6283838848606?text='+encodeURIComponent(msg),'_blank');
   document.getElementById('formBody').style.display='none';
   document.getElementById('fsuccess').style.display='block';
