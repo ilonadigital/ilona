@@ -3,214 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ilona Digital — Creative Agency</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<title>Ilona Digital — Creative Agency Bandung</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ── RESET & BASE ── */
+:root{
+  --orange:#E8522A;
+  --orange2:#FF6B3D;
+  --dark:#111111;
+  --light:#F2F2F0;
+  --light2:#E8E8E5;
+  --white:#FFFFFF;
+  --muted:#888884;
+  --cream:#EDE9E3;
+  --r:20px;
+  --r2:28px;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:16px;scroll-behavior:smooth;}
-body{background:#0A0A0A;color:#F0EDE6;font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+html{scroll-behavior:smooth;}
+body{background:var(--light);color:var(--dark);font-family:'Inter',sans-serif;font-weight:400;overflow-x:hidden;cursor:none;}
 
-/* ── CURSOR ── */
-#cur{position:fixed;z-index:9999;pointer-events:none;mix-blend-mode:difference;}
-#cdot{width:8px;height:8px;background:#F0EDE6;border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-#cring{width:32px;height:32px;border:1px solid rgba(240,237,230,0.4);border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);transition:width .4s cubic-bezier(0.76,0,0.24,1),height .4s cubic-bezier(0.76,0,0.24,1),opacity .3s;}
-body.hov #cdot{width:12px;height:12px;}
-body.hov #cring{width:60px;height:60px;opacity:.6;}
+/* CURSOR */
+#cdot{width:8px;height:8px;background:var(--dark);border-radius:50%;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+#cring{width:36px;height:36px;border:1.5px solid rgba(17,17,17,0.2);border-radius:50%;position:fixed;top:0;left:0;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .45s cubic-bezier(0.16,1,0.3,1),height .45s cubic-bezier(0.16,1,0.3,1),border-color .2s;}
+body.ch #cdot{width:12px;height:12px;background:var(--orange);}
+body.ch #cring{width:56px;height:56px;border-color:rgba(232,82,42,0.35);}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3rem;mix-blend-mode:difference;}
-.logo{font-family:'Instrument Serif',serif;font-size:1.2rem;font-style:italic;color:#F0EDE6;text-decoration:none;letter-spacing:.5px;}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:.72rem;color:rgba(240,237,230,0.6);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:#F0EDE6;}
-.nav-cta{font-size:.72rem;color:rgba(240,237,230,0.6);text-decoration:none;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(240,237,230,0.25);padding:.5rem 1.2rem;transition:all .2s;}
-.nav-cta:hover{color:#F0EDE6;border-color:#F0EDE6;}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;}
-.hbg span{display:block;width:22px;height:1px;background:#F0EDE6;transition:all .3s;}
-.hbg.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+/* NAV — pill floating */
+nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:500;display:flex;align-items:center;gap:2rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-radius:100px;padding:.75rem 1rem .75rem 1.5rem;box-shadow:0 2px 20px rgba(0,0,0,0.08);white-space:nowrap;}
+.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;}
+.logo-icon{width:28px;height:28px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-icon svg{width:16px;height:16px;fill:white;}
+.logo-txt{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--dark);letter-spacing:-.3px;}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;padding:.4rem .9rem;border-radius:100px;transition:all .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--dark);}
+.nav-btn{background:var(--dark);color:white;padding:.55rem 1.3rem;border-radius:100px;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.nav-btn:hover{background:#222;}
+.hbg{display:none;background:none;border:none;cursor:none;padding:4px;flex-direction:column;gap:5px;}
+.hbg span{display:block;width:20px;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .hbg.open span:nth-child(2){opacity:0;}
-.hbg.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-/* ── MOBILE MENU ── */
-.mob{display:none;position:fixed;inset:0;z-index:90;background:#0A0A0A;flex-direction:column;justify-content:flex-end;padding:4rem 3rem;gap:0;}
+/* MOB */
+.mob{display:none;position:fixed;inset:0;z-index:450;background:var(--dark);flex-direction:column;justify-content:center;align-items:center;gap:2rem;}
 .mob.open{display:flex;}
-.mob a{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,8vw,5rem);font-style:italic;color:rgba(240,237,230,0.2);text-decoration:none;display:block;padding:.3rem 0;border-bottom:1px solid rgba(240,237,230,0.06);transition:color .2s;}
-.mob a:hover{color:#F0EDE6;}
-.mob-foot{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.2);margin-top:2rem;}
+.mob a{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:rgba(255,255,255,.15);text-decoration:none;transition:color .2s;}
+.mob a:hover{color:white;}
+.mob-cta{background:var(--orange)!important;color:white!important;padding:.8rem 2.5rem;border-radius:100px;font-size:1rem!important;}
 
-/* ── HERO ── */
-.hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end;}
-.hero-video{position:absolute;inset:0;z-index:0;}
-.hero-video video,.hero-video-placeholder{width:100%;height:100%;object-fit:cover;}
-.hero-video-placeholder{background:linear-gradient(135deg,#0d0d0d 0%,#1a1a2e 40%,#0d0d0d 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
-.hero-video-placeholder-icon{width:70px;height:70px;border:1px solid rgba(240,237,230,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;}
-.hero-video-placeholder-icon:hover{border-color:rgba(240,237,230,0.5);}
-.hero-video-placeholder-icon svg{margin-left:4px;}
-.hero-video-lbl{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.85) 0%,rgba(10,10,10,0.1) 60%,transparent 100%);z-index:1;}
-.hero-content{position:relative;z-index:2;padding:0 3rem 4rem;width:100%;}
-.hero-tag{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
-.hero-tag::before{content:'';display:block;width:30px;height:1px;background:rgba(240,237,230,0.3);}
-.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(3.5rem,9vw,12rem);font-style:italic;font-weight:300;line-height:.9;letter-spacing:-3px;color:#F0EDE6;margin-bottom:2.5rem;max-width:900px;}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
-.hero-desc{font-size:.9rem;line-height:1.8;color:rgba(240,237,230,0.5);max-width:340px;}
-.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:.8rem;}
-.scroll-line{width:1px;height:60px;background:rgba(240,237,230,0.15);position:relative;overflow:hidden;}
-.scroll-fill{position:absolute;top:-100%;width:100%;height:100%;background:rgba(240,237,230,0.5);animation:scrl 2s ease infinite;}
-@keyframes scrl{to{top:200%;}}
-.scroll-lbl{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
+/* HERO — orange bg */
+.hero{background:var(--orange);min-height:100vh;padding:7rem 2.5rem 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;border-radius:0 0 var(--r2) var(--r2);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:.92;letter-spacing:-3px;color:var(--dark);margin-bottom:1.2rem;max-width:800px;}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(17,17,17,.65);max-width:500px;margin:0 auto 3.5rem;line-height:1.6;font-weight:400;}
+.hero-sub strong{color:var(--dark);font-weight:600;}
+/* hero visual card */
+.hero-visual{background:white;border-radius:var(--r2);padding:1.5rem;max-width:380px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.2);position:relative;overflow:hidden;}
+.hero-visual-top{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
+.hv-icon{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.hv-icon svg{width:16px;height:16px;fill:white;}
+.hv-txt{font-size:.72rem;color:var(--muted);}
+.hv-txt strong{color:var(--dark);display:block;font-size:.85rem;}
+.hv-card{background:var(--light);border-radius:12px;padding:1rem;margin-bottom:.6rem;}
+.hv-card-label{font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.3rem;}
+.hv-card-val{font-size:.88rem;font-weight:600;color:var(--dark);}
+.hv-rows{display:flex;flex-direction:column;gap:.4rem;}
+.hv-row{display:flex;align-items:center;gap:.6rem;padding:.5rem .6rem;border-radius:8px;transition:background .2s;}
+.hv-row:hover{background:var(--light);}
+.hv-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.hv-row-txt{font-size:.78rem;color:var(--dark);flex:1;}
+.hv-row-badge{font-size:.6rem;background:var(--orange);color:white;padding:.2rem .5rem;border-radius:100px;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap;}
+.btn-dark{background:var(--dark);color:white;padding:.85rem 2rem;border-radius:100px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .3s;}
+.btn-dark:hover{background:#222;transform:translateY(-2px);}
+.btn-outline{background:rgba(0,0,0,.1);color:var(--dark);padding:.85rem 2rem;border-radius:100px;font-size:.85rem;font-weight:500;text-decoration:none;transition:all .2s;}
+.btn-outline:hover{background:rgba(0,0,0,.18);}
 
-/* ── MARQUEE ── */
-.marquee{border-top:1px solid rgba(240,237,230,0.07);border-bottom:1px solid rgba(240,237,230,0.07);padding:.9rem 0;overflow:hidden;background:rgba(240,237,230,0.02);position:relative;}
-.marquee::before,.marquee::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:1;pointer-events:none;}
-.marquee::before{left:0;background:linear-gradient(to right,#0A0A0A,transparent);}
-.marquee::after{right:0;background:linear-gradient(to left,#0A0A0A,transparent);}
-.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:mq 30s linear infinite;}
-.marquee-track:hover{animation-play-state:paused;}
-.mi{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.2);padding:0 2.5rem;flex-shrink:0;transition:color .2s;}
-.mi:hover{color:rgba(240,237,230,0.6);}
-.mi-sep{color:rgba(240,237,230,0.1);}
-@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+/* CLIENTS — white section */
+.clients-sec{background:white;padding:4rem 2.5rem;text-align:center;}
+.cl-label{font-size:.72rem;color:var(--muted);margin-bottom:2.5rem;letter-spacing:.3px;}
+.cl-logos{display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap;}
+.cl-logo{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:rgba(17,17,17,.2);letter-spacing:-.3px;transition:color .2s;}
+.cl-logo:hover{color:rgba(17,17,17,.5);}
 
-/* ── SERVICES ── */
-.services{padding:8rem 3rem;}
-.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6rem;padding-bottom:3rem;border-bottom:1px solid rgba(240,237,230,0.07);}
-.svc-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.3);}
-.svc-title{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,6vw,6rem);font-style:italic;font-weight:300;letter-spacing:-2px;color:#F0EDE6;line-height:.9;}
-.svc-desc{font-size:.88rem;color:rgba(240,237,230,0.45);line-height:1.8;max-width:280px;}
-/* Sub-brand cards like 02PX */
-.svc-brands{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(240,237,230,0.07);margin-bottom:1px;}
-.svc-brand{background:#0A0A0A;padding:3.5rem;cursor:none;position:relative;overflow:hidden;transition:background .4s;}
-.svc-brand::before{content:'';position:absolute;inset:0;background:rgba(240,237,230,0.03);opacity:0;transition:opacity .4s;}
-.svc-brand:hover::before{opacity:1;}
-.svc-brand:hover .sb-arrow{transform:translateX(5px);opacity:1;}
-.sb-num{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.2);margin-bottom:3rem;}
-.sb-name{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,3vw,3rem);font-style:italic;font-weight:300;color:#F0EDE6;line-height:1;margin-bottom:1rem;letter-spacing:-1px;}
-.sb-desc{font-size:.78rem;color:rgba(240,237,230,0.4);line-height:1.7;margin-bottom:2rem;}
-.sb-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
-.sb-tag{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);border:1px solid rgba(240,237,230,0.1);padding:.25rem .6rem;}
-.sb-arrow{color:rgba(240,237,230,0.3);font-size:.8rem;opacity:0;transform:translateX(-5px);transition:all .35s;margin-top:2rem;display:block;letter-spacing:2px;font-size:.65rem;text-transform:uppercase;}
+/* FEATURES — cream bg, horizontal scroll cards */
+.features{background:white;padding:3rem 0 5rem;}
+.feat-header{padding:0 2.5rem 3rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;}
+.feat-title{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.5px;color:var(--dark);}
+.feat-sub{font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.6;}
+.feat-scroll{display:flex;gap:1.2rem;overflow-x:auto;padding:0 2.5rem 1rem;scrollbar-width:none;}
+.feat-scroll::-webkit-scrollbar{display:none;}
+.feat-card{background:var(--cream);border-radius:var(--r2);padding:2rem;min-width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:2.5rem;}
+.feat-card-img{flex:1;border-radius:16px;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:white;}
+.feat-card-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.feat-card-body{}
+.feat-card-title{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;}
+.feat-card-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
 
-/* ── PORTFOLIO ── */
-.portfolio{padding:0 3rem 8rem;}
-.port-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;}
-.port-title{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,5rem);font-style:italic;font-weight:300;letter-spacing:-2px;color:#F0EDE6;}
-.port-link{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.35);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
-.port-link:hover{color:#F0EDE6;}
-.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(240,237,230,0.07);}
-.pcard{background:#0A0A0A;overflow:hidden;position:relative;cursor:none;}
-.pcard:first-child{grid-column:span 2;}
-.pcard:hover .p-thumb{transform:scale(1.04);}
-.pcard:hover .p-overlay{opacity:1;}
-.pcard:hover .p-info{transform:translateY(0);opacity:1;}
-.p-thumb-wrap{overflow:hidden;aspect-ratio:16/9;position:relative;}
-.pcard:first-child .p-thumb-wrap{aspect-ratio:16/7;}
-.p-thumb{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(0.76,0,0.24,1);background:linear-gradient(135deg,#111,#1a1a2e);}
-.p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 50%);opacity:0;transition:opacity .4s;}
-.p-info{position:absolute;bottom:0;left:0;right:0;padding:2rem;transform:translateY(10px);opacity:0;transition:all .4s cubic-bezier(0.76,0,0.24,1);}
-.p-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.5);margin-bottom:.4rem;}
-.p-name{font-family:'Instrument Serif',serif;font-size:1.3rem;font-style:italic;color:#F0EDE6;}
-/* placeholder colors for cards */
-.p-c1{background:linear-gradient(135deg,#0d1a2e,#1a0d2e);}
-.p-c2{background:linear-gradient(135deg,#1a0d0d,#2e1a0d);}
-.p-c3{background:linear-gradient(135deg,#0d1a0d,#1a1a0d);}
-.p-c4{background:linear-gradient(135deg,#1a1a1a,#0d0d1a);}
-.p-c5{background:linear-gradient(135deg,#1a0d1a,#0d1a1a);}
+/* PORTFOLIO — dark bg, rotated cards */
+.portfolio{background:var(--dark);padding:6rem 2.5rem;border-radius:var(--r2) var(--r2) 0 0;position:relative;overflow:hidden;}
+.port-bg-txt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:clamp(6rem,15vw,18rem);font-weight:800;color:rgba(255,255,255,.03);white-space:nowrap;pointer-events:none;letter-spacing:-5px;}
+.port-header{text-align:center;margin-bottom:5rem;position:relative;z-index:1;}
+.port-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;}
+.port-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:800;letter-spacing:-2px;color:rgba(255,255,255,.06);line-height:.9;}
+/* tilted cards layout */
+.port-cards{display:flex;align-items:center;justify-content:center;gap:-3rem;position:relative;z-index:1;padding:2rem 0;min-height:420px;}
+.port-card{background:#1a1a1a;border-radius:var(--r2);overflow:hidden;position:absolute;width:300px;cursor:none;transition:transform .4s cubic-bezier(0.16,1,0.3,1),z-index .1s;}
+.port-card:nth-child(1){transform:rotate(-6deg) translateX(-280px);z-index:1;}
+.port-card:nth-child(2){transform:rotate(0deg) translateY(-20px);z-index:3;}
+.port-card:nth-child(3){transform:rotate(6deg) translateX(280px);z-index:1;}
+.port-card:hover{transform:rotate(0deg) translateY(-30px) scale(1.03);z-index:10;}
+.port-card-thumb{height:220px;position:relative;overflow:hidden;}
+.port-card-body{padding:1.2rem 1.5rem 1.5rem;}
+.port-card-cat{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem;}
+.port-card-name{font-size:.9rem;font-weight:600;color:white;margin-bottom:1rem;}
+.port-card-btn{background:var(--orange);color:white;padding:.5rem 1rem;border-radius:100px;font-size:.72rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:background .2s;}
+.port-card-btn:hover{background:var(--orange2);}
+.port-stats{display:flex;gap:1rem;margin-top:1rem;}
+.port-stat{background:white;border-radius:10px;padding:.7rem .9rem;}
+.port-stat-n{font-size:1.3rem;font-weight:700;color:var(--dark);line-height:1;}
+.port-stat-t{font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
 
-/* ── ABOUT ── */
-.about{padding:8rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;border-top:1px solid rgba(240,237,230,0.07);}
-.about-left{}
-.about-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,237,230,0.3);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
-.about-label::before{content:'';display:block;width:20px;height:1px;background:rgba(240,237,230,0.3);}
-.about-title{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,5vw,6rem);font-style:italic;font-weight:300;letter-spacing:-2px;line-height:.9;color:#F0EDE6;margin-bottom:3rem;}
-.about-text{font-size:.92rem;color:rgba(240,237,230,0.5);line-height:1.9;margin-bottom:1.2rem;}
-.about-text strong{color:#F0EDE6;font-weight:400;}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(240,237,230,0.07);}
-.astat-n{font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;color:#F0EDE6;line-height:1;}
-.astat-t{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.3);margin-top:.3rem;}
-.about-right{position:relative;}
-.about-img{aspect-ratio:3/4;background:linear-gradient(135deg,#111,#0d1a2e);border:1px solid rgba(240,237,230,0.07);display:flex;align-items:center;justify-content:center;}
-.about-img-txt{font-family:'Instrument Serif',serif;font-size:6rem;font-style:italic;color:rgba(240,237,230,0.04);}
-.about-tag{position:absolute;bottom:2rem;left:-2rem;background:#0A0A0A;border:1px solid rgba(240,237,230,0.1);padding:1.2rem 1.8rem;}
-.about-tag-n{font-family:'Instrument Serif',serif;font-size:1.8rem;font-style:italic;color:#F0EDE6;line-height:1;}
-.about-tag-t{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.3);}
+/* HOW IT WORKS */
+.how{background:var(--light);padding:6rem 2.5rem;}
+.how-header{text-align:center;margin-bottom:4rem;}
+.how-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:white;border-radius:100px;padding:.35rem 1rem;font-size:.72rem;color:var(--muted);margin-bottom:1.2rem;}
+.how-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);}
+.how-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+.how-card{background:white;border-radius:var(--r);padding:2rem;transition:transform .3s,box-shadow .3s;}
+.how-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08);}
+.how-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:rgba(17,17,17,.06);line-height:1;margin-bottom:1.5rem;}
+.how-icon{font-size:1.5rem;margin-bottom:.8rem;}
+.how-name{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;}
+.how-desc{font-size:.78rem;color:var(--muted);line-height:1.65;}
 
-/* ── CLIENTS ── */
-.clients{padding:6rem 3rem;border-top:1px solid rgba(240,237,230,0.07);}
-.cl-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4rem;}
-.cl-title{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,4rem);font-style:italic;font-weight:300;letter-spacing:-1px;color:#F0EDE6;}
-.cl-sub{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,237,230,0.25);}
-.cl-marquee{overflow:hidden;position:relative;}
-.cl-marquee::before,.cl-marquee::after{content:'';position:absolute;top:0;bottom:0;width:150px;z-index:1;pointer-events:none;}
-.cl-marquee::before{left:0;background:linear-gradient(to right,#0A0A0A,transparent);}
-.cl-marquee::after{right:0;background:linear-gradient(to left,#0A0A0A,transparent);}
-.cl-track{display:flex;align-items:center;gap:5rem;white-space:nowrap;width:max-content;animation:mq 25s linear infinite;}
-.cl-track:hover{animation-play-state:paused;}
-.cl-item{height:45px;display:flex;align-items:center;flex-shrink:0;opacity:0.5;transition:opacity .3s;filter:brightness(0) invert(1);}
-.cl-item:hover{opacity:1;}
-.cl-item img{height:100%;width:auto;object-fit:contain;}
+/* SERVICES list */
+.services{background:white;padding:6rem 2.5rem;}
+.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
+.svc-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);}
+.svc-sub{font-size:.85rem;color:var(--muted);max-width:260px;line-height:1.6;}
+.svc-list{display:flex;flex-direction:column;border-top:1px solid rgba(17,17,17,.07);}
+.svc-row{display:flex;align-items:center;padding:1.5rem 0;border-bottom:1px solid rgba(17,17,17,.07);cursor:none;gap:1.5rem;transition:padding .3s cubic-bezier(0.16,1,0.3,1);}
+.svc-row:hover{padding-left:1rem;}
+.svc-row:hover .svc-name{color:var(--orange);}
+.svc-row:hover .svc-dot{background:var(--orange);}
+.svc-dot{width:8px;height:8px;border-radius:50%;background:rgba(17,17,17,.12);flex-shrink:0;transition:background .2s;}
+.svc-name{font-family:'Syne',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700;color:var(--dark);flex:1;transition:color .2s;letter-spacing:-.3px;}
+.svc-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+.svc-tag{font-size:.6rem;color:var(--muted);background:var(--light);padding:.3rem .7rem;border-radius:100px;}
+.svc-arr{color:rgba(17,17,17,.2);font-size:.75rem;font-weight:600;transition:all .2s;opacity:0;transform:translateX(-5px);}
+.svc-row:hover .svc-arr{opacity:1;transform:translateX(0);}
 
-/* ── CONTACT ── */
-.contact{background:#F0EDE6;color:#0A0A0A;padding:8rem 3rem;position:relative;overflow:hidden;}
-.contact-noise{position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;}
-.contact-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
-.contact-left{}
-.contact-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
-.contact-label::before{content:'';display:block;width:20px;height:1px;background:rgba(10,10,10,0.25);}
-.contact-title{font-family:'Instrument Serif',serif;font-size:clamp(3rem,7vw,8rem);font-style:italic;font-weight:300;letter-spacing:-4px;line-height:.88;color:#0A0A0A;margin-bottom:2rem;}
-.contact-sub{font-size:.9rem;color:rgba(10,10,10,0.5);line-height:1.8;max-width:350px;margin-bottom:3rem;}
-.contact-links{display:flex;flex-direction:column;gap:.6rem;}
-.clink{font-size:.78rem;color:rgba(10,10,10,0.4);text-decoration:none;display:flex;align-items:center;gap:.7rem;transition:color .2s;}
-.clink::before{content:'';width:4px;height:4px;background:#0A0A0A;border-radius:50%;opacity:.3;flex-shrink:0;}
-.clink:hover{color:#0A0A0A;}
-/* Form */
-.cform{padding:0;}
-.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.4rem;}
-.fg label{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(10,10,10,0.3);}
-.fg input,.fg select,.fg textarea{border:none;border-bottom:1px solid rgba(10,10,10,0.15);padding:.7rem 0;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#0A0A0A;background:transparent;outline:none;width:100%;transition:border-color .2s;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:#0A0A0A;}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(10,10,10,0.2);}
-.fg select{appearance:none;cursor:none;}
-.fg select option{background:#F0EDE6;color:#0A0A0A;}
-.fg textarea{resize:vertical;min-height:80px;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.btn-send{width:100%;background:#0A0A0A;color:#F0EDE6;border:none;padding:1rem;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:none;transition:background .3s;margin-top:.5rem;}
-.btn-send:hover{background:#1a1a1a;}
-.fnote{font-size:.6rem;color:rgba(10,10,10,0.25);text-align:center;margin-top:.8rem;line-height:1.5;}
-.fsuccess{display:none;text-align:center;padding:4rem 1rem;}
-.fsuccess h3{font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;font-weight:300;color:#0A0A0A;margin-bottom:.5rem;}
-.fsuccess p{font-size:.88rem;color:rgba(10,10,10,0.5);line-height:1.8;}
+/* ABOUT / TESTIMONIALS */
+.about{background:var(--light);padding:6rem 2.5rem;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1000px;margin:0 auto;}
+.about-main{background:var(--orange);border-radius:var(--r2);padding:3rem;display:flex;flex-direction:column;justify-content:space-between;min-height:320px;position:relative;overflow:hidden;}
+.about-main::before{content:'';position:absolute;top:-3rem;right:-3rem;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08);}
+.about-logo{display:flex;align-items:center;gap:.5rem;margin-bottom:auto;}
+.about-logo-icon{width:28px;height:28px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.about-logo-icon svg{width:14px;height:14px;fill:var(--orange);}
+.about-logo-txt{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:white;}
+.about-tagline{font-size:1.2rem;font-weight:600;color:white;line-height:1.4;position:relative;z-index:1;}
+.about-tagline span{opacity:.7;}
+.about-stats{background:white;border-radius:var(--r2);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.ast-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--dark);letter-spacing:-1px;line-height:1;}
+.ast-t{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+.about-desc{background:var(--cream);border-radius:var(--r2);padding:2.5rem;grid-column:span 2;}
+.about-desc h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.3px;color:var(--dark);margin-bottom:1rem;}
+.about-desc p{font-size:.88rem;color:var(--muted);line-height:1.8;}
+.about-desc p strong{color:var(--dark);font-weight:600;}
 
-/* ── FOOTER ── */
-footer{background:#0A0A0A;border-top:1px solid rgba(240,237,230,0.07);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.footer-logo{font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:rgba(240,237,230,0.2);}
-footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,237,230,0.15);}
-.footer-links{display:flex;gap:2rem;}
-.footer-links a{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,230,0.2);text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:rgba(240,237,230,0.7);}
+/* FOOTER */
+footer{background:var(--light);padding:2rem 2.5rem 3rem;}
+.footer-inner{display:grid;grid-template-columns:280px 1fr auto;gap:1.5rem;align-items:start;}
+.footer-left{background:var(--orange);border-radius:var(--r2);padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between;min-height:200px;}
+.fl-logo{display:flex;align-items:center;gap:.5rem;margin-bottom:auto;}
+.fl-logo-icon{width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.fl-logo-icon svg{width:12px;height:12px;fill:white;}
+.fl-logo-txt{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:1px;}
+.fl-tagline{font-size:.88rem;font-weight:600;color:white;line-height:1.4;}
+.fl-tagline span{opacity:.6;}
+.footer-mid{background:white;border-radius:var(--r2);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.footer-col h4{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;}
+.footer-col a{display:block;font-size:.92rem;font-weight:500;color:var(--dark);text-decoration:none;margin-bottom:.7rem;transition:color .2s;}
+.footer-col a:hover{color:var(--orange);}
+.footer-bottom{display:flex;align-items:flex-end;justify-content:space-between;flex-direction:column;gap:1rem;}
+.footer-cta-btn{background:var(--dark);color:white;padding:.75rem 1.8rem;border-radius:100px;font-size:.82rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.footer-cta-btn:hover{background:#222;}
+.footer-copy{font-size:.68rem;color:var(--muted);}
+/* BIG EMAIL */
+.footer-email{text-align:center;padding:2rem 2.5rem 1rem;overflow:hidden;}
+.footer-email a{font-family:'Syne',sans-serif;font-size:clamp(2rem,6vw,6rem);font-weight:800;letter-spacing:-2px;color:rgba(17,17,17,.08);text-decoration:none;transition:color .3s;white-space:nowrap;}
+.footer-email a:hover{color:rgba(17,17,17,.15);}
 
-/* ── REVEAL ── */
-.rev{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.76,0,0.24,1),transform .9s cubic-bezier(0.76,0,0.24,1);}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1);}
 .rev.vis{opacity:1;transform:translateY(0);}
+.rev-d1{transition-delay:.1s;}
+.rev-d2{transition-delay:.2s;}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:900px){
-  nav{padding:1.2rem 1.5rem;}
-  nav .nav-links, nav .nav-cta{display:none;}
+  nav{top:.8rem;padding:.6rem .8rem .6rem 1.2rem;gap:1rem;}
+  .nav-links{display:none;}
+  .nav-btn{display:none;}
   .hbg{display:flex;}
-  .hero-content{padding:0 1.5rem 3rem;}
-  .hero h1{font-size:clamp(3rem,12vw,6rem);letter-spacing:-2px;}
-  .services,.portfolio,.about,.clients,.contact{padding:5rem 1.5rem;}
-  .svc-brands{grid-template-columns:1fr;}
-  .port-grid{grid-template-columns:1fr;}
-  .pcard:first-child{grid-column:span 1;}
-  .about{grid-template-columns:1fr;gap:3rem;}
-  .about-right{display:none;}
-  .contact-inner{grid-template-columns:1fr;gap:3rem;}
-  .frow{grid-template-columns:1fr;}
-  footer{padding:1.5rem;flex-direction:column;text-align:center;}
-  .svc-header{flex-direction:column;align-items:flex-start;gap:1.5rem;}
+  .hero{padding:6rem 1.5rem 3rem;border-radius:0 0 16px 16px;}
+  .feat-scroll{padding:0 1.5rem 1rem;}
+  .port-cards{flex-direction:column;min-height:auto;}
+  .port-card{position:static;transform:none!important;width:100%;max-width:340px;}
+  .how-grid{grid-template-columns:1fr 1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-desc{grid-column:span 1;}
+  .footer-inner{grid-template-columns:1fr;gap:1rem;}
+  .footer-bottom{flex-direction:row;}
+  .footer-email a{font-size:clamp(1.5rem,8vw,3.5rem);}
+  .svc-tags{display:none;}
+  .clients,.services,.about,.how{padding:4rem 1.5rem;}
+}
+@media(max-width:520px){
+  .how-grid{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:1fr 1fr;}
+  .port-card{max-width:100%;}
+  nav{width:calc(100% - 2rem);left:50%;transform:translateX(-50%);}
 }
 </style>
 </head>
@@ -219,291 +235,299 @@ footer p{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rg
 <div id="cdot"></div>
 <div id="cring"></div>
 
-<!-- NAV -->
+<!-- NAV pill -->
 <nav>
-  <a href="#" class="logo">Ilona</a>
+  <a href="#" class="logo">
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <span class="logo-txt">ILONA</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
+    <li><a href="#services" class="active">Services</a></li>
     <li><a href="#portfolio">Work</a></li>
     <li><a href="#about">About</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="nav-btn">Mulai Sekarang</a>
   <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- MOB -->
 <div class="mob" id="mob">
   <a href="#services" onclick="closeMM()">Services</a>
   <a href="#portfolio" onclick="closeMM()">Work</a>
   <a href="#about" onclick="closeMM()">About</a>
-  <a href="#contact" onclick="closeMM()">Get in Touch</a>
-  <div class="mob-foot">Bandung · Since 2021 · #LetsGrow!</div>
+  <a href="https://wa.me/6283838848606" target="_blank" class="mob-cta" onclick="closeMM()">Mulai Sekarang</a>
 </div>
 
 <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-video">
-    <div class="hero-video-placeholder">
-      <div class="hero-video-placeholder-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(240,237,230,0.6)"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="hero-video-lbl">Play Showreel</div>
-    </div>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Creative Agency — Bandung, 2021</div>
-    <h1>We make<br>brands grow.</h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">Social media agency & creative marketing strategist. Kami humanize brands lewat konten yang authentic dan resonan.</p>
-      <div class="hero-scroll">
-        <div class="scroll-line"><div class="scroll-fill"></div></div>
-        <span class="scroll-lbl">Scroll</span>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="hero">
+  <h1>Stop guessing,<br>Start growing.</h1>
+  <p class="hero-sub">Kami bantu brand kamu tumbuh lewat <strong>social media, branding, dan iklan</strong> yang authentic dan terukur.</p>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span class="mi">Bank BRI <span class="mi-sep">·</span></span>
-    <span class="mi">Bank BJB <span class="mi-sep">·</span></span>
-    <span class="mi">Maxim <span class="mi-sep">·</span></span>
-    <span class="mi">Resso <span class="mi-sep">·</span></span>
-    <span class="mi">Natasha <span class="mi-sep">·</span></span>
-    <span class="mi">Scarlett <span class="mi-sep">·</span></span>
-    <span class="mi">Wardah <span class="mi-sep">·</span></span>
-    <span class="mi">Viu <span class="mi-sep">·</span></span>
-    <span class="mi">Nokia <span class="mi-sep">·</span></span>
-    <span class="mi">Meraki Cafe <span class="mi-sep">·</span></span>
-    <span class="mi">Duamata <span class="mi-sep">·</span></span>
-    <span class="mi">Complete Me <span class="mi-sep">·</span></span>
-    <span class="mi">Bank BRI <span class="mi-sep">·</span></span>
-    <span class="mi">Bank BJB <span class="mi-sep">·</span></span>
-    <span class="mi">Maxim <span class="mi-sep">·</span></span>
-    <span class="mi">Resso <span class="mi-sep">·</span></span>
-    <span class="mi">Natasha <span class="mi-sep">·</span></span>
-    <span class="mi">Scarlett <span class="mi-sep">·</span></span>
-    <span class="mi">Wardah <span class="mi-sep">·</span></span>
-    <span class="mi">Viu <span class="mi-sep">·</span></span>
-    <span class="mi">Nokia <span class="mi-sep">·</span></span>
-    <span class="mi">Meraki Cafe <span class="mi-sep">·</span></span>
-    <span class="mi">Duamata <span class="mi-sep">·</span></span>
-    <span class="mi">Complete Me <span class="mi-sep">·</span></span>
+  <!-- mock dashboard card -->
+  <div class="hero-visual">
+    <div class="hero-visual-top">
+      <div class="hv-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+      <div class="hv-txt"><span>Notifikasi</span><strong>Konten kamu sudah live! 🚀</strong></div>
+    </div>
+    <div class="hv-card">
+      <div class="hv-card-label">Campaign bulan ini</div>
+      <div class="hv-card-val">Meraki Cafe — Social Media</div>
+    </div>
+    <div class="hv-rows">
+      <div class="hv-row">
+        <div class="hv-dot" style="background:#22c55e;"></div>
+        <span class="hv-row-txt">Konten feed & reels</span>
+        <span class="hv-row-badge">Live</span>
+      </div>
+      <div class="hv-row">
+        <div class="hv-dot" style="background:#f59e0b;"></div>
+        <span class="hv-row-txt">Meta Ads — awareness</span>
+        <span class="hv-row-badge" style="background:#f59e0b;">Review</span>
+      </div>
+      <div class="hv-row">
+        <div class="hv-dot" style="background:var(--light2);"></div>
+        <span class="hv-row-txt">Brand guidelines</span>
+        <span style="font-size:.6rem;color:var(--muted);">Segera</span>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="svc-header rev">
-    <div>
-      <div class="svc-label">What We Do</div>
-      <h2 class="svc-title">Our<br>Services</h2>
-    </div>
-    <p class="svc-desc">Solusi kreatif lengkap untuk brand kamu berkembang — dari konten harian hingga kampanye besar.</p>
-  </div>
-  <div class="svc-brands rev">
-    <div class="svc-brand">
-      <div class="sb-num">01</div>
-      <div class="sb-name">Social &<br>Content</div>
-      <div class="sb-desc">Strategi, produksi, dan manajemen konten sosial media yang konsisten dan berdampak untuk brand kamu.</div>
-      <div class="sb-tags">
-        <span class="sb-tag">Social Media Management</span>
-        <span class="sb-tag">Content Strategy</span>
-        <span class="sb-tag">Copywriting</span>
-      </div>
-      <span class="sb-arrow">Explore →</span>
-    </div>
-    <div class="svc-brand">
-      <div class="sb-num">02</div>
-      <div class="sb-name">Brand &<br>Visual</div>
-      <div class="sb-desc">Identitas visual yang kuat, graphic design, motion, dan 3D yang membuat brand kamu unforgettable.</div>
-      <div class="sb-tags">
-        <span class="sb-tag">Brand Identity</span>
-        <span class="sb-tag">Graphic Design</span>
-        <span class="sb-tag">Motion & 3D</span>
-      </div>
-      <span class="sb-arrow">Explore →</span>
-    </div>
-    <div class="svc-brand">
-      <div class="sb-num">03</div>
-      <div class="sb-name">Ads &<br>Production</div>
-      <div class="sb-desc">Iklan yang perform, produksi foto & video profesional, dan website yang mencerminkan brand kamu.</div>
-      <div class="sb-tags">
-        <span class="sb-tag">Meta & Google Ads</span>
-        <span class="sb-tag">Photo & Video</span>
-        <span class="sb-tag">Web Development</span>
-      </div>
-      <span class="sb-arrow">Explore →</span>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-  <div class="port-header rev">
-    <h2 class="port-title">Selected Work</h2>
-    <a href="#contact" class="port-link">View All Projects →</a>
-  </div>
-  <div class="port-grid rev">
-    <div class="pcard">
-      <div class="p-thumb-wrap">
-        <div class="p-thumb p-c1" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:3rem;font-style:italic;color:rgba(240,237,230,0.08);">Duamata</div>
-        <div class="p-overlay"></div>
-        <div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Duamata Residence</div></div>
-      </div>
-    </div>
-    <div class="pcard">
-      <div class="p-thumb-wrap">
-        <div class="p-thumb p-c2" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Raos</div>
-        <div class="p-overlay"></div>
-        <div class="p-info"><div class="p-cat">Brand Identity</div><div class="p-name">Raos Pangsit</div></div>
-      </div>
-    </div>
-    <div class="pcard">
-      <div class="p-thumb-wrap">
-        <div class="p-thumb p-c3" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Nokia</div>
-        <div class="p-overlay"></div>
-        <div class="p-info"><div class="p-cat">Videography</div><div class="p-name">Nokia — #LoveitTrusitKeepit</div></div>
-      </div>
-    </div>
-    <div class="pcard">
-      <div class="p-thumb-wrap">
-        <div class="p-thumb p-c4" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Meraki</div>
-        <div class="p-overlay"></div>
-        <div class="p-info"><div class="p-cat">Social Media</div><div class="p-name">Meraki Cafe & Coffee</div></div>
-      </div>
-    </div>
-    <div class="pcard">
-      <div class="p-thumb-wrap">
-        <div class="p-thumb p-c5" style="display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:2.5rem;font-style:italic;color:rgba(240,237,230,0.08);">Dejafu</div>
-        <div class="p-overlay"></div>
-        <div class="p-info"><div class="p-cat">Photography</div><div class="p-name">Dejafu Parfum</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="rev">
-    <div class="about-label">Who We Are</div>
-    <h2 class="about-title">Humanizing<br>brands.</h2>
-    <p class="about-text">Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist berbasis di Bandung, berdiri sejak 2021.</p>
-    <p class="about-text">Kami percaya bahwa <strong>humanizing brands</strong> adalah kunci untuk menciptakan brand image yang authentic, inovatif, dan honest — yang benar-benar resonan.</p>
-    <div class="about-stats">
-      <div><div class="astat-n">50+</div><div class="astat-t">Happy Clients</div></div>
-      <div><div class="astat-n">3+</div><div class="astat-t">Years Active</div></div>
-      <div><div class="astat-n">7</div><div class="astat-t">Services</div></div>
-      <div><div class="astat-n">∞</div><div class="astat-t">#LetsGrow!</div></div>
-    </div>
-  </div>
-  <div class="rev">
-    <div class="about-img">
-      <div class="about-img-txt">Ilona</div>
-    </div>
-    <div class="about-tag">
-      <div class="about-tag-n">2021</div>
-      <div class="about-tag-t">Founded · Bandung</div>
-    </div>
+  <div class="hero-btns">
+    <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="btn-dark">Konsultasi Gratis →</a>
+    <a href="#portfolio" class="btn-outline">Lihat Karya</a>
   </div>
 </section>
 
 <!-- CLIENTS -->
-<section class="clients" id="clients">
-  <div class="cl-header rev">
-    <h2 class="cl-title">Trusted by<br>great brands.</h2>
-    <div class="cl-sub">50+ Clients · Since 2021</div>
-  </div>
-  <div class="cl-marquee rev">
-    <div class="cl-track">
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BRI</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Maxim</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Scarlett</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Wardah</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Viu</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Nokia</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Natasha</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Resso</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BJB</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Meraki Cafe</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BRI</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Maxim</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Scarlett</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Wardah</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Viu</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Nokia</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Natasha</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Resso</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Bank BJB</div>
-      <div class="cl-item" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:1.2rem;color:rgba(240,237,230,0.3);filter:none;opacity:.4;">Meraki Cafe</div>
-    </div>
+<section class="clients-sec rev">
+  <p class="cl-label">Dipercaya oleh brand-brand yang sedang berkembang</p>
+  <div class="cl-logos">
+    <div class="cl-logo">BANK BRI</div>
+    <div class="cl-logo">MAXIM</div>
+    <div class="cl-logo">SCARLETT</div>
+    <div class="cl-logo">WARDAH</div>
+    <div class="cl-logo">VIU</div>
+    <div class="cl-logo">NOKIA</div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-noise"></div>
-  <div class="contact-inner">
-    <div class="rev">
-      <div class="contact-label">Get In Touch</div>
-      <h2 class="contact-title">Let's<br>grow<br>together.</h2>
-      <p class="contact-sub">Ceritakan kebutuhan brand kamu. Tim kami akan merespons dalam 1×24 jam kerja.</p>
-      <div class="contact-links">
-        <a href="https://instagram.com/ilonadigital" target="_blank" class="clink">@ilonadigital</a>
-        <a href="https://wa.me/6283838848606" target="_blank" class="clink">083838848606</a>
-        <a href="mailto:kontak.ilona@gmail.com" class="clink">kontak.ilona@gmail.com</a>
+<!-- FEATURES -->
+<section class="features">
+  <div class="feat-header rev">
+    <h2 class="feat-title">Kenapa brand memilih<br>Ilona Digital?</h2>
+    <p class="feat-sub">Kami bukan vendor biasa — kami partner kreatif yang ikut peduli hasilnya.</p>
+  </div>
+  <div class="feat-scroll">
+    <div class="feat-card">
+      <div class="feat-card-img" style="background:#FFF0EB;">
+        <div style="font-size:3rem;">🎯</div>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-title">🎙 Tim dedicated</div>
+        <div class="feat-card-desc">Tim kreatif kami fully dedicated untuk brand kamu — bukan freelancer random yang datang-pergi.</div>
       </div>
     </div>
-    <div class="rev">
-      <div id="cformWrap">
-        <div id="formBody">
-          <div class="frow">
-            <div class="fg"><label>Nama Lengkap *</label><input type="text" id="f-nama" placeholder="Nama kamu"></div>
-            <div class="fg"><label>Brand / Perusahaan</label><input type="text" id="f-brand" placeholder="Nama brand"></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><label>WhatsApp *</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div>
-            <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="email@kamu.com"></div>
-          </div>
-          <div class="fg"><label>Sosial Media</label><input type="text" id="f-sosmed" placeholder="@namaakun"></div>
-          <div class="fg">
-            <label>Kebutuhan Utama *</label>
-            <select id="f-service">
-              <option value="" disabled selected>— Pilih layanan —</option>
-              <option>Social Media Management</option>
-              <option>Brand Identity</option>
-              <option>Ads Placement</option>
-              <option>Photo & Video Production</option>
-              <option>Graphic Design</option>
-              <option>Motion & 3D Visual</option>
-              <option>Website Development</option>
-              <option>Konsultasi Dulu</option>
-            </select>
-          </div>
-          <div class="fg"><label>Pesan</label><textarea id="f-pesan" placeholder="Ceritakan kebutuhan kamu..."></textarea></div>
-          <button class="btn-send" onclick="kirim()">Send Message →</button>
-          <div class="fnote">Dengan mengisi form ini, kamu setuju dihubungi oleh tim Ilona Digital.</div>
-        </div>
-        <div class="fsuccess" id="fsuccess">
-          <h3>Sent!</h3>
-          <p>Makasih sudah menghubungi Ilona Digital.<br>Tim kami akan segera balas.<br><br>#LetsGrow!</p>
-        </div>
+    <div class="feat-card">
+      <div class="feat-card-img" style="background:#F0F5FF;">
+        <div style="font-size:3rem;">📊</div>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-title">📋 Unlimited revisi</div>
+        <div class="feat-card-desc">Tidak ada biaya tambahan per revisi. Kami terus kerjakan sampai kamu puas dengan hasilnya.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-img" style="background:#F0FFF4;">
+        <div style="font-size:3rem;">⚡</div>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-title">⚡ Turnaround cepat</div>
+        <div class="feat-card-desc">Konten, desain, dan materi iklan siap dalam waktu yang disepakati — tidak ada alasan molor.</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-card-img" style="background:#FFFBF0;">
+        <div style="font-size:3rem;">📱</div>
+      </div>
+      <div class="feat-card-body">
+        <div class="feat-card-title">🔗 Terintegrasi</div>
+        <div class="feat-card-desc">Semua layanan terhubung — dari konten, desain, iklan, sampai website dalam satu ekosistem.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PORTFOLIO — dark, tilted cards -->
+<section class="portfolio" id="portfolio">
+  <div class="port-bg-txt">WORK</div>
+  <div class="port-header">
+    <div class="port-label">Selected Projects</div>
+    <h2 class="port-title">Stories of<br>great brands.</h2>
+  </div>
+  <p style="text-align:center;font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:4rem;position:relative;z-index:1;">Kami sudah bantu puluhan brand lokal & nasional tumbuh lewat kreativitas.</p>
+
+  <div class="port-cards">
+    <div class="port-card">
+      <div class="port-card-thumb" style="background:linear-gradient(135deg,#0d1a2e,#1a0d2e);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">DUAMATA</div>
+      </div>
+      <div class="port-card-body">
+        <div class="port-card-cat">Social Media</div>
+        <div class="port-card-name">Duamata Residence</div>
+        <div class="port-stats">
+          <div class="port-stat"><div class="port-stat-n">3×</div><div class="port-stat-t">engagement</div></div>
+          <div class="port-stat"><div class="port-stat-n">6mo</div><div class="port-stat-t">handled</div></div>
+        </div>
+        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-card-thumb" style="background:linear-gradient(135deg,#1a0800,#2e1500);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">MERAKI</div>
+      </div>
+      <div class="port-card-body">
+        <div class="port-card-cat">Social Media · Branding</div>
+        <div class="port-card-name">Meraki Cafe & Coffee</div>
+        <div class="port-stats">
+          <div class="port-stat"><div class="port-stat-n">5k+</div><div class="port-stat-t">followers</div></div>
+          <div class="port-stat"><div class="port-stat-n">12mo</div><div class="port-stat-t">handled</div></div>
+        </div>
+        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
+      </div>
+    </div>
+    <div class="port-card">
+      <div class="port-card-thumb" style="background:linear-gradient(135deg,#040810,#0d1a3a);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">NOKIA</div>
+      </div>
+      <div class="port-card-body">
+        <div class="port-card-cat">Videography</div>
+        <div class="port-card-name">Nokia — #LoveitTrusitKeepit</div>
+        <div class="port-stats">
+          <div class="port-stat"><div class="port-stat-n">1M+</div><div class="port-stat-t">views</div></div>
+          <div class="port-stat"><div class="port-stat-n">3mo</div><div class="port-stat-t">campaign</div></div>
+        </div>
+        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-header rev">
+    <div class="how-eyebrow">Cara Kerja Kami</div>
+    <h2 class="how-title">Simple, terukur,<br>dan hasilnya nyata.</h2>
+  </div>
+  <div class="how-grid rev">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-icon">📞</div>
+      <div class="how-name">Konsultasi</div>
+      <div class="how-desc">Kita ngobrol dulu — tentang brand, target, dan kebutuhan kamu. Gratis, no pressure.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-icon">🎨</div>
+      <div class="how-name">Strategi & Setup</div>
+      <div class="how-desc">Kami buat strategi kreatif, content plan, dan setup semua yang dibutuhkan.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-icon">🚀</div>
+      <div class="how-name">Produksi & Launch</div>
+      <div class="how-desc">Tim kami produksi konten, desain, dan iklan — lalu launch sesuai jadwal yang disepakati.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">04</div>
+      <div class="how-icon">📈</div>
+      <div class="how-name">Optimasi & Laporan</div>
+      <div class="how-desc">Kami monitor performa, optimalkan, dan kirim laporan transparan setiap bulannya.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="svc-header rev">
+    <h2 class="svc-title">Layanan<br>kami</h2>
+    <p class="svc-sub">Solusi kreatif lengkap untuk brand kamu tumbuh di era digital.</p>
+  </div>
+  <div class="svc-list rev">
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Social Media Management</span><div class="svc-tags"><span class="svc-tag">Konten</span><span class="svc-tag">Strategi</span><span class="svc-tag">Engagement</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Brand Identity</span><div class="svc-tags"><span class="svc-tag">Logo</span><span class="svc-tag">Visual</span><span class="svc-tag">Guidelines</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Ads Placement</span><div class="svc-tags"><span class="svc-tag">Meta</span><span class="svc-tag">Google</span><span class="svc-tag">Performance</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Photo & Video Production</span><div class="svc-tags"><span class="svc-tag">Foto</span><span class="svc-tag">Video</span><span class="svc-tag">Reels</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Graphic Design</span><div class="svc-tags"><span class="svc-tag">Digital</span><span class="svc-tag">Print</span><span class="svc-tag">Motion</span></div><span class="svc-arr">→</span></div>
+    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Website Development</span><div class="svc-tags"><span class="svc-tag">Design</span><span class="svc-tag">Dev</span><span class="svc-tag">Deploy</span></div><span class="svc-arr">→</span></div>
+  </div>
+</section>
+
+<!-- ABOUT BENTO -->
+<section class="about" id="about">
+  <div class="about-grid rev">
+    <div class="about-main">
+      <div class="about-logo">
+        <div class="about-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+        <span class="about-logo-txt">ILONA</span>
+      </div>
+      <div class="about-tagline">Creative agency,<br><span>on demand.</span></div>
+    </div>
+    <div class="about-stats rev rev-d1">
+      <div><div class="ast-n">50+</div><div class="ast-t">Happy Clients</div></div>
+      <div><div class="ast-n">3+</div><div class="ast-t">Years Active</div></div>
+      <div><div class="ast-n">7</div><div class="ast-t">Services</div></div>
+      <div><div class="ast-n">2021</div><div class="ast-t">Founded</div></div>
+    </div>
+    <div class="about-desc rev rev-d2">
+      <h3>Humanizing brands, growing together.</h3>
+      <p>Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist yang berbasis di Bandung. Kami percaya bahwa brand yang tumbuh adalah brand yang terasa <strong>nyata, authentic, dan honest</strong> — yang benar-benar resonan dengan audiensnya.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-email rev">
+  <a href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a>
+</div>
 <footer>
-  <span class="footer-logo">Ilona</span>
-  <p>© 2024 Ilona Digital Creative Agency · Bandung</p>
-  <div class="footer-links">
-    <a href="https://instagram.com/ilonadigital" target="_blank">Instagram</a>
-    <a href="https://wa.me/6283838848606" target="_blank">WhatsApp</a>
-    <a href="mailto:kontak.ilona@gmail.com">Email</a>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="fl-logo">
+        <div class="fl-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+        <span class="fl-logo-txt">ILONA</span>
+      </div>
+      <div class="fl-tagline">Creative agency,<br><span>on demand.</span></div>
+    </div>
+    <div class="footer-mid">
+      <div class="footer-col">
+        <h4>Layanan</h4>
+        <a href="#services">Social Media</a>
+        <a href="#services">Brand Identity</a>
+        <a href="#services">Ads Placement</a>
+        <a href="#services">Photo & Video</a>
+      </div>
+      <div class="footer-col">
+        <h4>Perusahaan</h4>
+        <a href="#about">About</a>
+        <a href="#portfolio">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="https://instagram.com/ilonadigital" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="footer-cta-btn">Mulai Sekarang →</a>
+      <div class="footer-copy">© 2024 Ilona Digital. All rights reserved.</div>
+    </div>
   </div>
 </footer>
+
+<!-- CONTACT (WA form) -->
+<section style="background:var(--orange);padding:5rem 2.5rem;text-align:center;border-radius:var(--r2) var(--r2) 0 0;" id="contact">
+  <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);margin-bottom:1rem;">Let's grow together.</h2>
+  <p style="font-size:.95rem;color:rgba(17,17,17,.65);max-width:400px;margin:0 auto 2.5rem;line-height:1.7;">Konsultasi gratis 30 menit — kami analisis kebutuhan brand kamu dan kasih rekomendasi konkret.</p>
+  <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi%20gratis." target="_blank" style="background:var(--dark);color:white;padding:1rem 2.5rem;border-radius:100px;font-size:.9rem;font-weight:700;text-decoration:none;display:inline-block;transition:all .3s;">💬 Chat WhatsApp Sekarang</a>
+  <p style="font-size:.72rem;color:rgba(17,17,17,.4);margin-top:1rem;">083838848606 · Respon cepat · Gratis</p>
+</section>
 
 <script>
 // Cursor
@@ -511,9 +535,9 @@ const cd=document.getElementById('cdot'),cr=document.getElementById('cring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
 (function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
-document.querySelectorAll('a,button,.svc-brand,.pcard').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+document.querySelectorAll('a,button,.svc-row,.how-card,.feat-card,.port-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
 });
 
 // Hamburger
@@ -521,27 +545,9 @@ const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
 hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
 function closeMM(){hbg.classList.remove('open');mob.classList.remove('open');}
 
-// Scroll reveal
-const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:.08});
+// Reveal
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:.07});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-
-// Form
-function kirim(){
-  const nama=document.getElementById('f-nama').value.trim();
-  const wa=document.getElementById('f-wa').value.trim();
-  const svc=document.getElementById('f-service').value;
-  if(!nama){alert('Nama wajib diisi!');return;}
-  if(!wa){alert('No. WhatsApp wajib diisi!');return;}
-  if(!svc){alert('Pilih layanan!');return;}
-  const brand=document.getElementById('f-brand').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  const sosmed=document.getElementById('f-sosmed').value.trim();
-  const pesan=document.getElementById('f-pesan').value.trim();
-  const msg=`Halo Ilona Digital! 👋 #LetsGrow!\n\n👤 Nama: ${nama}\n🏢 Brand: ${brand||'-'}\n📱 WA: ${wa}\n📧 Email: ${email||'-'}\n📸 Sosmed: ${sosmed||'-'}\n\n🎯 Layanan: ${svc}${pesan?'\n\n💬 Pesan:\n'+pesan:''}`;
-  window.open('https://wa.me/6283838848606?text='+encodeURIComponent(msg),'_blank');
-  document.getElementById('formBody').style.display='none';
-  document.getElementById('fsuccess').style.display='block';
-}
 </script>
 </body>
 </html>
