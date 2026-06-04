@@ -246,7 +246,7 @@ footer{background:var(--light);padding:2rem 2.5rem 3rem;}
     <li><a href="#portfolio">Work</a></li>
     <li><a href="#about">About</a></li>
   </ul>
-  <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="nav-btn">Mulai Sekarang</a>
+  <a href="#contact" target="_blank" class="nav-btn">Get Started</a>
   <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
 </nav>
 
@@ -255,7 +255,7 @@ footer{background:var(--light);padding:2rem 2.5rem 3rem;}
   <a href="#services" onclick="closeMM()">Services</a>
   <a href="#portfolio" onclick="closeMM()">Work</a>
   <a href="#about" onclick="closeMM()">About</a>
-  <a href="https://wa.me/6283838848606" target="_blank" class="mob-cta" onclick="closeMM()">Mulai Sekarang</a>
+  <a href="#contact" target="_blank" class="mob-cta" onclick="closeMM()">Get Started</a>
 </div>
 
 <!-- HERO -->
@@ -293,7 +293,7 @@ footer{background:var(--light);padding:2rem 2.5rem 3rem;}
   </div>
 
   <div class="hero-btns">
-    <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="btn-dark">Konsultasi Gratis →</a>
+    <a href="#contact" class="btn-dark">Fill Out the Form →</a>
     <a href="#portfolio" class="btn-outline">Lihat Karya</a>
   </div>
 </section>
@@ -515,19 +515,38 @@ footer{background:var(--light);padding:2rem 2.5rem 3rem;}
       </div>
     </div>
     <div class="footer-bottom">
-      <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi." target="_blank" class="footer-cta-btn">Mulai Sekarang →</a>
+      <a href="#contact" class="footer-cta-btn">Get Started →</a>
       <div class="footer-copy">© 2024 Ilona Digital. All rights reserved.</div>
     </div>
   </div>
 </footer>
 
 <!-- CONTACT (WA form) -->
-<section style="background:var(--orange);padding:5rem 2.5rem;text-align:center;border-radius:var(--r2) var(--r2) 0 0;" id="contact">
-  <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);margin-bottom:1rem;">Let's grow together.</h2>
-  <p style="font-size:.95rem;color:rgba(17,17,17,.65);max-width:400px;margin:0 auto 2.5rem;line-height:1.7;">Konsultasi gratis 30 menit — kami analisis kebutuhan brand kamu dan kasih rekomendasi konkret.</p>
-  <a href="https://wa.me/6283838848606?text=Halo%20Ilona%20Digital!%20Saya%20ingin%20konsultasi%20gratis." target="_blank" style="background:var(--dark);color:white;padding:1rem 2.5rem;border-radius:100px;font-size:.9rem;font-weight:700;text-decoration:none;display:inline-block;transition:all .3s;">💬 Chat WhatsApp Sekarang</a>
-  <p style="font-size:.72rem;color:rgba(17,17,17,.4);margin-top:1rem;">083838848606 · Respon cepat · Gratis</p>
+<section style="background:var(--orange);padding:6rem 2.5rem;border-radius:var(--r2) var(--r2) 0 0;" id="contact">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+    <!-- Left -->
+    <div>
+      <div style="font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(17,17,17,.5);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;"><span style="display:block;width:14px;height:1px;background:rgba(17,17,17,.4);"></span>Get In Touch</div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;letter-spacing:-2px;color:var(--dark);line-height:.9;margin-bottom:1.5rem;">Let's grow<br>together.</h2>
+      <p style="font-size:.9rem;color:rgba(17,17,17,.6);line-height:1.8;margin-bottom:2rem;">Tell us about your brand and what you need. We'll get back to you within 1×24 working hours.</p>
+      <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <a href="mailto:kontak.ilona@gmail.com" style="font-size:.82rem;color:rgba(17,17,17,.5);text-decoration:none;display:flex;align-items:center;gap:.6rem;transition:color .2s;"><span style="width:5px;height:5px;border-radius:50%;background:var(--dark);opacity:.4;flex-shrink:0;"></span>kontak.ilona@gmail.com</a>
+        <a href="https://instagram.com/ilonadigital" target="_blank" style="font-size:.82rem;color:rgba(17,17,17,.5);text-decoration:none;display:flex;align-items:center;gap:.6rem;"><span style="width:5px;height:5px;border-radius:50%;background:var(--dark);opacity:.4;flex-shrink:0;"></span>@ilonadigital</a>
+      </div>
+    </div>
+    <!-- Form -->
+    <div style="background:white;border-radius:var(--r2);overflow:hidden;">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform?embedded=true" width="100%" height="1184" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Memuat…</iframe>
+    </div>
+  </div>
 </section>
+
+<style>
+@media(max-width:768px){
+  #contact > div{grid-template-columns:1fr!important;gap:2.5rem!important;}
+  #contact > div > div:first-child{display:none;}
+}
+</style>
 
 <script>
 // Cursor
@@ -544,6 +563,18 @@ document.querySelectorAll('a,button,.svc-row,.how-card,.feat-card,.port-card').f
 const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
 hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
 function closeMM(){hbg.classList.remove('open');mob.classList.remove('open');}
+
+// Form submit
+function kirim(){
+  const nama=document.getElementById('f-nama').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const svc=document.getElementById('f-service').value;
+  if(!nama){alert('Name is required!');return;}
+  if(!email){alert('Email is required!');return;}
+  if(!svc){alert('Please select a service!');return;}
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('fsuccess').style.display='block';
+}
 
 // Reveal
 const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:.07});
