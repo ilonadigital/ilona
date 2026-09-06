@@ -1,584 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ilona Digital — Creative Agency Bandung</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --orange:#E8522A;
-  --orange2:#FF6B3D;
-  --dark:#111111;
-  --light:#F2F2F0;
-  --light2:#E8E8E5;
-  --white:#FFFFFF;
-  --muted:#888884;
-  --cream:#EDE9E3;
-  --r:20px;
-  --r2:28px;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--light);color:var(--dark);font-family:'Inter',sans-serif;font-weight:400;overflow-x:hidden;cursor:none;}
-
-/* CURSOR */
-#cdot{width:8px;height:8px;background:var(--dark);border-radius:50%;position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
-#cring{width:36px;height:36px;border:1.5px solid rgba(17,17,17,0.2);border-radius:50%;position:fixed;top:0;left:0;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .45s cubic-bezier(0.16,1,0.3,1),height .45s cubic-bezier(0.16,1,0.3,1),border-color .2s;}
-body.ch #cdot{width:12px;height:12px;background:var(--orange);}
-body.ch #cring{width:56px;height:56px;border-color:rgba(232,82,42,0.35);}
-
-/* NAV — pill floating */
-nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:500;display:flex;align-items:center;gap:2rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-radius:100px;padding:.75rem 1rem .75rem 1.5rem;box-shadow:0 2px 20px rgba(0,0,0,0.08);white-space:nowrap;}
-.logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;}
-.logo-icon{width:28px;height:28px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.logo-icon svg{width:16px;height:16px;fill:white;}
-.logo-txt{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--dark);letter-spacing:-.3px;}
-.nav-links{display:flex;gap:0;list-style:none;}
-.nav-links a{font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;padding:.4rem .9rem;border-radius:100px;transition:all .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--dark);}
-.nav-btn{background:var(--dark);color:white;padding:.55rem 1.3rem;border-radius:100px;font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap;}
-.nav-btn:hover{background:#222;}
-.hbg{display:none;background:none;border:none;cursor:none;padding:4px;flex-direction:column;gap:5px;}
-.hbg span{display:block;width:20px;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
-.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.hbg.open span:nth-child(2){opacity:0;}
-.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-/* MOB */
-.mob{display:none;position:fixed;inset:0;z-index:450;background:var(--dark);flex-direction:column;justify-content:center;align-items:center;gap:2rem;}
-.mob.open{display:flex;}
-.mob a{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:rgba(255,255,255,.15);text-decoration:none;transition:color .2s;}
-.mob a:hover{color:white;}
-.mob-cta{background:var(--orange)!important;color:white!important;padding:.8rem 2.5rem;border-radius:100px;font-size:1rem!important;}
-
-/* HERO — orange bg */
-.hero{background:var(--orange);min-height:100vh;padding:7rem 2.5rem 3rem;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;border-radius:0 0 var(--r2) var(--r2);}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:.92;letter-spacing:-3px;color:var(--dark);margin-bottom:1.2rem;max-width:800px;}
-.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(17,17,17,.65);max-width:500px;margin:0 auto 3.5rem;line-height:1.6;font-weight:400;}
-.hero-sub strong{color:var(--dark);font-weight:600;}
-/* hero visual card */
-.hero-visual{background:white;border-radius:var(--r2);padding:1.5rem;max-width:380px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.2);position:relative;overflow:hidden;}
-.hero-visual-top{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
-.hv-icon{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.hv-icon svg{width:16px;height:16px;fill:white;}
-.hv-txt{font-size:.72rem;color:var(--muted);}
-.hv-txt strong{color:var(--dark);display:block;font-size:.85rem;}
-.hv-card{background:var(--light);border-radius:12px;padding:1rem;margin-bottom:.6rem;}
-.hv-card-label{font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.3rem;}
-.hv-card-val{font-size:.88rem;font-weight:600;color:var(--dark);}
-.hv-rows{display:flex;flex-direction:column;gap:.4rem;}
-.hv-row{display:flex;align-items:center;gap:.6rem;padding:.5rem .6rem;border-radius:8px;transition:background .2s;}
-.hv-row:hover{background:var(--light);}
-.hv-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.hv-row-txt{font-size:.78rem;color:var(--dark);flex:1;}
-.hv-row-badge{font-size:.6rem;background:var(--orange);color:white;padding:.2rem .5rem;border-radius:100px;}
-.hero-btns{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap;}
-.btn-dark{background:var(--dark);color:white;padding:.85rem 2rem;border-radius:100px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .3s;}
-.btn-dark:hover{background:#222;transform:translateY(-2px);}
-.btn-outline{background:rgba(0,0,0,.1);color:var(--dark);padding:.85rem 2rem;border-radius:100px;font-size:.85rem;font-weight:500;text-decoration:none;transition:all .2s;}
-.btn-outline:hover{background:rgba(0,0,0,.18);}
-
-/* CLIENTS — white section */
-.clients-sec{background:white;padding:4rem 2.5rem;text-align:center;}
-.cl-label{font-size:.72rem;color:var(--muted);margin-bottom:2.5rem;letter-spacing:.3px;}
-.cl-logos{display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap;}
-.cl-logo{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:rgba(17,17,17,.2);letter-spacing:-.3px;transition:color .2s;}
-.cl-logo:hover{color:rgba(17,17,17,.5);}
-
-/* FEATURES — cream bg, horizontal scroll cards */
-.features{background:white;padding:3rem 0 5rem;}
-.feat-header{padding:0 2.5rem 3rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;}
-.feat-title{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.5px;color:var(--dark);}
-.feat-sub{font-size:.85rem;color:var(--muted);max-width:280px;line-height:1.6;}
-.feat-scroll{display:flex;gap:1.2rem;overflow-x:auto;padding:0 2.5rem 1rem;scrollbar-width:none;}
-.feat-scroll::-webkit-scrollbar{display:none;}
-.feat-card{background:var(--cream);border-radius:var(--r2);padding:2rem;min-width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:2.5rem;}
-.feat-card-img{flex:1;border-radius:16px;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:white;}
-.feat-card-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
-.feat-card-body{}
-.feat-card-title{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;}
-.feat-card-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
-
-/* PORTFOLIO — dark bg, rotated cards */
-.portfolio{background:var(--dark);padding:6rem 2.5rem;border-radius:var(--r2) var(--r2) 0 0;position:relative;overflow:hidden;}
-.port-bg-txt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:clamp(6rem,15vw,18rem);font-weight:800;color:rgba(255,255,255,.03);white-space:nowrap;pointer-events:none;letter-spacing:-5px;}
-.port-header{text-align:center;margin-bottom:5rem;position:relative;z-index:1;}
-.port-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;}
-.port-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:800;letter-spacing:-2px;color:rgba(255,255,255,.06);line-height:.9;}
-/* tilted cards layout */
-.port-cards{display:flex;align-items:center;justify-content:center;gap:-3rem;position:relative;z-index:1;padding:2rem 0;min-height:420px;}
-.port-card{background:#1a1a1a;border-radius:var(--r2);overflow:hidden;position:absolute;width:300px;cursor:none;transition:transform .4s cubic-bezier(0.16,1,0.3,1),z-index .1s;}
-.port-card:nth-child(1){transform:rotate(-6deg) translateX(-280px);z-index:1;}
-.port-card:nth-child(2){transform:rotate(0deg) translateY(-20px);z-index:3;}
-.port-card:nth-child(3){transform:rotate(6deg) translateX(280px);z-index:1;}
-.port-card:hover{transform:rotate(0deg) translateY(-30px) scale(1.03);z-index:10;}
-.port-card-thumb{height:220px;position:relative;overflow:hidden;}
-.port-card-body{padding:1.2rem 1.5rem 1.5rem;}
-.port-card-cat{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem;}
-.port-card-name{font-size:.9rem;font-weight:600;color:white;margin-bottom:1rem;}
-.port-card-btn{background:var(--orange);color:white;padding:.5rem 1rem;border-radius:100px;font-size:.72rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:background .2s;}
-.port-card-btn:hover{background:var(--orange2);}
-.port-stats{display:flex;gap:1rem;margin-top:1rem;}
-.port-stat{background:white;border-radius:10px;padding:.7rem .9rem;}
-.port-stat-n{font-size:1.3rem;font-weight:700;color:var(--dark);line-height:1;}
-.port-stat-t{font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-
-/* HOW IT WORKS */
-.how{background:var(--light);padding:6rem 2.5rem;}
-.how-header{text-align:center;margin-bottom:4rem;}
-.how-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:white;border-radius:100px;padding:.35rem 1rem;font-size:.72rem;color:var(--muted);margin-bottom:1.2rem;}
-.how-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);}
-.how-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);}
-.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
-.how-card{background:white;border-radius:var(--r);padding:2rem;transition:transform .3s,box-shadow .3s;}
-.how-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08);}
-.how-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:rgba(17,17,17,.06);line-height:1;margin-bottom:1.5rem;}
-.how-icon{font-size:1.5rem;margin-bottom:.8rem;}
-.how-name{font-size:.92rem;font-weight:700;color:var(--dark);margin-bottom:.4rem;}
-.how-desc{font-size:.78rem;color:var(--muted);line-height:1.65;}
-
-/* SERVICES list */
-.services{background:white;padding:6rem 2.5rem;}
-.svc-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
-.svc-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-1.5px;color:var(--dark);}
-.svc-sub{font-size:.85rem;color:var(--muted);max-width:260px;line-height:1.6;}
-.svc-list{display:flex;flex-direction:column;border-top:1px solid rgba(17,17,17,.07);}
-.svc-row{display:flex;align-items:center;padding:1.5rem 0;border-bottom:1px solid rgba(17,17,17,.07);cursor:none;gap:1.5rem;transition:padding .3s cubic-bezier(0.16,1,0.3,1);}
-.svc-row:hover{padding-left:1rem;}
-.svc-row:hover .svc-name{color:var(--orange);}
-.svc-row:hover .svc-dot{background:var(--orange);}
-.svc-dot{width:8px;height:8px;border-radius:50%;background:rgba(17,17,17,.12);flex-shrink:0;transition:background .2s;}
-.svc-name{font-family:'Syne',sans-serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700;color:var(--dark);flex:1;transition:color .2s;letter-spacing:-.3px;}
-.svc-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
-.svc-tag{font-size:.6rem;color:var(--muted);background:var(--light);padding:.3rem .7rem;border-radius:100px;}
-.svc-arr{color:rgba(17,17,17,.2);font-size:.75rem;font-weight:600;transition:all .2s;opacity:0;transform:translateX(-5px);}
-.svc-row:hover .svc-arr{opacity:1;transform:translateX(0);}
-
-/* ABOUT / TESTIMONIALS */
-.about{background:var(--light);padding:6rem 2.5rem;}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1000px;margin:0 auto;}
-.about-main{background:var(--orange);border-radius:var(--r2);padding:3rem;display:flex;flex-direction:column;justify-content:space-between;min-height:320px;position:relative;overflow:hidden;}
-.about-main::before{content:'';position:absolute;top:-3rem;right:-3rem;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08);}
-.about-logo{display:flex;align-items:center;gap:.5rem;margin-bottom:auto;}
-.about-logo-icon{width:28px;height:28px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.about-logo-icon svg{width:14px;height:14px;fill:var(--orange);}
-.about-logo-txt{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:white;}
-.about-tagline{font-size:1.2rem;font-weight:600;color:white;line-height:1.4;position:relative;z-index:1;}
-.about-tagline span{opacity:.7;}
-.about-stats{background:white;border-radius:var(--r2);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-.ast-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--dark);letter-spacing:-1px;line-height:1;}
-.ast-t{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
-.about-desc{background:var(--cream);border-radius:var(--r2);padding:2.5rem;grid-column:span 2;}
-.about-desc h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.3px;color:var(--dark);margin-bottom:1rem;}
-.about-desc p{font-size:.88rem;color:var(--muted);line-height:1.8;}
-.about-desc p strong{color:var(--dark);font-weight:600;}
-
-/* FOOTER */
-footer{background:var(--light);padding:2rem 2.5rem 3rem;}
-.footer-inner{display:grid;grid-template-columns:280px 1fr auto;gap:1.5rem;align-items:start;}
-.footer-left{background:var(--orange);border-radius:var(--r2);padding:2.5rem;display:flex;flex-direction:column;justify-content:space-between;min-height:200px;}
-.fl-logo{display:flex;align-items:center;gap:.5rem;margin-bottom:auto;}
-.fl-logo-icon{width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;}
-.fl-logo-icon svg{width:12px;height:12px;fill:white;}
-.fl-logo-txt{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:white;letter-spacing:1px;}
-.fl-tagline{font-size:.88rem;font-weight:600;color:white;line-height:1.4;}
-.fl-tagline span{opacity:.6;}
-.footer-mid{background:white;border-radius:var(--r2);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-.footer-col h4{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;}
-.footer-col a{display:block;font-size:.92rem;font-weight:500;color:var(--dark);text-decoration:none;margin-bottom:.7rem;transition:color .2s;}
-.footer-col a:hover{color:var(--orange);}
-.footer-bottom{display:flex;align-items:flex-end;justify-content:space-between;flex-direction:column;gap:1rem;}
-.footer-cta-btn{background:var(--dark);color:white;padding:.75rem 1.8rem;border-radius:100px;font-size:.82rem;font-weight:600;text-decoration:none;transition:background .2s;white-space:nowrap;}
-.footer-cta-btn:hover{background:#222;}
-.footer-copy{font-size:.68rem;color:var(--muted);}
-/* BIG EMAIL */
-.footer-email{text-align:center;padding:2rem 2.5rem 1rem;overflow:hidden;}
-.footer-email a{font-family:'Syne',sans-serif;font-size:clamp(2rem,6vw,6rem);font-weight:800;letter-spacing:-2px;color:rgba(17,17,17,.08);text-decoration:none;transition:color .3s;white-space:nowrap;}
-.footer-email a:hover{color:rgba(17,17,17,.15);}
-
-/* REVEAL */
-.rev{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(0.16,1,0.3,1),transform .8s cubic-bezier(0.16,1,0.3,1);}
-.rev.vis{opacity:1;transform:translateY(0);}
-.rev-d1{transition-delay:.1s;}
-.rev-d2{transition-delay:.2s;}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{top:.8rem;padding:.6rem .8rem .6rem 1.2rem;gap:1rem;}
-  .nav-links{display:none;}
-  .nav-btn{display:none;}
-  .hbg{display:flex;}
-  .hero{padding:6rem 1.5rem 3rem;border-radius:0 0 16px 16px;}
-  .feat-scroll{padding:0 1.5rem 1rem;}
-  .port-cards{flex-direction:column;min-height:auto;}
-  .port-card{position:static;transform:none!important;width:100%;max-width:340px;}
-  .how-grid{grid-template-columns:1fr 1fr;}
-  .about-grid{grid-template-columns:1fr;}
-  .about-desc{grid-column:span 1;}
-  .footer-inner{grid-template-columns:1fr;gap:1rem;}
-  .footer-bottom{flex-direction:row;}
-  .footer-email a{font-size:clamp(1.5rem,8vw,3.5rem);}
-  .svc-tags{display:none;}
-  .clients,.services,.about,.how{padding:4rem 1.5rem;}
-}
-@media(max-width:520px){
-  .how-grid{grid-template-columns:1fr;}
-  .about-stats{grid-template-columns:1fr 1fr;}
-  .port-card{max-width:100%;}
-  nav{width:calc(100% - 2rem);left:50%;transform:translateX(-50%);}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141512">
+  <meta name="description" content="Stop guessing, Start growing. Ilona Digital — Photo & Video Production, Social Media Management, Digital Ads, Website Development.">
+  <title>Ilona Digital — Stop guessing, Start growing.</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ilona Digital — Stop guessing, Start growing.">
+  <meta property="og:description" content="Photo & Video Production. Social Media Management. Digital Ads. Website Development.">
+  <link rel="icon" type="image/png" href="./assets/ilona-logo.png">
+  <link rel="preload" href="./assets/bricolage-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/manrope-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/dm-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./studio.css">
+  <script src="./studio.js" defer></script>
 </head>
-<body>
-
-<div id="cdot"></div>
-<div id="cring"></div>
-
-<!-- NAV pill -->
-<nav>
-  <a href="#" class="logo">
-    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-    <span class="logo-txt">ILONA</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#services" class="active">Services</a></li>
-    <li><a href="#portfolio">Work</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <a href="#contact" target="_blank" class="nav-btn">Get Started</a>
-  <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
-</nav>
-
-<!-- MOB -->
-<div class="mob" id="mob">
-  <a href="#services" onclick="closeMM()">Services</a>
-  <a href="#portfolio" onclick="closeMM()">Work</a>
-  <a href="#about" onclick="closeMM()">About</a>
-  <a href="#contact" target="_blank" class="mob-cta" onclick="closeMM()">Get Started</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <h1>Stop guessing,<br>Start growing.</h1>
-  <p class="hero-sub">Kami bantu brand kamu tumbuh lewat <strong>social media, branding, dan iklan</strong> yang authentic dan terukur.</p>
-
-  <!-- mock dashboard card -->
-  <div class="hero-visual">
-    <div class="hero-visual-top">
-      <div class="hv-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-      <div class="hv-txt"><span>Notifikasi</span><strong>Konten kamu sudah live! 🚀</strong></div>
-    </div>
-    <div class="hv-card">
-      <div class="hv-card-label">Campaign bulan ini</div>
-      <div class="hv-card-val">Meraki Cafe — Social Media</div>
-    </div>
-    <div class="hv-rows">
-      <div class="hv-row">
-        <div class="hv-dot" style="background:#22c55e;"></div>
-        <span class="hv-row-txt">Konten feed & reels</span>
-        <span class="hv-row-badge">Live</span>
-      </div>
-      <div class="hv-row">
-        <div class="hv-dot" style="background:#f59e0b;"></div>
-        <span class="hv-row-txt">Meta Ads — awareness</span>
-        <span class="hv-row-badge" style="background:#f59e0b;">Review</span>
-      </div>
-      <div class="hv-row">
-        <div class="hv-dot" style="background:var(--light2);"></div>
-        <span class="hv-row-txt">Brand guidelines</span>
-        <span style="font-size:.6rem;color:var(--muted);">Segera</span>
+<body class="studio-direction">
+  <a class="skip-link" href="#main">Langsung ke konten</a>
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="#top" aria-label="Ilona Digital — beranda"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital"></a>
+      <div class="header-controls">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Buka menu"><span class="menu-label">Menu</span><span class="menu-bars" aria-hidden="true"><i></i><i></i></span></button>
+        <a class="header-contact" href="#contact">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
       </div>
     </div>
-  </div>
-
-  <div class="hero-btns">
-    <a href="#contact" class="btn-dark">Fill Out the Form →</a>
-    <a href="#portfolio" class="btn-outline">Lihat Karya</a>
-  </div>
-</section>
-
-<!-- CLIENTS -->
-<section class="clients-sec rev">
-  <p class="cl-label">Dipercaya oleh brand-brand yang sedang berkembang</p>
-  <div class="cl-logos">
-    <div class="cl-logo">BANK BRI</div>
-    <div class="cl-logo">MAXIM</div>
-    <div class="cl-logo">SCARLETT</div>
-    <div class="cl-logo">WARDAH</div>
-    <div class="cl-logo">VIU</div>
-    <div class="cl-logo">NOKIA</div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features">
-  <div class="feat-header rev">
-    <h2 class="feat-title">Kenapa brand memilih<br>Ilona Digital?</h2>
-    <p class="feat-sub">Kami bukan vendor biasa — kami partner kreatif yang ikut peduli hasilnya.</p>
-  </div>
-  <div class="feat-scroll">
-    <div class="feat-card">
-      <div class="feat-card-img" style="background:#FFF0EB;">
-        <div style="font-size:3rem;">🎯</div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navigasi seluler" hidden>
+      <div class="mobile-nav-inner wrap">
+        <a href="#about"><span>01</span>About us<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#clients"><span>02</span>Trust<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#work"><span>03</span>Our Work<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#expertise"><span>04</span>Expertise<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#contact"><span>05</span>Let's talk<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a class="mobile-email" href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a>
       </div>
-      <div class="feat-card-body">
-        <div class="feat-card-title">🎙 Tim dedicated</div>
-        <div class="feat-card-desc">Tim kreatif kami fully dedicated untuk brand kamu — bukan freelancer random yang datang-pergi.</div>
-      </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-card-img" style="background:#F0F5FF;">
-        <div style="font-size:3rem;">📊</div>
-      </div>
-      <div class="feat-card-body">
-        <div class="feat-card-title">📋 Unlimited revisi</div>
-        <div class="feat-card-desc">Tidak ada biaya tambahan per revisi. Kami terus kerjakan sampai kamu puas dengan hasilnya.</div>
-      </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-card-img" style="background:#F0FFF4;">
-        <div style="font-size:3rem;">⚡</div>
-      </div>
-      <div class="feat-card-body">
-        <div class="feat-card-title">⚡ Turnaround cepat</div>
-        <div class="feat-card-desc">Konten, desain, dan materi iklan siap dalam waktu yang disepakati — tidak ada alasan molor.</div>
-      </div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-card-img" style="background:#FFFBF0;">
-        <div style="font-size:3rem;">📱</div>
-      </div>
-      <div class="feat-card-body">
-        <div class="feat-card-title">🔗 Terintegrasi</div>
-        <div class="feat-card-desc">Semua layanan terhubung — dari konten, desain, iklan, sampai website dalam satu ekosistem.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO — dark, tilted cards -->
-<section class="portfolio" id="portfolio">
-  <div class="port-bg-txt">WORK</div>
-  <div class="port-header">
-    <div class="port-label">Selected Projects</div>
-    <h2 class="port-title">Stories of<br>great brands.</h2>
-  </div>
-  <p style="text-align:center;font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:4rem;position:relative;z-index:1;">Kami sudah bantu puluhan brand lokal & nasional tumbuh lewat kreativitas.</p>
-
-  <div class="port-cards">
-    <div class="port-card">
-      <div class="port-card-thumb" style="background:linear-gradient(135deg,#0d1a2e,#1a0d2e);">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">DUAMATA</div>
-      </div>
-      <div class="port-card-body">
-        <div class="port-card-cat">Social Media</div>
-        <div class="port-card-name">Duamata Residence</div>
-        <div class="port-stats">
-          <div class="port-stat"><div class="port-stat-n">3×</div><div class="port-stat-t">engagement</div></div>
-          <div class="port-stat"><div class="port-stat-n">6mo</div><div class="port-stat-t">handled</div></div>
+    </nav>
+    <div class="reading-progress" aria-hidden="true"></div>
+  </header>
+  <main id="main">
+    <section class="hero-story" id="top" aria-labelledby="hero-title">
+      <div class="hero-pin">
+        <div class="hero-media" aria-hidden="true">
+          <img class="hero-image hero-image-first" src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="" fetchpriority="high" decoding="async">
+          <img class="hero-image hero-image-second" src="./assets/brief/about-monitor.jpg" width="1170" height="1560" alt="" decoding="async">
+          <div class="hero-shade"></div>
         </div>
-        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
-      </div>
-    </div>
-    <div class="port-card">
-      <div class="port-card-thumb" style="background:linear-gradient(135deg,#1a0800,#2e1500);">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">MERAKI</div>
-      </div>
-      <div class="port-card-body">
-        <div class="port-card-cat">Social Media · Branding</div>
-        <div class="port-card-name">Meraki Cafe & Coffee</div>
-        <div class="port-stats">
-          <div class="port-stat"><div class="port-stat-n">5k+</div><div class="port-stat-t">followers</div></div>
-          <div class="port-stat"><div class="port-stat-n">12mo</div><div class="port-stat-t">handled</div></div>
+        <div class="hero-content">
+          <h1 id="hero-title"><span class="hero-line">Stop guessing,</span> <span class="hero-line hero-italic">Start growing.</span></h1>
         </div>
-        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
+        <div class="hero-foot"><span class="hero-name">Ilona Digital</span><a href="#work" class="hero-work-link">Our Work <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="#about" class="hero-scroll-link" aria-label="Scroll ke About us"><svg class="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a></div>
       </div>
-    </div>
-    <div class="port-card">
-      <div class="port-card-thumb" style="background:linear-gradient(135deg,#040810,#0d1a3a);">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.08);">NOKIA</div>
+    </section>
+
+    <section class="about-section wrap" id="about" aria-labelledby="about-title">
+      <div class="section-heading reveal"><span class="section-index" aria-hidden="true">01 /</span><h2 id="about-title">About us</h2><span class="heading-mark" aria-hidden="true">↗</span></div>
+      <div class="about-images">
+        <figure class="about-photo first-photo reveal" data-parallax="first">
+          <img src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="Tim produksi dengan kamera di lokasi pengambilan gambar." loading="lazy" decoding="async">
+          <span class="photo-corner" aria-hidden="true"></span>
+        </figure>
+        <figure class="about-photo second-photo reveal" data-parallax="second">
+          <img src="./assets/brief/about-monitor.jpg" width="1170" height="1560" alt="Monitor kamera menampilkan adegan saat proses produksi video." loading="lazy" decoding="async">
+          <span class="photo-corner" aria-hidden="true"></span>
+        </figure>
       </div>
-      <div class="port-card-body">
-        <div class="port-card-cat">Videography</div>
-        <div class="port-card-name">Nokia — #LoveitTrusitKeepit</div>
-        <div class="port-stats">
-          <div class="port-stat"><div class="port-stat-n">1M+</div><div class="port-stat-t">views</div></div>
-          <div class="port-stat"><div class="port-stat-n">3mo</div><div class="port-stat-t">campaign</div></div>
-        </div>
-        <a href="#contact" class="port-card-btn" style="margin-top:1rem;">Lihat Detail →</a>
+    </section>
+
+    <section class="clients-section wrap" id="clients" aria-labelledby="clients-title">
+      <div class="section-heading reveal"><span class="section-index" aria-hidden="true">02 /</span><h2 id="clients-title">Trust, <span>Across Industries.</span></h2></div>
+      <ul class="client-logos reveal" aria-label="Klien Ilona Digital">
+        <li class="logo-gonegani"><img src="./assets/clients/gonegani.png" width="2048" height="474" alt="Gonegani" loading="lazy" decoding="async"></li>
+        <li class="logo-seefluencer"><img src="./assets/clients/seefluencer.png" width="669" height="275" alt="Seefluencer School of Marketing" loading="lazy" decoding="async"></li>
+        <li class="logo-farmanina"><img src="./assets/clients/farmanina.webp" width="963" height="157" alt="Farmanina Hair Transplant Centre" loading="lazy" decoding="async"></li>
+        <li class="logo-tribelio"><img src="./assets/clients/tribelio.png" width="500" height="500" alt="Tribelio" loading="lazy" decoding="async"></li>
+        <li class="logo-authentism"><img src="./assets/clients/authentism.webp" width="182" height="53" alt="Authentism" loading="lazy" decoding="async"></li>
+      </ul>
+    </section>
+
+    <section class="work-section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="work-heading reveal"><div><span class="section-index" aria-hidden="true">03 /</span><h2 id="work-title">Our Work</h2></div><svg class="work-arrow icon" aria-hidden="true"><use href="#arrow-ne"/></svg></div>
+        <article class="case-study" aria-labelledby="case-title">
+          <div class="case-top reveal"><h3 id="case-title">Brand: Akela Trading <span class="case-discipline">- Social Media Management</span></h3><span class="case-number" aria-hidden="true">01</span></div>
+          <div class="case-body">
+            <div class="case-results reveal">
+              <p class="result-statement"><span class="result-label">Follower bertambah</span> <strong class="result-number">+6527</strong> <span class="result-label second-label">atau growth</span> <strong class="result-growth">78<span>%</span></strong> <span class="result-label final-label">dari bulan sebelumnya</span></p>
+              <div class="result-rule" aria-hidden="true"><span></span><svg class="icon"><use href="#arrow-ne"/></svg></div>
+            </div>
+            <figure class="case-visual reveal">
+              <a class="result-image-link" href="./assets/brief/akela-results.png" target="_blank" rel="noopener" aria-label="Perbesar screenshot hasil Akela Trading">
+                <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Hasil Akela Trading: 14.894 pengikut, pertumbuhan 78,0%, dengan pertumbuhan keseluruhan 6.527 pengikut." loading="lazy" decoding="async">
+                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
+              </a>
+            </figure>
+          </div>
+        </article>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="how-header rev">
-    <div class="how-eyebrow">Cara Kerja Kami</div>
-    <h2 class="how-title">Simple, terukur,<br>dan hasilnya nyata.</h2>
-  </div>
-  <div class="how-grid rev">
-    <div class="how-card">
-      <div class="how-num">01</div>
-      <div class="how-icon">📞</div>
-      <div class="how-name">Konsultasi</div>
-      <div class="how-desc">Kita ngobrol dulu — tentang brand, target, dan kebutuhan kamu. Gratis, no pressure.</div>
-    </div>
-    <div class="how-card">
-      <div class="how-num">02</div>
-      <div class="how-icon">🎨</div>
-      <div class="how-name">Strategi & Setup</div>
-      <div class="how-desc">Kami buat strategi kreatif, content plan, dan setup semua yang dibutuhkan.</div>
-    </div>
-    <div class="how-card">
-      <div class="how-num">03</div>
-      <div class="how-icon">🚀</div>
-      <div class="how-name">Produksi & Launch</div>
-      <div class="how-desc">Tim kami produksi konten, desain, dan iklan — lalu launch sesuai jadwal yang disepakati.</div>
-    </div>
-    <div class="how-card">
-      <div class="how-num">04</div>
-      <div class="how-icon">📈</div>
-      <div class="how-name">Optimasi & Laporan</div>
-      <div class="how-desc">Kami monitor performa, optimalkan, dan kirim laporan transparan setiap bulannya.</div>
-    </div>
-  </div>
-</section>
+    <section class="expertise-section wrap" id="expertise" aria-labelledby="expertise-title">
+      <div class="expertise-heading reveal"><span class="section-index" aria-hidden="true">04 /</span><h2 id="expertise-title">Expertise</h2></div>
+      <ul class="expertise-list">
+        <li class="reveal"><a class="brief-trigger" data-service="Photo &amp; Video Production" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">01</span><span class="service-watermark" aria-hidden="true">01</span><h3>Photo &amp; Video Production</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
+        <li class="reveal"><a class="brief-trigger" data-service="Social Media Management" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">02</span><span class="service-watermark" aria-hidden="true">02</span><h3>Social Media Management</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
+        <li class="reveal"><a class="brief-trigger" data-service="Digital Ads" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">03</span><span class="service-watermark" aria-hidden="true">03</span><h3>Digital Ads</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
+        <li class="reveal"><a class="brief-trigger" data-service="Website Development" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">04</span><span class="service-watermark" aria-hidden="true">04</span><h3>Website Development</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
+      </ul>
+    </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="svc-header rev">
-    <h2 class="svc-title">Layanan<br>kami</h2>
-    <p class="svc-sub">Solusi kreatif lengkap untuk brand kamu tumbuh di era digital.</p>
-  </div>
-  <div class="svc-list rev">
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Social Media Management</span><div class="svc-tags"><span class="svc-tag">Konten</span><span class="svc-tag">Strategi</span><span class="svc-tag">Engagement</span></div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Brand Identity</span><div class="svc-tags"><span class="svc-tag">Logo</span><span class="svc-tag">Visual</span><span class="svc-tag">Guidelines</span></div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Ads Placement</span><div class="svc-tags"><span class="svc-tag">Meta</span><span class="svc-tag">Google</span><span class="svc-tag">Performance</span></div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Photo & Video Production</span><div class="svc-tags"><span class="svc-tag">Foto</span><span class="svc-tag">Video</span><span class="svc-tag">Reels</span></div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Graphic Design</span><div class="svc-tags"><span class="svc-tag">Digital</span><span class="svc-tag">Print</span><span class="svc-tag">Motion</span></div><span class="svc-arr">→</span></div>
-    <div class="svc-row"><span class="svc-dot"></span><span class="svc-name">Website Development</span><div class="svc-tags"><span class="svc-tag">Design</span><span class="svc-tag">Dev</span><span class="svc-tag">Deploy</span></div><span class="svc-arr">→</span></div>
-  </div>
-</section>
-
-<!-- ABOUT BENTO -->
-<section class="about" id="about">
-  <div class="about-grid rev">
-    <div class="about-main">
-      <div class="about-logo">
-        <div class="about-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-        <span class="about-logo-txt">ILONA</span>
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact-top reveal"><span class="section-index" aria-hidden="true">05 /</span><a class="contact-cta brief-trigger" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><h2 id="contact-title">Start growing.</h2><span class="contact-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></div>
+        <div class="contact-links"><a href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="https://instagram.com/ilonadigital" target="_blank" rel="noopener noreferrer">Instagram <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
       </div>
-      <div class="about-tagline">Creative agency,<br><span>on demand.</span></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <a class="footer-wordmark" href="#top" aria-label="Ilona Digital — kembali ke atas"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital" loading="lazy"></a>
+      <div class="footer-bottom"><span>© <span id="copyright-year">2026</span> Ilona Digital</span><a href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></a></div>
     </div>
-    <div class="about-stats rev rev-d1">
-      <div><div class="ast-n">50+</div><div class="ast-t">Happy Clients</div></div>
-      <div><div class="ast-n">3+</div><div class="ast-t">Years Active</div></div>
-      <div><div class="ast-n">7</div><div class="ast-t">Services</div></div>
-      <div><div class="ast-n">2021</div><div class="ast-t">Founded</div></div>
-    </div>
-    <div class="about-desc rev rev-d2">
-      <h3>Humanizing brands, growing together.</h3>
-      <p>Kami adalah <strong>Ilona Digital</strong> — social media agency dan creative marketing strategist yang berbasis di Bandung. Kami percaya bahwa brand yang tumbuh adalah brand yang terasa <strong>nyata, authentic, dan honest</strong> — yang benar-benar resonan dengan audiensnya.</p>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- FOOTER -->
-<div class="footer-email rev">
-  <a href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a>
-</div>
-<footer>
-  <div class="footer-inner">
-    <div class="footer-left">
-      <div class="fl-logo">
-        <div class="fl-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-        <span class="fl-logo-txt">ILONA</span>
-      </div>
-      <div class="fl-tagline">Creative agency,<br><span>on demand.</span></div>
-    </div>
-    <div class="footer-mid">
-      <div class="footer-col">
-        <h4>Layanan</h4>
-        <a href="#services">Social Media</a>
-        <a href="#services">Brand Identity</a>
-        <a href="#services">Ads Placement</a>
-        <a href="#services">Photo & Video</a>
-      </div>
-      <div class="footer-col">
-        <h4>Perusahaan</h4>
-        <a href="#about">About</a>
-        <a href="#portfolio">Work</a>
-        <a href="#contact">Contact</a>
-        <a href="https://instagram.com/ilonadigital" target="_blank">Instagram</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <a href="#contact" class="footer-cta-btn">Get Started →</a>
-      <div class="footer-copy">© 2024 Ilona Digital. All rights reserved.</div>
-    </div>
-  </div>
-</footer>
-
-<!-- CONTACT (WA form) -->
-<section style="background:var(--orange);padding:6rem 2.5rem;border-radius:var(--r2) var(--r2) 0 0;" id="contact">
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
-    <!-- Left -->
-    <div>
-      <div style="font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(17,17,17,.5);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;"><span style="display:block;width:14px;height:1px;background:rgba(17,17,17,.4);"></span>Get In Touch</div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;letter-spacing:-2px;color:var(--dark);line-height:.9;margin-bottom:1.5rem;">Let's grow<br>together.</h2>
-      <p style="font-size:.9rem;color:rgba(17,17,17,.6);line-height:1.8;margin-bottom:2rem;">Tell us about your brand and what you need. We'll get back to you within 1×24 working hours.</p>
-      <div style="display:flex;flex-direction:column;gap:.6rem;">
-        <a href="mailto:kontak.ilona@gmail.com" style="font-size:.82rem;color:rgba(17,17,17,.5);text-decoration:none;display:flex;align-items:center;gap:.6rem;transition:color .2s;"><span style="width:5px;height:5px;border-radius:50%;background:var(--dark);opacity:.4;flex-shrink:0;"></span>kontak.ilona@gmail.com</a>
-        <a href="https://instagram.com/ilonadigital" target="_blank" style="font-size:.82rem;color:rgba(17,17,17,.5);text-decoration:none;display:flex;align-items:center;gap:.6rem;"><span style="width:5px;height:5px;border-radius:50%;background:var(--dark);opacity:.4;flex-shrink:0;"></span>@ilonadigital</a>
-      </div>
-    </div>
-    <!-- Form -->
-    <div style="background:white;border-radius:var(--r2);overflow:hidden;">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform?embedded=true" width="100%" height="1184" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Memuat…</iframe>
-    </div>
-  </div>
-</section>
-
-<style>
-@media(max-width:768px){
-  #contact > div{grid-template-columns:1fr!important;gap:2.5rem!important;}
-  #contact > div > div:first-child{display:none;}
-}
-</style>
-
-<script>
-// Cursor
-const cd=document.getElementById('cdot'),cr=document.getElementById('cring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
-(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();
-document.querySelectorAll('a,button,.svc-row,.how-card,.feat-card,.port-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
-});
-
-// Hamburger
-const hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
-hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');});
-function closeMM(){hbg.classList.remove('open');mob.classList.remove('open');}
-
-// Form submit
-function kirim(){
-  const nama=document.getElementById('f-nama').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  const svc=document.getElementById('f-service').value;
-  if(!nama){alert('Name is required!');return;}
-  if(!email){alert('Email is required!');return;}
-  if(!svc){alert('Please select a service!');return;}
-  document.getElementById('formBody').style.display='none';
-  document.getElementById('fsuccess').style.display='block';
-}
-
-// Reveal
-const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:.07});
-document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-</script>
+  <dialog id="brief-dialog" class="brief-dialog" aria-labelledby="brief-title">
+    <div class="dialog-heading"><div><h2 id="brief-title">Let's talk</h2><p id="service-context" hidden></p></div><button class="dialog-close" type="button" aria-label="Tutup formulir" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
+    <div class="form-fallback"><a href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Buka formulir di tab baru <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+    <iframe id="brief-frame" title="Formulir konsultasi Ilona Digital" data-src="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform?embedded=true" width="720" height="900"></iframe>
+    <p class="dialog-email"><a href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a></p>
+  </dialog>
+  <dialog id="result-dialog" class="result-dialog" aria-label="Screenshot hasil Akela Trading">
+    <button class="image-close" type="button" aria-label="Tutup screenshot" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button>
+    <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Screenshot asli hasil Akela Trading: pertumbuhan keseluruhan 6.527 pengikut dan growth 78,0%." loading="lazy">
+  </dialog>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="arrow-ne" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol><symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol><symbol id="arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6"/></symbol><symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol></svg>
 </body>
 </html>

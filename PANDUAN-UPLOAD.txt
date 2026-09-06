@@ -1,0 +1,27 @@
+ILONA DIGITAL — PANDUAN UPLOAD
+
+Paket website statis siap upload, versi desain terbaru.
+
+ISI PAKET
+index.html, studio.css, studio.js, folder assets (gambar dan font), panduan ini.
+Tidak memerlukan proses build atau database tambahan.
+Formulir konsultasi tetap memakai Google Forms Ilona yang sudah ada.
+
+COBA DI HOSTING CPANEL
+1. Masuk ke cPanel lalu buka File Manager.
+2. Pilih document root untuk domain Ilona. Domain utama biasanya menggunakan public_html; domain tambahan dapat memakai folder berbeda.
+3. Buat folder baru bernama preview-ilona di dalam folder domain tersebut.
+4. Upload ilona-website-upload.zip ke folder preview-ilona.
+5. Pilih ZIP yang sudah di-upload lalu klik Extract.
+6. Pastikan index.html, studio.css, studio.js, dan assets langsung berada di dalam preview-ilona, bukan di dalam folder tambahan.
+7. Buka alamat domain kamu dengan akhiran /preview-ilona/ untuk melihat hasilnya.
+
+File memakai jalur aset relatif, sehingga gambar, font, dan gaya tetap dapat dimuat dari subfolder maupun root domain.
+
+MENGGANTIKAN WEBSITE UTAMA
+Cadangkan website lama terlebih dahulu. Lokasi pemasangan dan langkah pergantian perlu disesuaikan dengan hosting serta website yang sekarang digunakan, terutama jika masih memakai WordPress. Paket ini adalah website HTML statis, bukan tema atau plugin WordPress.
+
+Setelah memastikan seluruh halaman dan formulir berfungsi di hosting, gunakan prosedur pergantian yang sesuai dengan panel hostingmu.
+
+Referensi cPanel:
+https://docs.cpanel.net/cpanel/files/file-manager/
