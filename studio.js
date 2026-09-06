@@ -62,14 +62,21 @@
     syncScrollLock();
   }));
 
-  document.querySelector('.result-image-link').addEventListener('click', event => {
+  document.querySelectorAll('.result-image-link').forEach(link => link.addEventListener('click', event => {
     if (!isPlainClick(event) || typeof resultDialog.showModal !== 'function') return;
     event.preventDefault();
     previousDialogTrigger = event.currentTarget;
+    const source = link.querySelector('img');
+    const image = resultDialog.querySelector('img');
+    image.src = link.href;
+    image.alt = source.alt;
+    image.width = source.width;
+    image.height = source.height;
+    resultDialog.setAttribute('aria-label', link.getAttribute('aria-label'));
     resultDialog.showModal();
     resultDialog.scrollTop = 0;
     syncScrollLock();
-  });
+  }));
 
   [briefDialog, resultDialog].forEach(dialog => {
     dialog.querySelector('button').addEventListener('click', () => dialog.close());
@@ -110,6 +117,128 @@
       }
     });
   }
+
+  // Two equal groups make -50% -> 0 a seamless left-to-right loop.
+  const marquee = document.getElementById('client-marquee');
+  const marqueeTrack = marquee.querySelector('.client-track');
+  const logoSet = marquee.querySelector('.client-logo-set');
+  const marqueeToggle = document.querySelector('.marquee-toggle');
+  const repeatedLogos = logoSet.cloneNode(true);
+  repeatedLogos.setAttribute('aria-hidden', 'true');
+  repeatedLogos.removeAttribute('aria-label');
+  repeatedLogos.querySelectorAll('img').forEach(image => {
+    image.alt = '';
+    image.loading = 'eager';
+  });
+  marqueeTrack.append(repeatedLogos);
+  let marqueePaused = false;
+  let marqueeInView = true;
+  function syncMarquee() {
+    marquee.classList.toggle('is-enhanced', !reduceMotion.matches);
+    marquee.classList.toggle('is-paused', marqueePaused || document.hidden || !marqueeInView);
+    marqueeToggle.hidden = reduceMotion.matches;
+    marqueeToggle.setAttribute('aria-pressed', String(marqueePaused));
+    marqueeToggle.querySelector('span').textContent = marqueePaused ? 'Lanjutkan logo' : 'Jeda logo';
+    marqueeToggle.querySelector('use').setAttribute('href', marqueePaused ? '#play' : '#pause');
+  }
+  marqueeToggle.addEventListener('click', () => { marqueePaused = !marqueePaused; syncMarquee(); });
+  reduceMotion.addEventListener('change', syncMarquee);
+  document.addEventListener('visibilitychange', syncMarquee);
+  if ('IntersectionObserver' in window) {
+    const marqueeObserver = new IntersectionObserver(entries => {
+      marqueeInView = entries[0].isIntersecting;
+      syncMarquee();
+    }, { rootMargin: '150px' });
+    marqueeObserver.observe(marquee);
+  }
+  syncMarquee();
+
+  // Hover is decorative. Native details keep all content accessible by tap or keyboard.
+  const hoverDevice = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 901px) and (min-height: 600px)');
+  const expertiseItems = [...document.querySelectorAll('.expertise-item')];
+  const expertisePreview = document.querySelector('.expertise-preview');
+  const previewImage = expertisePreview.querySelector('.preview-image');
+  const previewTitle = expertisePreview.querySelector('.preview-title');
+  const previewTags = expertisePreview.querySelector('.preview-tags');
+  let activeExpertise = null;
+  let previewFrame = 0;
+  let cursorX = 0, cursorY = 0, previewX = 0, previewY = 0;
+
+  function hideExpertisePreview() {
+    activeExpertise = null;
+    expertisePreview.classList.remove('is-visible');
+    window.cancelAnimationFrame(previewFrame);
+    previewFrame = 0;
+  }
+  function previewPosition() {
+    const width = expertisePreview.offsetWidth;
+    const height = expertisePreview.offsetHeight;
+    const gap = 32;
+    let x = cursorX + gap;
+    if (x + width > window.innerWidth - 20) x = cursorX - width - gap;
+    return {
+      x: Math.max(20, Math.min(x, window.innerWidth - width - 20)),
+      y: Math.max(100, Math.min(cursorY - height * .48, window.innerHeight - height - 20))
+    };
+  }
+  function animateExpertisePreview() {
+    previewFrame = 0;
+    if (!activeExpertise) return;
+    const target = previewPosition();
+    const dx = target.x - previewX;
+    const dy = target.y - previewY;
+    previewX += dx * .19;
+    previewY += dy * .19;
+    expertisePreview.style.transform = `translate3d(${previewX.toFixed(2)}px,${previewY.toFixed(2)}px,0)`;
+    expertisePreview.style.setProperty('--preview-tilt', `${Math.max(-5, Math.min(5, dx * .025 - 2)).toFixed(2)}deg`);
+    if (Math.abs(dx) + Math.abs(dy) > .2) previewFrame = window.requestAnimationFrame(animateExpertisePreview);
+  }
+  function queueExpertisePreview(event) {
+    cursorX = event.clientX;
+    cursorY = event.clientY;
+    if (!previewFrame) previewFrame = window.requestAnimationFrame(animateExpertisePreview);
+  }
+  expertiseItems.forEach(item => {
+    const summary = item.querySelector('summary');
+    function showPreview(event) {
+      if (event.pointerType !== 'mouse' || !hoverDevice.matches || reduceMotion.matches || item.open || body.classList.contains('menu-open') || document.querySelector('dialog[open]')) return;
+      const sourceImage = item.querySelector('.service-image');
+      previewImage.src = sourceImage.src;
+      previewImage.width = sourceImage.width;
+      previewImage.height = sourceImage.height;
+      previewImage.classList.toggle('is-logo', sourceImage.classList.contains('service-image-logo'));
+      previewTitle.textContent = item.querySelector('h3').textContent;
+      previewTags.replaceChildren(...[...item.querySelectorAll('.service-tags li')].map(tag => tag.cloneNode(true)));
+      cursorX = event.clientX;
+      cursorY = event.clientY;
+      const target = previewPosition();
+      previewX = target.x;
+      previewY = target.y;
+      activeExpertise = item;
+      expertisePreview.style.transform = `translate3d(${previewX}px,${previewY}px,0)`;
+      expertisePreview.classList.add('is-visible');
+      queueExpertisePreview(event);
+    }
+    summary.addEventListener('pointerenter', showPreview);
+    summary.addEventListener('pointermove', event => {
+      if (activeExpertise === item) queueExpertisePreview(event);
+      else showPreview(event);
+    });
+    summary.addEventListener('pointerleave', hideExpertisePreview);
+    summary.addEventListener('pointerdown', hideExpertisePreview);
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      hideExpertisePreview();
+      expertiseItems.forEach(other => { if (other !== item) other.open = false; });
+    });
+  });
+  window.addEventListener('scroll', hideExpertisePreview, { passive: true });
+  window.addEventListener('resize', hideExpertisePreview, { passive: true });
+  window.addEventListener('blur', hideExpertisePreview);
+  document.addEventListener('keydown', hideExpertisePreview);
+  document.addEventListener('visibilitychange', hideExpertisePreview);
+  reduceMotion.addEventListener('change', hideExpertisePreview);
+  hoverDevice.addEventListener('change', hideExpertisePreview);
 
   const navLinks = [...menu.querySelectorAll('a[href^="#"]')];
   const sections = navLinks.map(link => document.querySelector(link.hash));

@@ -13,8 +13,8 @@
   <link rel="preload" href="./assets/bricolage-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/manrope-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/dm-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./studio.css">
-  <script src="./studio.js" defer></script>
+  <link rel="stylesheet" href="./studio.css?v=5">
+  <script src="./studio.js?v=5" defer></script>
 </head>
 <body class="studio-direction">
   <a class="skip-link" href="#main">Langsung ke konten</a>
@@ -30,8 +30,8 @@
       <div class="mobile-nav-inner wrap">
         <a href="#about"><span>01</span>About us<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
         <a href="#clients"><span>02</span>Trust<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
-        <a href="#work"><span>03</span>Our Work<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
-        <a href="#expertise"><span>04</span>Expertise<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#work"><span>03</span>Selected Work<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
+        <a href="#expertise"><span>04</span>Our Expertise<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
         <a href="#contact"><span>05</span>Let's talk<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
         <a class="mobile-email" href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a>
       </div>
@@ -49,7 +49,7 @@
         <div class="hero-content">
           <h1 id="hero-title"><span class="hero-line">Stop guessing,</span> <span class="hero-line hero-italic">Start growing.</span></h1>
         </div>
-        <div class="hero-foot"><span class="hero-name">Ilona Digital</span><a href="#work" class="hero-work-link">Our Work <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="#about" class="hero-scroll-link" aria-label="Scroll ke About us"><svg class="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a></div>
+        <div class="hero-foot"><span class="hero-name">Ilona Digital</span><a href="#work" class="hero-work-link">Selected Work <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="#about" class="hero-scroll-link" aria-label="Scroll ke About us"><svg class="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a></div>
       </div>
     </section>
 
@@ -67,20 +67,30 @@
       </div>
     </section>
 
-    <section class="clients-section wrap" id="clients" aria-labelledby="clients-title">
-      <div class="section-heading reveal"><span class="section-index" aria-hidden="true">02 /</span><h2 id="clients-title">Trust, <span>Across Industries.</span></h2></div>
-      <ul class="client-logos reveal" aria-label="Klien Ilona Digital">
-        <li class="logo-gonegani"><img src="./assets/clients/gonegani.png" width="2048" height="474" alt="Gonegani" loading="lazy" decoding="async"></li>
-        <li class="logo-seefluencer"><img src="./assets/clients/seefluencer.png" width="669" height="275" alt="Seefluencer School of Marketing" loading="lazy" decoding="async"></li>
-        <li class="logo-farmanina"><img src="./assets/clients/farmanina.webp" width="963" height="157" alt="Farmanina Hair Transplant Centre" loading="lazy" decoding="async"></li>
-        <li class="logo-tribelio"><img src="./assets/clients/tribelio.png" width="500" height="500" alt="Tribelio" loading="lazy" decoding="async"></li>
-        <li class="logo-authentism"><img src="./assets/clients/authentism.webp" width="182" height="53" alt="Authentism" loading="lazy" decoding="async"></li>
-      </ul>
+    <section class="clients-section" id="clients" aria-labelledby="clients-title">
+      <div class="wrap">
+        <div class="section-heading reveal"><span class="section-index" aria-hidden="true">02 /</span><h2 id="clients-title">Trust, <span>Across Industries.</span></h2></div>
+      </div>
+      <div class="client-marquee" id="client-marquee">
+        <div class="client-track">
+          <ul class="client-logo-set" aria-label="Klien Ilona Digital">
+            <li class="logo-gonegani"><img src="./assets/clients/gonegani.png" width="2048" height="474" alt="Gonegani" loading="lazy" decoding="async"></li>
+            <li class="logo-seefluencer"><img src="./assets/clients/seefluencer.png" width="669" height="275" alt="Seefluencer School of Marketing" loading="lazy" decoding="async"></li>
+            <li class="logo-farmanina"><img src="./assets/clients/farmanina.webp" width="963" height="157" alt="Farmanina Hair Transplant Centre" loading="lazy" decoding="async"></li>
+            <li class="logo-tribelio"><img src="./assets/clients/tribelio.png" width="500" height="500" alt="Tribelio" loading="lazy" decoding="async"></li>
+            <li class="logo-authentism"><img src="./assets/clients/authentism.webp" width="182" height="53" alt="Authentism" loading="lazy" decoding="async"></li>
+            <li class="logo-bank-bjb"><img src="./assets/clients/bank-bjb.png" width="179" height="90" alt="Bank BJB" loading="lazy" decoding="async"></li>
+            <li class="logo-maxim"><img src="./assets/clients/maxim.png" width="179" height="90" alt="Maxim" loading="lazy" decoding="async"></li>
+            <li class="logo-amazy"><img src="./assets/clients/amazy.png" width="179" height="90" alt="Amazy Family Resto" loading="lazy" decoding="async"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap marquee-controls"><button class="marquee-toggle" type="button" aria-controls="client-marquee" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#pause"/></svg><span>Jeda logo</span></button></div>
     </section>
 
     <section class="work-section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <div class="work-heading reveal"><div><span class="section-index" aria-hidden="true">03 /</span><h2 id="work-title">Our Work</h2></div><svg class="work-arrow icon" aria-hidden="true"><use href="#arrow-ne"/></svg></div>
+        <div class="work-heading reveal"><div><span class="section-index" aria-hidden="true">03 /</span><h2 id="work-title">Selected Work</h2></div><svg class="work-arrow icon" aria-hidden="true"><use href="#arrow-ne"/></svg></div>
         <article class="case-study" aria-labelledby="case-title">
           <div class="case-top reveal"><h3 id="case-title">Brand: Akela Trading <span class="case-discipline">- Social Media Management</span></h3><span class="case-number" aria-hidden="true">01</span></div>
           <div class="case-body">
@@ -96,17 +106,59 @@
             </figure>
           </div>
         </article>
+        <article class="case-study gonegani-case" aria-labelledby="gonegani-title">
+          <div class="case-top reveal"><h3 id="gonegani-title">Brand: Gonegani <span class="case-discipline">- Video Production</span></h3><span class="case-number" aria-hidden="true">02</span></div>
+          <p class="gonegani-statement reveal">Mendapatkan views <strong>401K <span>dan</span> 824K</strong></p>
+          <div class="gonegani-gallery">
+            <figure class="gonegani-visual reveal">
+              <a class="result-image-link" href="./assets/brief/gonegani-401k.png" target="_blank" rel="noopener" aria-label="Perbesar hasil video Gonegani dengan 401K views">
+                <img src="./assets/brief/gonegani-401k.png" width="508" height="790" alt="Video produksi Gonegani: lukisan perayaan 10 tahun, dengan 401 ribu views." loading="lazy" decoding="async">
+                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
+              </a>
+            </figure>
+            <figure class="gonegani-visual reveal">
+              <a class="result-image-link" href="./assets/brief/gonegani-824k.png" target="_blank" rel="noopener" aria-label="Perbesar hasil video Gonegani dengan 824K views">
+                <img src="./assets/brief/gonegani-824k.png" width="500" height="778" alt="Video produksi Gonegani: model dengan kain, dengan 824 ribu views." loading="lazy" decoding="async">
+                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
+              </a>
+            </figure>
+          </div>
+        </article>
       </div>
     </section>
 
     <section class="expertise-section wrap" id="expertise" aria-labelledby="expertise-title">
-      <div class="expertise-heading reveal"><span class="section-index" aria-hidden="true">04 /</span><h2 id="expertise-title">Expertise</h2></div>
-      <ul class="expertise-list">
-        <li class="reveal"><a class="brief-trigger" data-service="Photo &amp; Video Production" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">01</span><span class="service-watermark" aria-hidden="true">01</span><h3>Photo &amp; Video Production</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
-        <li class="reveal"><a class="brief-trigger" data-service="Social Media Management" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">02</span><span class="service-watermark" aria-hidden="true">02</span><h3>Social Media Management</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
-        <li class="reveal"><a class="brief-trigger" data-service="Digital Ads" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">03</span><span class="service-watermark" aria-hidden="true">03</span><h3>Digital Ads</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
-        <li class="reveal"><a class="brief-trigger" data-service="Website Development" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer"><span class="service-index" aria-hidden="true">04</span><span class="service-watermark" aria-hidden="true">04</span><h3>Website Development</h3><span class="service-arrow"><svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></span></a></li>
-      </ul>
+      <div class="expertise-heading reveal"><span class="section-index" aria-hidden="true">04 /</span><h2 id="expertise-title">Our Expertise</h2></div>
+      <div class="expertise-rows">
+        <details class="expertise-item reveal">
+          <summary><span class="service-index" aria-hidden="true">01</span><h3>Photo &amp; Video Production</h3><span class="expertise-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow-ne"/></svg></span></summary>
+          <div class="expertise-detail">
+            <img class="service-image" src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="" loading="lazy" decoding="async">
+            <div class="service-copy"><ul class="service-tags"><li>Photography</li><li>Campaign video</li><li>Reels production</li></ul><a class="service-cta brief-trigger" data-service="Photo &amp; Video Production" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+          </div>
+        </details>
+        <details class="expertise-item reveal">
+          <summary><span class="service-index" aria-hidden="true">02</span><h3>Social Media Management</h3><span class="expertise-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow-ne"/></svg></span></summary>
+          <div class="expertise-detail">
+            <img class="service-image" src="./assets/brief/gonegani-824k.png" width="500" height="778" alt="" loading="lazy" decoding="async">
+            <div class="service-copy"><ul class="service-tags"><li>Content strategy</li><li>Copywriting</li><li>Feed &amp; Reels</li><li>Reporting</li></ul><a class="service-cta brief-trigger" data-service="Social Media Management" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+          </div>
+        </details>
+        <details class="expertise-item reveal">
+          <summary><span class="service-index" aria-hidden="true">03</span><h3>Digital Ads</h3><span class="expertise-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow-ne"/></svg></span></summary>
+          <div class="expertise-detail">
+            <img class="service-image" src="./assets/brief/about-monitor.jpg" width="1170" height="1560" alt="" loading="lazy" decoding="async">
+            <div class="service-copy"><ul class="service-tags"><li>Meta Ads</li><li>Google Ads</li><li>Tiktok Ads</li><li>Shopee Ads</li></ul><a class="service-cta brief-trigger" data-service="Digital Ads" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+          </div>
+        </details>
+        <details class="expertise-item reveal">
+          <summary><span class="service-index" aria-hidden="true">04</span><h3>Website Development</h3><span class="expertise-arrow" aria-hidden="true"><svg class="icon"><use href="#arrow-ne"/></svg></span></summary>
+          <div class="expertise-detail">
+            <img class="service-image service-image-logo" src="./assets/ilona-logo.png" width="1542" height="364" alt="" loading="lazy" decoding="async">
+            <div class="service-copy"><ul class="service-tags"><li>Website Development</li></ul><a class="service-cta brief-trigger" data-service="Website Development" href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+          </div>
+        </details>
+      </div>
     </section>
 
     <section class="contact-section" id="contact" aria-labelledby="contact-title">
@@ -133,6 +185,7 @@
     <button class="image-close" type="button" aria-label="Tutup screenshot" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button>
     <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Screenshot asli hasil Akela Trading: pertumbuhan keseluruhan 6.527 pengikut dan growth 78,0%." loading="lazy">
   </dialog>
-  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="arrow-ne" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol><symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol><symbol id="arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6"/></symbol><symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol></svg>
+  <div class="expertise-preview" aria-hidden="true"><div class="expertise-preview-inner"><img class="preview-image" alt=""><p class="preview-title"></p><ul class="preview-tags"></ul></div></div>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="arrow-ne" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol><symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol><symbol id="arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6"/></symbol><symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol><symbol id="pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol><symbol id="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol></svg>
 </body>
 </html>

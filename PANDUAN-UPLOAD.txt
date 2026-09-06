@@ -1,27 +1,23 @@
-ILONA DIGITAL — PANDUAN UPLOAD
+ILONA DIGITAL — PANDUAN UPLOAD GITHUB
 
-Paket website statis siap upload, versi desain terbaru.
+PEMBARUAN
+- Kartu gambar dan rincian layanan mengikuti kursor pada desktop.
+- Rincian layanan bisa dibuka dengan tap di HP dan keyboard.
+- Delapan logo klien bergerak dari kiri ke kanan; tersedia tombol jeda.
+- Selected Work mencakup Akela Trading dan dua hasil Gonegani (401K / 824K views).
+- Rincian Photo & Video Production, Social Media Management, serta platform Digital Ads mengikuti brief.
 
-ISI PAKET
-index.html, studio.css, studio.js, folder assets (gambar dan font), panduan ini.
-Tidak memerlukan proses build atau database tambahan.
+UPLOAD KE REPO ilonadigital/ilona
+1. Ekstrak ilona-website-upload.zip di komputer.
+2. Di halaman utama repo, buka Add file > Upload files.
+3. Dari Finder / File Explorer, seret index.html, studio.css, studio.js, dan folder assets ke kotak upload GitHub.
+4. Tunggu semua file selesai diunggah, lalu klik Commit changes.
+5. Gunakan pengaturan GitHub Pages atau deployment yang sudah ada untuk repo tersebut.
+6. Setelah deployment selesai, buka halaman website dan refresh.
+
+Pastikan index.html sejajar dengan studio.css, studio.js, dan folder assets di halaman utama repo.
+Folder assets beserta isinya perlu ikut diunggah, karena ada dua gambar Gonegani baru.
+File menggunakan jalur relatif sehingga bisa digunakan di root domain maupun subfolder /ilona/.
+
+Paket ini adalah website statis dan tidak memerlukan proses build tambahan.
 Formulir konsultasi tetap memakai Google Forms Ilona yang sudah ada.
-
-COBA DI HOSTING CPANEL
-1. Masuk ke cPanel lalu buka File Manager.
-2. Pilih document root untuk domain Ilona. Domain utama biasanya menggunakan public_html; domain tambahan dapat memakai folder berbeda.
-3. Buat folder baru bernama preview-ilona di dalam folder domain tersebut.
-4. Upload ilona-website-upload.zip ke folder preview-ilona.
-5. Pilih ZIP yang sudah di-upload lalu klik Extract.
-6. Pastikan index.html, studio.css, studio.js, dan assets langsung berada di dalam preview-ilona, bukan di dalam folder tambahan.
-7. Buka alamat domain kamu dengan akhiran /preview-ilona/ untuk melihat hasilnya.
-
-File memakai jalur aset relatif, sehingga gambar, font, dan gaya tetap dapat dimuat dari subfolder maupun root domain.
-
-MENGGANTIKAN WEBSITE UTAMA
-Cadangkan website lama terlebih dahulu. Lokasi pemasangan dan langkah pergantian perlu disesuaikan dengan hosting serta website yang sekarang digunakan, terutama jika masih memakai WordPress. Paket ini adalah website HTML statis, bukan tema atau plugin WordPress.
-
-Setelah memastikan seluruh halaman dan formulir berfungsi di hosting, gunakan prosedur pergantian yang sesuai dengan panel hostingmu.
-
-Referensi cPanel:
-https://docs.cpanel.net/cpanel/files/file-manager/
