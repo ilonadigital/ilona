@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,20 +13,20 @@
   <link rel="preload" href="./assets/bricolage-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/manrope-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/dm-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./studio.css?v=5">
-  <script src="./studio.js?v=5" defer></script>
+  <link rel="stylesheet" href="./studio.css?v=6">
+  <script src="./studio.js?v=6" defer></script>
 </head>
 <body class="studio-direction">
-  <a class="skip-link" href="#main">Langsung ke konten</a>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner wrap">
-      <a class="brand" href="#top" aria-label="Ilona Digital — beranda"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital"></a>
+      <a class="brand" href="#top" aria-label="Ilona Digital — home"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital"></a>
       <div class="header-controls">
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Buka menu"><span class="menu-label">Menu</span><span class="menu-bars" aria-hidden="true"><i></i><i></i></span></button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span class="menu-label">Menu</span><span class="menu-bars" aria-hidden="true"><i></i><i></i></span></button>
         <a class="header-contact" href="#contact">Let's talk <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
       </div>
     </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Navigasi seluler" hidden>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Main navigation" hidden>
       <div class="mobile-nav-inner wrap">
         <a href="#about"><span>01</span>About us<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
         <a href="#clients"><span>02</span>Trust<svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a>
@@ -49,19 +49,26 @@
         <div class="hero-content">
           <h1 id="hero-title"><span class="hero-line">Stop guessing,</span> <span class="hero-line hero-italic">Start growing.</span></h1>
         </div>
-        <div class="hero-foot"><span class="hero-name">Ilona Digital</span><a href="#work" class="hero-work-link">Selected Work <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="#about" class="hero-scroll-link" aria-label="Scroll ke About us"><svg class="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a></div>
+        <div class="hero-foot"><span class="hero-name">Ilona Digital</span><a href="#work" class="hero-work-link">Selected Work <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a><a href="#about" class="hero-scroll-link" aria-label="Scroll to About us"><svg class="icon" aria-hidden="true"><use href="#arrow-down"/></svg></a></div>
       </div>
     </section>
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="section-heading reveal"><span class="section-index" aria-hidden="true">01 /</span><h2 id="about-title">About us</h2><span class="heading-mark" aria-hidden="true">↗</span></div>
+      <div class="intro-story">
+        <div class="intro-panel">
+          <img class="intro-background" src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="" loading="lazy" decoding="async">
+          <div class="intro-shade" aria-hidden="true"></div>
+          <p class="intro-statement"><span class="intro-name" data-intro-text>We’re Ilona Digital.</span> <span class="intro-description" data-intro-text>We bring strategy, creativity, and performance together to turn attention into real business growth.</span></p>
+        </div>
+      </div>
       <div class="about-images">
         <figure class="about-photo first-photo reveal" data-parallax="first">
-          <img src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="Tim produksi dengan kamera di lokasi pengambilan gambar." loading="lazy" decoding="async">
+          <img src="./assets/brief/about-production.jpg" width="1170" height="1560" alt="Production team filming on location." loading="lazy" decoding="async">
           <span class="photo-corner" aria-hidden="true"></span>
         </figure>
         <figure class="about-photo second-photo reveal" data-parallax="second">
-          <img src="./assets/brief/about-monitor.jpg" width="1170" height="1560" alt="Monitor kamera menampilkan adegan saat proses produksi video." loading="lazy" decoding="async">
+          <img src="./assets/brief/about-monitor.jpg" width="1170" height="1560" alt="Camera monitor during a video shoot." loading="lazy" decoding="async">
           <span class="photo-corner" aria-hidden="true"></span>
         </figure>
       </div>
@@ -73,7 +80,7 @@
       </div>
       <div class="client-marquee" id="client-marquee">
         <div class="client-track">
-          <ul class="client-logo-set" aria-label="Klien Ilona Digital">
+          <ul class="client-logo-set" aria-label="Ilona Digital clients">
             <li class="logo-gonegani"><img src="./assets/clients/gonegani.png" width="2048" height="474" alt="Gonegani" loading="lazy" decoding="async"></li>
             <li class="logo-seefluencer"><img src="./assets/clients/seefluencer.png" width="669" height="275" alt="Seefluencer School of Marketing" loading="lazy" decoding="async"></li>
             <li class="logo-farmanina"><img src="./assets/clients/farmanina.webp" width="963" height="157" alt="Farmanina Hair Transplant Centre" loading="lazy" decoding="async"></li>
@@ -85,7 +92,7 @@
           </ul>
         </div>
       </div>
-      <div class="wrap marquee-controls"><button class="marquee-toggle" type="button" aria-controls="client-marquee" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#pause"/></svg><span>Jeda logo</span></button></div>
+      <div class="wrap marquee-controls"><button class="marquee-toggle" type="button" aria-controls="client-marquee" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#pause"/></svg><span>Pause logos</span></button></div>
     </section>
 
     <section class="work-section" id="work" aria-labelledby="work-title">
@@ -95,32 +102,46 @@
           <div class="case-top reveal"><h3 id="case-title">Brand: Akela Trading <span class="case-discipline">- Social Media Management</span></h3><span class="case-number" aria-hidden="true">01</span></div>
           <div class="case-body">
             <div class="case-results reveal">
-              <p class="result-statement"><span class="result-label">Follower bertambah</span> <strong class="result-number">+6527</strong> <span class="result-label second-label">atau growth</span> <strong class="result-growth">78<span>%</span></strong> <span class="result-label final-label">dari bulan sebelumnya</span></p>
+              <p class="result-statement"><span class="result-label">New followers</span> <strong class="result-number">+6,527</strong> <span class="result-label second-label">Growth</span> <strong class="result-growth">78<span>%</span></strong> <span class="result-label final-label">Compared with the previous month</span></p>
               <div class="result-rule" aria-hidden="true"><span></span><svg class="icon"><use href="#arrow-ne"/></svg></div>
             </div>
-            <figure class="case-visual reveal">
-              <a class="result-image-link" href="./assets/brief/akela-results.png" target="_blank" rel="noopener" aria-label="Perbesar screenshot hasil Akela Trading">
-                <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Hasil Akela Trading: 14.894 pengikut, pertumbuhan 78,0%, dengan pertumbuhan keseluruhan 6.527 pengikut." loading="lazy" decoding="async">
-                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
-              </a>
-            </figure>
+            <div class="akela-gallery" role="group" aria-label="Akela Trading screenshots" tabindex="0">
+              <figure class="phone-visual reveal">
+                <a class="result-image-link device-mockup" href="./assets/brief/akela-results.png" target="_blank" rel="noopener" aria-label="Enlarge Akela Trading results">
+                  <span class="device-screen"><img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Akela Trading results: 14,894 followers, 78.0% growth and 6,527 new followers." loading="lazy" decoding="async"></span>
+                  <img class="device-frame" src="./assets/device/iphone-16-pro-max-natural.png" width="1424" height="2956" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Enlarge</span></span>
+                </a>
+                <figcaption>Follower growth</figcaption>
+              </figure>
+              <figure class="phone-visual reveal">
+                <a class="result-image-link device-mockup" href="./assets/brief/akela-content.jpg" target="_blank" rel="noopener" aria-label="Enlarge Akela Trading content">
+                  <span class="device-screen"><img src="./assets/brief/akela-content.jpg" width="738" height="1600" alt="Original Akela Trading Instagram content grid and video views." loading="lazy" decoding="async"></span>
+                  <img class="device-frame" src="./assets/device/iphone-16-pro-max-natural.png" width="1424" height="2956" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Enlarge</span></span>
+                </a>
+                <figcaption>Social media content</figcaption>
+              </figure>
+            </div>
           </div>
         </article>
         <article class="case-study gonegani-case" aria-labelledby="gonegani-title">
           <div class="case-top reveal"><h3 id="gonegani-title">Brand: Gonegani <span class="case-discipline">- Video Production</span></h3><span class="case-number" aria-hidden="true">02</span></div>
-          <p class="gonegani-statement reveal">Mendapatkan views <strong>401K <span>dan</span> 824K</strong></p>
-          <div class="gonegani-gallery">
+          <p class="gonegani-statement reveal">Video views <strong>401K <span>and</span> 824K</strong></p>
+          <div class="gonegani-gallery" role="group" aria-label="Gonegani video results" tabindex="0">
             <figure class="gonegani-visual reveal">
-              <a class="result-image-link" href="./assets/brief/gonegani-401k.png" target="_blank" rel="noopener" aria-label="Perbesar hasil video Gonegani dengan 401K views">
-                <img src="./assets/brief/gonegani-401k.png" width="508" height="790" alt="Video produksi Gonegani: lukisan perayaan 10 tahun, dengan 401 ribu views." loading="lazy" decoding="async">
-                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
-              </a>
+              <a class="result-image-link device-mockup contain-screen" href="./assets/brief/gonegani-401k.png" target="_blank" rel="noopener" aria-label="Enlarge Gonegani video result with 401K views">
+                  <span class="device-screen"><img src="./assets/brief/gonegani-401k.png" width="508" height="790" alt="Gonegani production: a painting celebrating 10 years, with 401K video views." loading="lazy" decoding="async"></span>
+                  <img class="device-frame" src="./assets/device/iphone-16-pro-max-natural.png" width="1424" height="2956" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Enlarge</span></span>
+                </a>
             </figure>
             <figure class="gonegani-visual reveal">
-              <a class="result-image-link" href="./assets/brief/gonegani-824k.png" target="_blank" rel="noopener" aria-label="Perbesar hasil video Gonegani dengan 824K views">
-                <img src="./assets/brief/gonegani-824k.png" width="500" height="778" alt="Video produksi Gonegani: model dengan kain, dengan 824 ribu views." loading="lazy" decoding="async">
-                <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Perbesar</span></span>
-              </a>
+              <a class="result-image-link device-mockup contain-screen" href="./assets/brief/gonegani-824k.png" target="_blank" rel="noopener" aria-label="Enlarge Gonegani video result with 824K views">
+                  <span class="device-screen"><img src="./assets/brief/gonegani-824k.png" width="500" height="778" alt="Gonegani production: a model with fabric, with 824K video views." loading="lazy" decoding="async"></span>
+                  <img class="device-frame" src="./assets/device/iphone-16-pro-max-natural.png" width="1424" height="2956" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                  <span class="enlarge-button"><svg class="icon" aria-hidden="true"><use href="#expand"/></svg><span>Enlarge</span></span>
+                </a>
             </figure>
           </div>
         </article>
@@ -170,20 +191,20 @@
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <a class="footer-wordmark" href="#top" aria-label="Ilona Digital — kembali ke atas"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital" loading="lazy"></a>
+      <a class="footer-wordmark" href="#top" aria-label="Ilona Digital — back to top"><img src="./assets/ilona-logo.png" width="1542" height="364" alt="Ilona Digital" loading="lazy"></a>
       <div class="footer-bottom"><span>© <span id="copyright-year">2026</span> Ilona Digital</span><a href="#top">Back to top <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></a></div>
     </div>
   </footer>
 
   <dialog id="brief-dialog" class="brief-dialog" aria-labelledby="brief-title">
-    <div class="dialog-heading"><div><h2 id="brief-title">Let's talk</h2><p id="service-context" hidden></p></div><button class="dialog-close" type="button" aria-label="Tutup formulir" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <div class="form-fallback"><a href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Buka formulir di tab baru <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
-    <iframe id="brief-frame" title="Formulir konsultasi Ilona Digital" data-src="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform?embedded=true" width="720" height="900"></iframe>
+    <div class="dialog-heading"><div><h2 id="brief-title">Let's talk</h2><p id="service-context" hidden></p></div><button class="dialog-close" type="button" aria-label="Close form" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
+    <div class="form-fallback"><a href="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform" target="_blank" rel="noopener noreferrer">Open the form in a new tab <svg class="icon" aria-hidden="true"><use href="#arrow-ne"/></svg></a></div>
+    <iframe id="brief-frame" title="Ilona Digital consultation form" data-src="https://docs.google.com/forms/d/e/1FAIpQLSduMMmoJnQye6_7PCJLUN62f74MiSvdaxJvKP2VKKF1_CbilQ/viewform?embedded=true" width="720" height="900"></iframe>
     <p class="dialog-email"><a href="mailto:kontak.ilona@gmail.com">kontak.ilona@gmail.com</a></p>
   </dialog>
-  <dialog id="result-dialog" class="result-dialog" aria-label="Screenshot hasil Akela Trading">
-    <button class="image-close" type="button" aria-label="Tutup screenshot" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button>
-    <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Screenshot asli hasil Akela Trading: pertumbuhan keseluruhan 6.527 pengikut dan growth 78,0%." loading="lazy">
+  <dialog id="result-dialog" class="result-dialog" aria-label="Akela Trading results">
+    <button class="image-close" type="button" aria-label="Close image" autofocus><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button>
+    <img src="./assets/brief/akela-results.png" width="710" height="1537" alt="Original Akela Trading results: 6,527 new followers and 78.0% growth." loading="lazy">
   </dialog>
   <div class="expertise-preview" aria-hidden="true"><div class="expertise-preview-inner"><img class="preview-image" alt=""><p class="preview-title"></p><ul class="preview-tags"></ul></div></div>
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><symbol id="arrow-ne" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol><symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol><symbol id="arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6"/></symbol><symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol><symbol id="pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol><symbol id="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol></svg>

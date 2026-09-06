@@ -13,7 +13,7 @@
 
   function setMenu(open, restoreFocus = false) {
     menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     menu.hidden = !open;
     body.classList.toggle('menu-open', open);
     pageContent.forEach(element => { element.inert = open; });
@@ -138,7 +138,7 @@
     marquee.classList.toggle('is-paused', marqueePaused || document.hidden || !marqueeInView);
     marqueeToggle.hidden = reduceMotion.matches;
     marqueeToggle.setAttribute('aria-pressed', String(marqueePaused));
-    marqueeToggle.querySelector('span').textContent = marqueePaused ? 'Lanjutkan logo' : 'Jeda logo';
+    marqueeToggle.querySelector('span').textContent = marqueePaused ? 'Resume logos' : 'Pause logos';
     marqueeToggle.querySelector('use').setAttribute('href', marqueePaused ? '#play' : '#pause');
   }
   marqueeToggle.addEventListener('click', () => { marqueePaused = !marqueePaused; syncMarquee(); });
@@ -245,6 +245,23 @@
   const hero = document.querySelector('.hero-story');
   const heroPin = document.querySelector('.hero-pin');
   const about = document.querySelector('.about-section');
+  const introStory = document.querySelector('.intro-story');
+  const introPanel = document.querySelector('.intro-panel');
+  const introWords = [];
+  document.querySelectorAll('[data-intro-text]').forEach(line => {
+    const words = line.textContent.trim().split(/\s+/);
+    const fragment = document.createDocumentFragment();
+    words.forEach((word, index) => {
+      const span = document.createElement('span');
+      span.className = 'intro-word';
+      span.textContent = word;
+      introWords.push(span);
+      fragment.append(span);
+      if (index < words.length - 1) fragment.append(document.createTextNode(' '));
+    });
+    line.replaceChildren(fragment);
+  });
+  introPanel.classList.add('has-text-reveal');
   const aboutFirst = document.querySelector('[data-parallax="first"]');
   const aboutSecond = document.querySelector('[data-parallax="second"]');
   const contact = document.querySelector('.contact-section');
@@ -264,6 +281,18 @@
       else link.removeAttribute('aria-current');
     });
     const vp = window.innerHeight;
+    const introBox = introStory.getBoundingClientRect();
+    let introProgress = 1;
+    if (!reduceMotion.matches) {
+      const stickyIntro = window.innerWidth > 800 && window.innerHeight > 680;
+      const start = vp * (stickyIntro ? .62 : .82);
+      const end = stickyIntro ? -(introStory.offsetHeight - introPanel.offsetHeight - 100) : vp * .12;
+      introProgress = clamp((start - introBox.top) / Math.max(1, start - end));
+    }
+    introStory.style.setProperty('--intro-progress', introProgress.toFixed(4));
+    introWords.forEach((word, index) => {
+      word.style.setProperty('--word-fill', `${(clamp(introProgress * introWords.length - index) * 100).toFixed(1)}%`);
+    });
     if (!reduceMotion.matches) {
       const box = hero.getBoundingClientRect();
       const travel = Math.max(1, hero.offsetHeight - heroPin.offsetHeight);

@@ -1,11 +1,12 @@
 ILONA DIGITAL — PANDUAN UPLOAD GITHUB
 
 PEMBARUAN
-- Kartu gambar dan rincian layanan mengikuti kursor pada desktop.
-- Rincian layanan bisa dibuka dengan tap di HP dan keyboard.
-- Delapan logo klien bergerak dari kiri ke kanan; tersedia tombol jeda.
-- Selected Work mencakup Akela Trading dan dua hasil Gonegani (401K / 824K views).
-- Rincian Photo & Video Production, Social Media Management, serta platform Digital Ads mengikuti brief.
+- Intro About us sesuai copy yang disetujui, dengan panel foto oval dan warna teks mengikuti scroll.
+- Teks antarmuka website menggunakan bahasa Inggris.
+- Dua screenshot Akela dan dua screenshot Gonegani ditampilkan dalam mockup iPhone 16 Pro Max.
+- Gambar dan angka screenshot asli dipertahankan; seluruh gambar dapat diperbesar.
+- Hover layanan, rincian lewat tap di HP, dan delapan logo berjalan tetap tersedia.
+- Bagian karya Farmanina masih menunggu tautan atau screenshot website dari brief.
 
 UPLOAD KE REPO ilonadigital/ilona
 1. Ekstrak ilona-website-upload.zip di komputer.
@@ -16,7 +17,7 @@ UPLOAD KE REPO ilonadigital/ilona
 6. Setelah deployment selesai, buka halaman website dan refresh.
 
 Pastikan index.html sejajar dengan studio.css, studio.js, dan folder assets di halaman utama repo.
-Folder assets beserta isinya perlu ikut diunggah, karena ada dua gambar Gonegani baru.
+Folder assets beserta isinya perlu ikut diunggah, karena ada screenshot Akela tambahan dan aset mockup iPhone.
 File menggunakan jalur relatif sehingga bisa digunakan di root domain maupun subfolder /ilona/.
 
 Paket ini adalah website statis dan tidak memerlukan proses build tambahan.
