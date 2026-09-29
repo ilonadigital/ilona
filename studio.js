@@ -72,9 +72,11 @@
     image.alt = source.alt;
     image.width = source.width;
     image.height = source.height;
+    resultDialog.classList.toggle('is-landscape', source.width > source.height);
     resultDialog.setAttribute('aria-label', link.getAttribute('aria-label'));
     resultDialog.showModal();
     resultDialog.scrollTop = 0;
+    resultDialog.scrollLeft = 0;
     syncScrollLock();
   }));
 

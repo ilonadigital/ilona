@@ -1,24 +1,21 @@
-ILONA DIGITAL — PANDUAN UPLOAD GITHUB
+ILONA DIGITAL — PAKET WEBSITE
 
-PEMBARUAN
-- Intro About us sesuai copy yang disetujui, dengan panel foto oval dan warna teks mengikuti scroll.
-- Teks antarmuka website menggunakan bahasa Inggris.
-- Dua screenshot Akela dan dua screenshot Gonegani ditampilkan dalam mockup iPhone 16 Pro Max.
-- Gambar dan angka screenshot asli dipertahankan; seluruh gambar dapat diperbesar.
-- Hover layanan, rincian lewat tap di HP, dan delapan logo berjalan tetap tersedia.
-- Bagian karya Farmanina masih menunggu tautan atau screenshot website dari brief.
+Pembaruan 29 September 2026
+Urutan portofolio: Gonegani GMV, Zerox Fishing, Akela Trading, Gonegani Video Production.
+- Gonegani — Fashion: GMV dari iklan Rp2,1 miliar (Januari) menjadi Rp3,2 miliar (Februari), naik sekitar 52,4%.
+- Zerox Fishing — Shopee Ads: ROAS 19,85 di bulan pertama, periode 1–29 September.
+- Tiga screenshot asli dapat diperbesar.
 
-UPLOAD KE REPO ilonadigital/ilona
-1. Ekstrak ilona-website-upload.zip di komputer.
-2. Di halaman utama repo, buka Add file > Upload files.
-3. Dari Finder / File Explorer, seret index.html, studio.css, studio.js, dan folder assets ke kotak upload GitHub.
-4. Tunggu semua file selesai diunggah, lalu klik Commit changes.
-5. Gunakan pengaturan GitHub Pages atau deployment yang sudah ada untuk repo tersebut.
-6. Setelah deployment selesai, buka halaman website dan refresh.
+UPLOAD KE GITHUB
+1. Ekstrak ZIP ini di komputer.
+2. Buka repo ilonadigital/ilona pada branch yang dipakai website.
+3. Di halaman utama repo, pilih Add file > Upload files.
+4. Seret index.html, studio.css, studio.js, dan folder assets dari hasil ekstrak.
+5. Commit changes.
 
-Pastikan index.html sejajar dengan studio.css, studio.js, dan folder assets di halaman utama repo.
-Folder assets beserta isinya perlu ikut diunggah, karena ada screenshot Akela tambahan dan aset mockup iPhone.
-File menggunakan jalur relatif sehingga bisa digunakan di root domain maupun subfolder /ilona/.
+index.html harus langsung berada di root repo, bukan di dalam folder tambahan.
+Upload file hasil ekstrak, bukan file ZIP. Jika browser tidak menerima folder, buka folder assets di repo lalu upload file ke subfolder yang sama.
+Tiga aset baru ada di assets/brief/: gonegani-gmv-january.png, gonegani-gmv-february.png, zerox-shopee-ads.png.
 
-Paket ini adalah website statis dan tidak memerlukan proses build tambahan.
-Formulir konsultasi tetap memakai Google Forms Ilona yang sudah ada.
+Paket dapat dipakai di root domain maupun subfolder karena menggunakan path relatif.
+Pertahankan pengaturan domain, CNAME, dan GitHub Pages yang sudah digunakan.
