@@ -135,3 +135,14 @@ dialog{padding:0;border:0;color:var(--ink);background:var(--paper)}dialog::backd
 .website-preview video:focus-visible{outline:2px solid var(--orange);outline-offset:5px}
 .website-preview figcaption{font-size:14px;line-height:1.5;color:#b9beb0;margin-top:23px;text-align:center}
 @media(max-width:520px){.farmanina-case .case-discipline{font-size:14px}.macbook-mockup{margin-top:5px;filter:drop-shadow(0 8px 9px #0004)}}
+
+/* Viona Water uses the shared MacBook presentation and original homepage capture. */
+.viona-case{background:var(--paper);color:var(--ink)}
+.client-logo-set .logo-viona img{width:165px;max-height:82px}
+.macbook-snapshot{display:block;border-radius:0;box-shadow:none;max-width:1060px}
+.macbook-snapshot>.macbook-frame{border-radius:0}
+.viona-case .macbook-screen{background:#fff}
+.macbook-snapshot:focus-visible{outline:2px solid var(--orange);outline-offset:8px}
+.project-site-link{display:inline-block;color:var(--ink);font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:5px;padding:10px 2px}
+.project-site-link:hover{color:#a92e15}
+@media(max-width:520px){.viona-case .case-discipline{font-size:14px}}

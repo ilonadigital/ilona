@@ -1,10 +1,7 @@
 ILONA DIGITAL — PAKET WEBSITE
 
-Pembaruan 29 September 2026
-Urutan portofolio: Gonegani GMV, Zerox Fishing, Akela Trading, Gonegani Video Production, Farmanina Website Development.
-- Gonegani — Fashion: GMV dari iklan Rp2,1 miliar (Januari) menjadi Rp3,2 miliar (Februari), naik sekitar 52,4%.
-- Zerox Fishing — Shopee Ads: ROAS 19,85 di bulan pertama, periode 1–29 September.
-- Tiga screenshot asli dapat diperbesar.
+Pembaruan 12 Oktober 2026
+Urutan portofolio: Gonegani GMV, Zerox Fishing, Akela Trading, Gonegani Video Production, Farmanina Website Development, Viona Water Website Development.
 
 UPLOAD KE GITHUB
 1. Ekstrak ZIP ini di komputer.
@@ -14,18 +11,15 @@ UPLOAD KE GITHUB
 5. Commit changes.
 
 index.html harus langsung berada di root repo, bukan di dalam folder tambahan.
-Upload file hasil ekstrak, bukan file ZIP. Jika browser tidak menerima folder, buka folder assets di repo lalu upload file ke subfolder yang sama.
-Tiga aset baru ada di assets/brief/: gonegani-gmv-january.png, gonegani-gmv-february.png, zerox-shopee-ads.png.
+Upload file hasil ekstrak, bukan ZIP. Jika browser tidak menerima folder, buka folder assets di repo lalu upload file ke subfolder yang sama.
+Paket menggunakan path relatif sehingga bisa dipakai di root domain maupun subfolder.
+Pertahankan pengaturan domain, CNAME dan GitHub Pages yang sudah digunakan.
 
-Paket dapat dipakai di root domain maupun subfolder karena menggunakan path relatif.
-Pertahankan pengaturan domain, CNAME, dan GitHub Pages yang sudah digunakan.
+VIONA WATER
+Screenshot homepage berada di assets/brief/viona-homepage.jpg.
+Logo asli berada di assets/clients/viona.png.
+Keduanya sudah ditambahkan ke halaman dan deretan logo klien.
 
-FARMANINA — WEBSITE DEVELOPMENT
-Portofolio kelima menampilkan rekaman website Farmanina 34 detik.
-File baru di assets/brief/: farmanina-website-preview.mp4 dan farmanina-website-poster.webp.
-Animasi website menggunakan video tanpa suara yang berulang untuk menjaga ketajaman dan ukuran file. GIF terpisah tersedia sebagai unduhan.
-
-MOCKUP MACBOOK
-Preview Farmanina kini tampil di dalam frame MacBook.
-Aset baru: assets/device/macbook-pro-frame.png.
-Pastikan file ini ikut diupload bersama index.html dan studio.css terbaru.
+FARMANINA
+Preview website menggunakan video tanpa suara yang berulang di dalam mockup MacBook.
+Pastikan assets/brief/farmanina-website-preview.mp4, assets/brief/farmanina-website-poster.webp, dan assets/device/macbook-pro-frame.png ikut diupload.
