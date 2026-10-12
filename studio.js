@@ -120,6 +120,40 @@
     });
   }
 
+  // Portfolio recordings load and play only while visible; native controls remain available.
+  document.querySelectorAll('[data-portfolio-video]').forEach(video => {
+    let inView = false;
+    let userPaused = false;
+    let automaticPause = false;
+    function pausePreview() {
+      if (!video.paused) {
+        automaticPause = true;
+        video.pause();
+      }
+    }
+    function syncPreview() {
+      if (!inView || document.hidden || reduceMotion.matches) {
+        pausePreview();
+        return;
+      }
+      if (!userPaused) video.play().catch(() => {});
+    }
+    video.addEventListener('pause', () => {
+      if (automaticPause) automaticPause = false;
+      else userPaused = true;
+    });
+    video.addEventListener('play', () => { userPaused = false; });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        syncPreview();
+      }, { threshold: 0.2 });
+      observer.observe(video);
+    }
+    document.addEventListener('visibilitychange', syncPreview);
+    reduceMotion.addEventListener('change', syncPreview);
+  });
+
   // Two equal groups make -50% -> 0 a seamless left-to-right loop.
   const marquee = document.getElementById('client-marquee');
   const marqueeTrack = marquee.querySelector('.client-track');

@@ -1,7 +1,7 @@
 ILONA DIGITAL — PAKET WEBSITE
 
 Pembaruan 29 September 2026
-Urutan portofolio: Gonegani GMV, Zerox Fishing, Akela Trading, Gonegani Video Production.
+Urutan portofolio: Gonegani GMV, Zerox Fishing, Akela Trading, Gonegani Video Production, Farmanina Website Development.
 - Gonegani — Fashion: GMV dari iklan Rp2,1 miliar (Januari) menjadi Rp3,2 miliar (Februari), naik sekitar 52,4%.
 - Zerox Fishing — Shopee Ads: ROAS 19,85 di bulan pertama, periode 1–29 September.
 - Tiga screenshot asli dapat diperbesar.
@@ -19,3 +19,13 @@ Tiga aset baru ada di assets/brief/: gonegani-gmv-january.png, gonegani-gmv-febr
 
 Paket dapat dipakai di root domain maupun subfolder karena menggunakan path relatif.
 Pertahankan pengaturan domain, CNAME, dan GitHub Pages yang sudah digunakan.
+
+FARMANINA — WEBSITE DEVELOPMENT
+Portofolio kelima menampilkan rekaman website Farmanina 34 detik.
+File baru di assets/brief/: farmanina-website-preview.mp4 dan farmanina-website-poster.webp.
+Animasi website menggunakan video tanpa suara yang berulang untuk menjaga ketajaman dan ukuran file. GIF terpisah tersedia sebagai unduhan.
+
+MOCKUP MACBOOK
+Preview Farmanina kini tampil di dalam frame MacBook.
+Aset baru: assets/device/macbook-pro-frame.png.
+Pastikan file ini ikut diupload bersama index.html dan studio.css terbaru.

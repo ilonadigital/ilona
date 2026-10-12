@@ -123,3 +123,15 @@ dialog{padding:0;border:0;color:var(--ink);background:var(--paper)}dialog::backd
 /* Keep portfolio spacing consistent after reordering cases. */
 .work-section .case-study{margin-top:0}.work-section .case-study + .case-study{margin-top:38px}
 @media(max-width:520px){.work-section .case-study + .case-study{margin-top:24px}}
+
+/* Clinic website walkthrough inside an original transparent MacBook frame. */
+.farmanina-case{background:#20221d;color:var(--paper);border:1px solid #41463a}
+.farmanina-case .case-top{border-color:#41463a}.farmanina-case .case-discipline,.farmanina-case .case-number{color:#b9beb0}
+.macbook-mockup{position:relative;isolation:isolate;width:100%;max-width:1060px;aspect-ratio:800/489;margin:12px auto 0;filter:drop-shadow(0 16px 18px #0004)}
+.macbook-mockup .macbook-screen{display:block;position:absolute;left:9.25%;top:3.68098%;width:81.5%;height:86.29857%;aspect-ratio:auto;background:#080808;object-fit:contain;border-radius:0;z-index:1}
+.macbook-frame{position:relative;display:block;width:100%;height:auto;z-index:2;pointer-events:none;user-select:none}
+.macbook-mockup .macbook-screen:fullscreen{inset:0;width:100%;height:100%;object-fit:contain;border-radius:0}
+.macbook-mockup .macbook-screen:-webkit-full-screen{inset:0;width:100%;height:100%;object-fit:contain;border-radius:0}
+.website-preview video:focus-visible{outline:2px solid var(--orange);outline-offset:5px}
+.website-preview figcaption{font-size:14px;line-height:1.5;color:#b9beb0;margin-top:23px;text-align:center}
+@media(max-width:520px){.farmanina-case .case-discipline{font-size:14px}.macbook-mockup{margin-top:5px;filter:drop-shadow(0 8px 9px #0004)}}
