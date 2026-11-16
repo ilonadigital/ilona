@@ -1,0 +1,1981 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<title>Ads Profit Analyzer Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f5f5f7; --sidebar:rgba(236,236,240,.78); --card:#ffffff; --card-2:#fbfbfd; --elev:#ffffff;
+  --fill:rgba(120,120,128,.12); --fill-2:rgba(120,120,128,.08); --fill-3:rgba(120,120,128,.05);
+  --sep:rgba(60,60,67,.13); --sep-strong:rgba(60,60,67,.22);
+  --label:#1d1d1f; --label-2:#6e6e73; --label-3:#86868b; --label-4:#aeaeb2;
+  --accent:#0071e3; --accent-ink:#0066cc; --accent-soft:rgba(0,113,227,.10);
+  --green:#34c759; --green-ink:#248a3d; --blue:#007aff; --blue-ink:#0066cc; --red:#ff3b30; --red-ink:#d70015;
+  --orange:#ff9500; --orange-ink:#c93400; --yellow:#ffcc00; --yellow-ink:#a05a00; --indigo:#5856d6; --indigo-ink:#3634a3;
+  --purple:#af52de; --gray:#8e8e93; --gray-ink:#6e6e73; --teal:#30b0c7; --pink:#ff2d55; --brown:#a2845e;
+  --shadow:0 1px 1px rgba(0,0,0,.02),0 2px 4px rgba(0,0,0,.02),0 8px 28px rgba(0,0,0,.05);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.06);
+  --r:20px; --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#000000; --sidebar:rgba(28,28,30,.72); --card:#1c1c1e; --card-2:#232325; --elev:#2c2c2e;
+    --fill:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.16); --fill-3:rgba(118,118,128,.10);
+    --sep:rgba(84,84,88,.55); --sep-strong:rgba(84,84,88,.8);
+    --label:#f5f5f7; --label-2:#a1a1a6; --label-3:#8e8e93; --label-4:#636366;
+    --accent:#0a84ff; --accent-ink:#409cff; --accent-soft:rgba(10,132,255,.18);
+    --green:#30d158; --green-ink:#30d158; --blue:#0a84ff; --blue-ink:#409cff; --red:#ff453a; --red-ink:#ff6961;
+    --orange:#ff9f0a; --orange-ink:#ffb340; --yellow:#ffd60a; --yellow-ink:#ffd426; --indigo:#5e5ce6; --indigo-ink:#7d7aff;
+    --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0;
+    --shadow:none; --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#000000; --sidebar:rgba(28,28,30,.72); --card:#1c1c1e; --card-2:#232325; --elev:#2c2c2e;
+  --fill:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.16); --fill-3:rgba(118,118,128,.10);
+  --sep:rgba(84,84,88,.55); --sep-strong:rgba(84,84,88,.8);
+  --label:#f5f5f7; --label-2:#a1a1a6; --label-3:#8e8e93; --label-4:#636366;
+  --accent:#0a84ff; --accent-ink:#409cff; --accent-soft:rgba(10,132,255,.18);
+  --green:#30d158; --green-ink:#30d158; --blue:#0a84ff; --blue-ink:#409cff; --red:#ff453a; --red-ink:#ff6961;
+  --orange:#ff9f0a; --orange-ink:#ffb340; --yellow:#ffd60a; --yellow-ink:#ffd426; --indigo:#5e5ce6; --indigo-ink:#7d7aff;
+  --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0;
+  --shadow:none; --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--label);font:15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,sans-serif;letter-spacing:-.003em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+button,input,select{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer}
+.num,b,.v{font-variant-numeric:tabular-nums}
+.ic{flex:none;display:block}
+.hidden{display:none!important}
+.pos{color:var(--green-ink)} .neg{color:var(--red-ink)} .muted{color:var(--label-2)}
+.clamp1{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ---------- shell ---------- */
+.app{display:flex;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;width:272px;flex:none;background:var(--sidebar);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-right:1px solid var(--sep);display:flex;flex-direction:column;padding:22px 12px 14px}
+.sb-app{display:flex;gap:11px;align-items:center;padding:0 8px 22px}
+.appicon{width:38px;height:38px;border-radius:10px;background:linear-gradient(145deg,#5ac8fa 0%,#007aff 55%,#5856d6 100%);display:grid;place-items:center;color:#fff;box-shadow:0 2px 6px rgba(0,122,255,.3),inset 0 1px 0 rgba(255,255,255,.25);flex:none}
+.sb-app b{display:block;font-size:14px;font-weight:650;letter-spacing:-.015em;line-height:1.25;white-space:nowrap}
+.sb-app #sbShop{display:block;font-size:12.5px;color:var(--label-2);line-height:1.3;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-sec{font-size:11.5px;font-weight:600;color:var(--label-3);padding:14px 10px 6px;letter-spacing:.01em}
+.nav{display:flex;align-items:center;gap:11px;width:100%;border:0;background:none;padding:6px 10px 6px 8px;border-radius:9px;font-size:14px;color:var(--label);text-align:left;font-weight:500;margin-bottom:1px}
+.nic{width:26px;height:26px;border-radius:7px;background:var(--c);color:#fff;display:grid;place-items:center;flex:none;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08),0 1px 1.5px rgba(0,0,0,.08)}
+.pro{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:1px 5px;border-radius:4px;background:linear-gradient(135deg,#5856d6,#007aff);color:#fff;vertical-align:2px;margin-left:3px}
+.nav:hover{background:var(--fill-2)}
+.nav[aria-current="page"]{background:var(--fill)}
+.nav .badge{margin-left:auto;font-size:12px;color:var(--label-2);font-weight:500}
+.nav .badge.alert{background:var(--red);color:#fff;border-radius:10px;padding:0 7px;font-weight:600;font-size:11.5px;line-height:18px}
+.sb-foot{margin-top:auto;padding-top:12px}
+.filecard{background:var(--card);border-radius:14px;padding:6px 4px;box-shadow:var(--shadow);border:1px solid var(--sep)}
+.fileline{display:flex;align-items:center;gap:9px;padding:7px 10px;font-size:12.5px}
+.fileline .st{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--fill);color:var(--label-3);flex:none}
+.fileline .st.ok{background:var(--green);color:#fff}
+.fileline b{display:block;font-weight:600;font-size:12.5px}
+.fileline span{display:block;color:var(--label-2);font-size:11.5px;line-height:1.3}
+.main{flex:1;min-width:0}
+#view{max-width:1120px;margin:0 auto;padding:40px 40px 80px}
+.tabbar{display:none}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:980px;padding:8px 16px;font-size:14px;font-weight:500;background:var(--fill-2);color:var(--label);white-space:nowrap;transition:background .15s, transform .1s}
+.btn:hover{background:var(--fill)}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.link{background:none;color:var(--accent-ink);padding:6px 4px}
+.btn.link:hover{text-decoration:underline}
+.btn.block{width:100%}
+.btn.sm{padding:6px 12px;font-size:13px}
+.btn.danger{color:var(--red-ink)}
+
+/* ---------- page head ---------- */
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+.ph h1{font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.028em;margin:0}
+.ph p{margin:6px 0 0;color:var(--label-2);font-size:15px}
+.ph-a{display:flex;gap:8px;flex-wrap:wrap}
+h2.sec{font-size:21px;font-weight:650;letter-spacing:-.022em;margin:36px 0 12px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+h2.sec small{font-size:14px;font-weight:400;color:var(--label-2);letter-spacing:-.01em}
+h2.sec:first-child{margin-top:0}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--sep);padding:22px}
+@media (prefers-color-scheme: light){ .card{border-color:transparent} }
+:root[data-theme="light"] .card{border-color:transparent}
+.cap{font-size:13px;color:var(--label-2)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.metric{background:var(--card);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);border:1px solid transparent}
+:root[data-theme="dark"] .metric{border-color:var(--sep)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .metric{border-color:var(--sep)} }
+.metric .l{font-size:13px;color:var(--label-2);font-weight:500}
+.metric .v{font-size:26px;font-weight:650;letter-spacing:-.03em;margin-top:4px;line-height:1.15}
+.metric .f{font-size:12.5px;color:var(--label-3);margin-top:4px}
+.metric.tap{cursor:pointer;transition:transform .12s}
+.metric.tap:hover{transform:translateY(-1px)}
+.metric.on{box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+.hero-main{padding:28px}
+.eyebrow{font-size:13px;font-weight:600;color:var(--label-2);display:flex;align-items:center;gap:7px}
+.hero-num{font-size:52px;font-weight:700;letter-spacing:-.045em;line-height:1.05;margin:10px 0 8px}
+.hero-say{font-size:17px;line-height:1.45;color:var(--label);letter-spacing:-.015em;margin:0 0 22px;max-width:520px}
+.hero-say em{font-style:normal;color:var(--label-2)}
+.mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+
+/* gauge */
+.gauge{margin-top:22px}
+.g-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;color:var(--label-2);margin-bottom:10px}
+.g-head b{color:var(--label);font-weight:600;font-size:15px;margin-left:3px}
+.g-head .pos,.g-head .neg{font-weight:500}
+.g-track{position:relative;height:8px;border-radius:4px;background:var(--fill)}
+.g-fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--c)}
+.g-mark{position:absolute;top:-5px;bottom:-5px;width:3px;margin-left:-1.5px;background:var(--label);border-radius:2px;box-shadow:0 0 0 2px var(--card)}
+.g-mark.sc{background:var(--green)}
+.g-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:12.5px;color:var(--label-2)}
+.g-legend span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.g-legend i{width:3px;height:12px;border-radius:2px;background:var(--label);display:inline-block}
+.g-legend i.sc{background:var(--green)}
+
+/* breakdown */
+.bd{margin:0;padding:0;list-style:none}
+.bd li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;font-size:14px;border-top:1px solid var(--sep)}
+.bd li:first-child{border-top:0}
+.bd li span{color:var(--label-2)}
+.bd li.tot{font-weight:650}
+.bd li.tot span{color:var(--label)}
+.bd b{font-weight:600}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:980px;font-size:12.5px;font-weight:600;white-space:nowrap;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--ci);line-height:1.35}
+.pill .pd{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.c-green{--c:var(--green);--ci:var(--green-ink)} .c-blue{--c:var(--blue);--ci:var(--blue-ink)} .c-red{--c:var(--red);--ci:var(--red-ink)}
+.c-orange{--c:var(--orange);--ci:var(--orange-ink)} .c-yellow{--c:var(--yellow);--ci:var(--yellow-ink)} .c-indigo{--c:var(--indigo);--ci:var(--indigo-ink)}
+.c-gray{--c:var(--gray);--ci:var(--gray-ink)} .c-purple{--c:var(--purple);--ci:var(--purple)}
+
+/* grouped list */
+.list{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;border:1px solid transparent}
+:root[data-theme="dark"] .list{border-color:var(--sep)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .list{border-color:var(--sep)} }
+.row{display:flex;align-items:center;gap:14px;padding:13px 18px;position:relative;min-height:60px;width:100%;border:0;background:none;text-align:left}
+.row + .row::before{content:"";position:absolute;top:0;left:18px;right:0;height:1px;background:var(--sep)}
+.row.ind + .row.ind::before{left:66px}
+.row.tap{cursor:pointer;transition:background .12s}
+.row.tap:hover{background:var(--fill-3)}
+.row.tap:active{background:var(--fill-2)}
+.r-ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--c);flex:none}
+.r-main{flex:1;min-width:0}
+.r-t{font-size:15px;font-weight:500;letter-spacing:-.012em}
+.r-s{font-size:13px;color:var(--label-2);margin-top:1px}
+.r-cols{display:flex;gap:8px;flex:none}
+.r-col{width:100px;text-align:right;flex:none}
+.r-col span{display:block;font-size:12px;color:var(--label-3);margin-bottom:2px;white-space:nowrap}
+.r-col b{font-size:14.5px;font-weight:500;white-space:nowrap}
+.r-col.strong{width:118px}
+.r-col.strong b{font-weight:650;font-size:15px}
+.r-end{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none;text-align:right;min-width:128px}
+.show-s{display:none}
+.r-end b{font-size:15px;font-weight:600}
+.chev{color:var(--label-4);flex:none}
+.rank{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;background:var(--c);flex:none}
+.rank.c-yellow{color:#3d2a00}
+.more{display:flex;justify-content:center;padding:12px;border-top:1px solid var(--sep)}
+.empty{padding:40px 20px;text-align:center;color:var(--label-2)}
+.foot{font-size:13px;color:var(--label-2);padding:8px 18px 0;line-height:1.45}
+
+/* toolbar */
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--fill-2);border-radius:10px;padding:2px;gap:0;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{border:0;background:none;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;white-space:nowrap;color:var(--label);transition:background .15s}
+.seg button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04);font-weight:600}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{background:#636366}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .seg button[aria-pressed="true"]{background:#636366} }
+.seg button .n{color:var(--label-3);margin-left:5px;font-weight:500}
+.search{display:flex;align-items:center;gap:6px;background:var(--fill-2);border-radius:10px;padding:0 10px;height:34px;color:var(--label-3);min-width:0;flex:0 1 240px}
+.search input{border:0;background:none;outline:none;width:100%;min-width:0;color:var(--label);font-size:14px}
+.select{appearance:none;-webkit-appearance:none;border:0;background:var(--fill-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238e8e93' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 11px center;border-radius:10px;height:34px;padding:0 30px 0 12px;font-size:13px;font-weight:500}
+.spacer{flex:1}
+.switch{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--label);cursor:pointer;user-select:none}
+.switch input{appearance:none;-webkit-appearance:none;width:42px;height:26px;border-radius:13px;background:var(--fill);position:relative;transition:background .2s;margin:0;cursor:pointer}
+.switch input::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:transform .2s}
+.switch input:checked{background:var(--green)}
+.switch input:checked::after{transform:translateX(16px)}
+
+/* ad cards */
+.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.adc{cursor:pointer;transition:transform .15s, box-shadow .15s;display:flex;flex-direction:column;padding:24px}
+.adc:hover{transform:translateY(-2px);box-shadow:var(--shadow),0 12px 32px rgba(0,0,0,.06)}
+.adc-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.adc-top .cap{font-size:13px}
+.adc-top .pills{display:flex;gap:6px;flex:none}
+.adc-top .pill .ic{margin-left:-1px}
+.adc h3{font-size:17px;font-weight:600;letter-spacing:-.012em;margin:0 0 22px;line-height:1.4;min-height:48px}
+.adc .lbl{font-size:13px;color:var(--label-2);margin-bottom:6px}
+.adc .big{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid var(--sep)}
+.stats span{display:block;font-size:12px;color:var(--label-3);margin-bottom:4px}
+.stats b{font-size:14px;font-weight:600}
+.advice{display:flex;gap:10px;align-items:flex-start;margin-top:20px;padding:13px 14px;border-radius:12px;background:var(--fill-3);font-size:13.5px;line-height:1.5;color:var(--label)}
+.advice .ic{color:var(--ci,var(--accent));margin-top:2px}
+.adc .advice{margin-top:auto}
+.adc .stats{margin-bottom:20px}
+
+/* storage bar */
+.stor{display:flex;gap:2px;height:14px;border-radius:7px;overflow:hidden;background:var(--fill)}
+.stor div{background:var(--c);min-width:3px}
+.leg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px 24px;margin-top:16px}
+.leg div{display:flex;align-items:center;gap:9px;font-size:13.5px;min-width:0}
+.leg i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.leg span{color:var(--label-2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leg b{font-weight:600}
+
+/* callout */
+.callout{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--orange) 12%,var(--card));margin-bottom:24px;font-size:13.5px;line-height:1.45}
+.callout .ic{color:var(--orange-ink);margin-top:1px}
+.callout.info{background:var(--accent-soft)}
+.callout.info .ic{color:var(--accent-ink)}
+
+/* progress */
+.prog{height:6px;border-radius:3px;background:var(--fill);overflow:hidden;margin-top:8px}
+.prog div{height:100%;background:var(--green);border-radius:3px}
+
+/* input rows */
+.ins{display:flex;gap:8px;flex:none}
+.fin{display:inline-flex;align-items:center;background:var(--fill-2);border-radius:9px;height:34px;padding:0 10px;gap:4px;transition:box-shadow .15s}
+.fin:focus-within{box-shadow:0 0 0 3px var(--accent-soft),0 0 0 1px var(--accent)}
+.fin input{border:0;background:none;outline:none;width:64px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}
+.fin.w input{width:84px}
+.fin em{font-style:normal;color:var(--label-3);font-size:12.5px}
+.fin.set{background:var(--accent-soft)}
+.inlbl{display:block;font-size:11px;color:var(--label-3);margin-bottom:3px;text-align:right}
+
+/* form (settings / sheets) */
+.form{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;border:1px solid transparent}
+:root[data-theme="dark"] .form{border-color:var(--sep)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .form{border-color:var(--sep)} }
+.frow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 12px 10px 18px;min-height:52px;position:relative}
+.frow + .frow::before{content:"";position:absolute;top:0;left:18px;right:0;height:1px;background:var(--sep)}
+.frow > span:first-child{font-size:15px}
+.frow .fin{background:transparent;padding:0 6px}
+.frow .fin input{width:110px;color:var(--label-2)}
+.frow .fin:focus-within input{color:var(--label)}
+.frow select{border:0;background:none;color:var(--label-2);font-size:15px;text-align:right;outline:none;padding:6px}
+.frow.total{font-weight:600}
+.ftitle{font-size:13px;color:var(--label-2);padding:0 18px 7px;font-weight:500}
+.fnote{font-size:12.5px;color:var(--label-2);padding:8px 18px 0;line-height:1.45}
+.fgroup + .fgroup{margin-top:28px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px;align-items:start}
+
+/* kv list in sheet */
+.kv{display:flex;justify-content:space-between;gap:14px;padding:11px 18px;font-size:14.5px;position:relative}
+.kv + .kv::before{content:"";position:absolute;top:0;left:18px;right:0;height:1px;background:var(--sep)}
+.kv span{color:var(--label-2)}
+.kv b{font-weight:500;text-align:right}
+
+/* sheet */
+.sheet-wrap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.28);opacity:0;transition:opacity .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.sheet{position:relative;width:min(640px,calc(100% - 48px));max-height:calc(100vh - 64px);background:var(--bg);border-radius:22px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;opacity:0;transform:scale(.97) translateY(10px);transition:opacity .22s, transform .28s cubic-bezier(.2,.9,.3,1.05)}
+.sheet-wrap.on{pointer-events:auto}
+.sheet-wrap.on .scrim{opacity:1}
+.sheet-wrap.on .sheet{opacity:1;transform:none}
+.sheet-h{display:flex;align-items:flex-start;gap:12px;padding:22px 22px 14px;border-bottom:1px solid transparent}
+.sheet-h h3{font-size:20px;font-weight:650;letter-spacing:-.022em;margin:0;line-height:1.3;flex:1}
+.sheet-h .cap{margin-top:4px}
+.xbtn{width:30px;height:30px;border-radius:50%;border:0;background:var(--fill);color:var(--label-2);display:grid;place-items:center;flex:none}
+.sheet-b{overflow-y:auto;padding:4px 22px 26px;overscroll-behavior:contain}
+.sheet-b .fgroup{margin-top:22px}
+.grabber{display:none}
+.bigstat{text-align:center;padding:10px 0 4px}
+.bigstat .v{font-size:40px;font-weight:700;letter-spacing:-.04em;line-height:1.1}
+.bigstat .cap{margin-top:4px}
+.drops{display:grid;gap:12px}
+.drop{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--card);border-radius:16px;border:1.5px dashed var(--sep-strong);cursor:pointer;transition:.15s;text-align:left;width:100%}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop.ok{border-style:solid;border-color:transparent;box-shadow:var(--shadow)}
+.drop .di{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--fill-2);color:var(--accent);flex:none}
+.drop.ok .di{background:var(--green);color:#fff}
+.drop b{display:block;font-weight:600;font-size:15px}
+.drop small{display:block;color:var(--label-2);font-size:12.5px;margin-top:1px}
+
+/* welcome */
+.welcome{max-width:560px;margin:7vh auto 0;text-align:center}
+.welcome .appicon{width:84px;height:84px;border-radius:20px;margin:0 auto 22px}
+.welcome h1{font-size:40px;font-weight:700;letter-spacing:-.035em;line-height:1.08;margin:0}
+.welcome p.lead{font-size:19px;color:var(--label-2);margin:12px auto 34px;line-height:1.45;letter-spacing:-.015em}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:34px;text-align:left}
+.feat div{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--label-2);line-height:1.4}
+.feat .fi{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--c);flex:none}
+.feat b{display:block;color:var(--label);font-weight:600;font-size:14px}
+
+/* onboarding */
+.onb{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:32px 20px;overflow-y:auto}
+.onb-card{width:100%;max-width:540px;text-align:center;animation:fadeUp .45s cubic-bezier(.2,.8,.3,1)}
+.onb .appicon{width:96px;height:96px;border-radius:22px;margin:0 auto 26px;box-shadow:0 10px 30px rgba(0,122,255,.28),inset 0 1px 0 rgba(255,255,255,.25)}
+.onb h1{font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin:0}
+.onb h1 .pro{font-size:13px;vertical-align:12px;padding:3px 8px;border-radius:6px}
+.onb .lead{font-size:18px;color:var(--label-2);line-height:1.5;margin:14px auto 34px;max-width:440px}
+.onb .ico-lg{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;margin:0 auto 22px;color:#fff;background:var(--c)}
+.onb .feat{margin:0 0 36px}
+.big-input{display:block;width:100%;height:56px;border-radius:14px;border:0;background:var(--card);box-shadow:var(--shadow),inset 0 0 0 1px var(--sep);font-size:20px;font-weight:500;padding:0 20px;text-align:center;outline:none;transition:box-shadow .15s}
+.big-input:focus{box-shadow:0 0 0 4px var(--accent-soft),inset 0 0 0 1.5px var(--accent)}
+.onb-actions{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px}
+.btn.lg{padding:14px 30px;font-size:16px;font-weight:600;min-width:240px}
+.btn:disabled{opacity:.4;pointer-events:none}
+.dots{display:flex;gap:7px;justify-content:center;margin-top:34px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--label-4);opacity:.5}
+.dots i.on{background:var(--label);width:20px;border-radius:4px;opacity:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (max-width:560px){ .onb h1{font-size:30px} .onb .lead{font-size:16px} }
+
+#tip{position:fixed;z-index:80;pointer-events:none;background:var(--elev);color:var(--label);font-size:12.5px;padding:8px 11px;border-radius:10px;max-width:280px;opacity:0;transition:opacity .1s;white-space:pre-line;line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,.16),0 0 0 .5px var(--sep)}
+#toast{position:fixed;left:50%;top:18px;transform:translateX(-50%) translateY(-12px);background:var(--elev);color:var(--label);padding:11px 18px;border-radius:14px;font-size:14px;font-weight:500;opacity:0;transition:.25s;z-index:90;max-width:calc(100% - 32px);box-shadow:0 10px 36px rgba(0,0,0,.16),0 0 0 .5px var(--sep);display:flex;gap:9px;align-items:center}
+#toast.on{opacity:1;transform:translateX(-50%)}
+
+/* ---------- target ROAS / stock flags / deltas ---------- */
+.tgt{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:11px 14px;border-radius:12px;background:var(--accent-soft)}
+.tgt span{font-size:13px;color:var(--label-2);display:flex;align-items:center;gap:7px}
+.tgt span .ic{color:var(--accent-ink)}
+.tgt b{font-size:17px;font-weight:700;color:var(--accent-ink);letter-spacing:-.01em}
+.r-end b.tgt-n{font-size:18px;font-weight:700;color:var(--accent-ink)}
+.flag{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:550;padding:8px 12px;border-radius:10px;margin:-4px 0 16px;background:color-mix(in srgb,var(--c) 13%,transparent);color:var(--ci);line-height:1.35}
+.adtag{display:inline-block;font-size:11px;font-weight:600;color:var(--orange-ink);background:color-mix(in srgb,var(--orange) 14%,transparent);padding:0 6px;border-radius:5px;margin-right:6px;line-height:17px;vertical-align:1px}
+.dlt{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:600;padding:1px 7px;border-radius:6px;white-space:nowrap;line-height:18px}
+.dlt.good{color:var(--green-ink);background:color-mix(in srgb,var(--green) 13%,transparent)}
+.dlt.bad{color:var(--red-ink);background:color-mix(in srgb,var(--red) 12%,transparent)}
+.dlt.flat{color:var(--label-2);background:var(--fill-2)}
+.vsl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--label-2);margin:-2px 0 14px}
+.metric .vs{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.metric .f .dlt{margin-right:2px}
+.chg{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chg .pill{font-size:11.5px;padding:1px 8px 1px 7px}
+.chg .arr{color:var(--label-3)}
+h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* bar chart */
+.bch{margin-top:18px}
+.bch-plot{position:relative;height:150px;display:flex;gap:6px}
+.bch-zero{position:absolute;left:0;right:0;height:1px;background:var(--sep-strong)}
+.bch-col{flex:1;position:relative;min-width:0;border-radius:6px;transition:background .12s}
+.bch-col:hover{background:var(--fill-3)}
+.bch-bar{position:absolute;left:50%;width:min(28px,62%);transform:translateX(-50%);background:var(--c);border-radius:4px 4px 0 0}
+.bch-bar.neg{border-radius:0 0 4px 4px}
+.bch-col.dim .bch-bar{opacity:.32}
+.bch-tick{position:absolute;left:50%;width:min(42px,86%);transform:translateX(-50%);height:3px;margin-top:-1.5px;background:var(--label);border-radius:2px;box-shadow:0 0 0 2px var(--card)}
+.bch-col.dim .bch-tick{opacity:.45}
+.bch-val{position:absolute;left:-20px;right:-20px;text-align:center;font-size:11.5px;font-weight:600;color:var(--label);white-space:nowrap;pointer-events:none}
+.bch-x{display:flex;gap:6px;margin-top:8px}
+.bch-x span{flex:1;text-align:center;font-size:11.5px;color:var(--label-3);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bch-x span.on{color:var(--label);font-weight:600}
+.bch-leg{display:flex;gap:18px;margin-top:12px;font-size:12.5px;color:var(--label-2)}
+.bch-leg span{display:inline-flex;align-items:center;gap:7px}
+.bch-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--blue)}
+.bch-leg i.tk{width:14px;height:3px;border-radius:2px;background:var(--label)}
+
+/* report preview + print */
+.rpt{position:fixed;inset:0;z-index:75;background:var(--bg);overflow-y:auto}
+.rpt-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--sidebar);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid var(--sep)}
+.rpt-bar b{flex:1;text-align:center;font-size:15px;font-weight:600}
+.rpt-body{padding:28px 16px 60px}
+.rpt-note{max-width:820px;margin:0 auto 14px;font-size:13px;color:var(--label-2);text-align:center}
+.paper{
+  --label:#1d1d1f;--label-2:#6e6e73;--label-3:#86868b;--sep:rgba(60,60,67,.16);--fill:rgba(120,120,128,.12);--fill-2:rgba(120,120,128,.08);--card:#fff;
+  --green:#34c759;--green-ink:#248a3d;--red:#ff3b30;--red-ink:#d70015;--orange:#ff9500;--orange-ink:#c93400;--yellow:#ffcc00;--yellow-ink:#a05a00;
+  --blue:#007aff;--blue-ink:#0066cc;--indigo:#5856d6;--indigo-ink:#3634a3;--gray:#8e8e93;--gray-ink:#6e6e73;--accent-ink:#0066cc;
+  color-scheme:light;width:min(820px,100%);margin:0 auto;background:#fff;color:var(--label);padding:44px 48px;border-radius:6px;box-shadow:0 6px 30px rgba(0,0,0,.12);font-size:12px;line-height:1.45}
+.rp-h{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:16px;border-bottom:2px solid var(--label);margin-bottom:20px}
+.rp-k{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--label-2)}
+.paper h1{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px;line-height:1.15}
+.rp-s{font-size:12px;color:var(--label-2)}
+.rp-brand{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--label-2);white-space:nowrap}
+.rp-brand .appicon{width:22px;height:22px;border-radius:6px;box-shadow:none}
+.rp-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.rp-kpi{border:1px solid var(--sep);border-radius:10px;padding:10px 12px}
+.rp-kpi > span{display:block;font-size:10.5px;color:var(--label-2);font-weight:500}
+.rp-kpi b{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.rp-kpi em{display:block;font-style:normal;font-size:10.5px;color:var(--label-3);margin-top:1px}
+.rp-kpi i{display:block;font-style:normal;margin-top:6px}
+.rp-kpi .dlt{font-size:10.5px;padding:0 6px}
+.rp-say{font-size:13px;margin:0 0 4px}
+.paper h2{font-size:14px;font-weight:700;margin:24px 0 8px;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.paper h2 small{font-size:11px;font-weight:500;color:var(--label-2)}
+.rp-scroll{overflow-x:auto}
+.rp-tbl{width:100%;border-collapse:collapse;font-size:11px}
+.rp-tbl th{text-align:right;font-weight:600;color:var(--label-2);font-size:10px;padding:6px;border-bottom:1px solid var(--label);white-space:nowrap}
+.rp-tbl td{text-align:right;padding:7px 6px;border-bottom:1px solid var(--sep);vertical-align:top;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rp-tbl th:first-child,.rp-tbl td:first-child{text-align:left;white-space:normal;padding-left:0}
+.rp-tbl td:last-child,.rp-tbl th:last-child{padding-right:0}
+.rp-tbl td small{display:block;color:var(--label-3);font-size:10px}
+.rp-tbl tr.tot td{font-weight:700;border-bottom:0;border-top:1px solid var(--label)}
+.rp-tbl .pill{font-size:10px;padding:1px 7px 1px 6px}
+.rp-flag{font-size:9.5px;color:var(--orange-ink);margin-top:3px;font-weight:600}
+.rp-flag.push{color:var(--blue-ink)}
+.rp-todo{margin:0;padding-left:18px}
+.rp-todo li{margin:4px 0}
+.rp-todo li span{color:var(--label-2)}
+.rp-foot{margin-top:26px;padding-top:12px;border-top:1px solid var(--sep);font-size:10px;color:var(--label-3);line-height:1.55}
+@media (max-width:640px){ .paper{padding:24px 18px} .rp-kpis{grid-template-columns:repeat(2,minmax(0,1fr))} .rp-h{flex-direction:column} }
+@media print{
+  @page{size:A4;margin:12mm}
+  html,body{background:#fff!important;height:auto!important;overflow:visible!important}
+  body > :not(#rpt){display:none!important}
+  #rpt{position:static!important;display:block!important;background:#fff!important;overflow:visible!important}
+  .rpt-bar,.rpt-note{display:none!important}
+  .rpt-body{padding:0!important}
+  .paper{box-shadow:none!important;width:auto!important;padding:0!important;margin:0!important;border-radius:0!important}
+  .rp-scroll{overflow:visible!important}
+  .rp-tbl tr,.rp-kpi,.rp-foot{break-inside:avoid}
+  .rp-tbl td{padding:5px 6px}
+  .paper h2{margin:18px 0 6px}
+  .rp-foot{margin-top:16px}
+  .paper h2{break-after:avoid}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){ .r-cols{display:none} .show-s{display:inline} }
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .sidebar{display:none}
+  #view{padding:22px 16px calc(96px + env(safe-area-inset-bottom))}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--sidebar);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-top:1px solid var(--sep);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:500;color:var(--label-3);padding:4px 0;position:relative}
+  .tabbar button[aria-current="page"]{color:var(--accent)}
+  .tabbar .tb{position:absolute;top:0;left:calc(50% + 6px);background:var(--red);color:#fff;font-size:10.5px;font-weight:600;border-radius:9px;padding:0 5px;line-height:16px;min-width:16px;text-align:center}
+  .ph h1{font-size:30px}
+  .hero-num{font-size:40px}
+  .hero-main{padding:22px}
+  .sheet-wrap{align-items:flex-end}
+  .sheet{width:100%;max-height:92vh;border-radius:16px 16px 0 0;transform:translateY(100%)}
+  .grabber{display:block;width:36px;height:5px;border-radius:3px;background:var(--fill);margin:8px auto 0}
+  .sheet-h{padding:12px 18px 10px}
+  .sheet-b{padding:4px 16px calc(28px + env(safe-area-inset-bottom))}
+  .search{flex:1 1 100%}
+  .welcome h1{font-size:32px}
+  .welcome p.lead{font-size:17px}
+}
+@media (max-width:560px){
+  .g4,.g3,.mini{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .g2{grid-template-columns:1fr}
+  .metric{padding:14px}
+  .metric .v{font-size:21px}
+  .ads{grid-template-columns:1fr}
+  .leg{grid-template-columns:1fr}
+  .feat{grid-template-columns:1fr}
+  .row{padding:12px 16px;gap:12px}
+  .row + .row::before{left:16px}
+  .ins{flex-direction:column;gap:6px}
+  .fin input{width:58px}
+  .fin.w input{width:70px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:10px}
+  .hide-s{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-app">
+      <div class="appicon" id="sbIcon"></div>
+      <div style="min-width:0"><b>Ads Profit Analyzer<span class="pro">PRO</span></b><span id="sbShop">Analyzer</span></div>
+    </div>
+    <div class="sb-sec">Analisis</div>
+    <div id="navA"></div>
+    <div class="sb-sec">Data</div>
+    <div id="navB"></div>
+    <div class="sb-foot">
+      <div class="filecard" id="fileCard"></div>
+      <button class="btn primary block" style="margin-top:10px" data-act="import">Impor laporan</button>
+    </div>
+  </aside>
+  <div class="main"><main id="view"></main></div>
+  <nav class="tabbar" id="tabbar"></nav>
+</div>
+
+<div class="sheet-wrap" id="sheetWrap" aria-hidden="true">
+  <div class="scrim" data-act="closeSheet"></div>
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="grabber"></div>
+    <div class="sheet-h" id="sheetHead"></div>
+    <div class="sheet-b" id="sheetBody"></div>
+  </div>
+</div>
+
+<div class="onb hidden" id="onb"><div class="onb-card" id="onbBody"></div></div>
+
+<div class="rpt hidden" id="rpt" role="dialog" aria-modal="true" aria-label="Pratinjau laporan">
+  <div class="rpt-bar"><button class="btn" data-act="closeReport">Tutup</button><b>Pratinjau laporan</b><button class="btn primary" data-act="printReport">Simpan PDF</button></div>
+  <div class="rpt-body"><p class="rpt-note">Klik <b>Simpan PDF</b>, lalu pilih <b>Simpan sebagai PDF</b> di jendela cetak.</p><div id="rptBody"></div></div>
+</div>
+
+<input type="file" id="fAds" accept=".csv,.xlsx,.xls" hidden>
+<input type="file" id="fProd" accept=".xlsx,.xls,.csv" hidden>
+<input type="file" id="fStock" accept=".csv,.xlsx,.xls" hidden>
+<input type="file" id="fBackup" accept=".json" hidden>
+<div id="tip"></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ============================== state ============================== */
+const DEFAULTS = {
+  ppn:0.11, buffer:0.30, minSpend:50000, hppDefault:0.50, ctrMin:0.01, cvrMin:0.02, basis:'Pesanan Dibuat',
+  komisi:0.08, layanan:0.04, affiliate:0, voucher:0,
+  shopName:'', onboarded:false, periodOverride:'', leadTime:14, safety:7, cover:30, overstock:90, growth:0, refDate:''
+};
+const LS = {
+  get(k,d){ try{ const v = localStorage.getItem('apa_'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('apa_'+k, JSON.stringify(v)); }catch(e){ if (!LS.warned){ LS.warned = true; toast('Browser ini tidak mengizinkan penyimpanan — data hilang saat halaman ditutup', false); } } },
+  del(k){ try{ localStorage.removeItem('apa_'+k); }catch(e){} }
+};
+let S = Object.assign({}, DEFAULTS, LS.get('settings', {}));
+let HPP = LS.get('hpp', {});
+let STOCK = LS.get('stock', {});
+let RAW = LS.get('raw', {ads:null, prod:null, adsFile:'', prodFile:''});
+let HIST = LS.get('hist', {});
+let R = null, VIEW = 'ringkasan', SHEET = null, DIRTY = false;
+const UI = { adF:'ALL', adSort:'profit', prF:'ALL', prQ:'', prSort:'profit', stTab:'pri', stF:'ALL', stQ:'', stSort:'urg', hppQ:'', hppOnly:false, isQ:'', isOnly:false, hA:'', hB:'', lim:{} };
+
+/* ============================== helpers ============================== */
+const $ = s => document.querySelector(s);
+const T = v => (v == null ? '' : String(v)).trim();
+const esc = s => T(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const code = v => typeof v === 'number' ? (Number.isInteger(v) ? String(v) : String(Math.round(v))) : T(v);
+function num(v){
+  if (typeof v === 'number') return isFinite(v) ? v : 0;
+  let s = T(v).replace(/rp/ig,'').replace(/\s/g,'');
+  if (!s || s === '-') return 0;
+  const neg = s[0] === '-'; if (neg) s = s.slice(1);
+  const pct = s.endsWith('%'); if (pct) s = s.slice(0,-1);
+  let n;
+  if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) n = parseFloat(s.replace(/\./g,'').replace(',','.'));
+  else if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) n = parseFloat(s.replace(/,/g,''));
+  else if (/^\d+,\d+$/.test(s)) n = parseFloat(s.replace(',','.'));
+  else n = parseFloat(s.replace(/[^\d.]/g,''));
+  if (!isFinite(n)) n = 0;
+  if (pct) n /= 100;
+  return neg ? -n : n;
+}
+const isNum = v => v !== '' && v != null && isFinite(v);
+const ceil = x => Math.ceil(x - 1e-9);
+const nf0 = new Intl.NumberFormat('id-ID',{maximumFractionDigits:0});
+const nf1 = new Intl.NumberFormat('id-ID',{minimumFractionDigits:1,maximumFractionDigits:1});
+const nf2 = new Intl.NumberFormat('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fRp = n => (n < 0 ? '−Rp ' : 'Rp ') + nf0.format(Math.abs(Math.round(n)));
+function fRpS(n){ const a = Math.abs(n), s = n < 0 ? '−' : '';
+  if (a >= 1e9) return s+'Rp '+nf2.format(a/1e9)+' M';
+  if (a >= 1e6) return s+'Rp '+nf1.format(a/1e6)+' jt';
+  if (a >= 1e3) return s+'Rp '+nf0.format(a/1e3)+' rb';
+  return s+'Rp '+nf0.format(a); }
+const fPct = (f,d=1) => isFinite(f) ? (d === 2 ? nf2 : d ? nf1 : nf0).format(f*100) + '%' : '—';
+const fX = n => n > 0 && isFinite(n) ? nf2.format(n) + '×' : '—';
+const fN = n => n == null ? '—' : nf0.format(n);
+const fD = n => n != null && isFinite(n) ? nf1.format(n) : '—';
+const fT = n => n > 0 && isFinite(n) ? nf1.format(n) + '×' : '—';
+const ceil1 = x => Math.ceil(x * 10 - 1e-9) / 10;
+const MO = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const fDate = d => d ? `${d.getDate()} ${MO[d.getMonth()]} ${d.getFullYear()}` : '—';
+function fPeriod(p){
+  const m = p && p.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/); if (!m) return p || '';
+  return m[2] === m[5] && m[3] === m[6] ? `${+m[1]}–${+m[4]} ${MO[m[2]-1]} ${m[3]}` : `${+m[1]} ${MO[m[2]-1]} ${m[3]} – ${+m[4]} ${MO[m[5]-1]} ${m[6]}`;
+}
+const sum = (a,f) => a.reduce((s,x) => s + (f(x)||0), 0);
+const sgn = n => n >= 0 ? 'pos' : 'neg';
+const plus = n => (n > 0 ? '+' : '') ;
+const countBy = (arr,k) => arr.reduce((m,x) => (m[x[k]] = (m[x[k]] || 0) + 1, m), {});
+function toast(msg, ok = true){ const t = $('#toast'); t.innerHTML = `<span style="color:var(--${ok ? 'green' : 'red'}-ink)">${ic(ok ? 'check' : 'warn', 18)}</span>${esc(msg)}`; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('on'), 3400); }
+
+/* ============================== icons ============================== */
+const ICONS = {
+  grid:'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+  mega:'<path d="M3.5 10.5v3a1 1 0 0 0 1 1H7l5 4v-13l-5 4H4.5a1 1 0 0 0-1 1z"/><path d="M15.5 9a3.5 3.5 0 0 1 0 6"/><path d="M18 6.5a7 7 0 0 1 0 11"/>',
+  bag:'<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>',
+  box:'<path d="M20.5 7.5 12 3 3.5 7.5 12 12l8.5-4.5z"/><path d="M3.5 7.5v9L12 21l8.5-4.5v-9"/><path d="M12 12v9"/>',
+  tag:'<path d="M20 12.5 12.5 20a1.5 1.5 0 0 1-2.1 0L3.6 13.2a1.5 1.5 0 0 1-.4-1V4.7a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1 .4L20 10.4a1.5 1.5 0 0 1 0 2.1z"/><circle cx="8" cy="8" r="1.4"/>',
+  stack:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+  slider:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  imp:'<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 20h14"/>',
+  dl:'<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 20h14"/>',
+  up:'<path d="M12 19V5M6 11l6-6 6 6"/>',
+  stop:'<rect x="7" y="7" width="10" height="10" rx="2"/>',
+  chev:'<path d="M9.5 6l6 6-6 6"/>',
+  search:'<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+  x:'<path d="M7 7l10 10M17 7 7 17"/>',
+  more:'<circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/>',
+  warn:'<path d="M12 4 21 19.5H3L12 4z"/><path d="M12 10v4.5M12 17.2v.1"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  doc:'<path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3z"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/>',
+  save:'<path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/>',
+  undo:'<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
+  arrow:'<path d="M7 17 17 7M9 7h8v8"/>',
+  pie:'<path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5H12z"/><path d="M15 3.8a8.5 8.5 0 0 1 5.2 5.2H15z"/>',
+  megaphone:'<path d="M3.5 9.8v4.4a1 1 0 0 0 1 1H7l8 4.3V4.5L7 8.8H4.5a1 1 0 0 0-1 1z"/><path d="M18.2 9.2a3.8 3.8 0 0 1 0 5.6"/><path d="M7.5 15.3 8.8 20h2.4l-1-4.2"/>',
+  restock:'<path d="M19.5 10.5a7.6 7.6 0 0 0-13.6-3.6L4.5 8.6"/><path d="M4.5 4.5v4.1h4.1"/><path d="M4.5 13.5a7.6 7.6 0 0 0 13.6 3.6l1.4-1.7"/><path d="M19.5 19.5v-4.1h-4.1"/>',
+  archive:'<rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v9.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V9"/><path d="M10 13h4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  trend:'<path d="M3.5 17 9.5 11l4 4 7-7.5"/><path d="M15 7.5h5.5V13"/>',
+  octagon:'<path d="M8.3 3h7.4L21 8.3v7.4L15.7 21H8.3L3 15.7V8.3z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/>',
+  sparkles:'<path d="M10.5 3.5 12.2 8l4.5 1.7-4.5 1.7-1.7 4.6-1.7-4.6L4.3 9.7 8.8 8z"/><path d="M18 14l.9 2.3 2.3.9-2.3.9L18 20.4l-.9-2.3-2.3-.9 2.3-.9z"/>',
+  store:'<path d="M4.5 10v10h15V10"/><path d="M3 4h18l-1.3 4.4a2.6 2.6 0 0 1-5 0 2.6 2.6 0 0 1-5 0 2.6 2.6 0 0 1-5 0z" transform="translate(0 .5)"/><path d="M10 20v-5h4v5"/>',
+  calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  ellipsis:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="12" r=".9" fill="currentColor"/><circle cx="12" cy="12" r=".9" fill="currentColor"/><circle cx="16" cy="12" r=".9" fill="currentColor"/>',
+  chart:'<path d="M4 20h16"/><path d="M7.5 16v-5M12 16V6.5M16.5 16v-8"/>',
+  target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
+  coin:'<circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.8-2.8 2.1 0 2.9 5.8 1.5 5.8 4.3 0 1.3-1.3 2.1-3 2.1-1.3 0-2.4-.5-2.9-1.5M12 6v1.8M12 16.3V18"/>'
+};
+const APPICON = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="#fff"><rect x="3.8" y="12.5" width="4" height="7.5" rx="1.3" opacity=".72"/><rect x="10" y="8.5" width="4" height="11.5" rx="1.3" opacity=".86"/><rect x="16.2" y="4" width="4" height="16" rx="1.3"/></svg>`;
+const ic = (n, s = 20, w = 1.8) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ''}</svg>`;
+
+/* ============================== status ============================== */
+const ST = {
+  'SCALE':{l:'Scale',c:'green',d:'ROAS ≥ BEP × (1 + buffer). Untung nyata dengan ruang aman.'},
+  'PERTAHANKAN':{l:'Pertahankan',c:'blue',d:'ROAS di atas BEP tapi belum masuk zona aman. Untung tipis.'},
+  'RUGI':{l:'Stop',c:'red',d:'ROAS di bawah BEP ROAS — setiap rupiah iklan menggerus profit.'},
+  'DATA KURANG':{l:'Data kurang',c:'gray',d:'Biaya iklan di bawah minimum — belum cukup data untuk memutuskan.'},
+  'BELUM DIIKLANKAN':{l:'Belum diiklankan',c:'indigo',d:'Produk laku tapi tidak ada biaya iklan.'},
+  'TIDAK ADA PENJUALAN':{l:'Tidak ada penjualan',c:'gray',d:'Tidak ada penjualan di periode ini.'},
+  'HABIS':{l:'Habis',c:'red',d:'Stok efektif 0 padahal ada permintaan.'},
+  'KRITIS':{l:'Kritis',c:'orange',d:'Sisa hari stok < lead time — habis sebelum restock tiba.'},
+  'SEGERA RESTOCK':{l:'Segera restock',c:'yellow',d:'Stok efektif di bawah reorder point.'},
+  'AMAN':{l:'Aman',c:'green',d:'Stok cukup.'},
+  'OVERSTOCK':{l:'Overstock',c:'blue',d:'Sisa hari stok melebihi batas overstock.'},
+  'STOK DIAM':{l:'Stok diam',c:'gray',d:'Ada stok tapi tidak laku di periode ini.'},
+  'STOK BELUM DIISI':{l:'Stok belum diisi',c:'gray',d:'Isi stok agar forecast terhitung.'},
+  'NONAKTIF':{l:'Nonaktif',c:'gray',d:'Listing tidak berstatus Normal.'}
+};
+const pill = (k, prod) => { const s = ST[k] || {l:k,c:'gray',d:''}; const l = prod && k === 'RUGI' ? 'Rugi' : s.l; return `<span class="pill c-${s.c}" data-tip="${esc(s.d)}"><span class="pd"></span>${esc(l)}</span>`; };
+const cvar = k => `var(--${(ST[k]||{c:'gray'}).c})`;
+
+/* ============================== parsing ============================== */
+function parseCSV(text){
+  text = text.replace(/^﻿/,'');
+  const lines = text.split(/\r?\n/);
+  const hl = lines.find(l => /^"?Urutan"?\s*[,;\t]/.test(l)) || lines.find(l => /^"?Kode Produk"?\s*[,;\t]/.test(l)) || lines[0] || '';
+  const cnt = ch => hl.split(ch).length;
+  const d = [',',';','\t'].sort((a,b) => cnt(b) - cnt(a))[0];
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (q){ if (c === '"'){ if (text[i+1] === '"'){ f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === d){ row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r'){ if (c === '\r' && text[i+1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+    else f += c;
+  }
+  if (f !== '' || row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+const findHeader = (rows,key) => { for (let i = 0; i < Math.min(rows.length, 60); i++) if (T(rows[i] && rows[i][0]) === key) return i; return -1; };
+async function readTable(file, kind){
+  const key = kind === 'ads' ? 'Urutan' : 'Kode Produk';
+  if (/\.(csv|txt)$/i.test(file.name)){
+    const rows = parseCSV(await file.text());
+    if (findHeader(rows,key) < 0) throw new Error(kind === 'ads' ? 'Ini bukan laporan iklan Shopee (kolom “Urutan” tidak ada)' : 'Ini bukan laporan produk Shopee (kolom “Kode Produk” tidak ada)');
+    return rows;
+  }
+  if (typeof XLSX === 'undefined') throw new Error('Pembaca Excel belum termuat — periksa koneksi internet lalu muat ulang');
+  const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+  let names = wb.SheetNames.slice();
+  const pref = names.find(n => /performa terbaik/i.test(n));
+  if (kind === 'prod' && pref) names = [pref, ...names.filter(n => n !== pref)];
+  for (const n of names){
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, raw:true, defval:''});
+    if (findHeader(rows,key) >= 0) return rows;
+  }
+  throw new Error(kind === 'prod' ? 'Sheet “Produk dengan Performa Terbaik” tidak ditemukan' : 'Header laporan iklan tidak ditemukan');
+}
+const trimRows = rows => rows.map(r => { const a = r.slice(); while (a.length && T(a[a.length-1]) === '') a.pop(); return a; });
+
+const AD_COLS = {name:'Nama Iklan', status:'Status', mode:'Mode Bidding', kode:'Kode Produk', views:'Dilihat', clicks:'Jumlah Klik', conv:'Konversi', sold:'Produk Terjual', rev:'Omzet Penjualan', cost:'Biaya'};
+function parseAds(rows){
+  const out = {shop:'', period:'', days:null, ads:[], missing:[]};
+  if (!rows) return out;
+  for (let i = 0; i < Math.min(rows.length,60); i++){
+    const k = T(rows[i][0]);
+    if (k === 'Nama Toko') out.shop = T(rows[i][1]);
+    if (k === 'Periode') out.period = T(rows[i][1]);
+  }
+  const m = out.period.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m){ const a = Date.UTC(+m[3],m[2]-1,+m[1]), b = Date.UTC(+m[6],m[5]-1,+m[4]); out.days = Math.round((b-a)/864e5) + 1; }
+  const h = findHeader(rows,'Urutan'); if (h < 0) return out;
+  const hdr = rows[h].map(T), ix = {};
+  for (const [k,n] of Object.entries(AD_COLS)){ ix[k] = hdr.indexOf(n); if (ix[k] < 0) out.missing.push(n); }
+  const g = (r,k) => ix[k] >= 0 ? r[ix[k]] : '';
+  for (let i = h+1; i < rows.length; i++){
+    const r = rows[i]; const name = T(g(r,'name')); if (!name) continue;
+    out.ads.push({ name, status:T(g(r,'status')), mode:T(g(r,'mode')) || '(tidak ada)', kode:code(g(r,'kode')),
+      views:num(g(r,'views')), clicks:num(g(r,'clicks')), conv:num(g(r,'conv')), sold:num(g(r,'sold')), rev:num(g(r,'rev')), cost:num(g(r,'cost')) });
+  }
+  return out;
+}
+function parseProd(rows){
+  const out = {parents:[], items:[], missing:[]};
+  if (!rows) return out;
+  const h = findHeader(rows,'Kode Produk'); if (h < 0) return out;
+  const hdr = rows[h].map(T);
+  const siap = S.basis === 'Pesanan Siap Dikirim';
+  const want = { kode:'Kode Produk', nama:'Produk', kv:'Kode Variasi',
+    sales: siap ? 'Penjualan (Pesanan Siap Dikirim) (IDR)' : 'Total Penjualan (Pesanan Dibuat) (IDR)',
+    orders: siap ? 'Pesanan Siap Dikirim' : 'Pesanan Dibuat',
+    units: siap ? 'Produk (Pesanan Siap Dikirim)' : 'Produk (Pesanan Dibuat)',
+    views:'Jumlah Produk Dilihat', clicks:'Produk Diklik', vname:'Nama Variasi', pst:'Status Produk Saat Ini', vst:'Status Variasi Saat Ini' };
+  const ix = {};
+  for (const [k,n] of Object.entries(want)){ ix[k] = hdr.indexOf(n); if (ix[k] < 0) out.missing.push(n); }
+  const si = hdr.indexOf('SKU Induk'); ix.sku = (si > 0 && hdr[si-1] === 'Kode Variasi' && si-1 !== ix.kv) ? si-1 : -1;
+  const g = (r,k) => (r && ix[k] >= 0) ? r[ix[k]] : '';
+  for (let i = h+1; i < rows.length; i++){
+    const r = rows[i], kode = code(g(r,'kode')); if (!kode) continue;
+    const kv = code(g(r,'kv')), nxt = T(g(rows[i+1],'kv'));
+    const base = { kode, nama:T(g(r,'nama')), sales:num(g(r,'sales')), orders:num(g(r,'orders')), units:num(g(r,'units')), views:num(g(r,'views')), clicks:num(g(r,'clicks')) };
+    if (kv === '-') out.parents.push(base);
+    if ((kv !== '-' && kv !== '') || (kv === '-' && (nxt === '-' || nxt === ''))){
+      const pst = T(g(r,'pst')), vst = T(g(r,'vst'));
+      let listing = 'Normal';
+      if (pst && pst !== 'Normal') listing = pst;
+      else if (kv !== '-' && vst && vst !== '-' && vst !== 'Normal') listing = vst;
+      const sku = ix.sku >= 0 ? (T(g(r,'sku')) || '-') : '-';
+      out.items.push(Object.assign({}, base, { varId:kv, sku, vname: kv === '-' ? '(tanpa variasi)' : T(g(r,'vname')), listing }));
+    }
+  }
+  return out;
+}
+
+/* ============================== engine (mirrors Excel prototype) ============================== */
+function compute(){
+  const A = parseAds(RAW.ads), P = parseProd(RAW.prod);
+  const ppn = +S.ppn, pot = (+S.komisi) + (+S.layanan) + (+S.affiliate) + (+S.voucher);
+  const manual = isNum(S.periodOverride) && +S.periodOverride > 0;
+  const days = manual ? +S.periodOverride : (A.days || 30);
+  const daysSrc = manual ? 'manual' : (A.days ? 'auto' : 'default');
+  const ref = S.refDate ? new Date(S.refDate + 'T00:00:00') : new Date(new Date().toDateString());
+
+  const pMap = new Map();
+  const products = P.parents.map(p => {
+    const ads = A.ads.filter(a => a.kode === p.kode);
+    const spend = sum(ads, a => a.cost), adRev = sum(ads, a => a.rev);
+    const avg = p.units > 0 ? p.sales / p.units : 0;
+    const h = HPP[p.kode] || {};
+    let hpp = +S.hppDefault, hppSet = false;
+    if (isNum(h.pct)) { hpp = +h.pct; hppSet = true; }
+    else if (isNum(h.rp) && avg > 0) { hpp = h.rp / avg; hppSet = true; }
+    const margin = 1 - hpp - pot;
+    const roas = spend > 0 ? adRev / spend : 0;
+    const bep = margin > 0 ? (1 + ppn) / margin : Infinity;
+    const profit = p.sales * margin - spend * (1 + ppn);
+    const ctr = p.views > 0 ? p.clicks / p.views : 0, cvr = p.clicks > 0 ? p.orders / p.clicks : 0;
+    let st;
+    if (p.sales === 0 && spend === 0) st = 'TIDAK ADA PENJUALAN';
+    else if (spend === 0) st = 'BELUM DIIKLANKAN';
+    else if (spend < S.minSpend) st = 'DATA KURANG';
+    else if (margin <= 0) st = 'RUGI';
+    else if (roas >= bep * (1 + +S.buffer)) st = 'SCALE';
+    else if (roas >= bep) st = 'PERTAHANKAN';
+    else st = 'RUGI';
+    const cand = st === 'BELUM DIIKLANKAN' && margin > 0 && cvr >= S.cvrMin;
+    const act = {
+      'TIDAK ADA PENJUALAN':'Tidak ada penjualan di periode ini — cek stok, status listing, dan visibilitas produk.',
+      'BELUM DIIKLANKAN': cand ? 'Kandidat iklan: CVR di atas benchmark & margin positif — coba mulai dengan budget kecil.' : 'Belum diiklankan: perbaiki konversi/listing dan cek margin dulu.',
+      'SCALE':'Iklan efektif — scale bertahap.', 'PERTAHANKAN':'Untung tipis — pertahankan, optimasi CTR/CVR.',
+      'DATA KURANG':'Biaya iklan masih kecil — kumpulkan data lebih banyak.',
+      'RUGI': margin <= 0 ? 'Margin sudah negatif sebelum iklan — hentikan iklan, perbaiki harga/HPP dulu.' : 'Iklan rugi di level produk — tinjau budget, harga, atau HPP.'
+    }[st];
+    const o = Object.assign({}, p, { avg, spend, adRev, roas, bep, hpp, hppSet, margin, profit, ctr, cvr, st, act, cand,
+      tacos: p.sales > 0 ? spend / p.sales : 0, adShare: p.sales > 0 ? adRev / p.sales : 0, nAds: ads.length });
+    pMap.set(p.kode, o); return o;
+  });
+
+  const ads = A.ads.map((a, idx) => {
+    const prod = pMap.get(a.kode);
+    const hpp = prod ? prod.hpp : +S.hppDefault;
+    const margin = 1 - hpp - pot;
+    const costPpn = a.cost * (1 + ppn);
+    const profit = a.rev * margin - costPpn;
+    const bep = margin > 0 ? (1 + ppn) / margin : Infinity;
+    const roas = a.cost > 0 ? a.rev / a.cost : 0;
+    const ctr = a.views > 0 ? a.clicks / a.views : 0, cvr = a.clicks > 0 ? a.conv / a.clicks : 0;
+    let st;
+    if (a.cost < S.minSpend) st = 'DATA KURANG';
+    else if (margin <= 0) st = 'RUGI';
+    else if (roas >= bep * (1 + +S.buffer)) st = 'SCALE';
+    else if (roas >= bep) st = 'PERTAHANKAN';
+    else st = 'RUGI';
+    const act = st === 'SCALE' ? 'Naikkan budget bertahap 20–30%, pantau ROAS tiap 2–3 hari.'
+      : st === 'PERTAHANKAN' ? 'Pertahankan budget; tingkatkan CTR/CVR agar masuk zona scale.'
+      : st === 'DATA KURANG' ? 'Biaya masih kecil — kumpulkan data lebih banyak sebelum memutuskan.'
+      : margin <= 0 ? 'Hentikan: margin produk sudah negatif sebelum iklan. Perbaiki harga/HPP dulu.'
+      : ctr < S.ctrMin ? 'Rugi & CTR rendah: ganti foto/judul/keyword, atau hentikan.'
+      : cvr < S.cvrMin ? 'Rugi & CVR rendah: cek harga, voucher, rating, dan kualitas listing.'
+      : 'Rugi karena margin tipis: turunkan budget, naikkan harga, atau kurangi diskon.';
+    const noProd = !a.kode || a.kode === '-';
+    const note = noProd ? 'HPP default — iklan level toko/grup' : prod ? (prod.hppSet ? 'HPP dari data Anda' : 'HPP default — belum diisi') : 'Produk tidak ada di laporan produk — HPP default';
+    return Object.assign({}, a, { idx, prod, prodName: prod ? prod.nama : (noProd ? 'Iklan level toko / grup' : 'Produk tidak ada di laporan produk'),
+      mapped: !!prod, hpp, margin, costPpn, profit, bep, roas, ctr, cvr, cpc: a.clicks > 0 ? a.cost / a.clicks : 0, acos: a.rev > 0 ? a.cost / a.rev : 0,
+      st, act, note, paused: a.status === 'Dijeda' });
+  });
+
+  const skuCount = {}; P.items.forEach(it => { if (it.sku !== '-') skuCount[it.sku] = (skuCount[it.sku] || 0) + 1; });
+  const growth = +S.growth;
+  const items = P.items.map(it => {
+    const key = it.varId !== '-' ? it.varId : it.kode;
+    const s = STOCK[key] || {};
+    const stok = isNum(s.stok) ? +s.stok : null;
+    const otw = stok === null ? null : (isNum(s.otw) ? +s.otw : 0);
+    const lead = isNum(s.lead) && +s.lead > 0 ? +s.lead : +S.leadTime;
+    const daily = it.units / days, demand = daily * (1 + growth);
+    const eff = stok === null ? null : stok + otw;
+    const daysLeft = stok === null || demand <= 0 ? null : eff / demand;
+    const outDate = stok === null || demand <= 0 ? null : new Date(ref.getTime() + (stok / demand) * 864e5);
+    const rop = ceil(demand * (lead + +S.safety));
+    const qty = stok === null || it.listing !== 'Normal' ? null : Math.max(0, ceil(demand * (lead + +S.safety + +S.cover) - eff));
+    const prod = pMap.get(it.kode);
+    const unitCost = (it.units > 0 ? it.sales / it.units : 0) * (prod ? prod.hpp : +S.hppDefault);
+    const modal = qty === null ? null : qty * unitCost;
+    let st;
+    if (it.listing !== 'Normal') st = 'NONAKTIF';
+    else if (stok === null) st = it.units === 0 ? 'TIDAK ADA PENJUALAN' : 'STOK BELUM DIISI';
+    else if (demand <= 0) st = eff > 0 ? 'STOK DIAM' : 'TIDAK ADA PENJUALAN';
+    else if (eff <= 0) st = 'HABIS';
+    else if (daysLeft < lead) st = 'KRITIS';
+    else if (eff <= rop) st = 'SEGERA RESTOCK';
+    else if (daysLeft > S.overstock) st = 'OVERSTOCK';
+    else st = 'AMAN';
+    const dup = it.sku !== '-' && skuCount[it.sku] > 1;
+    const act = {
+      'HABIS':`Stok habis padahal ada permintaan — restock sekarang ±${fN(qty)} unit.`,
+      'KRITIS':`Stok tidak cukup sampai barang restock tiba — pesan sekarang ±${fN(qty)} unit.`,
+      'SEGERA RESTOCK':`Di bawah reorder point — jadwalkan pemesanan ±${fN(qty)} unit.`,
+      'OVERSTOCK':`Stok cukup lebih dari ${S.overstock} hari — tahan restock, pertimbangkan promo/bundling.`,
+      'STOK DIAM':'Ada stok tapi tidak laku di periode ini — cek listing, pertimbangkan diskon/bundling.',
+      'STOK BELUM DIISI':'Isi stok saat ini agar forecast terhitung.',
+      'NONAKTIF':`Listing berstatus ${it.listing} — tidak diproses.`,
+      'AMAN':`Stok aman untuk ±${fN(Math.round(daysLeft || 0))} hari ke depan.`,
+      'TIDAK ADA PENJUALAN':'Tidak ada penjualan di periode ini.'
+    }[st];
+    const urg = st === 'HABIS' ? 1 : st === 'KRITIS' ? 2 : st === 'SEGERA RESTOCK' ? 3 : 0;
+    return Object.assign({}, it, { key, stok, otw, eff, lead, daily, demand, daysLeft, outDate, rop, qty, modal, unitCost, st, act, dup, urg, prodHpp: prod ? prod.hpp : +S.hppDefault, leadCustom: isNum(s.lead) && +s.lead > 0 });
+  });
+  const priority = items.filter(i => i.urg).sort((a,b) => (a.daysLeft - b.daysLeft) || (b.demand - a.demand));
+  priority.forEach((p,i) => p.rank = i + 1);
+
+  // ---- ads ↔ stock cross-check + target ROAS ----
+  const stockBy = new Map();
+  items.forEach(i => {
+    if (i.listing !== 'Normal' || i.stok === null) return;
+    const g = stockBy.get(i.kode) || {eff:0, dem:0, urgDem:0, urg:[], n:0};
+    g.eff += i.eff; g.dem += i.demand; g.n++;
+    if (i.urg === 1 || i.urg === 2){ g.urgDem += i.demand; g.urg.push(i); }
+    stockBy.set(i.kode, g);
+  });
+  stockBy.forEach(g => { g.days = g.dem > 0 ? g.eff / g.dem : null; g.urgShare = g.dem > 0 ? g.urgDem / g.dem : 0; g.urg.sort((a,b) => a.daysLeft - b.daysLeft); });
+  const flagFor = (st, g) => {
+    if (!g || g.days === null) return null;
+    const good = st === 'SCALE' || st === 'PERTAHANKAN';
+    if (good && (g.urgShare >= 0.25 || g.days < +S.leadTime)) return {k:'HOLD', g};
+    if ((good || st === 'BELUM DIIKLANKAN') && g.days > +S.overstock && !g.urg.length) return {k:'PUSH', g};
+    return null;
+  };
+  const tgtOf = bep => isFinite(bep) && bep > 0 ? {min: ceil1(bep), rec: ceil1(bep * (1 + +S.buffer))} : null;
+  const holdTxt = g => g.urg.length ? `${g.urg.length} SKU habis/kritis (${fPct(g.urgShare,0)} permintaan)` : `stok tinggal ±${fD(g.days)} hari`;
+  products.forEach(p => {
+    p.stock = stockBy.get(p.kode) || null;
+    p.tgt = tgtOf(p.bep);
+    p.flag = flagFor(p.st === 'BELUM DIIKLANKAN' && !(p.margin > 0) ? '' : p.st, p.stock);
+    if (p.flag){
+      const d = fN(Math.round(p.flag.g.days));
+      if (p.flag.k === 'HOLD') p.act = `Iklan untung, tapi ${holdTxt(p.flag.g)} — tahan budget iklan, restock dulu.`;
+      else if (p.st === 'BELUM DIIKLANKAN') p.act = `Stok berlebih ±${d} hari & belum diiklankan — mulai iklan GMV Max dengan target ROAS ${fT(p.tgt.rec)} untuk menghabiskan stok.`;
+      else p.act = `Iklan untung & stok berlebih ±${d} hari — dorong iklan untuk mempercepat perputaran stok.`;
+    }
+  });
+  ads.forEach(a => {
+    a.stock = a.prod ? a.prod.stock : null;
+    a.tgt = tgtOf(a.bep);
+    a.flag = flagFor(a.st, a.stock);
+    if (a.flag){
+      const g = a.flag.g, d = fN(Math.round(g.days));
+      if (a.flag.k === 'HOLD') a.act = `Tahan scale: ${holdTxt(g)}. Restock dulu, baru naikkan budget.`;
+      else a.act = a.st === 'SCALE' ? `Untung & stok berlebih (±${d} hari) — scale lebih agresif untuk menghabiskan stok.`
+        : `Stok berlebih ±${d} hari — boleh tambah budget sedikit selama ROAS tetap di atas ${fT(a.tgt.rec)}.`;
+    }
+  });
+  items.forEach(i => {
+    i.ads = ads.filter(a => a.kode === i.kode && a.cost > 0 && !a.paused);
+    i.adOn = i.ads.length > 0;
+    if (i.urg && i.adOn) i.act += ' Produk ini sedang diiklankan — penjualan bisa lebih cepat dari forecast.';
+  });
+
+  const tot = {
+    sales: sum(products, p => p.sales), orders: sum(products, p => p.orders), units: sum(products, p => p.units),
+    views: sum(products, p => p.views), clicks: sum(products, p => p.clicks),
+    spend: sum(ads, a => a.cost), costPpn: sum(ads, a => a.costPpn), adRev: sum(ads, a => a.rev), adOrders: sum(ads, a => a.conv),
+    adProfit: sum(ads, a => a.profit), adContribution: sum(ads, a => a.rev * a.margin)
+  };
+  tot.aov = tot.orders > 0 ? tot.sales / tot.orders : 0;
+  tot.roas = tot.spend > 0 ? tot.adRev / tot.spend : 0;
+  tot.acos = tot.adRev > 0 ? tot.spend / tot.adRev : 0;
+  tot.tacos = tot.sales > 0 ? tot.spend / tot.sales : 0;
+  tot.adShare = tot.sales > 0 ? tot.adRev / tot.sales : 0;
+  tot.bep = tot.adContribution > 0 ? tot.adRev * (1 + ppn) / tot.adContribution : Infinity;
+  tot.net = sum(products, p => p.profit) - sum(ads.filter(a => !a.mapped), a => a.costPpn);
+  tot.netMargin = tot.sales > 0 ? tot.net / tot.sales : 0;
+  tot.hppRp = sum(products, p => p.sales * p.hpp);
+  tot.potRp = tot.sales * pot;
+  tot.rugiBudget = sum(ads.filter(a => a.st === 'RUGI'), a => a.cost);
+  tot.rugiLoss = sum(ads.filter(a => a.st === 'RUGI'), a => Math.min(0, a.profit));
+
+  return { A, P, ads, products, pMap, items, priority, tot, days, daysSrc, pot, ref,
+    hppFilled: products.filter(p => p.hppSet).length,
+    stockFilled: items.filter(i => i.stok !== null).length,
+    cand: products.filter(p => p.cand).sort((a,b) => b.sales - a.sales) };
+}
+
+const modeKind = m => /gmv max roas/i.test(m) ? 'roas' : /gmv max auto/i.test(m) ? 'auto' : 'other';
+function tgtAdvice(a){
+  if (!a.tgt) return 'Margin produk sudah negatif sebelum iklan — tidak ada target ROAS yang bisa untung. Perbaiki harga atau HPP dulu.';
+  const k = modeKind(a.mode), r = fT(a.tgt.rec), m = fT(a.tgt.min);
+  if (a.flag && a.flag.k === 'HOLD') return `Stok kritis: ${k === 'roas' ? `naikkan target ROAS sementara di atas ${r}` : 'kurangi budget sementara'} untuk mengerem penjualan sampai restock tiba.`;
+  if (k === 'roas'){
+    if (a.cost >= S.minSpend && a.roas >= a.tgt.rec * 1.4) return `ROAS aktual ${fX(a.roas)} jauh di atas target — turunkan target bertahap (mis. 10–15% per minggu) mendekati ${r} untuk menambah volume. Jangan di bawah ${m}.`;
+    return `Isi Target ROAS ${r} di pengaturan iklan GMV Max. Di bawah ${m}, iklan ini rugi.`;
+  }
+  if (k === 'auto') return `Mode Auto tidak memakai target. Agar profit terkendali, pakai GMV Max ROAS dengan target ${r}.`;
+  return `Jaga ROAS minimal ${r}. Jika beralih ke GMV Max ROAS, isi target ${r}.`;
+}
+
+/* ============================== history (per period) ============================== */
+function periodInfo(A){
+  let s, e;
+  const m = A.period && A.period.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m){ s = [+m[3], +m[2], +m[1]]; e = [+m[6], +m[5], +m[4]]; }
+  else { const f = (RAW.prodFile || '').match(/(20\d{2})(\d{2})(\d{2})_(20\d{2})(\d{2})(\d{2})/); if (!f) return null; s = [+f[1], +f[2], +f[3]]; e = [+f[4], +f[5], +f[6]]; }
+  const iso = a => `${a[0]}-${String(a[1]).padStart(2,'0')}-${String(a[2]).padStart(2,'0')}`;
+  const full = s[2] === 1 && s[0] === e[0] && s[1] === e[1] && e[2] === new Date(e[0], e[1], 0).getDate();
+  return { key: iso(s) + '_' + iso(e), start: iso(s), end: iso(e),
+    label: full ? `${MO[s[1]-1]} ${s[0]}` : fPeriod(`${s[2]}/${s[1]}/${s[0]} - ${e[2]}/${e[1]}/${e[0]}`),
+    short: full ? `${MO[s[1]-1]} ${String(s[0]).slice(2)}` : `${s[2]}/${s[1]}` };
+}
+const adId = a => (a.kode && a.kode !== '-' ? a.kode : a.name) + '|' + a.mode;
+const isDemo = () => /-contoh\./.test(RAW.adsFile || '') || /-contoh\./.test(RAW.prodFile || '');
+function makeSnap(R){
+  const pi = periodInfo(R.A); if (!pi || (!R.ads.length && !R.products.length)) return null;
+  const t = R.tot;
+  return Object.assign(pi, { shop: shopName(), demo: isDemo(), saved: new Date().toISOString(), days: R.days, hasAds: R.ads.length > 0, hasProd: R.products.length > 0,
+    tot: {sales:t.sales, orders:t.orders, units:t.units, spend:t.spend, adRev:t.adRev, adProfit:t.adProfit, net:t.net, roas:t.roas, bep: isFinite(t.bep) ? t.bep : null, tacos:t.tacos, acos:t.acos, adShare:t.adShare},
+    n: countBy(R.ads, 'st'),
+    ads: R.ads.map(a => ({id: adId(a), name:a.name, kode:a.kode, mode:a.mode, cost:a.cost, rev:a.rev, roas:a.roas, bep: isFinite(a.bep) ? a.bep : null, profit:a.profit, st:a.st})),
+    prods: R.products.filter(p => p.sales || p.spend).map(p => ({kode:p.kode, nama:p.nama, sales:p.sales, units:p.units, spend:p.spend, profit:p.profit, roas:p.roas, st:p.st})) });
+}
+let snapT;
+function queueSnap(){ clearTimeout(snapT); snapT = setTimeout(flushSnap, 400); }
+function flushSnap(){ clearTimeout(snapT); if (R && R.snap){ HIST[R.snap.key] = R.snap; LS.set('hist', HIST); } }
+function histList(){ const h = Object.assign({}, HIST); if (R && R.snap) h[R.snap.key] = R.snap; return Object.values(h).sort((a,b) => a.start.localeCompare(b.start)); }
+function prevSnap(){ if (!R || !R.snap) return null; const L = histList(), i = L.findIndex(s => s.key === R.snap.key); return i > 0 ? L[i-1] : null; }
+// change chip: kind rel | rp | x | pp ; good 1 = higher is better, -1 = lower is better, 0 = neutral
+function dl(cur, prev, kind = 'rel', good = 1){
+  if (prev == null || cur == null || !isFinite(cur) || !isFinite(prev)) return '';
+  const d = cur - prev;
+  if (kind === 'rel' && !prev) return '';
+  const flat = kind === 'rel' ? Math.abs(d / prev) < 0.005 : kind === 'rp' ? Math.abs(d) < 1 : kind === 'x' ? Math.abs(d) < 0.005 : Math.abs(d) < 0.0005;
+  const txt = kind === 'rel' ? fPct(Math.abs(d / prev), 0) : kind === 'rp' ? fRpS(Math.abs(d)) : kind === 'x' ? nf2.format(Math.abs(d)) + '×' : nf1.format(Math.abs(d * 100)) + ' poin';
+  const tone = flat || !good ? 'flat' : (d > 0) === (good > 0) ? 'good' : 'bad';
+  return `<span class="dlt ${tone}">${flat ? '= sama' : (d > 0 ? '▲ ' : '▼ ') + txt}</span>`;
+}
+
+/* ============================== UI primitives ============================== */
+const pageHead = (title, sub, actions = '') => `<header class="ph"><div><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ''}</div>${actions ? `<div class="ph-a">${actions}</div>` : ''}</header>`;
+const metric = (l, v, f, cls = '', attrs = '') => `<div class="metric ${attrs ? 'tap' : ''}" ${attrs}><div class="l">${l}</div><div class="v ${cls}">${v}</div>${f ? `<div class="f">${f}</div>` : ''}</div>`;
+const seg = (grp, cur, opts) => `<div class="seg" role="group">${opts.map(o => `<button data-seg="${grp}|${o.k}" aria-pressed="${cur === o.k}">${o.l}${o.n != null ? `<span class="n">${o.n}</span>` : ''}</button>`).join('')}</div>`;
+const searchBox = (key, ph) => `<label class="search">${ic('search',16)}<input type="search" placeholder="${ph}" data-q="${key}" value="${esc(UI[key])}"></label>`;
+const sortSel = (key, opts) => `<select class="select" data-sel="${key}" aria-label="Urutkan">${opts.map(([k,l]) => `<option value="${k}" ${UI[key] === k ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+function storage(segs){
+  const tot = segs.reduce((s,x) => s + Math.max(0, x.v), 0) || 1;
+  return `<div class="stor">${segs.filter(s => s.v > 0).map(s => `<div style="--c:${s.c};flex:${s.v/tot}" data-tip="${esc(s.l)}\n${esc(s.t)}"></div>`).join('')}</div>
+  <div class="leg">${segs.map(s => `<div><i style="--c:${s.c}"></i><span>${esc(s.l)}</span><b>${s.t}</b></div>`).join('')}</div>`;
+}
+function gauge(roas, bep, st){
+  if (!isFinite(bep)) return `<div class="gauge"><div class="g-head"><span>ROAS<b>${fX(roas)}</b></span><span class="neg">Margin ≤ 0 — tidak bisa impas</span></div><div class="g-track"><div class="g-fill" style="--c:var(--red);width:100%;opacity:.35"></div></div></div>`;
+  const sc = bep * (1 + +S.buffer), max = Math.max(roas, sc) * 1.12 || 1;
+  return `<div class="gauge" data-tip="ROAS ${fX(roas)}\nTitik impas (BEP) ${fX(bep)}\nBatas scale ${fX(sc)}">
+    <div class="g-head"><span>ROAS<b>${fX(roas)}</b></span>${roas >= bep ? `<span class="pos">${fX(roas - bep)} di atas impas</span>` : `<span class="neg">${fX(bep - roas)} di bawah impas</span>`}</div>
+    <div class="g-track"><div class="g-fill" style="--c:${cvar(st)};width:${Math.min(100, roas / max * 100)}%"></div><div class="g-mark" style="left:${bep / max * 100}%"></div><div class="g-mark sc" style="left:${sc / max * 100}%"></div></div>
+    <div class="g-legend"><span><i></i>Impas ${fX(bep)}</span><span><i class="sc"></i>Scale ≥ ${fX(sc)}</span></div></div>`;
+}
+// single-series bar chart; negative values hang below the zero line; optional tick (e.g. break-even) per column
+function barChart(data, {fmt, color, hi = [], label = true}){
+  const vals = data.map(d => d.v), ticks = data.map(d => d.t).filter(x => x != null && isFinite(x));
+  const top = Math.max(0, ...vals, ...ticks) * 1.22 || 1, bot = Math.min(0, ...vals) * 1.22, span = top - bot || 1;
+  const y = v => (top - v) / span * 100, z = y(0);
+  const cols = data.map(d => {
+    const h = Math.abs(d.v) / span * 100, t0 = d.v >= 0 ? y(d.v) : z, on = hi.includes(d.key);
+    const val = label && d.key === hi[0] ? `<span class="bch-val" style="top:calc(${d.v >= 0 ? t0 + '% - 19px' : (t0 + h) + '% + 4px'})">${fmt(d.v)}</span>` : '';
+    return `<div class="bch-col ${hi.length && !on ? 'dim' : ''}" data-tip="${esc(d.tip)}"><div class="bch-bar ${d.v < 0 ? 'neg' : ''}" style="--c:${color(d.v)};top:${t0}%;height:${Math.max(h, .8)}%"></div>${d.t != null && isFinite(d.t) ? `<div class="bch-tick" style="top:${y(d.t)}%"></div>` : ''}${val}</div>`;
+  }).join('');
+  return `<div class="bch"><div class="bch-plot"><div class="bch-zero" style="top:${z}%"></div>${cols}</div><div class="bch-x">${data.map(d => `<span class="${hi.includes(d.key) ? 'on' : ''}">${esc(d.x)}</span>`).join('')}</div></div>`;
+}
+const chev = `<span class="chev">${ic('chev',16,2.2)}</span>`;
+const more = (id, total, lim) => total > lim ? `<div class="more"><button class="btn sm" data-more="${id}">Tampilkan semua ${fN(total)}</button></div>` : '';
+const limit = (id, n = 60) => UI.lim[id] || n;
+const itemSub = i => [i.vname !== '(tanpa variasi)' ? i.vname : '', i.sku !== '-' ? i.sku : ''].filter(Boolean).map(esc).join(' · ') || esc(i.key);
+
+/* ============================== views ============================== */
+const FEATURES = `<div class="feat">
+      <div><span class="fi" style="--c:var(--green)">${ic('pie',18,2)}</span><span><b>Untung atau rugi</b>Profit bersih iklan setelah HPP, potongan & PPN.</span></div>
+      <div><span class="fi" style="--c:var(--blue)">${ic('trend',18,2.1)}</span><span><b>Scale atau stop</b>Keputusan jelas untuk setiap iklan.</span></div>
+      <div><span class="fi" style="--c:var(--indigo)">${ic('clock',18,2)}</span><span><b>Forecast stok</b>Kapan setiap SKU akan habis.</span></div>
+      <div><span class="fi" style="--c:var(--orange)">${ic('restock',18,2)}</span><span><b>Prioritas restock</b>Apa yang dipesan dulu & berapa banyak.</span></div>
+    </div>`;
+function vWelcome(){
+  return `<div class="welcome">
+    <div class="appicon">${APPICON(44)}</div>
+    <h1>Impor laporan Shopee${shopName() ? `<br><span style="color:var(--label-2)">untuk ${esc(shopName())}</span>` : ''}</h1>
+    <p class="lead">Semua dihitung langsung di perangkat Anda — tidak ada data yang dikirim ke mana pun.</p>
+    ${dropTiles()}
+    <button class="btn link" data-act="demo" style="margin-top:18px">Coba dengan data contoh</button>
+    ${FEATURES}
+  </div>`;
+}
+function dropTiles(){
+  return `<div class="drops">
+    <button class="drop ${RAW.ads ? 'ok' : ''}" data-drop="ads"><span class="di">${RAW.ads ? ic('check',22,2.2) : ic('megaphone',22)}</span><span style="flex:1;min-width:0"><b>Laporan iklan</b><small class="clamp1">${RAW.ads ? esc(RAW.adsFile) : 'Data_Keseluruhan_Iklan_Shopee….csv'}</small></span><span class="cap">${RAW.ads ? 'Ganti' : 'Pilih file'}</span></button>
+    <button class="drop ${RAW.prod ? 'ok' : ''}" data-drop="prod"><span class="di">${RAW.prod ? ic('check',22,2.2) : ic('bag',22)}</span><span style="flex:1;min-width:0"><b>Laporan produk</b><small class="clamp1">${RAW.prod ? esc(RAW.prodFile) : 'parentskudetail….xlsx'}</small></span><span class="cap">${RAW.prod ? 'Ganti' : 'Pilih file'}</span></button>
+  </div>`;
+}
+
+function actionList(){
+  const t = R.tot, ads = R.ads, by = k => ads.filter(a => a.st === k);
+  const fk = k => ads.filter(a => a.flag && a.flag.k === k);
+  const rugi = by('RUGI'), hold = fk('HOLD'), push = fk('PUSH'), scale = by('SCALE').filter(a => !(a.flag && a.flag.k === 'HOLD'));
+  const hppMissing = R.products.filter(p => !p.hppSet && p.sales > 0).length;
+  const missStock = R.items.filter(i => i.st === 'STOK BELUM DIISI').length;
+  const out = [];
+  if (rugi.length) out.push({c:'red', i:'octagon', t:`${rugi.length} iklan sebaiknya dihentikan`, s:`Memakai ${fRpS(t.rugiBudget)} dan menggerus profit ${fRpS(-t.rugiLoss)}`, go:'iklan', f:{adF:'RUGI'}});
+  if (hold.length) out.push({c:'orange', i:'warn', t:`${hold.length} iklan untung, tapi stoknya kritis`, s:`Tahan scale sampai restock — mulai dari “${hold.sort((a,b) => b.cost - a.cost)[0].name}”`, go:'iklan', f:{adF:'HOLD'}});
+  if (scale.length) out.push({c:'green', i:'trend', t:`${scale.length} iklan siap di-scale`, s:`Mulai dari “${scale.sort((a,b) => b.profit - a.profit)[0].name}”`, go:'iklan', f:{adF:'SCALE'}});
+  if (push.length) out.push({c:'blue', i:'box', t:`${push.length} iklan bisa didorong untuk menghabiskan stok`, s:`Iklan untung & stok berlebih — “${push[0].name}”`, go:'iklan', f:{adF:'PUSH'}});
+  if (R.priority.length){ const p = R.priority[0]; out.push({c:'orange', i:'restock', t:`${R.priority.length} SKU perlu restock`, s:`Paling mendesak: ${p.nama}${p.vname !== '(tanpa variasi)' ? ' · ' + p.vname : ''} — ${p.st === 'HABIS' ? 'sudah habis' : 'habis ±' + fD(p.daysLeft) + ' hari lagi'}`, go:'stok', f:{stTab:'pri'}}); }
+  if (R.cand.length) out.push({c:'indigo', i:'sparkles', t:`${R.cand.length} produk layak mulai diiklankan`, s:'Laku, konversi bagus, margin positif — belum ada iklan', go:'produk', f:{prF:'CAND'}});
+  if (hppMissing) out.push({c:'pink', i:'coin', t:`${hppMissing} produk belum ada HPP`, s:`Memakai HPP default ${fPct(+S.hppDefault,0)} — isi agar profit akurat`, go:'hpp', f:{hppOnly:true}});
+  if (missStock) out.push({c:'teal', i:'archive', t:`${missStock} SKU belum diisi stoknya`, s:'Forecast tidak bisa dihitung tanpa stok saat ini', go:'inputstok', f:{isOnly:true}});
+  return out;
+}
+
+function vRingkasan(){
+  const t = R.tot, ads = R.ads, hasAds = ads.length > 0, hasProd = R.products.length > 0;
+  const by = k => ads.filter(a => a.st === k);
+  const prev = prevSnap();
+  const vs = (cur, k, kind, good, need) => prev && prev[need] ? `<div class="vs">${dl(cur, prev.tot[k], kind, good)}<span>vs ${esc(prev.label)}</span></div>` : '';
+  const warn = [];
+  if (R.A.missing.length) warn.push(`Kolom laporan iklan tidak ditemukan: ${R.A.missing.join(', ')}.`);
+  if (R.P.missing.length) warn.push(`Kolom laporan produk tidak ditemukan: ${R.P.missing.join(', ')}.`);
+  if (!RAW.ads) warn.push('Laporan iklan belum diimpor — profit iklan & keputusan scale/stop belum tersedia.');
+  if (!RAW.prod) warn.push('Laporan produk belum diimpor — profit toko, HPP & forecast stok belum tersedia.');
+  if (R.daysSrc === 'default' && hasProd) warn.push('Periode laporan tidak terbaca, forecast memakai 30 hari. Atur di Pengaturan.');
+
+  const hppMissing = R.products.filter(p => !p.hppSet && p.sales > 0).length;
+  const actions = actionList();
+  const actRows = actions.map((a,i) => `<div class="row ind tap" data-go="${a.go}" data-f='${esc(JSON.stringify(a.f))}'><span class="r-ic" style="--c:var(--${a.c})">${ic(a.i,18,2)}</span><div class="r-main"><div class="r-t">${esc(a.t)}</div><div class="r-s clamp1">${esc(a.s)}</div></div>${chev}</div>`).join('');
+
+  const sales = t.sales || 1;
+  const verdict = t.adProfit >= 0
+    ? `Iklan Anda <b class="pos">benar-benar untung</b>. ROAS ${fX(t.roas)} berada ${fX(t.roas - t.bep)} di atas titik impas ${fX(t.bep)}.`
+    : `Iklan Anda <b class="neg">sebenarnya rugi</b>. ROAS ${fX(t.roas)} terlihat bagus, tapi titik impas Anda ${fX(t.bep)}.`;
+
+  return `${pageHead(shopName() ? esc(shopName()) : 'Ringkasan', ['Ringkasan', R.snap ? R.snap.label : fPeriod(R.A.period)].filter(Boolean).map(esc).join(' · '), `<button class="btn" data-act="report">${ic('doc',17)} Ekspor PDF</button>`)}
+  ${warn.length ? `<div class="callout">${ic('warn',18)}<div>${warn.map(esc).join('<br>')}</div></div>` : ''}
+  ${hasAds ? `<div class="hero">
+    <div class="card hero-main">
+      <div class="eyebrow"><span class="nic" style="--c:var(--orange);width:22px;height:22px;border-radius:6px">${ic('megaphone',13,2.2)}</span> Profit bersih dari iklan</div>
+      <div class="hero-num ${sgn(t.adProfit)}">${plus(t.adProfit)}${fRp(t.adProfit)}</div>
+      ${prev && prev.hasAds ? `<div class="vsl">${dl(t.adProfit, prev.tot.adProfit, 'rp', 1)}<span>vs ${esc(prev.label)} (${fRpS(prev.tot.adProfit)})</span></div>` : ''}
+      <p class="hero-say">${verdict}</p>
+      ${gauge(t.roas, t.bep, t.adProfit >= 0 ? (t.roas >= t.bep * (1 + +S.buffer) ? 'SCALE' : 'PERTAHANKAN') : 'RUGI')}
+    </div>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:8px">Dari mana angka itu</div>
+      <ul class="bd">
+        <li><span>Omzet dari iklan</span><b>${fRp(t.adRev)}</b></li>
+        <li><span>HPP & potongan marketplace</span><b>${fRp(-(t.adRev - t.adContribution))}</b></li>
+        <li><span>Biaya iklan + PPN ${fPct(+S.ppn,0)}</span><b>${fRp(-t.costPpn)}</b></li>
+        <li class="tot"><span>Profit bersih iklan</span><b class="${sgn(t.adProfit)}">${fRp(t.adProfit)}</b></li>
+      </ul>
+      <p class="cap" style="margin:12px 0 0">Seller Centre hanya menampilkan ROAS. Angka di atas sudah memperhitungkan HPP tiap produk${hppMissing ? ' (sebagian masih memakai HPP default)' : ''}.</p>
+    </div>
+  </div>` : ''}
+
+  <div class="grid g4" style="margin-top:16px">
+    ${metric('Penjualan toko', fRpS(t.sales), `${fN(t.orders)} pesanan · ${fN(t.units)} unit${hasProd ? vs(t.sales, 'sales', 'rel', 1, 'hasProd') : ''}`)}
+    ${metric('Profit bersih toko', fRpS(t.net), `Margin ${fPct(t.netMargin)}${hasProd ? vs(t.net, 'net', 'rp', 1, 'hasProd') : ''}`, hasProd ? sgn(t.net) : '')}
+    ${metric('Biaya iklan', fRpS(t.spend), `${fPct(t.adShare)} penjualan dari iklan${hasAds ? vs(t.spend, 'spend', 'rel', 0, 'hasAds') : ''}`)}
+    ${metric('TACOS', fPct(t.tacos), `Biaya iklan ÷ total penjualan${hasProd && hasAds ? vs(t.tacos, 'tacos', 'pp', -1, 'hasProd') : ''}`)}
+  </div>
+
+  <h2 class="sec">Perlu tindakan</h2>
+  ${actions.length ? `<div class="list">${actRows}</div>` : `<div class="list"><div class="row ind"><span class="r-ic" style="--c:var(--green)">${ic('check',18,2.2)}</span><div class="r-main"><div class="r-t">Semua terlihat baik</div><div class="r-s">Tidak ada yang perlu ditindaklanjuti saat ini.</div></div></div></div>`}
+
+  <div class="grid g2" style="margin-top:36px">
+    <div class="card">
+      <h2 class="sec" style="margin:0 0 4px;font-size:18px">Ke mana uang penjualan</h2>
+      <p class="cap" style="margin:0 0 18px">Estimasi dari ${fRpS(t.sales)} total penjualan</p>
+      ${hasProd ? storage([
+        {l:'HPP', v:t.hppRp, c:'var(--purple)', t:fPct(t.hppRp/sales,0)},
+        {l:'Potongan marketplace', v:t.potRp, c:'var(--orange)', t:fPct(t.potRp/sales,0)},
+        {l:'Iklan + PPN', v:t.costPpn, c:'var(--red)', t:fPct(t.costPpn/sales,0)},
+        {l: t.net >= 0 ? 'Profit bersih' : 'Rugi bersih', v:Math.max(0,t.net), c:'var(--green)', t:fPct(t.net/sales,0)}
+      ]) : '<p class="cap">Butuh laporan produk.</p>'}
+    </div>
+    <div class="card">
+      <h2 class="sec" style="margin:0 0 4px;font-size:18px">Budget iklan per keputusan</h2>
+      <p class="cap" style="margin:0 0 18px">Dari ${fRpS(t.spend)} biaya iklan</p>
+      ${hasAds ? storage(['SCALE','PERTAHANKAN','RUGI','DATA KURANG'].map(k => { const g = by(k); return {l:`${ST[k].l} · ${g.length} iklan`, v:sum(g,a=>a.cost), c:cvar(k), t:fRpS(sum(g,a=>a.cost))}; })) : '<p class="cap">Butuh laporan iklan.</p>'}
+    </div>
+  </div>
+
+  ${hasProd ? `<h2 class="sec">Restock paling mendesak <button class="btn link" data-go="stok">Lihat semua</button></h2>
+    ${R.priority.length ? `<div class="list">${R.priority.slice(0,5).map(priRow).join('')}</div>` : `<div class="list"><div class="row"><div class="r-main"><div class="r-t">${R.stockFilled ? 'Tidak ada SKU yang perlu restock' : 'Stok belum diisi'}</div><div class="r-s">${R.stockFilled ? 'Semua stok di atas reorder point.' : 'Isi stok saat ini untuk melihat prioritas restock.'}</div></div>${R.stockFilled ? '' : `<button class="btn sm" data-go="inputstok">Isi stok</button>`}</div></div>`}` : ''}`;
+}
+
+function priRow(i){
+  const c = ST[i.st].c, gone = i.st === 'HABIS' || i.stok <= 0;
+  const when = gone ? 'Sudah habis' : (i.outDate ? `${i.outDate.getDate()} ${MO[i.outDate.getMonth()]}` : '—');
+  return `<div class="row tap" data-sheet="item|${esc(i.key)}">
+    <span class="rank c-${c}" style="--c:var(--${c})">${i.rank}</span>
+    <div class="r-main"><div class="r-t clamp1">${esc(i.nama)}</div><div class="r-s clamp1">${i.adOn ? '<span class="adtag">Diiklankan</span>' : ''}${itemSub(i)}<span class="show-s"> · ${gone ? '<span class="neg">sudah habis</span>' : 'habis ' + when}</span></div></div>
+    <div class="r-cols"><div class="r-col"><span>Stok</span><b>${fN(i.eff)}</b></div><div class="r-col"><span>Laku / hari</span><b>${fD(i.demand)}</b></div><div class="r-col"><span>Habis</span><b class="${i.daysLeft < i.lead ? 'neg' : ''}">${when}</b></div></div>
+    <div class="r-col strong"><span>Pesan</span><b>${fN(i.qty)} unit</b></div>${chev}</div>`;
+}
+
+function vIklan(){
+  const ads = R.ads;
+  if (!ads.length) return pageHead('Iklan') + emptyImport('ads');
+  const cnt = countBy(ads,'st');
+  const ord = ['SCALE','PERTAHANKAN','RUGI','DATA KURANG'];
+  const sorter = {profit:(a,b) => b.profit - a.profit, cost:(a,b) => b.cost - a.cost, roas:(a,b) => b.roas - a.roas, loss:(a,b) => a.profit - b.profit}[UI.adSort];
+  const fk = k => ads.filter(a => a.flag && a.flag.k === k).length, nH = fk('HOLD'), nP = fk('PUSH');
+  const rows = ads.filter(a => UI.adF === 'ALL' || a.st === UI.adF || (a.flag && a.flag.k === UI.adF)).sort(sorter);
+  const opts = [{k:'ALL',l:'Semua',n:ads.length}, ...ord.filter(k => cnt[k]).map(k => ({k, l:ST[k].l, n:cnt[k]}))];
+  if (nH) opts.push({k:'HOLD', l:'Stok kritis', n:nH});
+  if (nP) opts.push({k:'PUSH', l:'Stok berlebih', n:nP});
+  return `${pageHead('Iklan', 'Profit sebenarnya & keputusan scale atau stop untuk setiap iklan')}
+  <div class="grid g4" style="margin-bottom:28px">
+    ${ord.map(k => { const g = ads.filter(a => a.st === k); return metric(pill(k), `${g.length} <span style="font-size:15px;color:var(--label-3);font-weight:500">iklan</span>`, `${fRpS(sum(g,a=>a.cost))} budget · profit ${fRpS(sum(g,a=>a.profit))}`, '', `data-seg="adF|${UI.adF === k ? 'ALL' : k}"`).replace('class="metric tap"', `class="metric tap ${UI.adF === k ? 'on' : ''}"`); }).join('')}
+  </div>
+  ${nH && UI.adF !== 'HOLD' ? `<div class="callout">${ic('warn',18)}<div><b>${nH} iklan untung, tapi stok produknya kritis.</b> Menaikkan budget sekarang hanya mempercepat stok habis — restock dulu. <button class="btn link" data-seg="adF|HOLD" style="padding:0">Lihat</button></div></div>` : ''}
+  <div class="toolbar">
+    ${seg('adF', UI.adF, opts)}
+    <span class="spacer"></span>
+    ${sortSel('adSort', [['profit','Profit tertinggi'],['loss','Rugi terbesar'],['cost','Biaya terbesar'],['roas','ROAS tertinggi']])}
+  </div>
+  <div class="ads">${rows.map(a => `<div class="card adc" data-sheet="ad|${a.idx}" role="button" tabindex="0">
+      <div class="adc-top"><span class="pills">${pill(a.st)}${flagPill(a.flag)}</span><span class="cap clamp1">${esc(a.mode)}${a.paused ? ' · Dijeda' : ''}</span></div>
+      <h3 class="clamp2">${esc(a.name)}</h3>
+      <div class="lbl">Profit bersih</div>
+      <div class="big ${sgn(a.profit)}">${plus(a.profit)}${fRp(a.profit)}</div>
+      ${gauge(a.roas, a.bep, a.st)}
+      ${a.tgt && modeKind(a.mode) === 'roas' ? `<div class="tgt" data-tip="${esc(tgtAdvice(a))}"><span>${ic('target',16,2)}Target ROAS GMV Max</span><b>${fT(a.tgt.rec)}</b></div>` : ''}
+      <div class="stats">
+        <div><span>Biaya</span><b>${fRpS(a.cost)}</b></div><div><span>Omzet</span><b>${fRpS(a.rev)}</b></div>
+        <div><span>CTR</span><b class="${a.views && a.ctr < S.ctrMin ? 'neg' : ''}">${fPct(a.ctr,2)}</b></div><div><span>CVR</span><b class="${a.clicks && a.cvr < S.cvrMin ? 'neg' : ''}">${fPct(a.cvr,2)}</b></div>
+      </div>
+      <div class="advice c-${ST[a.st].c}">${ic('bulb',17)}<span>${esc(a.act)}</span></div>
+    </div>`).join('') || '<div class="empty">Tidak ada iklan untuk filter ini.</div>'}</div>
+  ${targetList(ads)}
+  ${modeTable(ads)}`;
+}
+const flagPill = f => !f ? '' : f.k === 'HOLD'
+  ? `<span class="pill c-orange" data-tip="Stok produk ini kritis — menaikkan budget mempercepat stok habis">${ic('warn',12,2.4)}Stok kritis</span>`
+  : `<span class="pill c-blue" data-tip="Stok cukup ±${fN(Math.round(f.g.days))} hari — iklan bisa didorong">${ic('box',12,2.4)}Stok berlebih</span>`;
+const flagChip = f => !f ? '' : f.k === 'HOLD'
+  ? `<div class="flag c-orange">${ic('warn',15,2)}<span>Stok kritis — tahan scale</span></div>`
+  : `<div class="flag c-blue">${ic('box',15,2)}<span>Stok berlebih ±${fN(Math.round(f.g.days))} hari — dorong iklan</span></div>`;
+function targetList(ads){
+  const rows = ads.filter(a => a.tgt).sort((a,b) => b.cost - a.cost);
+  const cand = R.cand.filter(p => p.tgt).slice(0, 6);
+  if (!rows.length && !cand.length) return '';
+  const row = (name, sub, roas, tg, attrs) => `<div class="row tap" ${attrs}>
+    <div class="r-main"><div class="r-t clamp1">${esc(name)}</div><div class="r-s clamp1">${sub}<span class="show-s"> · impas ${fT(tg.min)}</span></div></div>
+    <div class="r-cols"><div class="r-col"><span>ROAS aktual</span><b>${roas}</b></div><div class="r-col"><span>Batas impas</span><b>${fT(tg.min)}</b></div></div>
+    <div class="r-end" style="min-width:110px"><span class="r-s">Target ROAS</span><b class="tgt-n">${fT(tg.rec)}</b></div>${chev}</div>`;
+  return `<h2 class="sec">Target ROAS siap pakai <small>untuk GMV Max</small></h2>
+  ${rows.length ? `<div class="list">${rows.map(a => row(a.name, esc(a.mode) + (a.mapped ? '' : ' · HPP default') + (a.flag && a.flag.k === 'HOLD' ? ' · <span class="neg">stok kritis</span>' : ''), fX(a.roas), a.tgt, `data-sheet="ad|${a.idx}"`)).join('')}</div>` : ''}
+  ${cand.length ? `<h3 class="sub">Produk layak diiklankan</h3><div class="list">${cand.map(p => row(p.nama, `Belum diiklankan · CVR ${fPct(p.cvr)}`, '—', p.tgt, `data-sheet="prod|${esc(p.kode)}"`)).join('')}</div>` : ''}
+  <p class="foot">Target = titik impas × (1 + buffer ${fPct(+S.buffer,0)}), dibulatkan ke atas. Isi angka ini di kolom <b>Target ROAS</b> saat membuat atau mengubah iklan GMV Max. Di bawah batas impas, setiap penjualan dari iklan merugi.</p>`;
+}
+function modeTable(ads){
+  const modes = [...new Set(ads.map(a => a.mode))].map(m => { const g = ads.filter(a => a.mode === m); const c = sum(g,a=>a.cost), r = sum(g,a=>a.rev); return {m, c, r, roas: c > 0 ? r/c : 0, p: sum(g,a=>a.profit), n:g.length}; }).sort((a,b) => b.c - a.c);
+  return `<h2 class="sec">Per mode iklan</h2><div class="list">${modes.map(x => `<div class="row">
+    <div class="r-main"><div class="r-t">${esc(x.m)}</div><div class="r-s">${x.n} iklan · biaya ${fRpS(x.c)} · ROAS ${fX(x.roas)}</div></div>
+    <div class="r-end"><b class="${sgn(x.p)}">${fRp(x.p)}</b><span class="r-s">profit bersih</span></div></div>`).join('')}</div>`;
+}
+
+function vProduk(){
+  const ps = R.products;
+  if (!ps.length) return pageHead('Produk') + emptyImport('prod');
+  const ord = ['SCALE','PERTAHANKAN','RUGI','DATA KURANG','BELUM DIIKLANKAN','TIDAK ADA PENJUALAN'];
+  const cnt = countBy(ps,'st'), q = UI.prQ.toLowerCase();
+  const sorter = {profit:(a,b) => b.profit - a.profit, sales:(a,b) => b.sales - a.sales, spend:(a,b) => b.spend - a.spend, name:(a,b) => a.nama.localeCompare(b.nama)}[UI.prSort];
+  const rows = ps.filter(p => (UI.prF === 'ALL' || p.st === UI.prF || (UI.prF === 'CAND' && p.cand)) && (!q || (p.nama + ' ' + p.kode).toLowerCase().includes(q))).sort(sorter);
+  const lim = limit('prod');
+  const top = ps.slice().sort((a,b) => b.sales - a.sales).slice(0,10), topShare = sum(top, p => p.sales) / (R.tot.sales || 1);
+  const opts = [{k:'ALL',l:'Semua',n:ps.length}, ...ord.filter(k => cnt[k]).map(k => ({k, l: k === 'RUGI' ? 'Rugi' : ST[k].l, n:cnt[k]}))];
+  if (R.cand.length) opts.push({k:'CAND', l:'Layak diiklankan', n:R.cand.length});
+  return `${pageHead('Produk', `Profit bersih per produk setelah biaya iklan. 10 produk teratas = ${fPct(topShare,0)} penjualan toko.`)}
+  ${R.cand.length && UI.prF !== 'CAND' ? `<div class="callout info">${ic('sparkles',18)}<div><b>${R.cand.length} produk layak mulai diiklankan.</b> Sudah laku, konversi di atas ${fPct(+S.cvrMin)}, dan margin positif — tapi belum ada iklan. <button class="btn link" data-seg="prF|CAND" style="padding:0">Lihat</button></div></div>` : ''}
+  <div class="toolbar">${seg('prF', UI.prF, opts)}</div>
+  <div class="toolbar">${searchBox('prQ','Cari produk')}<span class="spacer"></span>${sortSel('prSort', [['profit','Profit'],['sales','Penjualan'],['spend','Biaya iklan'],['name','Nama']])}</div>
+  <div class="list">${rows.slice(0, lim).map(p => `<div class="row tap" data-sheet="prod|${esc(p.kode)}">
+    <div class="r-main"><div class="r-t clamp1">${esc(p.nama)}</div><div class="r-s clamp1">${fRpS(p.sales)} penjualan · HPP ${fPct(p.hpp,0)}${p.hppSet ? '' : ' (default)'}</div></div>
+    <div class="r-cols"><div class="r-col"><span>Biaya iklan</span><b>${p.spend ? fRpS(p.spend) : '—'}</b></div><div class="r-col"><span>ROAS / BEP</span><b>${p.spend ? fX(p.roas) : '—'} <span style="display:inline;font-size:12px;color:var(--label-3)">/ ${fX(p.bep)}</span></b></div><div class="r-col"><span>TACOS</span><b>${fPct(p.tacos)}</b></div></div>
+    <div class="r-end"><b class="${sgn(p.profit)}">${fRpS(p.profit)}</b>${pill(p.st, true)}</div>${chev}</div>`).join('') || '<div class="empty">Tidak ada produk yang cocok.</div>'}
+  ${more('prod', rows.length, lim)}</div>`;
+}
+
+function vStok(){
+  const it = R.items;
+  if (!it.length) return pageHead('Stok & Restock') + emptyImport('prod');
+  const cnt = countBy(it,'st'), need = R.priority;
+  const order = ['HABIS','KRITIS','SEGERA RESTOCK','AMAN','OVERSTOCK','STOK DIAM','STOK BELUM DIISI','TIDAK ADA PENJUALAN','NONAKTIF'];
+  const withDays = it.filter(i => i.daysLeft !== null);
+  let body;
+  if (UI.stTab === 'pri'){
+    body = need.length ? `<div class="list">${need.slice(0, limit('pri')).map(priRow).join('')}${more('pri', need.length, limit('pri'))}</div>
+      <p class="foot">Urut dari sisa hari stok paling sedikit. Merah = sudah habis, oranye = habis sebelum barang restock tiba (lead time), kuning = di bawah reorder point.</p>`
+      : `<div class="list"><div class="row ind"><span class="r-ic" style="--c:var(--${R.stockFilled ? 'green' : 'gray'})">${ic(R.stockFilled ? 'check' : 'stack',18,2)}</span><div class="r-main"><div class="r-t">${R.stockFilled ? 'Tidak ada yang perlu direstock' : 'Stok belum diisi'}</div><div class="r-s">${R.stockFilled ? 'Semua SKU berada di atas reorder point.' : 'Isi stok saat ini per SKU untuk menghitung forecast.'}</div></div>${R.stockFilled ? '' : '<button class="btn sm primary" data-go="inputstok">Isi stok</button>'}</div></div>`;
+  } else {
+    const q = UI.stQ.toLowerCase();
+    const sorter = {urg:(a,b) => order.indexOf(a.st) - order.indexOf(b.st) || ((a.daysLeft ?? 1e9) - (b.daysLeft ?? 1e9)), days:(a,b) => (a.daysLeft ?? 1e9) - (b.daysLeft ?? 1e9), sold:(a,b) => b.units - a.units}[UI.stSort];
+    const rows = it.filter(i => (UI.stF === 'ALL' || i.st === UI.stF) && (!q || (i.nama + ' ' + i.vname + ' ' + i.sku + ' ' + i.key).toLowerCase().includes(q))).sort(sorter);
+    const lim = limit('fc');
+    body = `<div class="card" style="margin-bottom:16px">${storage(order.filter(k => cnt[k]).map(k => ({l:ST[k].l, v:cnt[k], c:cvar(k), t:fN(cnt[k])})))}</div>
+    <div class="toolbar">${searchBox('stQ','Cari SKU atau produk')}
+      <select class="select" data-sel="stF"><option value="ALL">Semua status</option>${order.filter(k => cnt[k]).map(k => `<option value="${k}" ${UI.stF === k ? 'selected' : ''}>${ST[k].l} (${cnt[k]})</option>`).join('')}</select>
+      <span class="spacer"></span>${sortSel('stSort', [['urg','Paling mendesak'],['days','Sisa hari'],['sold','Terlaris']])}</div>
+    <div class="list">${rows.slice(0, lim).map(i => `<div class="row tap" data-sheet="item|${esc(i.key)}">
+      <div class="r-main"><div class="r-t clamp1">${esc(i.nama)}</div><div class="r-s clamp1">${itemSub(i)}</div></div>
+      <div class="r-cols"><div class="r-col"><span>Terjual</span><b>${fN(i.units)}</b></div><div class="r-col"><span>Stok</span><b>${i.eff === null ? '—' : fN(i.eff)}</b></div><div class="r-col"><span>Sisa hari</span><b>${fD(i.daysLeft)}</b></div></div>
+      <div class="r-end">${pill(i.st)}<span class="r-s">${i.daysLeft !== null ? fD(i.daysLeft) + ' hari' : i.units ? fD(i.demand) + '/hari' : ''}</span></div>${chev}</div>`).join('') || '<div class="empty">Tidak ada SKU yang cocok.</div>'}
+    ${more('fc', rows.length, lim)}</div>`;
+  }
+  return `${pageHead('Stok & Restock', `Forecast dari penjualan ${R.days} hari${+S.growth ? ` + ${fPct(+S.growth,0)} kenaikan` : ''} · acuan ${fDate(R.ref)}`,
+      need.length ? `<button class="btn" data-act="csvRestock">${ic('dl',17)} Daftar restock</button>` : '')}
+  ${R.stockFilled ? '' : `<div class="callout">${ic('warn',18)}<div>Stok belum diisi untuk SKU mana pun, jadi forecast belum bisa dihitung. <button class="btn link" data-go="inputstok" style="padding:0">Isi stok sekarang</button></div></div>`}
+  <div class="grid g4" style="margin-bottom:28px">
+    ${metric('Perlu restock', `${need.length} <span style="font-size:15px;color:var(--label-3);font-weight:500">SKU</span>`, `${cnt.HABIS || 0} habis · ${cnt.KRITIS || 0} kritis · ${cnt['SEGERA RESTOCK'] || 0} segera`, need.length ? 'neg' : '')}
+    ${metric('Total dipesan', `${fN(sum(need, i => i.qty))} <span style="font-size:15px;color:var(--label-3);font-weight:500">unit</span>`, 'Untuk SKU prioritas')}
+    ${metric('Modal restock', fRpS(sum(need, i => i.modal)), 'Estimasi dari HPP')}
+    ${metric('Rata-rata sisa stok', `${fD(withDays.length ? sum(withDays, i => i.daysLeft) / withDays.length : NaN)} <span style="font-size:15px;color:var(--label-3);font-weight:500">hari</span>`, `${(cnt.OVERSTOCK || 0) + (cnt['STOK DIAM'] || 0)} SKU overstock / diam`)}
+  </div>
+  <div class="toolbar">${seg('stTab', UI.stTab, [{k:'pri', l:'Prioritas restock', n:need.length}, {k:'all', l:'Semua SKU', n:it.length}])}</div>
+  ${body}`;
+}
+
+function vHpp(){
+  const ps = R.products;
+  if (!ps.length) return pageHead('HPP Produk') + emptyImport('prod');
+  const q = UI.hppQ.toLowerCase(), lim = limit('hpp', 80);
+  const rows = ps.filter(p => (!UI.hppOnly || !p.hppSet) && (!q || (p.nama + ' ' + p.kode).toLowerCase().includes(q))).sort((a,b) => b.sales - a.sales);
+  const v = (k,f) => (HPP[k] || {})[f];
+  return `${pageHead('HPP Produk', `Isi HPP dalam % harga jual atau Rp per unit. Yang kosong memakai default ${fPct(+S.hppDefault,0)}. Tersimpan otomatis.`)}
+  <div class="card" style="margin-bottom:20px;padding:18px 22px"><div style="display:flex;justify-content:space-between;font-size:14px"><span><b>${R.hppFilled}</b> dari ${ps.length} produk sudah diisi</span><span class="muted">${fPct(R.hppFilled / ps.length, 0)}</span></div><div class="prog"><div style="width:${R.hppFilled / ps.length * 100}%"></div></div></div>
+  <div class="toolbar">${searchBox('hppQ','Cari produk')}<span class="spacer"></span><label class="switch"><input type="checkbox" data-tg="hppOnly" ${UI.hppOnly ? 'checked' : ''}>Belum diisi saja</label></div>
+  <div class="list">${rows.slice(0, lim).map(p => `<div class="row">
+    <div class="r-main"><div class="r-t clamp1">${esc(p.nama)}</div><div class="r-s clamp1">Harga rata² ${fRp(p.avg)} · <span data-der="${esc(p.kode)}">${hppDer(p)}</span></div></div>
+    <div class="ins">
+      <label><span class="inlbl">HPP %</span><span class="fin ${isNum(v(p.kode,'pct')) ? 'set' : ''}"><input inputmode="decimal" placeholder="—" data-hpp="${esc(p.kode)}|pct" value="${isNum(v(p.kode,'pct')) ? +(v(p.kode,'pct') * 100).toFixed(2) : ''}"><em>%</em></span></label>
+      <label><span class="inlbl">atau Rp / unit</span><span class="fin w ${isNum(v(p.kode,'rp')) ? 'set' : ''}"><em>Rp</em><input inputmode="numeric" placeholder="—" data-hpp="${esc(p.kode)}|rp" value="${isNum(v(p.kode,'rp')) ? v(p.kode,'rp') : ''}"></span></label>
+    </div></div>`).join('') || '<div class="empty">Semua produk sudah diisi.</div>'}
+  ${more('hpp', rows.length, lim)}</div>`;
+}
+const hppDer = p => `margin ${fPct(p.margin,0)} · BEP ${fX(p.bep)}${p.hppSet ? '' : ' · default'}`;
+
+function vInputStok(){
+  const it = R.items;
+  if (!it.length) return pageHead('Stok Gudang') + emptyImport('prod');
+  const q = UI.isQ.toLowerCase(), lim = limit('instok', 80);
+  const rows = it.filter(i => (!UI.isOnly || i.stok === null) && (!q || (i.nama + ' ' + i.vname + ' ' + i.sku + ' ' + i.key).toLowerCase().includes(q))).sort((a,b) => b.units - a.units);
+  const val = (i,f) => { const x = (STOCK[i.key] || {})[f]; return isNum(x) ? x : ''; };
+  return `${pageHead('Stok Gudang', 'Isi stok saat ini per SKU sebelum melihat forecast. Tersimpan otomatis.',
+      `<button class="btn" data-act="importStock">${ic('imp',17)} Impor dari file</button><button class="btn" data-act="tplStock">${ic('doc',17)} Template</button>`)}
+  <div class="card" style="margin-bottom:20px;padding:18px 22px"><div style="display:flex;justify-content:space-between;font-size:14px"><span><b>${R.stockFilled}</b> dari ${it.length} SKU sudah diisi</span><span class="muted">${fPct(R.stockFilled / it.length, 0)}</span></div><div class="prog"><div style="width:${R.stockFilled / it.length * 100}%"></div></div></div>
+  <div class="toolbar">${searchBox('isQ','Cari SKU atau produk')}<span class="spacer"></span><label class="switch"><input type="checkbox" data-tg="isOnly" ${UI.isOnly ? 'checked' : ''}>Belum diisi saja</label></div>
+  <div class="list">${rows.slice(0, lim).map(i => `<div class="row">
+    <div class="r-main"><div class="r-t clamp1">${esc(i.nama)}</div><div class="r-s clamp1">${itemSub(i)} · terjual ${fN(i.units)}${i.dup ? ' · <span class="neg">SKU ganda</span>' : ''}</div><div style="margin-top:5px" data-ist="${esc(i.key)}">${pill(i.st)}</div></div>
+    <div class="ins">
+      <label><span class="inlbl">Stok</span><span class="fin ${val(i,'stok') !== '' ? 'set' : ''}"><input inputmode="numeric" placeholder="—" data-stk="${esc(i.key)}|stok" value="${val(i,'stok')}"></span></label>
+      <label><span class="inlbl">Di jalan</span><span class="fin ${val(i,'otw') !== '' ? 'set' : ''}"><input inputmode="numeric" placeholder="0" data-stk="${esc(i.key)}|otw" value="${val(i,'otw')}"></span></label>
+      <label class="hide-s"><span class="inlbl">Lead time</span><span class="fin ${val(i,'lead') !== '' ? 'set' : ''}"><input inputmode="numeric" placeholder="${S.leadTime}" data-stk="${esc(i.key)}|lead" value="${val(i,'lead')}"><em>hr</em></span></label>
+    </div></div>`).join('') || '<div class="empty">Semua SKU sudah diisi.</div>'}
+  ${more('instok', rows.length, lim)}</div>
+  <p class="foot">Impor file CSV/XLSX dengan kolom kode (Kode Variasi, SKU, atau Kode Produk) dan Stok. Kolom “Dalam Perjalanan” dan “Lead Time” opsional.</p>`;
+}
+
+function vRiwayat(){
+  const L = histList();
+  const head = sub => pageHead('Riwayat', sub, R.snap ? `<button class="btn" data-act="report">${ic('doc',17)} Ekspor PDF</button>` : '');
+  if (!L.length) return head('Perbandingan bulan ke bulan') + `<div class="card" style="text-align:center;padding:52px 24px">
+    <div class="r-ic" style="--c:var(--purple);width:56px;height:56px;border-radius:15px;margin:0 auto 16px">${ic('chart',28,2)}</div>
+    <h3 style="margin:0 0 6px;font-size:19px;font-weight:650">Belum ada riwayat</h3>
+    <p class="cap" style="max-width:400px;margin:0 auto 18px;font-size:14px">Setiap laporan yang diimpor tersimpan otomatis per periode. Impor laporan bulan ini, lalu bulan depan — perbandingannya muncul di sini.</p>
+    <button class="btn primary" data-act="import">Impor laporan</button></div>`;
+
+  const keys = L.map(s => s.key);
+  let ia = keys.indexOf(UI.hA); if (ia < 0) ia = R.snap ? keys.indexOf(R.snap.key) : keys.length - 1; if (ia < 0) ia = keys.length - 1;
+  let ib = keys.indexOf(UI.hB); if (ib < 0 || ib === ia) ib = ia > 0 ? ia - 1 : (L.length > 1 ? ia + 1 : -1);
+  const cur = L[Math.max(ia, ib)], prev = ib >= 0 ? L[Math.min(ia, ib)] : null;
+  const v = (s, k) => !s ? null : ['sales','net','tacos','orders','units'].includes(k) ? (s.hasProd ? s.tot[k] : null) : (s.hasAds ? s.tot[k] : null);
+  const opt = sel => L.map(s => `<option value="${s.key}" ${s.key === sel ? 'selected' : ''}>${esc(s.label)}</option>`).join('');
+  const pick = L.length > 1 ? `<div class="toolbar"><select class="select" data-sel="hA" aria-label="Periode">${opt(keys[ia])}</select><span class="cap">dibandingkan dengan</span><select class="select" data-sel="hB" aria-label="Periode pembanding">${opt(keys[ib])}</select></div>` : '';
+
+  const tile = (l, k, fmt, kind, good, signed) => { const c = v(cur, k), p = v(prev, k);
+    return metric(l, c == null ? '—' : fmt(c), prev ? (p == null ? `${esc(prev.label)}: —` : `<div class="vs" style="margin-top:2px">${dl(c, p, kind, good)}<span>dari ${fmt(p)}</span></div>`) : esc(cur.label), signed && c != null ? sgn(c) : ''); };
+  const tiles = `<div class="grid g3" style="margin-bottom:16px">
+    ${tile('Profit bersih iklan', 'adProfit', fRpS, 'rp', 1, true)}
+    ${tile('Penjualan toko', 'sales', fRpS, 'rel', 1)}
+    ${tile('Profit bersih toko', 'net', fRpS, 'rp', 1, true)}
+    ${tile('Biaya iklan', 'spend', fRpS, 'rel', 0)}
+    ${tile('ROAS iklan', 'roas', fX, 'x', 1)}
+    ${tile('TACOS', 'tacos', x => fPct(x), 'pp', -1)}
+  </div>`;
+
+  const H = L.slice(-12), hi = [cur.key, prev && prev.key].filter(Boolean);
+  const chart = (title, sub, k, fmt, color, tick) => `<div class="card"><h2 class="sec" style="margin:0 0 2px;font-size:17px">${title}</h2><p class="cap" style="margin:0">${sub}</p>
+    ${barChart(H.map(s => ({key:s.key, x:s.short || s.label, v: v(s,k) ?? 0, t: tick ? v(s, tick) : null,
+      tip: `${s.label}\n${title}: ${v(s,k) == null ? '—' : fmt(v(s,k))}${tick && v(s,tick) ? `\nTitik impas: ${fX(v(s,tick))}` : ''}`})), {fmt, color, hi, label: !tick})}
+    ${tick ? `<div class="bch-leg"><span><i></i>ROAS</span><span><i class="tk"></i>Titik impas</span></div>` : ''}</div>`;
+  const charts = L.length > 1 ? `<div class="grid g2" style="margin-top:20px">
+    ${chart('Profit bersih iklan', 'Setelah HPP, potongan & PPN', 'adProfit', fRpS, x => x >= 0 ? 'var(--green)' : 'var(--red)')}
+    ${chart('Penjualan toko', 'Total penjualan per periode', 'sales', fRpS, () => 'var(--blue)')}
+    ${chart('ROAS & titik impas', 'Batang di atas garis = iklan untung', 'roas', fX, () => 'var(--blue)', 'bep')}
+    ${chart('Biaya iklan', 'Total biaya iklan sebelum PPN', 'spend', fRpS, () => 'var(--blue)')}
+  </div>` : '';
+
+  let compare = '';
+  if (prev && prev.hasAds && cur.hasAds){
+    const ca = new Map(cur.ads.map(a => [a.id, a])), pa = new Map(prev.ads.map(a => [a.id, a]));
+    const scaled = prev.ads.filter(a => a.st === 'SCALE');
+    const verdict = (p, c) => !c ? ['gray','Tidak aktif'] : c.cost <= p.cost * 1.05 ? ['gray','Budget tidak dinaikkan'] : c.profit > p.profit ? ['green','Berhasil'] : ['orange','Profit tidak naik'];
+    const dRow = (name, sub, d, end) => `<div class="row"><div class="r-main"><div class="r-t clamp1">${esc(name)}</div><div class="r-s">${sub}</div></div><div class="r-end">${d}${end || ''}</div></div>`;
+    const dv = d => `<b class="${sgn(d)}">${plus(d)}${fRpS(d)}</b>`;
+    if (scaled.length){
+      const ok = scaled.filter(p => verdict(p, ca.get(p.id))[1] === 'Berhasil').length;
+      compare += `<h2 class="sec">Apakah scale di ${esc(prev.label)} berhasil? <small>${ok} dari ${scaled.length} iklan profitnya naik</small></h2>
+      <div class="list">${scaled.sort((a,b) => b.profit - a.profit).map(p => { const c = ca.get(p.id), [vc, vl] = verdict(p, c);
+        return dRow(p.name, c ? `Biaya ${fRpS(p.cost)} → ${fRpS(c.cost)} · ROAS ${fX(p.roas)} → ${fX(c.roas)}` : `Tidak ada di laporan ${esc(cur.label)}`,
+          c ? dv(c.profit - p.profit) : '<b>—</b>', `<span class="pill c-${vc}"><span class="pd"></span>${vl}</span>`); }).join('')}</div>
+      <p class="foot">Berhasil = biaya dinaikkan dan profit bersih ikut naik. Kalau biaya naik tapi profit tidak, ROAS turun terlalu jauh — kembalikan budget atau naikkan target ROAS.</p>`;
+    }
+    const ids = [...new Set([...prev.ads.map(a => a.id), ...cur.ads.map(a => a.id)])];
+    const rows = ids.map(id => { const p = pa.get(id), c = ca.get(id); return {p, c, x: c || p, d: (c ? c.profit : 0) - (p ? p.profit : 0)}; }).sort((a,b) => Math.abs(b.d) - Math.abs(a.d));
+    compare += `<h2 class="sec">Perubahan per iklan <small>${esc(prev.label)} → ${esc(cur.label)}</small></h2>
+    <div class="list">${rows.map(r => dRow(r.x.name,
+      r.p && r.c ? `<span class="chg">${pill(r.p.st)}<span class="arr">→</span>${pill(r.c.st)}<span class="cap">ROAS ${fX(r.p.roas)} → ${fX(r.c.roas)}</span></span>` : r.c ? `<span class="chg">${pill(r.c.st)}<span class="cap">Baru di ${esc(cur.label)}</span></span>` : `Tidak ada di ${esc(cur.label)}`,
+      dv(r.d), '<span class="r-s">perubahan profit</span>')).join('')}</div>`;
+  }
+  if (prev && prev.hasProd && cur.hasProd){
+    const pp = new Map(prev.prods.map(p => [p.kode, p])), cp = new Map(cur.prods.map(p => [p.kode, p]));
+    const mv = [...new Set([...pp.keys(), ...cp.keys()])].map(k => { const a = pp.get(k), b = cp.get(k); return {nama: (b || a).nama, a, b, d: (b ? b.profit : 0) - (a ? a.profit : 0)}; });
+    const up = mv.filter(x => x.d > 0).sort((x,y) => y.d - x.d).slice(0,5), dn = mv.filter(x => x.d < 0).sort((x,y) => x.d - y.d).slice(0,5);
+    const lst = arr => arr.length ? `<div class="list">${arr.map(x => `<div class="row"><div class="r-main"><div class="r-t clamp1">${esc(x.nama)}</div><div class="r-s">Penjualan ${fRpS(x.a ? x.a.sales : 0)} → ${fRpS(x.b ? x.b.sales : 0)}</div></div><div class="r-end"><b class="${sgn(x.d)}">${plus(x.d)}${fRpS(x.d)}</b></div></div>`).join('')}</div>` : `<div class="list"><div class="empty" style="padding:24px">Tidak ada</div></div>`;
+    compare += `<h2 class="sec">Produk dengan perubahan profit terbesar</h2><div class="grid g2"><div><h3 class="sub" style="margin-top:0">Naik</h3>${lst(up)}</div><div><h3 class="sub" style="margin-top:0">Turun</h3>${lst(dn)}</div></div>`;
+  }
+
+  const saved = `<h2 class="sec">Periode tersimpan <small>${L.length} periode</small></h2><div class="list">${L.slice().reverse().map(s => { const act = R.snap && s.key === R.snap.key;
+    return `<div class="row"><div class="r-main"><div class="r-t">${esc(s.label)}${act ? ' <span class="pill c-blue" style="margin-left:6px;vertical-align:1px">Aktif</span>' : ''}</div><div class="r-s">${s.hasProd ? fRpS(s.tot.sales) + ' penjualan' : 'tanpa laporan produk'} · ${s.ads.length} iklan</div></div>
+      <div class="r-end"><b class="${s.hasAds ? sgn(s.tot.adProfit) : ''}">${s.hasAds ? fRpS(s.tot.adProfit) : '—'}</b><span class="r-s">profit iklan</span></div>
+      ${act ? '<span style="width:30px;flex:none"></span>' : `<button class="xbtn" data-delhist="${esc(s.key)}" aria-label="Hapus periode ${esc(s.label)}" data-tip="Hapus periode ini">${ic('trash',15,2)}</button>`}</div>`; }).join('')}</div>
+    <p class="foot">Ringkasan tiap periode tersimpan otomatis saat laporan diimpor dan ikut diperbarui saat HPP diubah. Periode lama tidak berubah lagi setelah Anda mulai periode baru.</p>`;
+
+  return `${head(prev ? `${esc(cur.label)} dibandingkan ${esc(prev.label)}` : 'Perbandingan bulan ke bulan')}
+  ${pick}
+  ${!prev ? `<div class="callout info">${ic('calendar',18)}<div><b>Baru ada 1 periode (${esc(cur.label)}).</b> Bulan depan, pilih <b>Mulai periode baru</b> lalu impor laporan berikutnya — perbandingan bulan ke bulan akan muncul otomatis di sini.</div></div>` : ''}
+  ${tiles}${charts}${compare}${saved}`;
+}
+
+function fRow(k, label, unit, type = 'pct', ph = ''){
+  const v = S[k]; const shown = type === 'pct' ? (isNum(v) ? +(v*100).toFixed(2) : '') : (v ?? '');
+  return `<label class="frow"><span>${label}</span><span class="fin">${unit === 'Rp' ? '<em>Rp</em>' : ''}<input data-set="${k}|${type}" ${type === 'date' ? 'type="date"' : type === 'str' ? 'type="text" style="width:190px"' : 'inputmode="decimal"'} value="${esc(shown)}" placeholder="${esc(ph)}">${unit && unit !== 'Rp' ? `<em>${unit}</em>` : ''}</span></label>`;
+}
+function vSetting(){
+  return `${pageHead('Pengaturan', 'Asumsi yang dipakai untuk semua perhitungan. Angka bawaan hanya contoh — sesuaikan dengan toko Anda.')}
+  <div class="cols">
+    <div>
+      <div class="fgroup"><div class="ftitle">Toko</div><div class="form">
+        ${fRow('shopName','Nama toko','','str', R.A.shop || 'Nama toko')}
+      </div></div>
+      <div class="fgroup"><div class="ftitle">Profit iklan</div><div class="form">
+        ${fRow('ppn','PPN atas biaya iklan','%')}
+        ${fRow('buffer','Buffer scale di atas BEP','%')}
+        ${fRow('minSpend','Biaya minimum agar dinilai','Rp','num')}
+        ${fRow('hppDefault','HPP default','%')}
+      </div><p class="fnote">Iklan berstatus Scale jika ROAS ≥ BEP × (1 + buffer). Di bawah biaya minimum, status = Data kurang. HPP default dipakai untuk produk yang belum diisi dan iklan level toko.</p></div>
+      <div class="fgroup"><div class="ftitle">Benchmark</div><div class="form">
+        ${fRow('ctrMin','CTR minimum','%')}
+        ${fRow('cvrMin','CVR minimum','%')}
+        <label class="frow"><span>Basis penjualan</span><select data-set="basis|str">${['Pesanan Dibuat','Pesanan Siap Dikirim'].map(o => `<option ${S.basis === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
+      </div><p class="fnote">Dipakai untuk saran aksi: CTR rendah = foto/judul kurang menarik, CVR rendah = harga/listing kurang meyakinkan.</p></div>
+      <div class="fgroup"><div class="ftitle">Potongan marketplace</div><div class="form">
+        ${fRow('komisi','Komisi / admin','%')}
+        ${fRow('layanan','Biaya layanan / transaksi','%')}
+        ${fRow('affiliate','Komisi affiliate','%')}
+        ${fRow('voucher','Voucher / ongkir ditanggung','%')}
+        <div class="frow total"><span>Total potongan</span><span style="padding-right:8px">${fPct(R.pot)}</span></div>
+      </div><p class="fnote">Persentase dari omzet. Contoh asumsi — bukan tarif resmi, cek Seller Centre.</p></div>
+    </div>
+    <div>
+      <div class="fgroup"><div class="ftitle">Forecast stok</div><div class="form">
+        ${fRow('periodOverride','Hari periode data','hari','num', R.A.days ? String(R.A.days) + ' (otomatis)' : '30')}
+        ${fRow('leadTime','Lead time restock','hari','num')}
+        ${fRow('safety','Safety stock','hari','num')}
+        ${fRow('cover','Target cover setelah restock','hari','num')}
+        ${fRow('overstock','Batas overstock','hari','num')}
+        ${fRow('growth','Kenaikan permintaan','%')}
+        ${fRow('refDate','Tanggal acuan stok','','date')}
+      </div><p class="fnote">Periode terbaca otomatis dari laporan iklan${R.A.days ? ` (${R.A.days} hari)` : ''}. Isi kenaikan permintaan mis. 30% untuk 11.11, 12.12, atau gajian. Tanggal acuan kosong = hari ini.</p></div>
+      <div class="fgroup"><div class="ftitle">Data</div><div class="list">
+        ${menuRows()}
+      </div><p class="fnote">Data tersimpan di browser ini saja. Simpan backup secara berkala atau sebelum pindah perangkat.</p></div>
+    </div>
+  </div>`;
+}
+function menuRows(){
+  const r = (act, icn, c, t, s = '', danger = false) => `<div class="row ind tap" data-act="${act}"><span class="r-ic" style="--c:var(--${c})">${ic(icn,18,2)}</span><div class="r-main"><div class="r-t ${danger ? 'neg' : ''}">${t}</div>${s ? `<div class="r-s">${s}</div>` : ''}</div>${chev}</div>`;
+  return r('import','imp','blue','Impor laporan', 'Ganti laporan iklan atau produk')
+    + r('report','doc','teal','Ekspor laporan PDF', 'Profit iklan, target ROAS & restock')
+    + r('export','save','green','Simpan backup', 'HPP, stok, riwayat, dan pengaturan')
+    + r('restore','undo','indigo','Pulihkan dari backup')
+    + r('demo','sparkles','purple','Muat data contoh')
+    + r('theme','moon','gray','Tema terang / gelap')
+    + r('clearReports','calendar','orange','Mulai periode baru', 'Kosongkan laporan — riwayat, HPP & stok tetap')
+    + r('reset','trash','red','Hapus semua data', '', true);
+}
+function vLainnya(){
+  const r = (go, icn, c, t, s) => `<div class="row ind tap" data-go="${go}"><span class="r-ic" style="--c:var(--${c})">${ic(icn,18,2)}</span><div class="r-main"><div class="r-t">${t}</div><div class="r-s">${s}</div></div>${chev}</div>`;
+  return `${pageHead('Lainnya')}
+  <div class="fgroup"><div class="list">
+    ${r('riwayat','chart','purple','Riwayat', `${histList().length} periode tersimpan · bandingkan bulan ke bulan`)}
+    ${r('hpp','coin','pink','HPP Produk', `${R.hppFilled} dari ${R.products.length} produk diisi`)}
+    ${r('inputstok','archive','teal','Stok Gudang', `${R.stockFilled} dari ${R.items.length} SKU diisi`)}
+    ${r('setting','gear','gray','Pengaturan', 'Nama toko, PPN, potongan, lead time')}
+  </div></div>
+  <div class="fgroup"><div class="list">${menuRows()}</div></div>`;
+}
+function emptyImport(kind){
+  return `<div class="card" style="text-align:center;padding:48px 24px"><div class="drop" data-drop="${kind}" style="max-width:420px;margin:0 auto">
+    <span class="di">${ic(kind === 'ads' ? 'megaphone' : 'bag', 22)}</span><span style="flex:1"><b>${kind === 'ads' ? 'Impor laporan iklan' : 'Impor laporan produk'}</b><small>${kind === 'ads' ? 'Data_Keseluruhan_Iklan_Shopee….csv' : 'parentskudetail….xlsx'}</small></span></div></div>`;
+}
+
+/* ============================== PDF report ============================== */
+function reportHTML(){
+  const t = R.tot, prev = prevSnap(), hasAds = R.ads.length > 0, hasProd = R.products.length > 0;
+  const lbl = R.snap ? R.snap.label : (fPeriod(R.A.period) || '—');
+  const d = (c, k, kind, good, need) => prev && prev[need] ? dl(c, prev.tot[k], kind, good) + ` <span style="color:var(--label-3);font-size:10px">vs ${esc(prev.label)}</span>` : '';
+  const kpi = (l, v, f, cls = '', dd = '') => `<div class="rp-kpi"><span>${l}</span><b class="${cls}">${v}</b><em>${f}</em>${dd ? `<i>${dd}</i>` : ''}</div>`;
+  const kpis = [
+    hasAds && kpi('Profit bersih iklan', `${plus(t.adProfit)}${fRpS(t.adProfit)}`, `Setelah HPP, potongan & PPN ${fPct(+S.ppn,0)}`, sgn(t.adProfit), d(t.adProfit, 'adProfit', 'rp', 1, 'hasAds')),
+    hasAds && kpi('ROAS iklan', fX(t.roas), `Titik impas ${fX(t.bep)}`, t.roas >= t.bep ? 'pos' : 'neg', d(t.roas, 'roas', 'x', 1, 'hasAds')),
+    hasAds && kpi('Biaya iklan', fRpS(t.spend), `Omzet iklan ${fRpS(t.adRev)}`, '', d(t.spend, 'spend', 'rel', 0, 'hasAds')),
+    hasProd && kpi('Penjualan toko', fRpS(t.sales), `${fN(t.orders)} pesanan · ${fN(t.units)} unit`, '', d(t.sales, 'sales', 'rel', 1, 'hasProd')),
+    hasProd && kpi('Profit bersih toko', fRpS(t.net), `Margin ${fPct(t.netMargin)}`, sgn(t.net), d(t.net, 'net', 'rp', 1, 'hasProd')),
+    hasProd && hasAds && kpi('TACOS', fPct(t.tacos), 'Biaya iklan ÷ total penjualan', '', d(t.tacos, 'tacos', 'pp', -1, 'hasProd'))
+  ].filter(Boolean).join('');
+  const verdict = !hasAds ? '' : t.adProfit >= 0
+    ? `Iklan <b class="pos">benar-benar untung</b>: ROAS ${fX(t.roas)} berada ${fX(t.roas - t.bep)} di atas titik impas ${fX(t.bep)}.`
+    : `Iklan <b class="neg">sebenarnya rugi</b>: ROAS ${fX(t.roas)} masih di bawah titik impas ${fX(t.bep)}.`;
+  const todo = actionList();
+  const ads = R.ads.slice().sort((a,b) => b.cost - a.cost);
+  const adTbl = !hasAds ? '' : `<h2>Keputusan per iklan <small>${ads.length} iklan · urut biaya terbesar</small></h2><div class="rp-scroll"><table class="rp-tbl">
+    <thead><tr><th>Iklan</th><th>Biaya</th><th>Omzet</th><th>ROAS</th><th>Impas</th><th>Target</th><th>Profit bersih</th><th>Keputusan</th></tr></thead>
+    <tbody>${ads.map(a => `<tr><td>${esc(a.name)}<small>${esc(a.mode)}${a.paused ? ' · Dijeda' : ''}</small></td><td>${fRpS(a.cost)}</td><td>${fRpS(a.rev)}</td><td>${fX(a.roas)}</td><td>${fX(a.bep)}</td><td><b style="color:var(--accent-ink)">${a.tgt ? fT(a.tgt.rec) : '—'}</b></td><td class="${sgn(a.profit)}"><b>${plus(a.profit)}${fRpS(a.profit)}</b></td>
+      <td><span class="pill c-${ST[a.st].c}"><span class="pd"></span>${ST[a.st].l}</span>${a.flag ? `<div class="rp-flag ${a.flag.k === 'PUSH' ? 'push' : ''}">${a.flag.k === 'HOLD' ? 'Tahan — stok kritis' : 'Stok berlebih'}</div>` : ''}</td></tr>`).join('')}
+    <tr class="tot"><td>Total</td><td>${fRpS(t.spend)}</td><td>${fRpS(t.adRev)}</td><td>${fX(t.roas)}</td><td>${fX(t.bep)}</td><td></td><td class="${sgn(t.adProfit)}">${plus(t.adProfit)}${fRpS(t.adProfit)}</td><td></td></tr></tbody></table></div>
+    <p style="font-size:10px;color:var(--label-3);margin:6px 0 0">Target = target ROAS untuk GMV Max (titik impas × (1 + buffer ${fPct(+S.buffer,0)})). Profit bersih = omzet iklan × margin − biaya iklan × (1 + PPN).</p>`;
+  const P = R.priority, PN = 15;
+  const rsTbl = !hasProd ? '' : !R.stockFilled ? `<h2>Prioritas restock</h2><p style="color:var(--label-2)">Stok gudang belum diisi — prioritas restock belum bisa dihitung.</p>`
+    : !P.length ? `<h2>Prioritas restock</h2><p style="color:var(--label-2)">Tidak ada SKU di bawah reorder point. Semua stok aman.</p>`
+    : `<h2>Prioritas restock <small>${P.length} SKU · acuan ${fDate(R.ref)} · lead time ${S.leadTime} hari</small></h2><div class="rp-scroll"><table class="rp-tbl">
+    <thead><tr><th>Produk / variasi</th><th>Status</th><th>Stok</th><th>Laku/hari</th><th>Habis</th><th>Pesan</th><th>Modal</th></tr></thead>
+    <tbody>${P.slice(0, PN).map(i => `<tr><td>${i.rank}. ${esc(i.nama)}<small>${[i.vname !== '(tanpa variasi)' ? i.vname : '', i.sku !== '-' ? i.sku : '', i.adOn ? 'diiklankan' : ''].filter(Boolean).map(esc).join(' · ')}</small></td>
+      <td><span class="pill c-${ST[i.st].c}"><span class="pd"></span>${ST[i.st].l}</span></td><td>${fN(i.eff)}</td><td>${fD(i.demand)}</td><td>${i.st === 'HABIS' || i.stok <= 0 ? '<span class="neg">Habis</span>' : i.outDate ? `${i.outDate.getDate()} ${MO[i.outDate.getMonth()]}` : '—'}</td><td><b>${fN(i.qty)}</b></td><td>${fRpS(i.modal)}</td></tr>`).join('')}
+    <tr class="tot"><td>Total ${P.length > PN ? `(${PN} teratas dari ${P.length})` : ''}</td><td></td><td></td><td></td><td></td><td>${fN(sum(P, i => i.qty))}</td><td>${fRpS(sum(P, i => i.modal))}</td></tr></tbody></table></div>`;
+  const cand = R.cand.slice(0, 6);
+  const cTbl = !cand.length ? '' : `<h2>Produk layak mulai diiklankan <small>laku, CVR ≥ ${fPct(+S.cvrMin)}, margin positif</small></h2><div class="rp-scroll"><table class="rp-tbl">
+    <thead><tr><th>Produk</th><th>Penjualan</th><th>CVR</th><th>Margin</th><th>Target ROAS</th></tr></thead>
+    <tbody>${cand.map(p => `<tr><td>${esc(p.nama)}</td><td>${fRpS(p.sales)}</td><td>${fPct(p.cvr)}</td><td>${fPct(p.margin,0)}</td><td><b style="color:var(--accent-ink)">${p.tgt ? fT(p.tgt.rec) : '—'}</b></td></tr>`).join('')}</tbody></table></div>`;
+  return `<div class="paper">
+    <header class="rp-h"><div><div class="rp-k">Laporan iklan & stok</div><h1>${esc(shopName() || 'Toko Anda')}</h1><div class="rp-s">Periode ${esc(lbl)} · dibuat ${fDate(new Date())}</div></div>
+      <div class="rp-brand"><span class="appicon">${APPICON(14)}</span>Ads Profit Analyzer Pro</div></header>
+    ${verdict ? `<p class="rp-say">${verdict}</p>` : ''}
+    <div class="rp-kpis" style="margin-top:12px">${kpis}</div>
+    ${todo.length ? `<h2>Yang perlu dilakukan</h2><ol class="rp-todo">${todo.map(a => `<li><b>${esc(a.t)}</b> <span>— ${esc(a.s)}</span></li>`).join('')}</ol>` : ''}
+    ${adTbl}${rsTbl}${cTbl}
+    <div class="rp-foot">Asumsi: PPN iklan ${fPct(+S.ppn,0)} · buffer scale ${fPct(+S.buffer,0)} · potongan marketplace ${fPct(R.pot)} · HPP default ${fPct(+S.hppDefault,0)} · lead time ${S.leadTime} hari · safety ${S.safety} hari · cover ${S.cover} hari.
+      HPP diisi untuk ${R.hppFilled} dari ${R.products.length} produk; stok diisi untuk ${R.stockFilled} dari ${R.items.length} SKU. Sumber: ${[RAW.adsFile, RAW.prodFile].filter(Boolean).map(esc).join(' & ')}.</div>
+  </div>`;
+}
+function openReport(){
+  if (!RAW.ads && !RAW.prod){ toast('Impor laporan dulu', false); return; }
+  if (SHEET) closeSheet();
+  $('#rptBody').innerHTML = reportHTML();
+  const r = $('#rpt'); r.classList.remove('hidden'); r.scrollTop = 0; document.body.style.overflow = 'hidden';
+}
+function closeReport(){ $('#rpt').classList.add('hidden'); document.body.style.overflow = ''; }
+function printReport(){
+  const old = document.title;
+  document.title = ['Laporan', shopName(), R.snap ? R.snap.label : ''].filter(Boolean).join(' ');
+  window.print();
+  setTimeout(() => { document.title = old; }, 1000);
+}
+
+/* ============================== sheets (detail) ============================== */
+const kv = (l, v, cls = '') => `<div class="kv"><span>${l}</span><b class="${cls}">${v}</b></div>`;
+const group = (title, inner, note = '') => `<div class="fgroup">${title ? `<div class="ftitle">${title}</div>` : ''}<div class="form">${inner}</div>${note ? `<p class="fnote">${note}</p>` : ''}</div>`;
+function hppInputs(kode){
+  const h = HPP[kode] || {};
+  return group('HPP produk ini', `
+    <label class="frow"><span>HPP % harga jual</span><span class="fin"><input inputmode="decimal" placeholder="${fPct(+S.hppDefault,0).replace('%','')} (default)" data-hpp="${esc(kode)}|pct" value="${isNum(h.pct) ? +(h.pct*100).toFixed(2) : ''}"><em>%</em></span></label>
+    <label class="frow"><span>atau HPP per unit</span><span class="fin"><em>Rp</em><input inputmode="numeric" placeholder="—" data-hpp="${esc(kode)}|rp" value="${isNum(h.rp) ? h.rp : ''}"></span></label>`,
+    'Isi salah satu. Jika keduanya diisi, HPP % yang dipakai. Perubahan langsung menghitung ulang profit.');
+}
+function stockInputs(key){
+  const s = STOCK[key] || {}, v = f => isNum(s[f]) ? s[f] : '';
+  return group('Stok', `
+    <label class="frow"><span>Stok saat ini</span><span class="fin"><input inputmode="numeric" placeholder="belum diisi" data-stk="${esc(key)}|stok" value="${v('stok')}"><em>unit</em></span></label>
+    <label class="frow"><span>Dalam perjalanan</span><span class="fin"><input inputmode="numeric" placeholder="0" data-stk="${esc(key)}|otw" value="${v('otw')}"><em>unit</em></span></label>
+    <label class="frow"><span>Lead time khusus</span><span class="fin"><input inputmode="numeric" placeholder="${S.leadTime} (default)" data-stk="${esc(key)}|lead" value="${v('lead')}"><em>hari</em></span></label>`);
+}
+function targetGroup(tg, roas, note){
+  if (!tg) return group('Target ROAS', kv('Target', '—'), esc(note));
+  return group('Target ROAS', kv('Target disarankan', `<span style="color:var(--accent-ink);font-weight:700;font-size:16px">${fT(tg.rec)}</span>`) + kv('Batas impas (minimum)', fT(tg.min)) + (roas != null ? kv('ROAS aktual', fX(roas), roas < tg.min ? 'neg' : roas >= tg.rec ? 'pos' : '') : ''), esc(note));
+}
+function stockGroup(g, flag){
+  return `<div class="fgroup"><div class="ftitle">Stok produk ini</div><div class="form">${kv('Sisa stok (semua variasi)', g.days === null ? '—' : `±${fD(g.days)} hari`, g.days !== null && g.days < +S.leadTime ? 'neg' : '')}${kv('SKU habis / kritis', `${g.urg.length} dari ${g.n} SKU`, g.urg.length ? 'neg' : '')}</div>
+    ${g.urg.length ? `<div class="list" style="margin-top:10px">${g.urg.slice(0,5).map(i => `<div class="row tap" data-sheet="item|${esc(i.key)}"><div class="r-main"><div class="r-t clamp1">${itemSub(i)}</div><div class="r-s">${i.st === 'HABIS' ? 'Sudah habis' : `Habis ±${fD(i.daysLeft)} hari`} · pesan ${fN(i.qty)} unit</div></div>${pill(i.st)}${chev}</div>`).join('')}</div>` : ''}
+    ${flag ? `<p class="fnote">${flag.k === 'HOLD' ? 'Menaikkan budget sekarang akan menghabiskan stok sebelum barang restock tiba.' : 'Stok cukup untuk waktu lama — iklan bisa dipakai untuk mempercepat perputaran stok.'}</p>` : ''}</div>`;
+}
+const SHEETS = {
+  ad(id){
+    const a = R.ads[+id]; if (!a) return null;
+    return { head: `<div style="flex:1;min-width:0"><div style="margin-bottom:8px">${pill(a.st)}</div><h3>${esc(a.name)}</h3><div class="cap">${esc(a.mode)}${a.paused ? ' · Dijeda' : ''}${a.prodName !== a.name ? ' · ' + esc(a.prodName) : ''}</div></div>`,
+      live: () => { const a = R.ads[+id];
+        return `<div class="card" style="margin-top:8px">${a.flag ? flagChip(a.flag).replace('class="flag', 'style="margin:0 0 14px" class="flag') : ''}<div class="bigstat" style="text-align:left;padding:0"><div class="cap">Profit bersih</div><div class="v ${sgn(a.profit)}">${plus(a.profit)}${fRp(a.profit)}</div></div>${gauge(a.roas, a.bep, a.st)}
+          <div class="advice c-${ST[a.st].c}">${ic('bulb',17)}<span>${esc(a.act)}</span></div></div>
+        ${targetGroup(a.tgt, a.roas, tgtAdvice(a) + (a.mapped ? '' : ' Dihitung dengan HPP default.'))}
+        ${a.stock ? stockGroup(a.stock, a.flag) : ''}
+        ${group('Hitungan profit', kv('Omzet iklan', fRp(a.rev)) + kv(`HPP ${fPct(a.hpp,0)} + potongan ${fPct(R.pot,0)}`, fRp(-a.rev * (1 - a.margin))) + kv(`Biaya iklan + PPN ${fPct(+S.ppn,0)}`, fRp(-a.costPpn)) + kv('<b style="color:var(--label)">Profit bersih</b>', fRp(a.profit), sgn(a.profit)), esc(a.note))}
+        ${group('Kinerja', kv('ROAS', fX(a.roas)) + kv('BEP ROAS (impas)', fX(a.bep)) + kv('Batas scale', fX(a.bep * (1 + +S.buffer))) + kv('ACOS', fPct(a.acos)) + kv('Margin sebelum iklan', fPct(a.margin), a.margin <= 0 ? 'neg' : ''))}
+        ${group('Funnel', kv('Dilihat', fN(a.views)) + kv('Klik', fN(a.clicks)) + kv('CTR', fPct(a.ctr,2), a.views && a.ctr < S.ctrMin ? 'neg' : '') + kv('Pesanan', fN(a.conv)) + kv('CVR', fPct(a.cvr,2), a.clicks && a.cvr < S.cvrMin ? 'neg' : '') + kv('Produk terjual', fN(a.sold)) + kv('Biaya per klik', fRp(a.cpc)))}`; },
+      inputs: a.prod ? hppInputs(a.prod.kode) : '' };
+  },
+  prod(kode){
+    const p = R.pMap.get(kode); if (!p) return null;
+    return { head: `<div style="flex:1;min-width:0"><div style="margin-bottom:8px">${pill(p.st, true)}</div><h3>${esc(p.nama)}</h3><div class="cap">Kode ${esc(p.kode)}</div></div>`,
+      live: () => { const p = R.pMap.get(kode); const ads = R.ads.filter(a => a.kode === kode);
+        return `<div class="card" style="margin-top:8px"><div class="cap">Profit bersih produk</div><div class="bigstat" style="text-align:left;padding:0"><div class="v ${sgn(p.profit)}">${plus(p.profit)}${fRp(p.profit)}</div></div>${p.spend ? gauge(p.roas, p.bep, p.st) : `<p class="cap" style="margin:8px 0 0">Belum diiklankan · iklan harus mencapai ROAS ≥ <b>${fX(p.bep)}</b> agar tidak rugi.</p>`}
+          <div class="advice c-${ST[p.st].c}">${ic('bulb',17)}<span>${esc(p.act)}</span></div></div>
+        ${targetGroup(p.tgt, p.spend ? p.roas : null, p.tgt ? (p.spend ? `Untuk iklan GMV Max produk ini, isi target ROAS ${fT(p.tgt.rec)}. Di bawah ${fT(p.tgt.min)}, iklan rugi.` : `Kalau mulai iklan GMV Max, isi target ROAS ${fT(p.tgt.rec)}. Jangan di bawah ${fT(p.tgt.min)}.`) : 'Margin sudah negatif sebelum iklan — perbaiki harga atau HPP dulu.')}
+        ${p.stock ? stockGroup(p.stock, p.flag) : ''}
+        ${group('Hitungan profit', kv('Penjualan', fRp(p.sales)) + kv(`HPP ${fPct(p.hpp,1)}${p.hppSet ? '' : ' (default)'}`, fRp(-p.sales * p.hpp)) + kv(`Potongan ${fPct(R.pot,0)}`, fRp(-p.sales * R.pot)) + kv('Biaya iklan + PPN', fRp(-p.spend * (1 + +S.ppn))) + kv('<b style="color:var(--label)">Profit bersih</b>', fRp(p.profit), sgn(p.profit)))}
+        ${group('Kinerja', kv('Pesanan', fN(p.orders)) + kv('Unit terjual', fN(p.units)) + kv('Harga rata-rata', fRp(p.avg)) + kv('CTR produk', fPct(p.ctr,2)) + kv('CVR produk', fPct(p.cvr,2)) + kv('TACOS', fPct(p.tacos)) + kv('Porsi penjualan dari iklan', fPct(p.adShare)) + kv('BEP ROAS', fX(p.bep)))}
+        ${ads.length ? `<div class="fgroup"><div class="ftitle">Iklan untuk produk ini</div><div class="list">${ads.map(a => `<div class="row tap" data-sheet="ad|${a.idx}"><div class="r-main"><div class="r-t clamp1">${esc(a.name)}</div><div class="r-s">${esc(a.mode)} · ROAS ${fX(a.roas)}</div></div><div class="r-end"><b class="${sgn(a.profit)}">${fRpS(a.profit)}</b>${pill(a.st)}</div>${chev}</div>`).join('')}</div></div>` : ''}`; },
+      inputs: hppInputs(kode) };
+  },
+  item(key){
+    const i = R.items.find(x => x.key === key); if (!i) return null;
+    return { head: `<div style="flex:1;min-width:0"><div style="margin-bottom:8px" data-sheet-pill>${pill(i.st)}</div><h3>${esc(i.nama)}</h3><div class="cap">${itemSub(i)}</div></div>`,
+      live: () => { const i = R.items.find(x => x.key === key);
+        const big = i.stok === null ? '<div class="v" style="color:var(--label-3)">—</div><div class="cap">Isi stok untuk menghitung forecast</div>'
+          : i.demand <= 0 ? `<div class="v">${fN(i.eff)}</div><div class="cap">unit · tidak ada penjualan di periode ini</div>`
+          : `<div class="v ${i.urg ? 'neg' : ''}">${fD(i.daysLeft)} <span style="font-size:20px;font-weight:600">hari</span></div><div class="cap">${i.stok <= 0 ? 'Stok sudah habis' : 'stok tersisa · habis sekitar ' + fDate(i.outDate)}</div>`;
+        return `<div class="card" style="margin-top:8px"><div class="bigstat">${big}</div>
+          ${i.qty ? `<div style="display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap"><span class="pill c-${ST[i.st].c}" style="font-size:14px;padding:6px 14px">Pesan ${fN(i.qty)} unit</span><span class="pill c-gray" style="font-size:14px;padding:6px 14px">≈ ${fRpS(i.modal)}</span></div>` : ''}
+          <div class="advice c-${ST[i.st].c}">${ic('bulb',17)}<span>${esc(i.act)}</span></div></div>
+        ${group('Forecast', kv('Terjual (periode)', `${fN(i.units)} unit`) + kv('Rata-rata per hari', fD(i.daily)) + kv('Proyeksi per hari', fD(i.demand)) + kv('Stok efektif', i.eff === null ? '—' : `${fN(i.eff)} unit`) + kv('Lead time', `${i.lead} hari`) + kv('Reorder point', `${fN(i.rop)} unit`) + kv('Qty restock disarankan', i.qty === null ? '—' : `${fN(i.qty)} unit`) + kv('Estimasi modal', i.modal === null ? '—' : fRp(i.modal)),
+          `Reorder point = proyeksi/hari × (lead time + ${S.safety} hari safety). Qty restock = proyeksi/hari × (lead time + safety + ${S.cover} hari cover) − stok efektif.`)}
+        ${i.ads.length ? `<div class="fgroup"><div class="ftitle">Iklan aktif untuk produk ini</div><div class="list">${i.ads.map(a => `<div class="row tap" data-sheet="ad|${a.idx}"><div class="r-main"><div class="r-t clamp1">${esc(a.name)}</div><div class="r-s">${esc(a.mode)} · ROAS ${fX(a.roas)}</div></div><div class="r-end">${pill(a.st)}</div>${chev}</div>`).join('')}</div>${i.urg ? '<p class="fnote">Stok SKU ini menipis — tahan kenaikan budget iklan sampai restock tiba.</p>' : ''}</div>` : ''}`; },
+      inputs: stockInputs(key) };
+  },
+  import(){
+    return { head: `<div style="flex:1"><h3>Impor laporan</h3><div class="cap">Laporan Shopee untuk periode yang sama</div></div>`,
+      live: () => `${dropTiles()}<p class="fnote" style="padding:12px 2px 0">Laporan iklan: Iklan Shopee → Laporan → <b>Semua Laporan Iklan CPC</b> (CSV).<br>Laporan produk: Bisnis Saya → Performa Produk → <b>Unduh</b> (parentskudetail, XLSX).<br>File juga bisa diseret ke jendela ini.</p>
+        <div class="fgroup"><div class="list">${menuRows()}</div></div>`, inputs:'' };
+  }
+};
+function openSheet(type, id){
+  const s = SHEETS[type](id); if (!s) return;
+  SHEET = {type, id, s};
+  $('#sheetHead').innerHTML = s.head + `<button class="xbtn" data-act="closeSheet" aria-label="Tutup">${ic('x',16,2.4)}</button>`;
+  $('#sheetBody').innerHTML = `${s.inputsFirst ? s.inputs : ''}<div id="sheetLive">${s.live()}</div>${s.inputs}`;
+  $('#sheetBody').scrollTop = 0;
+  const w = $('#sheetWrap'); w.classList.add('on'); w.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function refreshSheet(){
+  if (!SHEET) return;
+  const live = $('#sheetLive'); if (live) live.innerHTML = SHEET.s.live();
+  if (SHEET.type === 'item'){ const i = R.items.find(x => x.key === SHEET.id); const p = $('[data-sheet-pill]'); if (i && p) p.innerHTML = pill(i.st); }
+  if (SHEET.type === 'import') $('#sheetBody').innerHTML = `<div id="sheetLive">${SHEET.s.live()}</div>`;
+}
+function closeSheet(){
+  const w = $('#sheetWrap'); w.classList.remove('on'); w.setAttribute('aria-hidden','true');
+  document.body.style.overflow = ''; SHEET = null;
+  if (DIRTY){ DIRTY = false; renderView(); }
+}
+
+/* ============================== render ============================== */
+const NAV_A = [['ringkasan','pie','Ringkasan','blue'],['iklan','megaphone','Iklan','orange'],['produk','bag','Produk','indigo'],['stok','restock','Stok & Restock','green'],['riwayat','chart','Riwayat','purple']];
+const NAV_B = [['hpp','coin','HPP Produk','pink'],['inputstok','archive','Stok Gudang','teal'],['setting','gear','Pengaturan','gray']];
+const shopName = () => T(S.shopName) || (R && R.A.shop) || '';
+function navBadge(v){
+  if (!R) return '';
+  if (v === 'iklan'){ const n = R.ads.filter(a => a.st === 'RUGI').length; return n ? `<span class="badge alert">${n}</span>` : (R.ads.length ? `<span class="badge">${R.ads.length}</span>` : ''); }
+  if (v === 'produk') return R.products.length ? `<span class="badge">${R.products.length}</span>` : '';
+  if (v === 'stok') return R.priority.length ? `<span class="badge alert">${R.priority.length}</span>` : '';
+  if (v === 'hpp') return R.products.length ? `<span class="badge">${R.hppFilled}/${R.products.length}</span>` : '';
+  if (v === 'riwayat'){ const n = histList().length; return n ? `<span class="badge">${n}</span>` : ''; }
+  if (v === 'inputstok') return R.items.length ? `<span class="badge">${R.stockFilled}/${R.items.length}</span>` : '';
+  return '';
+}
+function renderChrome(){
+  const nav = list => list.map(([v,i,l,c]) => `<button class="nav" data-go="${v}" ${VIEW === v ? 'aria-current="page"' : ''}><span class="nic" style="--c:var(--${c})">${ic(i,15,2.1)}</span><span>${l}</span>${navBadge(v)}</button>`).join('');
+  $('#navA').innerHTML = nav(NAV_A); $('#navB').innerHTML = nav(NAV_B);
+  $('#sbIcon').innerHTML = APPICON(22);
+  $('#sbShop').textContent = [shopName(), fPeriod(R.A.period)].filter(Boolean).join(' · ') || 'Shopee';
+  const fl = (ok, t, s) => `<div class="fileline"><span class="st ${ok ? 'ok' : ''}">${ok ? ic('check',12,3) : ''}</span><div style="min-width:0"><b>${t}</b><span class="clamp1">${s}</span></div></div>`;
+  $('#fileCard').innerHTML = fl(!!RAW.ads, 'Laporan iklan', RAW.ads ? `${R.ads.length} iklan · ${esc(fPeriod(R.A.period) || RAW.adsFile)}` : 'Belum diimpor')
+    + fl(!!RAW.prod, 'Laporan produk', RAW.prod ? `${R.products.length} produk · ${R.items.length} SKU` : 'Belum diimpor');
+  const tabs = [['ringkasan','pie','Ringkasan'],['iklan','megaphone','Iklan'],['produk','bag','Produk'],['stok','restock','Restock'],['lainnya','ellipsis','Lainnya']];
+  const sub = ['hpp','inputstok','setting','lainnya','riwayat'];
+  $('#tabbar').innerHTML = tabs.map(([v,i,l]) => { const cur = VIEW === v || (v === 'lainnya' && sub.includes(VIEW));
+    const n = v === 'iklan' ? R.ads.filter(a => a.st === 'RUGI').length : v === 'stok' ? R.priority.length : 0;
+    return `<button data-go="${v}" ${cur ? 'aria-current="page"' : ''}>${ic(i,24,1.7)}<span>${l}</span>${n ? `<span class="tb">${n}</span>` : ''}</button>`; }).join('');
+}
+function render(skipView){
+  R = compute();
+  R.snap = makeSnap(R);
+  if (R.snap) queueSnap();
+  renderChrome();
+  if (!skipView) renderView();
+}
+function renderView(){
+  const has = RAW.ads || RAW.prod;
+  const v = !has && !['setting','lainnya','riwayat'].includes(VIEW) ? vWelcome()
+    : ({ringkasan:vRingkasan, iklan:vIklan, produk:vProduk, stok:vStok, riwayat:vRiwayat, hpp:vHpp, inputstok:vInputStok, setting:vSetting, lainnya:vLainnya}[VIEW] || vRingkasan)();
+  $('#view').innerHTML = v;
+}
+function go(v, f){
+  if (f) Object.assign(UI, f);
+  VIEW = v; try{ sessionStorage.setItem('apa_view', v); }catch(e){}
+  render(); window.scrollTo({top:0});
+}
+
+/* ============================== actions ============================== */
+async function loadFile(file, kind){
+  try{
+    const rows = trimRows(await readTable(file, kind));
+    if (kind === 'ads'){
+      const p = parseAds(rows); if (!p.ads.length) throw new Error('Tidak ada baris iklan di file ini');
+      RAW.ads = rows; RAW.adsFile = file.name;
+      toast(`${p.ads.length} iklan diimpor${p.period ? ' · ' + fPeriod(p.period) : ''}`);
+    } else {
+      const p = parseProd(rows); if (!p.parents.length) throw new Error('Tidak ada produk di file ini');
+      RAW.prod = rows; RAW.prodFile = file.name;
+      toast(`${p.parents.length} produk · ${p.items.length} SKU diimpor`);
+    }
+    if (!/-contoh\./.test(file.name)){ let n = 0; Object.keys(HIST).forEach(k => { if (HIST[k].demo){ delete HIST[k]; n++; } }); if (n) LS.set('hist', HIST); }
+    LS.set('raw', RAW); render(); refreshSheet();
+    if (!$('#onb').classList.contains('hidden')) renderOnb();
+  } catch(e){ console.error(e); toast(e.message, false); }
+}
+async function importStock(file){
+  try{
+    let rows;
+    if (/\.(csv|txt)$/i.test(file.name)) rows = parseCSV(await file.text());
+    else { const wb = XLSX.read(await file.arrayBuffer(), {type:'array'}); rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, raw:true, defval:''}); }
+    const hi = rows.findIndex(r => r.some(c => /^stok/i.test(T(c))));
+    if (hi < 0) throw new Error('Kolom “Stok” tidak ditemukan — gunakan template');
+    const h = rows[hi].map(c => T(c).toLowerCase());
+    const iStok = h.findIndex(c => c.startsWith('stok') && !c.includes('jalan'));
+    const iOtw = h.findIndex(c => c.includes('jalan') || c.includes('otw'));
+    const iLead = h.findIndex(c => c.includes('lead'));
+    const iCode = h.findIndex(c => /sku|kode|id/.test(c));
+    if (iCode < 0) throw new Error('Kolom kode (SKU / Kode Variasi / Kode Produk) tidak ditemukan');
+    const idx = new Map();
+    R.items.forEach(it => { [it.varId, it.sku, it.kode].forEach((k,j) => { if (k && k !== '-' && !(j === 1 && it.dup) && !(j === 2 && it.varId !== '-')) idx.set(k, it.key); }); });
+    let ok = 0, miss = 0;
+    for (const r of rows.slice(hi + 1)){
+      const c = code(r[iCode]); if (!c) continue;
+      const key = idx.get(c); if (!key){ miss++; continue; }
+      const o = STOCK[key] || (STOCK[key] = {});
+      if (T(r[iStok]) !== '') o.stok = num(r[iStok]);
+      if (iOtw >= 0 && T(r[iOtw]) !== '') o.otw = num(r[iOtw]);
+      if (iLead >= 0 && T(r[iLead]) !== '') o.lead = num(r[iLead]);
+      ok++;
+    }
+    LS.set('stock', STOCK); render();
+    toast(`Stok ${ok} SKU diperbarui${miss ? ` · ${miss} kode tidak cocok` : ''}`);
+  } catch(e){ toast(e.message, false); }
+}
+function download(name, text, type = 'text/csv'){
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type: type + ';charset=utf-8'})); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+const csvRow = arr => arr.map(v => { const s = String(v ?? ''); return /[",;\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }).join(',');
+
+const hasUserData = () => !!(RAW.ads || RAW.prod || Object.keys(HPP).length || Object.keys(STOCK).length || Object.keys(HIST).some(k => !HIST[k].demo));
+const DEMO_CONFIRM = 'Data contoh akan menggantikan laporan, HPP, stok, dan riwayat yang tersimpan. Lanjutkan?';
+const ACTS = {
+  import(){ openSheet('import'); },
+  closeSheet,
+  demo(){ if (hasUserData() && !confirm(DEMO_CONFIRM)) return; closeSheet(); demo(); },
+  report: openReport, closeReport, printReport,
+  export(){ flushSnap(); download('ads-profit-backup.json', JSON.stringify({app:'ads-profit-analyzer', v:2, saved:new Date().toISOString(), settings:S, hpp:HPP, stock:STOCK, hist:HIST}, null, 1), 'application/json'); toast('Backup disimpan'); },
+  restore(){ $('#fBackup').click(); },
+  clearReports(){ if (!confirm('Mulai periode baru? Laporan saat ini dikosongkan, ringkasannya tetap tersimpan di Riwayat. HPP, stok, dan pengaturan juga tetap.')) return; flushSnap(); RAW = {ads:null, prod:null, adsFile:'', prodFile:''}; LS.set('raw', RAW); closeSheet(); go('ringkasan'); },
+  reset(){ if (!confirm('Hapus SEMUA data (laporan, HPP, stok, pengaturan) dari browser ini? Tindakan ini tidak bisa dibatalkan.')) return; ['raw','hpp','stock','settings','hist'].forEach(LS.del); S = Object.assign({}, DEFAULTS); HPP = {}; STOCK = {}; HIST = {}; clearTimeout(snapT); RAW = {ads:null, prod:null, adsFile:'', prodFile:''}; closeSheet(); go('ringkasan'); showOnb(); },
+  theme(){ const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); const nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = nx; try{ localStorage.setItem('apa_theme', nx); }catch(e){} },
+  importStock(){ $('#fStock').click(); },
+  tplStock(){ download('template-stok.csv', [csvRow(['Kode Variasi / Kode Produk','SKU','Nama','Variasi','Stok Saat Ini','Dalam Perjalanan','Lead Time']), ...R.items.map(i => csvRow([i.varId !== '-' ? i.varId : i.kode, i.sku, i.nama, i.vname, i.stok ?? '', (STOCK[i.key]||{}).otw ?? '', (STOCK[i.key]||{}).lead ?? '']))].join('\n')); },
+  csvRestock(){ download(`restock-${new Date().toISOString().slice(0,10)}.csv`, [csvRow(['Prioritas','Status','Produk','Variasi','SKU','Kode Variasi/Produk','Sisa Hari','Perkiraan Habis','Stok Efektif','Permintaan/Hari','Reorder Point','Qty Restock','Estimasi Modal (Rp)','Lead Time']),
+    ...R.priority.map(i => csvRow([i.rank, ST[i.st].l, i.nama, i.vname, i.sku, i.key, i.daysLeft.toFixed(1), i.outDate ? i.outDate.toISOString().slice(0,10) : '', i.eff, i.demand.toFixed(2), i.rop, i.qty, Math.round(i.modal), i.lead]))].join('\n')); }
+};
+
+/* ============================== onboarding ============================== */
+let ONB = 0;
+function showOnb(step = 0){ ONB = step; $('#onb').classList.remove('hidden'); document.body.style.overflow = 'hidden'; renderOnb(); }
+function renderOnb(){
+  const dots = `<div class="dots">${[0,1,2].map(i => `<i class="${i === ONB ? 'on' : ''}"></i>`).join('')}</div>`;
+  let h;
+  if (ONB === 0) h = `<div class="appicon">${APPICON(50)}</div>
+    <h1>Ads Profit Analyzer<span class="pro">PRO</span></h1>
+    <p class="lead">Ketahui iklan mana yang benar-benar menghasilkan profit — dan stok mana yang harus dipesan lebih dulu.</p>
+    ${FEATURES}
+    <div class="onb-actions"><button class="btn primary lg" data-onb="next">Mulai</button></div>${dots}`;
+  else if (ONB === 1) h = `<div class="ico-lg" style="--c:var(--blue)">${ic('store',32,1.8)}</div>
+    <h1>Apa nama toko Anda?</h1>
+    <p class="lead">Nama ini tampil di dashboard dan bisa diubah kapan saja di Pengaturan.</p>
+    <input class="big-input" id="onbName" placeholder="Nama toko" maxlength="60" autocomplete="organization" value="${esc(S.shopName)}">
+    <div class="onb-actions"><button class="btn primary lg" data-onb="name" ${T(S.shopName) ? '' : 'disabled'}>Lanjut</button><button class="btn link" data-onb="back">Kembali</button></div>${dots}`;
+  else h = `<div class="ico-lg" style="--c:var(--green)">${ic('imp',32,1.9)}</div>
+    <h1>Impor laporan ${esc(S.shopName)}</h1>
+    <p class="lead">Dua file dari Seller Centre Shopee. Semua dihitung di perangkat ini — tidak ada data yang dikirim ke mana pun.</p>
+    <div style="text-align:left">${dropTiles()}</div>
+    <div class="onb-actions"><button class="btn primary lg" data-onb="done">${RAW.ads || RAW.prod ? 'Buka dashboard' : 'Lewati, impor nanti'}</button><button class="btn link" data-onb="demo">Coba dengan data contoh</button></div>${dots}`;
+  $('#onbBody').innerHTML = `<div class="onb-card" style="animation:fadeUp .45s cubic-bezier(.2,.8,.3,1)">${h}</div>`;
+  if (ONB === 1) setTimeout(() => { const i = $('#onbName'); if (i){ i.focus(); i.select(); } }, 60);
+}
+function finishOnb(){ S.onboarded = true; LS.set('settings', S); $('#onb').classList.add('hidden'); document.body.style.overflow = ''; go('ringkasan'); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-onb]'); if (!b) return;
+  const a = b.dataset.onb;
+  if (a === 'next'){ ONB = 1; renderOnb(); }
+  else if (a === 'back'){ ONB = Math.max(0, ONB - 1); renderOnb(); }
+  else if (a === 'name'){ const v = T($('#onbName').value); if (!v) return; S.shopName = v; LS.set('settings', S); ONB = 2; renderOnb(); }
+  else if (a === 'done') finishOnb();
+  else if (a === 'demo'){ if (hasUserData() && !confirm(DEMO_CONFIRM)) return; demo(); finishOnb(); }
+});
+document.addEventListener('input', e => { if (e.target.id === 'onbName'){ const btn = $('[data-onb="name"]'); if (btn) btn.disabled = !T(e.target.value); } });
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'onbName') $('[data-onb="name"]').click(); });
+
+/* ============================== demo data ============================== */
+function demo(){
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const P = [
+    ['Gamis Ceruti Premium', 189000, ['Hitam','Navy','Mocca','Sage'], 0.42], ['Hijab Pashmina Kaos', 45000, ['Hitam','Putih','Dusty Pink','Army','Coksu'], 0.38],
+    ['Tunik Linen Oversize', 159000, ['S','M','L','XL'], 0.47], ['Khimar Syari Jersey', 79000, ['Hitam','Maroon','Navy'], 0.40],
+    ['Inner Ninja Rajut', 25000, null, 0.35], ['Rok Plisket Premium', 119000, ['Hitam','Mocca','Olive'], 0.45],
+    ['Set Mukena Travel', 229000, ['Lilac','Sage'], 0.52], ['Bergo Instan Daily', 39000, ['Hitam','Cream','Abu'], 0.36],
+    ['Outer Kimono Motif', 139000, null, 0.55], ['Kaos Kaki Wudhu', 19000, null, 0.30], ['Cardigan Rajut Long', 175000, ['Cream','Coklat'], 0.50], ['Bros Hijab Mutiara', 15000, null, 0.33]
+  ];
+  const sales = [620, 1450, 210, 480, 900, 160, 35, 700, 22, 300, 0, 90];
+  const hdr = ['Kode Produk','Produk','Status Produk Saat Ini','Kode Variasi','Nama Variasi','Status Variasi Saat Ini','Kode Variasi','SKU Induk','Total Penjualan (Pesanan Dibuat) (IDR)','Penjualan (Pesanan Siap Dikirim) (IDR)','Jumlah Produk Dilihat','Produk Diklik','Pesanan Dibuat','Pesanan Siap Dikirim','Produk (Pesanan Dibuat)','Produk (Pesanan Siap Dikirim)'];
+  const prodRows = [hdr], stock = {}, hpp = {};
+  P.forEach(([nama, price, vars, h], i) => {
+    const kode = String(23000000000 + i * 7919 * 13), units = sales[i], orders = Math.round(units * 0.85);
+    const views = Math.round(units * (40 + rnd() * 60)) + 400, clicks = Math.round(views * (0.04 + rnd() * 0.06));
+    prodRows.push([kode, nama, 'Normal', '-', '-', '-', '-', 'SKU-' + (i+1), units * price, Math.round(units*0.95) * price, views, clicks, orders, Math.round(orders*0.95), units, Math.round(units*0.95)]);
+    if (i % 3 !== 2) hpp[kode] = i % 2 ? {pct:h} : {rp: Math.round(price * h / 500) * 500};
+    if (vars){
+      const w = vars.map(() => 0.4 + rnd()); const ws = w.reduce((a,b) => a+b, 0);
+      vars.forEach((v, j) => {
+        const vid = String(180000000000 + i * 1000 + j), sku = 'SKU-' + (i+1) + '-' + String(j+1).padStart(2,'0'), u = Math.round(units * w[j] / ws);
+        prodRows.push([kode, nama, 'Normal', vid, v, i === 3 && j === 2 ? 'Dihapus' : 'Normal', sku, '', u * price, Math.round(u*0.95) * price, '-', '-', '-', '-', u, Math.round(u*0.95)]);
+        const daily = u / 31, r = rnd();
+        const d = r < 0.12 ? 0 : r < 0.3 ? 4 + rnd()*8 : r < 0.45 ? 16 + rnd()*5 : r < 0.85 ? 25 + rnd()*50 : 100 + rnd()*80;
+        if (!(i === 7 && j === 2)) stock[vid] = {stok: Math.round(daily * d) + (u === 0 ? 12 : 0), otw: r > 0.2 && r < 0.3 ? Math.round(daily * 10) : null, lead: i === 6 ? 21 : null};
+      });
+    } else stock[kode] = {stok: i === 9 ? 0 : i === 8 ? 140 : i === 4 ? Math.round(units / 31 * 125) : Math.round(units / 31 * (10 + rnd() * 30)), otw:null, lead:null};
+  });
+  const adHdr = ['Urutan','Nama Iklan','Status','Jenis Iklan','Kode Produk','Tampilan Iklan','Mode Bidding','Penempatan Iklan','Tanggal Mulai','Tanggal Selesai','Dilihat','Jumlah Klik','Persentase Klik','Konversi','Produk Terjual','Omzet Penjualan','Biaya'];
+  const lines = [['Semua Laporan Iklan CPC - Shopee Indonesia'], ['Nama Toko','Toko Contoh Hijab'], ['Periode','01/10/2026 - 31/10/2026'], [], adHdr];
+  [[0,'GMV Max ROAS','Berjalan',1900000,11.5],[1,'Iklan Manual','Berjalan',2400000,6.9],[1,'GMV Max ROAS','Berjalan',900000,9.8],[2,'Iklan Manual','Berjalan',1100000,3.1],
+   [3,'Iklan Manual','Dijeda',650000,2.4],[4,'GMV Max Auto','Berjalan',380000,12.4],[5,'Iklan Manual','Berjalan',820000,2.2],[6,'Iklan Manual','Berjalan',540000,3.6],
+   [7,'GMV Max ROAS','Berjalan',30000,8],['-','Iklan Produk Otomatis','Berjalan',1250000,4.2],[9,'Iklan Manual','Berjalan',210000,5.1],[8,'Iklan Manual','Berjalan',300000,1.6]
+  ].forEach(([pi, mode, st, cost, roas], n) => {
+    const kode = pi === '-' ? '-' : prodRows.find(r => r[1] === P[pi][0])[0];
+    const rev = Math.round(cost * roas), price = pi === '-' ? 90000 : P[pi][1];
+    const sold = Math.max(1, Math.round(rev / price)), conv = Math.round(sold * 0.9);
+    const clicks = Math.round(conv / (pi === 4 ? 0.012 : 0.025 + rnd() * 0.04)), views = Math.round(clicks / (n === 6 ? 0.007 : 0.015 + rnd() * 0.03));
+    lines.push([n+1, pi === '-' ? 'Iklan Produk Otomatis' : P[pi][0], st, 'Iklan Produk', kode, '-', mode, 'Semua Penempatan', '01/10/2026', 'Tidak Terbatas', views, clicks, '', conv, sold, rev, cost]);
+  });
+  RAW = {ads: trimRows(parseCSV(lines.map(csvRow).join('\n'))), prod: trimRows(prodRows), adsFile:'Data_Keseluruhan_Iklan_Shopee-contoh.csv', prodFile:'parentskudetail-contoh.xlsx'};
+  HPP = hpp; STOCK = stock; S.refDate = '2026-11-01';
+  R = compute(); const cur = makeSnap(R); HIST = cur ? demoHistory(cur) : {};
+  LS.set('raw', RAW); LS.set('settings', S); LS.set('hpp', HPP); LS.set('stock', STOCK); LS.set('hist', HIST);
+  go('ringkasan'); toast('Data contoh dimuat');
+}
+
+// two earlier months for the demo, derived from the current demo period so the numbers stay coherent
+function demoHistory(cur){
+  let seed = 23; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const ppn = +S.ppn, buf = +S.buffer, out = {};
+  [['2026-08-01','2026-08-31','Agu 2026','Agu 26',31,0.74],['2026-09-01','2026-09-30','Sep 2026','Sep 26',30,0.88]].forEach(([start, end, label, short, days, f]) => {
+    const ads = cur.ads.map(a => {
+      const m = a.rev > 0 ? (a.profit + a.cost * (1 + ppn)) / a.rev : 0.3;
+      const cost = Math.round(a.cost * f * (0.7 + rnd() * 0.55)), rev = Math.round(a.rev * f * (0.65 + rnd() * 0.6)), roas = cost > 0 ? rev / cost : 0;
+      const st = cost < S.minSpend ? 'DATA KURANG' : !a.bep ? 'RUGI' : roas >= a.bep * (1 + buf) ? 'SCALE' : roas >= a.bep ? 'PERTAHANKAN' : 'RUGI';
+      return Object.assign({}, a, {cost, rev, roas, profit: rev * m - cost * (1 + ppn), st, m});
+    });
+    const prods = cur.prods.map(p => {
+      const mp = p.sales > 0 ? (p.profit + p.spend * (1 + ppn)) / p.sales : 0, g = f * (0.8 + rnd() * 0.4);
+      const sales = Math.round(p.sales * g), spend = Math.round(p.spend * f * (0.75 + rnd() * 0.5));
+      return Object.assign({}, p, {sales, units: Math.round(p.units * g), spend, profit: sales * mp - spend * (1 + ppn)});
+    });
+    const spend = sum(ads, a => a.cost), adRev = sum(ads, a => a.rev), contrib = sum(ads, a => a.rev * a.m), sales = sum(prods, p => p.sales), k = sales / (cur.tot.sales || 1);
+    const unmapped = sum(ads.filter(a => !a.kode || a.kode === '-'), a => a.cost * (1 + ppn));
+    ads.forEach(a => delete a.m);
+    out[start + '_' + end] = { key: start + '_' + end, start, end, label, short, shop: cur.shop, demo: true, saved: new Date().toISOString(), days, hasAds: true, hasProd: true,
+      tot: { sales, orders: Math.round(cur.tot.orders * k), units: Math.round(cur.tot.units * k), spend, adRev, adProfit: sum(ads, a => a.profit), net: sum(prods, p => p.profit) - unmapped,
+        roas: spend ? adRev / spend : 0, bep: contrib > 0 ? adRev * (1 + ppn) / contrib : null, tacos: sales ? spend / sales : 0, acos: adRev ? spend / adRev : 0, adShare: sales ? adRev / sales : 0 },
+      n: countBy(ads, 'st'), ads, prods };
+  });
+  out[cur.key] = cur;
+  return out;
+}
+
+/* ============================== events ============================== */
+$('#fAds').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'ads'); e.target.value = ''; };
+$('#fProd').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'prod'); e.target.value = ''; };
+$('#fStock').onchange = e => { if (e.target.files[0]) importStock(e.target.files[0]); e.target.value = ''; };
+$('#fBackup').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try{ const d = JSON.parse(await f.text()); if (!d || d.app !== 'ads-profit-analyzer') throw new Error('Bukan file backup aplikasi ini');
+    S = Object.assign({}, DEFAULTS, d.settings || {}); HPP = d.hpp || {}; STOCK = d.stock || {}; if (d.hist) HIST = d.hist; LS.set('settings',S); LS.set('hpp',HPP); LS.set('stock',STOCK); LS.set('hist',HIST); render(); refreshSheet(); toast('Backup dipulihkan'); }
+  catch(err){ toast(err.message, false); }
+};
+document.addEventListener('click', e => {
+  const dh = e.target.closest('[data-delhist]'); if (dh){ const k = dh.dataset.delhist, s = HIST[k]; if (s && confirm(`Hapus ringkasan periode ${s.label} dari riwayat?`)){ delete HIST[k]; LS.set('hist', HIST); render(); } return; }
+  const a = e.target.closest('[data-act]'); if (a){ ACTS[a.dataset.act](); return; }
+  const d = e.target.closest('[data-drop]'); if (d){ (d.dataset.drop === 'ads' ? $('#fAds') : $('#fProd')).click(); return; }
+  const sh = e.target.closest('[data-sheet]'); if (sh){ const [t, ...rest] = sh.dataset.sheet.split('|'); openSheet(t, rest.join('|')); return; }
+  const g = e.target.closest('[data-go]'); if (g){ e.preventDefault(); if (SHEET) closeSheet(); go(g.dataset.go, g.dataset.f ? JSON.parse(g.dataset.f) : null); return; }
+  const s = e.target.closest('[data-seg]'); if (s){ const [k,v] = s.dataset.seg.split('|'); UI[k] = v; renderView(); return; }
+  const m = e.target.closest('[data-more]'); if (m){ UI.lim[m.dataset.more] = 1e9; renderView(); return; }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('#rpt').classList.contains('hidden')){ closeReport(); return; }
+  if (e.key === 'Escape' && SHEET) closeSheet();
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"][data-sheet]')){ e.preventDefault(); e.target.click(); }
+  if (e.key === 'Enter' && e.target.matches('input[data-hpp],input[data-stk]')){
+    const attr = e.target.dataset.hpp ? 'hpp' : 'stk', f = e.target.dataset[attr].split('|')[1];
+    const all = [...document.querySelectorAll(`input[data-${attr}$="|${f}"]`)], i = all.indexOf(e.target);
+    if (all[i+1]){ all[i+1].focus(); all[i+1].select(); } else e.target.blur();
+  }
+});
+let qT;
+document.addEventListener('input', e => {
+  const q = e.target.dataset.q; if (!q) return;
+  UI[q] = e.target.value; clearTimeout(qT);
+  qT = setTimeout(() => { const pos = e.target.selectionStart; renderView(); const el = document.querySelector(`[data-q="${q}"]`); if (el){ el.focus(); try{ el.setSelectionRange(pos,pos); }catch(_){} } }, 160);
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.sel){ UI[t.dataset.sel] = t.value; renderView(); return; }
+  if (t.dataset.tg){ UI[t.dataset.tg] = t.checked; renderView(); return; }
+  if (t.dataset.hpp){
+    const [k,f] = t.dataset.hpp.split('|'); const o = HPP[k] || (HPP[k] = {});
+    const v = T(t.value) === '' ? null : num(t.value);
+    o[f] = v === null ? null : (f === 'pct' ? v / 100 : v);
+    if (!isNum(o.pct) && !isNum(o.rp)) delete HPP[k];
+    t.closest('.fin') && t.closest('.fin').classList.toggle('set', v !== null);
+    LS.set('hpp', HPP); render(true);
+    const p = R.pMap.get(k), der = document.querySelector(`[data-der="${CSS.escape(k)}"]`);
+    if (p && der) der.textContent = hppDer(p);
+    if (SHEET){ refreshSheet(); DIRTY = true; }
+    return;
+  }
+  if (t.dataset.stk){
+    const [k,f] = t.dataset.stk.split('|'); const o = STOCK[k] || (STOCK[k] = {});
+    o[f] = T(t.value) === '' ? null : num(t.value);
+    if (!isNum(o.stok) && !isNum(o.otw) && !isNum(o.lead)) delete STOCK[k];
+    t.closest('.fin') && t.closest('.fin').classList.toggle('set', T(t.value) !== '');
+    LS.set('stock', STOCK); render(true);
+    const it = R.items.find(x => x.key === k), cell = document.querySelector(`[data-ist="${CSS.escape(k)}"]`);
+    if (it && cell) cell.innerHTML = pill(it.st);
+    if (SHEET){ refreshSheet(); DIRTY = true; }
+    return;
+  }
+  if (t.dataset.set){
+    const [k,type] = t.dataset.set.split('|'); const raw = T(t.value);
+    if (type === 'pct') S[k] = raw === '' ? DEFAULTS[k] : num(raw) / 100;
+    else if (type === 'num') S[k] = raw === '' ? (k === 'periodOverride' ? '' : DEFAULTS[k]) : num(raw);
+    else S[k] = raw;
+    LS.set('settings', S); render(true);
+    const tot = [...document.querySelectorAll('.frow.total span')][1]; if (tot) tot.textContent = fPct(R.pot);
+  }
+});
+// drag & drop anywhere
+let dragN = 0;
+document.addEventListener('dragenter', e => { e.preventDefault(); dragN++; });
+document.addEventListener('dragover', e => { e.preventDefault(); const d = e.target.closest('[data-drop]'); document.querySelectorAll('[data-drop]').forEach(x => x.classList.toggle('over', x === d)); });
+document.addEventListener('dragleave', () => { if (--dragN <= 0){ dragN = 0; document.querySelectorAll('[data-drop]').forEach(x => x.classList.remove('over')); } });
+document.addEventListener('drop', e => {
+  e.preventDefault(); dragN = 0; document.querySelectorAll('[data-drop]').forEach(x => x.classList.remove('over'));
+  const d = e.target.closest('[data-drop]');
+  [...(e.dataTransfer && e.dataTransfer.files || [])].forEach(f => loadFile(f, d ? d.dataset.drop : (/\.csv$/i.test(f.name) || /iklan/i.test(f.name) ? 'ads' : 'prod')));
+});
+// tooltip (pointer devices only)
+const tip = $('#tip');
+document.addEventListener('mousemove', e => {
+  const el = e.target.closest('[data-tip]');
+  if (!el || !el.dataset.tip){ tip.style.opacity = 0; return; }
+  tip.textContent = el.dataset.tip; tip.style.opacity = 1;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY + 16;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 10;
+  if (y + h > innerHeight - 8) y = e.clientY - h - 12;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+});
+document.addEventListener('scroll', () => { tip.style.opacity = 0; }, true);
+
+/* ============================== boot ============================== */
+try{ const th = localStorage.getItem('apa_theme'); if (th) document.documentElement.dataset.theme = th; }catch(e){}
+try{ const v = sessionStorage.getItem('apa_view'); if (v) VIEW = v; }catch(e){}
+render();
+if (!S.onboarded) showOnb();
+</script>
+</body>
+</html>
