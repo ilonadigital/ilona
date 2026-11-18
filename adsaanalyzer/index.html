@@ -1,10 +1,5 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ads Profit Analyzer Pro by Digital Pro</title>
 <meta name="theme-color" content="#f5f5f7">
-<title>Ads Profit Analyzer Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +14,7 @@
   --accent:#0071e3; --accent-ink:#0066cc; --accent-soft:rgba(0,113,227,.10);
   --green:#34c759; --green-ink:#248a3d; --blue:#007aff; --blue-ink:#0066cc; --red:#ff3b30; --red-ink:#d70015;
   --orange:#ff9500; --orange-ink:#c93400; --yellow:#ffcc00; --yellow-ink:#a05a00; --indigo:#5856d6; --indigo-ink:#3634a3;
-  --purple:#af52de; --gray:#8e8e93; --gray-ink:#6e6e73; --teal:#30b0c7; --pink:#ff2d55; --brown:#a2845e;
+  --purple:#af52de; --gray:#8e8e93; --gray-ink:#6e6e73; --teal:#30b0c7; --pink:#ff2d55; --brown:#a2845e; --cyan:#32ade6;
   --shadow:0 1px 1px rgba(0,0,0,.02),0 2px 4px rgba(0,0,0,.02),0 8px 28px rgba(0,0,0,.05);
   --shadow-lg:0 20px 60px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.06);
   --r:20px; --r-sm:12px;
@@ -34,7 +29,7 @@
     --accent:#0a84ff; --accent-ink:#409cff; --accent-soft:rgba(10,132,255,.18);
     --green:#30d158; --green-ink:#30d158; --blue:#0a84ff; --blue-ink:#409cff; --red:#ff453a; --red-ink:#ff6961;
     --orange:#ff9f0a; --orange-ink:#ffb340; --yellow:#ffd60a; --yellow-ink:#ffd426; --indigo:#5e5ce6; --indigo-ink:#7d7aff;
-    --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0;
+    --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0; --cyan:#64d2ff;
     --shadow:none; --shadow-lg:0 20px 60px rgba(0,0,0,.6);
   }
 }
@@ -47,7 +42,7 @@
   --accent:#0a84ff; --accent-ink:#409cff; --accent-soft:rgba(10,132,255,.18);
   --green:#30d158; --green-ink:#30d158; --blue:#0a84ff; --blue-ink:#409cff; --red:#ff453a; --red-ink:#ff6961;
   --orange:#ff9f0a; --orange-ink:#ffb340; --yellow:#ffd60a; --yellow-ink:#ffd426; --indigo:#5e5ce6; --indigo-ink:#7d7aff;
-  --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0;
+  --purple:#bf5af2; --gray-ink:#aeaeb2; --teal:#40c8e0; --cyan:#64d2ff;
   --shadow:none; --shadow-lg:0 20px 60px rgba(0,0,0,.6);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -328,6 +323,8 @@ h2.sec:first-child{margin-top:0}
 .onb .appicon{width:96px;height:96px;border-radius:22px;margin:0 auto 26px;box-shadow:0 10px 30px rgba(0,122,255,.28),inset 0 1px 0 rgba(255,255,255,.25)}
 .onb h1{font-size:38px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin:0}
 .onb h1 .pro{font-size:13px;vertical-align:12px;padding:3px 8px;border-radius:6px}
+.onb .by{margin:8px 0 0;font-size:14px;font-weight:600;color:var(--label-2);letter-spacing:.01em}
+.onb .by + .lead{margin-top:10px}
 .onb .lead{font-size:18px;color:var(--label-2);line-height:1.5;margin:14px auto 34px;max-width:440px}
 .onb .ico-lg{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;margin:0 auto 22px;color:#fff;background:var(--c)}
 .onb .feat{margin:0 0 36px}
@@ -345,6 +342,15 @@ h2.sec:first-child{margin-top:0}
 #tip{position:fixed;z-index:80;pointer-events:none;background:var(--elev);color:var(--label);font-size:12.5px;padding:8px 11px;border-radius:10px;max-width:280px;opacity:0;transition:opacity .1s;white-space:pre-line;line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,.16),0 0 0 .5px var(--sep)}
 #toast{position:fixed;left:50%;top:18px;transform:translateX(-50%) translateY(-12px);background:var(--elev);color:var(--label);padding:11px 18px;border-radius:14px;font-size:14px;font-weight:500;opacity:0;transition:.25s;z-index:90;max-width:calc(100% - 32px);box-shadow:0 10px 36px rgba(0,0,0,.16),0 0 0 .5px var(--sep);display:flex;gap:9px;align-items:center}
 #toast.on{opacity:1;transform:translateX(-50%)}
+.ask{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;padding:20px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px))}
+.ask.hidden{display:none}
+.ask .scrim{opacity:1}
+.ask-card{position:relative;width:min(380px,100%);background:var(--elev);border-radius:18px;padding:22px 20px 16px;box-shadow:0 20px 60px rgba(0,0,0,.25),0 0 0 .5px var(--sep);text-align:center}
+.ask-card h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.ask-card p{margin:0 0 18px;font-size:14px;color:var(--label-2);line-height:1.45}
+.ask-act{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ask-act .btn{padding:11px 16px;font-weight:600}
+.ask-act .btn.danger{background:var(--red);color:#fff}
 
 /* ---------- target ROAS / stock flags / deltas ---------- */
 .tgt{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:11px 14px;border-radius:12px;background:var(--accent-soft)}
@@ -382,6 +388,8 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
 .bch-x{display:flex;gap:6px;margin-top:8px}
 .bch-x span{flex:1;text-align:center;font-size:11.5px;color:var(--label-3);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bch-x span.on{color:var(--label);font-weight:600}
+.bch.dense .bch-plot,.bch.dense .bch-x{gap:3px}
+.bch.dense .bch-x span{overflow:visible;text-overflow:clip}
 .bch-leg{display:flex;gap:18px;margin-top:12px;font-size:12.5px;color:var(--label-2)}
 .bch-leg span{display:inline-flex;align-items:center;gap:7px}
 .bch-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--blue)}
@@ -447,6 +455,50 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
 }
 
+/* ---------- stores / finance / expenses ---------- */
+.sb-store{display:flex;align-items:center;gap:10px;width:100%;background:var(--card);border-radius:12px;padding:8px 10px;margin:-8px 0 4px;box-shadow:var(--shadow);border:1px solid var(--sep);text-align:left;color:var(--label)}
+.sb-store:hover{background:var(--card-2)}
+.sb-store b{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.sb-store .s{display:block;font-size:11.5px;color:var(--label-2);line-height:1.3}
+.sav{border-radius:9px;display:grid;place-items:center;color:#fff;background:var(--c);font-weight:700;font-size:14px;flex:none}
+.addrow{display:flex;gap:10px}
+.addrow input{flex:1;min-width:0;height:40px;border:0;border-radius:10px;background:var(--card);box-shadow:var(--shadow),inset 0 0 0 1px var(--sep);padding:0 14px;font-size:15px;outline:none;color:var(--label)}
+.addrow input:focus{box-shadow:0 0 0 3px var(--accent-soft),inset 0 0 0 1px var(--accent)}
+.stmt > div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;font-size:14px;border-top:1px solid var(--sep)}
+.stmt > div:first-child{border-top:0}
+.stmt span{color:var(--label-2);min-width:0}
+.stmt b{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stmt .st-ind span{padding-left:14px}
+.stmt .st-tot,.stmt .st-big{font-weight:650}
+.stmt .st-tot span,.stmt .st-big span{color:var(--label)}
+.stmt .st-tot b,.stmt .st-big b{font-weight:650}
+.stmt .st-big{font-size:15.5px;border-top:1px solid var(--sep-strong);padding:11px 0}
+.stmt .st-h{font-size:11.5px;font-weight:600;color:var(--label-3);text-transform:uppercase;letter-spacing:.04em;padding-top:16px;border-top:0}
+.tbar{height:4px;border-radius:2px;background:var(--fill);margin-top:7px;overflow:hidden;max-width:280px}
+.tbar i{display:block;height:100%;border-radius:2px;background:var(--blue)}
+.exform{display:grid;grid-template-columns:160px minmax(0,1fr) 270px;gap:12px;align-items:end}
+.exform label:not(.switch){display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--label-3);min-width:0;font-weight:500}
+.exform .inp{height:38px;border:0;border-radius:10px;background:var(--fill-2);padding:0 12px;font-size:14px;outline:none;width:100%;min-width:0;color:var(--label)}
+.exform .inp:focus,.exform .inp:focus-within{box-shadow:0 0 0 3px var(--accent-soft),0 0 0 1px var(--accent)}
+.exform .rp{display:flex;align-items:center;gap:6px}
+.exform .rp input{border:0;background:none;outline:none;width:100%;min-width:0;font-size:14px;text-align:right;color:var(--label);font-variant-numeric:tabular-nums}
+.exform .rp em{font-style:normal;color:var(--label-3);font-size:13px}
+.exform .wide{grid-column:1 / span 2}
+.exform .end{display:flex;align-items:center;justify-content:space-between;gap:12px;height:38px}
+.exform .end .switch{white-space:nowrap}
+.rp-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.rp-st td{white-space:normal}
+.rp-st tr.ind td:first-child{padding-left:12px;color:var(--label-2)}
+.rp-st tr.tot td,.rp-st tr.big td{font-weight:700}
+.rp-st tr.tot td{border-top:0;border-bottom:1px solid var(--sep)}
+.rp-st tr.big td{border-top:1px solid var(--label);border-bottom:0}
+.rp-st tr.h td{font-size:9px;font-weight:600;color:var(--label-3);text-transform:uppercase;letter-spacing:.05em;padding-top:11px;border-bottom:0;text-align:left}
+@media (max-width:560px){
+  .exform{grid-template-columns:1fr 1fr}
+  .exform .wide,.exform .full,.exform .end{grid-column:1 / -1}
+}
+@media (max-width:640px){ .rp-2{grid-template-columns:1fr} }
+
 /* ---------- responsive ---------- */
 @media (max-width:1100px){ .r-cols{display:none} .show-s{display:inline} }
 @media (max-width:980px){
@@ -490,14 +542,13 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
   .hide-s{display:none}
 }
 </style>
-</head>
-<body>
 <div class="app">
   <aside class="sidebar">
     <div class="sb-app">
       <div class="appicon" id="sbIcon"></div>
-      <div style="min-width:0"><b>Ads Profit Analyzer<span class="pro">PRO</span></b><span id="sbShop">Analyzer</span></div>
+      <div style="min-width:0"><b>Ads Profit Analyzer<span class="pro">PRO</span></b><span id="sbShop">by Digital Pro</span></div>
     </div>
+    <button class="sb-store" id="sbStore" data-sheet="stores|" aria-label="Ganti toko"></button>
     <div class="sb-sec">Analisis</div>
     <div id="navA"></div>
     <div class="sb-sec">Data</div>
@@ -523,16 +574,20 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
 <div class="onb hidden" id="onb"><div class="onb-card" id="onbBody"></div></div>
 
 <div class="rpt hidden" id="rpt" role="dialog" aria-modal="true" aria-label="Pratinjau laporan">
-  <div class="rpt-bar"><button class="btn" data-act="closeReport">Tutup</button><b>Pratinjau laporan</b><button class="btn primary" data-act="printReport">Simpan PDF</button></div>
-  <div class="rpt-body"><p class="rpt-note">Klik <b>Simpan PDF</b>, lalu pilih <b>Simpan sebagai PDF</b> di jendela cetak.</p><div id="rptBody"></div></div>
+  <div class="rpt-bar"><button class="btn" data-act="closeReport">Tutup</button><b>Pratinjau laporan</b><button class="btn primary" id="rptGo" data-act="printReport">Simpan PDF</button></div>
+  <div class="rpt-body"><p class="rpt-note" id="rptNote">Klik <b>Simpan PDF</b>, lalu pilih <b>Simpan sebagai PDF</b> di jendela cetak.</p><div id="rptBody"></div></div>
 </div>
 
 <input type="file" id="fAds" accept=".csv,.xlsx,.xls" hidden>
 <input type="file" id="fProd" accept=".xlsx,.xls,.csv" hidden>
 <input type="file" id="fStock" accept=".csv,.xlsx,.xls" hidden>
 <input type="file" id="fBackup" accept=".json" hidden>
+<input type="file" id="fInc" accept=".xlsx,.xls,.csv" hidden>
+<input type="file" id="fOrd" accept=".xlsx,.xls,.csv" hidden>
+<input type="file" id="fStore" accept=".json" hidden>
 <div id="tip"></div>
 <div id="toast"></div>
+<div class="ask hidden" id="ask" role="alertdialog" aria-modal="true" aria-labelledby="askT" aria-describedby="askM"><div class="scrim" data-ask="0"></div><div class="ask-card"><h3 id="askT"></h3><p id="askM"></p><div class="ask-act"><button class="btn" id="askNo" data-ask="0">Batal</button><button class="btn primary" id="askYes" data-ask="1">Lanjutkan</button></div></div></div>
 
 <script>
 "use strict";
@@ -540,20 +595,39 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
 const DEFAULTS = {
   ppn:0.11, buffer:0.30, minSpend:50000, hppDefault:0.50, ctrMin:0.01, cvrMin:0.02, basis:'Pesanan Dibuat',
   komisi:0.08, layanan:0.04, affiliate:0, voucher:0,
-  shopName:'', onboarded:false, periodOverride:'', leadTime:14, safety:7, cover:30, overstock:90, growth:0, refDate:''
+  shopName:'', onboarded:false, periodOverride:'', leadTime:14, safety:7, cover:30, overstock:90, growth:0, refDate:'', finBasis:'order', actualFees:true
 };
 const LS = {
   get(k,d){ try{ const v = localStorage.getItem('apa_'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
   set(k,v){ try{ localStorage.setItem('apa_'+k, JSON.stringify(v)); }catch(e){ if (!LS.warned){ LS.warned = true; toast('Browser ini tidak mengizinkan penyimpanan — data hilang saat halaman ditutup', false); } } },
   del(k){ try{ localStorage.removeItem('apa_'+k); }catch(e){} }
 };
-let S = Object.assign({}, DEFAULTS, LS.get('settings', {}));
-let HPP = LS.get('hpp', {});
-let STOCK = LS.get('stock', {});
-let RAW = LS.get('raw', {ads:null, prod:null, adsFile:'', prodFile:''});
-let HIST = LS.get('hist', {});
+// multi-store registry: per-store data lives under apa_st_{id}_{key}; theme stays global
+const STORES = (() => { let r = LS.get('stores', null);
+  if (!r || !r.list || !r.list.length){
+    const old = LS.get('settings', {}) || {};
+    r = {cur:'s1', list:[{id:'s1', name: String(old.shopName || '').trim() || 'Toko 1'}]};
+    ['settings','hpp','stock','raw','hist'].forEach(k => { const v = LS.get(k, undefined); if (v !== undefined){ LS.set('st_s1_' + k, v); LS.del(k); } });
+    LS.set('stores', r);
+  }
+  if (!r.list.some(x => x.id === r.cur)) r.cur = r.list[0].id;
+  return r; })();
+const SL = { get:(k,d) => LS.get('st_' + STORES.cur + '_' + k, d), set:(k,v) => LS.set('st_' + STORES.cur + '_' + k, v), del:k => LS.del('st_' + STORES.cur + '_' + k) };
+const STORE_KEYS = ['settings','hpp','stock','raw','hist','exp','inc','ord'];
+let S, HPP, STOCK, RAW, HIST, EXP, INC, ORD;
+function loadStoreData(){
+  S = Object.assign({}, DEFAULTS, SL.get('settings', {}));
+  HPP = SL.get('hpp', {}); STOCK = SL.get('stock', {});
+  RAW = SL.get('raw', {ads:null, prod:null, adsFile:'', prodFile:''});
+  HIST = SL.get('hist', {}); EXP = SL.get('exp', []); INC = SL.get('inc', null); ORD = SL.get('ord', null);
+  if (!Array.isArray(EXP)) EXP = [];
+}
+loadStoreData();
+const saveAll = () => STORE_KEYS.forEach(k => SL.set(k, {settings:S, hpp:HPP, stock:STOCK, raw:RAW, hist:HIST, exp:EXP, inc:INC, ord:ORD}[k]));
+const curStore = () => STORES.list.find(x => x.id === STORES.cur) || STORES.list[0];
+const saveStores = () => LS.set('stores', STORES);
 let R = null, VIEW = 'ringkasan', SHEET = null, DIRTY = false;
-const UI = { adF:'ALL', adSort:'profit', prF:'ALL', prQ:'', prSort:'profit', stTab:'pri', stF:'ALL', stQ:'', stSort:'urg', hppQ:'', hppOnly:false, isQ:'', isOnly:false, hA:'', hB:'', lim:{} };
+const UI = { adF:'ALL', adSort:'profit', prF:'ALL', prQ:'', prSort:'profit', stTab:'pri', stF:'ALL', stQ:'', stSort:'urg', hppQ:'', hppOnly:false, isQ:'', isOnly:false, hA:'', hB:'', lim:{}, adView:'ad', mkF:'ALL', mkQ:'', mkSort:'cost', exCat:'gaji' };
 
 /* ============================== helpers ============================== */
 const $ = s => document.querySelector(s);
@@ -591,6 +665,9 @@ const fX = n => n > 0 && isFinite(n) ? nf2.format(n) + '×' : '—';
 const fN = n => n == null ? '—' : nf0.format(n);
 const fD = n => n != null && isFinite(n) ? nf1.format(n) : '—';
 const fT = n => n > 0 && isFinite(n) ? nf1.format(n) + '×' : '—';
+const fA = n => isFinite(n) && n !== 0 ? (n < 0 ? '−' : '') + nf2.format(Math.abs(n)) + '×' : '—';
+const pad2 = n => String(n).padStart(2,'0');
+const slug = x => T(x).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'toko';
 const ceil1 = x => Math.ceil(x * 10 - 1e-9) / 10;
 const MO = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 const fDate = d => d ? `${d.getDate()} ${MO[d.getMonth()]} ${d.getFullYear()}` : '—';
@@ -646,7 +723,13 @@ const ICONS = {
   ellipsis:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="12" r=".9" fill="currentColor"/><circle cx="12" cy="12" r=".9" fill="currentColor"/><circle cx="16" cy="12" r=".9" fill="currentColor"/>',
   chart:'<path d="M4 20h16"/><path d="M7.5 16v-5M12 16V6.5M16.5 16v-8"/>',
   target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
-  coin:'<circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.8-2.8 2.1 0 2.9 5.8 1.5 5.8 4.3 0 1.3-1.3 2.1-3 2.1-1.3 0-2.4-.5-2.9-1.5M12 6v1.8M12 16.3V18"/>'
+  coin:'<circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.8-2.8 2.1 0 2.9 5.8 1.5 5.8 4.3 0 1.3-1.3 2.1-3 2.1-1.3 0-2.4-.5-2.9-1.5M12 6v1.8M12 16.3V18"/>',
+  wallet:'<path d="M4.5 7.5V7a2 2 0 0 1 2-2H17v2.5"/><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M16 13.5h1.5"/>',
+  receipt:'<path d="M6 3.5h12v17l-2.4-1.5-2.4 1.5-2.2-1.5-2.4 1.5-2.6-1.5z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/>',
+  truck:'<path d="M3 6.5h11v10H3z"/><path d="M14 10h4l3 3.2v3.3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/>',
+  person:'<circle cx="12" cy="8" r="3.8"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>',
+  updown:'<path d="M8 9.5 12 5.5l4 4M8 14.5l4 4 4-4"/>',
+  share:'<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13"/>'
 };
 const APPICON = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="#fff"><rect x="3.8" y="12.5" width="4" height="7.5" rx="1.3" opacity=".72"/><rect x="10" y="8.5" width="4" height="11.5" rx="1.3" opacity=".86"/><rect x="16.2" y="4" width="4" height="16" rx="1.3"/></svg>`;
 const ic = (n, s = 20, w = 1.8) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${ICONS[n] || ''}</svg>`;
@@ -675,7 +758,7 @@ const cvar = k => `var(--${(ST[k]||{c:'gray'}).c})`;
 function parseCSV(text){
   text = text.replace(/^﻿/,'');
   const lines = text.split(/\r?\n/);
-  const hl = lines.find(l => /^"?Urutan"?\s*[,;\t]/.test(l)) || lines.find(l => /^"?Kode Produk"?\s*[,;\t]/.test(l)) || lines[0] || '';
+  const hl = lines.find(l => /^"?Urutan"?\s*[,;\t]/.test(l)) || lines.find(l => /^"?Kode Produk"?\s*[,;\t]/.test(l)) || lines.find(l => /No\.? ?Pesanan/i.test(l)) || lines[0] || '';
   const cnt = ch => hl.split(ch).length;
   const d = [',',';','\t'].sort((a,b) => cnt(b) - cnt(a))[0];
   const rows = []; let row = [], f = '', q = false;
@@ -691,23 +774,116 @@ function parseCSV(text){
   return rows;
 }
 const findHeader = (rows,key) => { for (let i = 0; i < Math.min(rows.length, 60); i++) if (T(rows[i] && rows[i][0]) === key) return i; return -1; };
-async function readTable(file, kind){
-  const key = kind === 'ads' ? 'Urutan' : 'Kode Produk';
-  if (/\.(csv|txt)$/i.test(file.name)){
-    const rows = parseCSV(await file.text());
-    if (findHeader(rows,key) < 0) throw new Error(kind === 'ads' ? 'Ini bukan laporan iklan Shopee (kolom “Urutan” tidak ada)' : 'Ini bukan laporan produk Shopee (kolom “Kode Produk” tidak ada)');
-    return rows;
+const isOrdId = c => /^no\.?\s*pesanan$/i.test(T(c));
+function detectKind(rows){
+  for (let i = 0; i < Math.min(rows.length, 60); i++){
+    const r = rows[i] || [], c0 = T(r[0]);
+    if (c0 === 'Urutan') return 'ads';
+    if (c0 === 'Kode Produk') return 'prod';
+    if (r.some(isOrdId)){
+      const low = r.map(c => T(c).toLowerCase());
+      if (low.some(c => /total penghasilan/.test(c))) return 'inc';
+      if (low.some(c => /status pesanan/.test(c))) return 'ord';
+    }
   }
-  if (typeof XLSX === 'undefined') throw new Error('Pembaca Excel belum termuat — periksa koneksi internet lalu muat ulang');
-  const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
-  let names = wb.SheetNames.slice();
-  const pref = names.find(n => /performa terbaik/i.test(n));
-  if (kind === 'prod' && pref) names = [pref, ...names.filter(n => n !== pref)];
-  for (const n of names){
-    const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, raw:true, defval:''});
-    if (findHeader(rows,key) >= 0) return rows;
+  return null;
+}
+// reads any Shopee export and detects which report it is (ads, products, income, orders)
+async function readAny(file, hint){
+  let sheets;
+  if (/\.(csv|txt)$/i.test(file.name)) sheets = [parseCSV(await file.text())];
+  else {
+    if (typeof XLSX === 'undefined') throw new Error('Pembaca Excel belum termuat — periksa koneksi internet lalu muat ulang');
+    const wb = XLSX.read(await file.arrayBuffer(), {type:'array'});
+    let names = wb.SheetNames.slice(); const pref = names.find(n => /performa terbaik/i.test(n));
+    if (pref) names = [pref, ...names.filter(n => n !== pref)];
+    sheets = names.map(n => XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, raw:true, defval:''}));
   }
-  throw new Error(kind === 'prod' ? 'Sheet “Produk dengan Performa Terbaik” tidak ditemukan' : 'Header laporan iklan tidak ditemukan');
+  const found = sheets.map(rows => ({rows, kind: detectKind(rows)})).filter(x => x.kind);
+  const pick = found.find(x => x.kind === hint) || found[0];
+  if (!pick) throw new Error('Format file tidak dikenali. Gunakan laporan iklan, laporan produk, laporan penghasilan, atau daftar pesanan dari Shopee.');
+  return pick;
+}
+function toISO(v){
+  if (v == null || v === '') return '';
+  if (typeof v === 'number'){
+    if (v > 20000 && v < 80000 && typeof XLSX !== 'undefined'){ const d = XLSX.SSF.parse_date_code(v); return d ? `${d.y}-${pad2(d.m)}-${pad2(d.d)}` : ''; }
+    return '';
+  }
+  const s = T(v); let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) return `${m[1]}-${pad2(m[2])}-${pad2(m[3])}`;
+  m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/); return m ? `${m[3]}-${pad2(m[2])}-${pad2(m[1])}` : '';
+}
+const ordHdr = rows => { for (let i = 0; i < Math.min(rows.length, 60); i++) if ((rows[i] || []).some(isOrdId)) return i; return -1; };
+const validId = id => /^[0-9A-Z]{8,}$/i.test(id);
+const FEE_KEYS = ['admin','layanan','proses','ams','transaksi','program','kampanye','lain'];
+const FEE_LABEL = {admin:'Biaya administrasi', layanan:'Biaya layanan', proses:'Biaya proses pesanan', ams:'Komisi AMS / affiliate', transaksi:'Biaya transaksi', program:'Program hemat ongkir', kampanye:'Biaya kampanye', lain:'Biaya lainnya', vouch:'Voucher & cashback penjual', other:'Ongkir & penyesuaian'};
+const EXCAT = {gaji:['Gaji & upah','person','blue'], sewa:['Sewa tempat','store','indigo'], packaging:['Packaging','box','orange'], ongkir:['Ongkir & kurir','truck','teal'], iklanluar:['Iklan di luar Shopee','megaphone','pink'], software:['Software & langganan','gear','purple'], lain:['Operasional lain','receipt','gray'], stok:['Pembelian stok','archive','brown'], income:['Pemasukan lain','coin','green']};
+function feeKind(c){
+  if (!/^(biaya|premi|komisi)/.test(c)) return null;
+  if (/hemat biaya kirim|program hemat/.test(c)) return 'program';
+  if (/administrasi|biaya admin/.test(c)) return 'admin';
+  if (/proses pesanan/.test(c)) return 'proses';
+  if (/\bams\b|affiliate/.test(c)) return 'ams';
+  if (/layanan/.test(c)) return 'layanan';
+  if (/transaksi/.test(c)) return 'transaksi';
+  if (/kampanye/.test(c)) return 'kampanye';
+  if (/kirim|ongkir|ongkos/.test(c)) return null;
+  return 'lain';
+}
+// Shopee "Laporan Penghasilan" → only totals are kept
+function parseInc(rows){
+  const h = ordHdr(rows); if (h < 0) return null;
+  const hdr = rows[h].map(c => T(c).toLowerCase()), f = re => hdr.findIndex(c => re.test(c));
+  const ix = {id: hdr.findIndex(c => /^no\.?\s*pesanan$/.test(c)), price: f(/harga asli produk/), disc: f(/total diskon produk/),
+    refund: f(/pengembalian dana ke pembeli|jumlah pengembalian dana/), total: f(/total penghasilan/), date: f(/dana dilepaskan/)};
+  if (ix.total < 0) return null;
+  const vouch = hdr.map((c,i) => /(voucher|cashback).*(penjual|seller)/.test(c) ? i : -1).filter(i => i >= 0);
+  const fees = hdr.map((c,i) => [i, feeKind(c)]).filter(x => x[1]);
+  const out = {n:0, price:0, disc:0, refund:0, vouch:0, total:0, fees:{}, feeTot:0, other:0, days:{}, start:'', end:''};
+  FEE_KEYS.forEach(k => out.fees[k] = 0);
+  const seen = new Set(), A = v => Math.abs(num(v));
+  for (let i = h + 1; i < rows.length; i++){
+    const r = rows[i] || [], id = code(r[ix.id]); if (!validId(id)) continue;
+    if (!seen.has(id)){ seen.add(id); out.n++; }
+    const tot = num(r[ix.total]);
+    if (ix.price >= 0) out.price += A(r[ix.price]);
+    if (ix.disc >= 0) out.disc += A(r[ix.disc]);
+    if (ix.refund >= 0) out.refund += A(r[ix.refund]);
+    vouch.forEach(j => out.vouch += A(r[j]));
+    fees.forEach(([j,k]) => out.fees[k] += A(r[j]));
+    out.total += tot;
+    const d = ix.date >= 0 ? toISO(r[ix.date]) : '';
+    if (d){ const o = out.days[d] || (out.days[d] = {n:0, v:0}); o.n++; o.v += tot; if (!out.start || d < out.start) out.start = d; if (!out.end || d > out.end) out.end = d; }
+  }
+  out.feeTot = sum(FEE_KEYS, k => out.fees[k]);
+  out.other = out.total - (out.price - out.disc - out.refund - out.vouch - out.feeTot);
+  return out;
+}
+// Shopee order export → aggregates per status and per day; buyer data (name, phone, address) is never read
+function parseOrd(rows){
+  const h = ordHdr(rows); if (h < 0) return null;
+  const hdr = rows[h].map(c => T(c).toLowerCase()), f = re => hdr.findIndex(c => re.test(c));
+  const ix = {id: hdr.findIndex(c => /^no\.?\s*pesanan$/.test(c)), st: f(/^status pesanan/), ret: f(/pembatalan.*pengembalian|status pengembalian/),
+    rq: f(/returned quantity|jumlah.*(dikembalikan|retur)/), v: f(/total harga produk/), v2: f(/^total pembayaran/), date: f(/waktu pesanan dibuat|tanggal pesanan/)};
+  const O = new Map();
+  for (let i = h + 1; i < rows.length; i++){
+    const r = rows[i] || [], id = code(r[ix.id]); if (!validId(id)) continue;
+    const o = O.get(id) || {v:0, pay:0, st:'', ret:false, d:''};
+    if (ix.v >= 0) o.v += num(r[ix.v]); else if (ix.v2 >= 0) o.pay = num(r[ix.v2]);
+    const st = ix.st >= 0 ? T(r[ix.st]).toLowerCase() : ''; if (st) o.st = st;
+    const rt = ix.ret >= 0 ? T(r[ix.ret]).toLowerCase() : '';
+    if ((rt && /pengembalian|retur|dikembalikan/.test(rt) && !/ditolak|dibatalkan/.test(rt)) || (ix.rq >= 0 && num(r[ix.rq]) > 0)) o.ret = true;
+    if (!o.d && ix.date >= 0) o.d = toISO(r[ix.date]);
+    O.set(id, o);
+  }
+  const out = {n:0, v:0, st:{Selesai:{n:0,v:0}, Proses:{n:0,v:0}, Retur:{n:0,v:0}, Batal:{n:0,v:0}}, days:{}, start:'', end:''};
+  O.forEach(o => {
+    const v = o.v || o.pay, k = /batal/.test(o.st) ? 'Batal' : o.ret ? 'Retur' : /selesai/.test(o.st) ? 'Selesai' : 'Proses';
+    out.n++; out.v += v; out.st[k].n++; out.st[k].v += v;
+    if (o.d){ const d = out.days[o.d] || (out.days[o.d] = {n:0, v:0, bn:0, bv:0}); d.n++; d.v += v; if (k === 'Batal'){ d.bn++; d.bv += v; }
+      if (!out.start || o.d < out.start) out.start = o.d; if (!out.end || o.d > out.end) out.end = o.d; }
+  });
+  return out;
 }
 const trimRows = rows => rows.map(r => { const a = r.slice(); while (a.length && T(a[a.length-1]) === '') a.pop(); return a; });
 
@@ -768,7 +944,9 @@ function parseProd(rows){
 /* ============================== engine (mirrors Excel prototype) ============================== */
 function compute(){
   const A = parseAds(RAW.ads), P = parseProd(RAW.prod);
-  const ppn = +S.ppn, pot = (+S.komisi) + (+S.layanan) + (+S.affiliate) + (+S.voucher);
+  const ppn = +S.ppn, potSet = (+S.komisi) + (+S.layanan) + (+S.affiliate) + (+S.voucher);
+  const incBase = INC ? INC.price - INC.disc : 0, incOk = !!INC && S.actualFees !== false && incBase > 0;
+  const pot = incOk ? (INC.feeTot + INC.vouch) / incBase : potSet;
   const manual = isNum(S.periodOverride) && +S.periodOverride > 0;
   const days = manual ? +S.periodOverride : (A.days || 30);
   const daysSrc = manual ? 'manual' : (A.days ? 'auto' : 'default');
@@ -805,7 +983,8 @@ function compute(){
       'RUGI': margin <= 0 ? 'Margin sudah negatif sebelum iklan — hentikan iklan, perbaiki harga/HPP dulu.' : 'Iklan rugi di level produk — tinjau budget, harga, atau HPP.'
     }[st];
     const o = Object.assign({}, p, { avg, spend, adRev, roas, bep, hpp, hppSet, margin, profit, ctr, cvr, st, act, cand,
-      tacos: p.sales > 0 ? spend / p.sales : 0, adShare: p.sales > 0 ? adRev / p.sales : 0, nAds: ads.length });
+      tacos: p.sales > 0 ? spend / p.sales : 0, adShare: p.sales > 0 ? adRev / p.sales : 0, nAds: ads.length,
+      adConv: sum(ads, a => a.conv), cpa: (c => c > 0 ? spend / c : 0)(sum(ads, a => a.conv)), aroas: spend > 0 ? adRev * margin / (spend * (1 + ppn)) : 0 });
     pMap.set(p.kode, o); return o;
   });
 
@@ -834,7 +1013,7 @@ function compute(){
     const noProd = !a.kode || a.kode === '-';
     const note = noProd ? 'HPP default — iklan level toko/grup' : prod ? (prod.hppSet ? 'HPP dari data Anda' : 'HPP default — belum diisi') : 'Produk tidak ada di laporan produk — HPP default';
     return Object.assign({}, a, { idx, prod, prodName: prod ? prod.nama : (noProd ? 'Iklan level toko / grup' : 'Produk tidak ada di laporan produk'),
-      mapped: !!prod, hpp, margin, costPpn, profit, bep, roas, ctr, cvr, cpc: a.clicks > 0 ? a.cost / a.clicks : 0, acos: a.rev > 0 ? a.cost / a.rev : 0,
+      mapped: !!prod, hpp, margin, costPpn, profit, bep, roas, ctr, cvr, cpc: a.clicks > 0 ? a.cost / a.clicks : 0, aroas: a.cost > 0 ? a.rev * margin / costPpn : 0, cpa: a.conv > 0 ? a.cost / a.conv : 0, acos: a.rev > 0 ? a.cost / a.rev : 0,
       st, act, note, paused: a.status === 'Dijeda' });
   });
 
@@ -947,8 +1126,65 @@ function compute(){
   tot.potRp = tot.sales * pot;
   tot.rugiBudget = sum(ads.filter(a => a.st === 'RUGI'), a => a.cost);
   tot.rugiLoss = sum(ads.filter(a => a.st === 'RUGI'), a => Math.min(0, a.profit));
+  tot.aroas = tot.costPpn > 0 ? tot.adContribution / tot.costPpn : 0;
+  tot.cpa = tot.adOrders > 0 ? tot.spend / tot.adOrders : 0;
 
-  return { A, P, ads, products, pMap, items, priority, tot, days, daysSrc, pot, ref,
+  // ---- finance: laba rugi & arus kas ----
+  const pi = periodInfo(A);
+  const inPer = e => !pi || (e.rec ? e.date <= pi.end : e.date >= pi.start && e.date <= pi.end);
+  const ex = EXP.filter(inPer).sort((a,b) => b.date.localeCompare(a.date));
+  const isOp = e => e.cat !== 'stok' && e.cat !== 'income';
+  const F = { basis: S.finBasis === 'income' && INC ? 'income' : 'order', ex, pi,
+    opex: sum(ex.filter(isOp), e => e.amt), otherInc: sum(ex.filter(e => e.cat === 'income'), e => e.amt), stockBuy: sum(ex.filter(e => e.cat === 'stok'), e => e.amt) };
+  F.opexBy = Object.keys(EXCAT).filter(k => k !== 'stok' && k !== 'income').map(k => ({k, l:EXCAT[k][0], v:sum(ex.filter(e => e.cat === k), e => e.amt)})).filter(x => x.v);
+  const hppPct = tot.sales > 0 ? tot.hppRp / tot.sales : +S.hppDefault;
+  const incFees = sc => [...FEE_KEYS.map(k => ({k, l:FEE_LABEL[k], v:INC.fees[k] * sc})), {k:'vouch', l:FEE_LABEL.vouch, v:INC.vouch * sc}, {k:'other', l:FEE_LABEL.other, v:-INC.other * sc}].filter(x => Math.abs(x.v) >= 1);
+  if (F.basis === 'income'){
+    F.gross = INC.price; F.disc = INC.disc; F.batal = 0; F.refund = INC.refund;
+    F.sales = INC.price - INC.disc - INC.refund; F.orders = INC.n;
+    F.hpp = F.sales * hppPct; F.fees = incFees(1); F.feeSrc = 'actual';
+  } else {
+    const os = ORD && ORD.v > 0 ? ORD.st : null, dib = S.basis === 'Pesanan Dibuat';
+    const bS = os && dib ? os.Batal.v / ORD.v : 0, rS = os ? os.Retur.v / ORD.v : 0, bN = os && dib ? os.Batal.n / ORD.n : 0, rN = os ? os.Retur.n / ORD.n : 0;
+    F.gross = tot.sales; F.disc = 0; F.batal = tot.sales * bS; F.refund = tot.sales * rS;
+    F.sales = F.gross - F.batal - F.refund; F.orders = Math.round(tot.orders * (1 - bN - rN));
+    F.hpp = tot.hppRp * (F.gross > 0 ? F.sales / F.gross : 1);
+    if (incOk){ F.fees = incFees(F.sales / incBase); F.feeSrc = 'actual'; }
+    else { F.fees = [['admin','Komisi / biaya admin',S.komisi],['layanan','Biaya layanan / transaksi',S.layanan],['ams','Komisi affiliate',S.affiliate],['vouch','Voucher / ongkir ditanggung',S.voucher]].map(([k,l,r]) => ({k, l, v:F.sales * +r})).filter(x => x.v); F.feeSrc = 'est'; }
+  }
+  F.feeTot = sum(F.fees, x => x.v); F.ads = tot.costPpn;
+  F.gp = F.sales - F.hpp; F.net = F.gp - F.feeTot - F.ads - F.opex + F.otherInc;
+  F.gpM = F.sales > 0 ? F.gp / F.sales : 0; F.netM = F.sales > 0 ? F.net / F.sales : 0; F.aov = F.orders > 0 ? F.sales / F.orders : 0;
+  F.pl = [
+    {l:'Penjualan kotor', v:F.gross, k:'row'},
+    F.disc ? {l:'Diskon produk', v:-F.disc, k:'ind'} : null,
+    F.batal ? {l:'Pesanan batal', v:-F.batal, k:'ind'} : null,
+    F.refund ? {l:'Retur & pengembalian dana', v:-F.refund, k:'ind'} : null,
+    {l:'Penjualan bersih', v:F.sales, k:'tot'},
+    {l:'HPP', v:-F.hpp, k:'ind'},
+    {l:'Laba kotor', v:F.gp, k:'big'},
+    {l:'Biaya marketplace', k:'h'}, ...F.fees.map(x => ({l:x.l, v:-x.v, k:'ind'})),
+    {l:'Pemasaran', k:'h'}, {l:'Iklan Shopee + PPN', v:-F.ads, k:'ind'},
+    {l:'Biaya operasional', k:'h'}, ...(F.opexBy.length ? F.opexBy.map(x => ({l:x.l, v:-x.v, k:'ind'})) : [{l:'Belum dicatat', v:0, k:'ind'}]),
+    F.otherInc ? {l:'Pemasukan lain', v:F.otherInc, k:'row'} : null,
+    {l:'Laba bersih', v:F.net, k:'big'}
+  ].filter(Boolean);
+  F.cashIn = INC ? INC.total : F.sales - F.feeTot; F.cashEst = !INC;
+  F.cashOut = F.ads + F.opex + F.stockBuy; F.cashNet = F.cashIn + F.otherInc - F.cashOut;
+  F.cf = [
+    {l:'Kas masuk', k:'h'},
+    {l: INC ? 'Dana cair dari Shopee' : 'Estimasi dana cair', v:F.cashIn, k:'ind'},
+    F.otherInc ? {l:'Pemasukan lain', v:F.otherInc, k:'ind'} : null,
+    {l:'Total kas masuk', v:F.cashIn + F.otherInc, k:'tot'},
+    {l:'Kas keluar', k:'h'},
+    {l:'Iklan Shopee + PPN', v:-F.ads, k:'ind'},
+    {l:'Biaya operasional', v:-F.opex, k:'ind'},
+    {l:'Pembelian stok', v:-F.stockBuy, k:'ind'},
+    {l:'Total kas keluar', v:-F.cashOut, k:'tot'},
+    {l:'Arus kas bersih', v:F.cashNet, k:'big'}
+  ].filter(Boolean);
+
+  return { A, P, ads, products, pMap, items, priority, tot, days, daysSrc, pot, potSet, incOk, ref, F,
     hppFilled: products.filter(p => p.hppSet).length,
     stockFilled: items.filter(i => i.stok !== null).length,
     cand: products.filter(p => p.cand).sort((a,b) => b.sales - a.sales) };
@@ -972,7 +1208,9 @@ function periodInfo(A){
   let s, e;
   const m = A.period && A.period.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   if (m){ s = [+m[3], +m[2], +m[1]]; e = [+m[6], +m[5], +m[4]]; }
-  else { const f = (RAW.prodFile || '').match(/(20\d{2})(\d{2})(\d{2})_(20\d{2})(\d{2})(\d{2})/); if (!f) return null; s = [+f[1], +f[2], +f[3]]; e = [+f[4], +f[5], +f[6]]; }
+  else { const f = (RAW.prodFile || '').match(/(20\d{2})(\d{2})(\d{2})_(20\d{2})(\d{2})(\d{2})/);
+    if (f){ s = [+f[1], +f[2], +f[3]]; e = [+f[4], +f[5], +f[6]]; }
+    else { const src = (INC && INC.start) ? INC : (ORD && ORD.start) ? ORD : null; if (!src) return null; s = src.start.split('-').map(Number); e = src.end.split('-').map(Number); } }
   const iso = a => `${a[0]}-${String(a[1]).padStart(2,'0')}-${String(a[2]).padStart(2,'0')}`;
   const full = s[2] === 1 && s[0] === e[0] && s[1] === e[1] && e[2] === new Date(e[0], e[1], 0).getDate();
   return { key: iso(s) + '_' + iso(e), start: iso(s), end: iso(e),
@@ -985,14 +1223,14 @@ function makeSnap(R){
   const pi = periodInfo(R.A); if (!pi || (!R.ads.length && !R.products.length)) return null;
   const t = R.tot;
   return Object.assign(pi, { shop: shopName(), demo: isDemo(), saved: new Date().toISOString(), days: R.days, hasAds: R.ads.length > 0, hasProd: R.products.length > 0,
-    tot: {sales:t.sales, orders:t.orders, units:t.units, spend:t.spend, adRev:t.adRev, adProfit:t.adProfit, net:t.net, roas:t.roas, bep: isFinite(t.bep) ? t.bep : null, tacos:t.tacos, acos:t.acos, adShare:t.adShare},
+    tot: {sales:t.sales, orders:t.orders, units:t.units, spend:t.spend, adRev:t.adRev, adProfit:t.adProfit, net:R.F.net, gp:R.F.gp, fees:R.F.feeTot, opex:R.F.opex, otherInc:R.F.otherInc, aov:R.F.aov, salesNet:R.F.sales, roas:t.roas, bep: isFinite(t.bep) ? t.bep : null, tacos:t.tacos, acos:t.acos, adShare:t.adShare},
     n: countBy(R.ads, 'st'),
     ads: R.ads.map(a => ({id: adId(a), name:a.name, kode:a.kode, mode:a.mode, cost:a.cost, rev:a.rev, roas:a.roas, bep: isFinite(a.bep) ? a.bep : null, profit:a.profit, st:a.st})),
     prods: R.products.filter(p => p.sales || p.spend).map(p => ({kode:p.kode, nama:p.nama, sales:p.sales, units:p.units, spend:p.spend, profit:p.profit, roas:p.roas, st:p.st})) });
 }
 let snapT;
 function queueSnap(){ clearTimeout(snapT); snapT = setTimeout(flushSnap, 400); }
-function flushSnap(){ clearTimeout(snapT); if (R && R.snap){ HIST[R.snap.key] = R.snap; LS.set('hist', HIST); } }
+function flushSnap(){ clearTimeout(snapT); if (R && R.snap){ HIST[R.snap.key] = R.snap; SL.set('hist', HIST); } }
 function histList(){ const h = Object.assign({}, HIST); if (R && R.snap) h[R.snap.key] = R.snap; return Object.values(h).sort((a,b) => a.start.localeCompare(b.start)); }
 function prevSnap(){ if (!R || !R.snap) return null; const L = histList(), i = L.findIndex(s => s.key === R.snap.key); return i > 0 ? L[i-1] : null; }
 // change chip: kind rel | rp | x | pp ; good 1 = higher is better, -1 = lower is better, 0 = neutral
@@ -1059,12 +1297,17 @@ function vWelcome(){
     ${FEATURES}
   </div>`;
 }
-function dropTiles(){
-  return `<div class="drops">
-    <button class="drop ${RAW.ads ? 'ok' : ''}" data-drop="ads"><span class="di">${RAW.ads ? ic('check',22,2.2) : ic('megaphone',22)}</span><span style="flex:1;min-width:0"><b>Laporan iklan</b><small class="clamp1">${RAW.ads ? esc(RAW.adsFile) : 'Data_Keseluruhan_Iklan_Shopee….csv'}</small></span><span class="cap">${RAW.ads ? 'Ganti' : 'Pilih file'}</span></button>
-    <button class="drop ${RAW.prod ? 'ok' : ''}" data-drop="prod"><span class="di">${RAW.prod ? ic('check',22,2.2) : ic('bag',22)}</span><span style="flex:1;min-width:0"><b>Laporan produk</b><small class="clamp1">${RAW.prod ? esc(RAW.prodFile) : 'parentskudetail….xlsx'}</small></span><span class="cap">${RAW.prod ? 'Ganti' : 'Pilih file'}</span></button>
-  </div>`;
+const TILES = {
+  ads:{i:'megaphone', t:'Laporan iklan', ph:'Data_Keseluruhan_Iklan_Shopee….csv', ok:() => RAW.ads, f:() => RAW.adsFile},
+  prod:{i:'bag', t:'Laporan produk', ph:'parentskudetail….xlsx', ok:() => RAW.prod, f:() => RAW.prodFile},
+  inc:{i:'wallet', t:'Laporan penghasilan', ph:'Income.dilepas….xlsx · opsional', ok:() => INC, f:() => `${INC.file} · ${fN(INC.n)} pesanan`},
+  ord:{i:'truck', t:'Daftar pesanan', ph:'Order.all….xlsx · opsional', ok:() => ORD, f:() => `${ORD.file} · ${fN(ORD.n)} pesanan`}
+};
+function dropTile(k){
+  const x = TILES[k], ok = !!x.ok();
+  return `<button class="drop ${ok ? 'ok' : ''}" data-drop="${k}"><span class="di">${ok ? ic('check',22,2.2) : ic(x.i,22)}</span><span style="flex:1;min-width:0"><b>${x.t}</b><small class="clamp1">${esc(ok ? x.f() : x.ph)}</small></span><span class="cap">${ok ? 'Ganti' : 'Pilih file'}</span></button>`;
 }
+const dropTiles = (keys = ['ads','prod']) => `<div class="drops">${keys.map(dropTile).join('')}</div>`;
 
 function actionList(){
   const t = R.tot, ads = R.ads, by = k => ads.filter(a => a.st === k);
@@ -1080,11 +1323,13 @@ function actionList(){
   if (R.priority.length){ const p = R.priority[0]; out.push({c:'orange', i:'restock', t:`${R.priority.length} SKU perlu restock`, s:`Paling mendesak: ${p.nama}${p.vname !== '(tanpa variasi)' ? ' · ' + p.vname : ''} — ${p.st === 'HABIS' ? 'sudah habis' : 'habis ±' + fD(p.daysLeft) + ' hari lagi'}`, go:'stok', f:{stTab:'pri'}}); }
   if (R.cand.length) out.push({c:'indigo', i:'sparkles', t:`${R.cand.length} produk layak mulai diiklankan`, s:'Laku, konversi bagus, margin positif — belum ada iklan', go:'produk', f:{prF:'CAND'}});
   if (hppMissing) out.push({c:'pink', i:'coin', t:`${hppMissing} produk belum ada HPP`, s:`Memakai HPP default ${fPct(+S.hppDefault,0)} — isi agar profit akurat`, go:'hpp', f:{hppOnly:true}});
-  if (missStock) out.push({c:'teal', i:'archive', t:`${missStock} SKU belum diisi stoknya`, s:'Forecast tidak bisa dihitung tanpa stok saat ini', go:'inputstok', f:{isOnly:true}});
+  if (missStock) out.push({c:'cyan', i:'archive', t:`${missStock} SKU belum diisi stoknya`, s:'Forecast tidak bisa dihitung tanpa stok saat ini', go:'inputstok', f:{isOnly:true}});
+  if (R.products.length && !R.F.ex.some(e => e.cat !== 'income' && e.cat !== 'stok')) out.push({c:'brown', i:'receipt', t:'Biaya operasional belum dicatat', s:'Gaji, sewa, packaging — catat agar laba bersih akurat', go:'biaya', f:{}});
   return out;
 }
 
 function vRingkasan(){
+  const F = R.F, fs = F.sales || 1;
   const t = R.tot, ads = R.ads, hasAds = ads.length > 0, hasProd = R.products.length > 0;
   const by = k => ads.filter(a => a.st === k);
   const prev = prevSnap();
@@ -1100,7 +1345,6 @@ function vRingkasan(){
   const actions = actionList();
   const actRows = actions.map((a,i) => `<div class="row ind tap" data-go="${a.go}" data-f='${esc(JSON.stringify(a.f))}'><span class="r-ic" style="--c:var(--${a.c})">${ic(a.i,18,2)}</span><div class="r-main"><div class="r-t">${esc(a.t)}</div><div class="r-s clamp1">${esc(a.s)}</div></div>${chev}</div>`).join('');
 
-  const sales = t.sales || 1;
   const verdict = t.adProfit >= 0
     ? `Iklan Anda <b class="pos">benar-benar untung</b>. ROAS ${fX(t.roas)} berada ${fX(t.roas - t.bep)} di atas titik impas ${fX(t.bep)}.`
     : `Iklan Anda <b class="neg">sebenarnya rugi</b>. ROAS ${fX(t.roas)} terlihat bagus, tapi titik impas Anda ${fX(t.bep)}.`;
@@ -1129,7 +1373,7 @@ function vRingkasan(){
 
   <div class="grid g4" style="margin-top:16px">
     ${metric('Penjualan toko', fRpS(t.sales), `${fN(t.orders)} pesanan · ${fN(t.units)} unit${hasProd ? vs(t.sales, 'sales', 'rel', 1, 'hasProd') : ''}`)}
-    ${metric('Profit bersih toko', fRpS(t.net), `Margin ${fPct(t.netMargin)}${hasProd ? vs(t.net, 'net', 'rp', 1, 'hasProd') : ''}`, hasProd ? sgn(t.net) : '')}
+    ${metric('Laba bersih toko', fRpS(F.net), `Margin ${fPct(F.netM)} · setelah semua biaya${hasProd ? vs(F.net, 'net', 'rp', 1, 'hasProd') : ''}`, hasProd ? sgn(F.net) : '', 'data-go="keuangan"')}
     ${metric('Biaya iklan', fRpS(t.spend), `${fPct(t.adShare)} penjualan dari iklan${hasAds ? vs(t.spend, 'spend', 'rel', 0, 'hasAds') : ''}`)}
     ${metric('TACOS', fPct(t.tacos), `Biaya iklan ÷ total penjualan${hasProd && hasAds ? vs(t.tacos, 'tacos', 'pp', -1, 'hasProd') : ''}`)}
   </div>
@@ -1140,12 +1384,13 @@ function vRingkasan(){
   <div class="grid g2" style="margin-top:36px">
     <div class="card">
       <h2 class="sec" style="margin:0 0 4px;font-size:18px">Ke mana uang penjualan</h2>
-      <p class="cap" style="margin:0 0 18px">Estimasi dari ${fRpS(t.sales)} total penjualan</p>
+      <p class="cap" style="margin:0 0 18px">Dari ${fRpS(F.sales)} penjualan bersih${F.feeSrc === 'est' ? ' · potongan estimasi' : ''}</p>
       ${hasProd ? storage([
-        {l:'HPP', v:t.hppRp, c:'var(--purple)', t:fPct(t.hppRp/sales,0)},
-        {l:'Potongan marketplace', v:t.potRp, c:'var(--orange)', t:fPct(t.potRp/sales,0)},
-        {l:'Iklan + PPN', v:t.costPpn, c:'var(--red)', t:fPct(t.costPpn/sales,0)},
-        {l: t.net >= 0 ? 'Profit bersih' : 'Rugi bersih', v:Math.max(0,t.net), c:'var(--green)', t:fPct(t.net/sales,0)}
+        {l:'HPP', v:F.hpp, c:'var(--purple)', t:fPct(F.hpp/fs,0)},
+        {l:'Potongan marketplace', v:F.feeTot, c:'var(--orange)', t:fPct(F.feeTot/fs,0)},
+        {l:'Iklan + PPN', v:F.ads, c:'var(--red)', t:fPct(F.ads/fs,0)},
+        {l:'Operasional', v:F.opex, c:'var(--brown)', t:fPct(F.opex/fs,0)},
+        {l: F.net >= 0 ? 'Laba bersih' : 'Rugi bersih', v:Math.max(0,F.net), c:'var(--green)', t:fPct(F.net/fs,0)}
       ]) : '<p class="cap">Butuh laporan produk.</p>'}
     </div>
     <div class="card">
@@ -1172,6 +1417,7 @@ function priRow(i){
 function vIklan(){
   const ads = R.ads;
   if (!ads.length) return pageHead('Iklan') + emptyImport('ads');
+  if (UI.adView === 'prod') return vMarketing();
   const cnt = countBy(ads,'st');
   const ord = ['SCALE','PERTAHANKAN','RUGI','DATA KURANG'];
   const sorter = {profit:(a,b) => b.profit - a.profit, cost:(a,b) => b.cost - a.cost, roas:(a,b) => b.roas - a.roas, loss:(a,b) => a.profit - b.profit}[UI.adSort];
@@ -1181,6 +1427,7 @@ function vIklan(){
   if (nH) opts.push({k:'HOLD', l:'Stok kritis', n:nH});
   if (nP) opts.push({k:'PUSH', l:'Stok berlebih', n:nP});
   return `${pageHead('Iklan', 'Profit sebenarnya & keputusan scale atau stop untuk setiap iklan')}
+  <div class="toolbar">${seg('adView', 'ad', AD_VIEWS)}</div>
   <div class="grid g4" style="margin-bottom:28px">
     ${ord.map(k => { const g = ads.filter(a => a.st === k); return metric(pill(k), `${g.length} <span style="font-size:15px;color:var(--label-3);font-weight:500">iklan</span>`, `${fRpS(sum(g,a=>a.cost))} budget · profit ${fRpS(sum(g,a=>a.profit))}`, '', `data-seg="adF|${UI.adF === k ? 'ALL' : k}"`).replace('class="metric tap"', `class="metric tap ${UI.adF === k ? 'on' : ''}"`); }).join('')}
   </div>
@@ -1230,6 +1477,195 @@ function modeTable(ads){
   return `<h2 class="sec">Per mode iklan</h2><div class="list">${modes.map(x => `<div class="row">
     <div class="r-main"><div class="r-t">${esc(x.m)}</div><div class="r-s">${x.n} iklan · biaya ${fRpS(x.c)} · ROAS ${fX(x.roas)}</div></div>
     <div class="r-end"><b class="${sgn(x.p)}">${fRp(x.p)}</b><span class="r-s">profit bersih</span></div></div>`).join('')}</div>`;
+}
+
+/* ---------- marketing per produk (gross vs actual ROAS) ---------- */
+const AD_VIEWS = [{k:'ad', l:'Per iklan'}, {k:'prod', l:'Per produk'}];
+function vMarketing(){
+  const t = R.tot, q = UI.mkQ.toLowerCase();
+  const ps = R.products.filter(p => p.spend > 0);
+  const FL = {ALL: () => true, LOW_ROAS: p => p.aroas < 1, LOW_MARGIN: p => p.margin < 0.2, NO_HPP: p => !p.hppSet};
+  const n = k => ps.filter(FL[k]).length;
+  const opts = [{k:'ALL', l:'Semua', n:ps.length}, {k:'LOW_ROAS', l:'ROAS rendah', n:n('LOW_ROAS')}, {k:'LOW_MARGIN', l:'Margin rendah', n:n('LOW_MARGIN')}, {k:'NO_HPP', l:'HPP belum diisi', n:n('NO_HPP')}];
+  const sorter = {cost:(a,b) => b.spend - a.spend, aroas:(a,b) => a.aroas - b.aroas, profit:(a,b) => b.profit - a.profit, rev:(a,b) => b.adRev - a.adRev}[UI.mkSort] || ((a,b) => b.spend - a.spend);
+  const rows = ps.filter(FL[UI.mkF] || FL.ALL).filter(p => !q || (p.nama + ' ' + p.kode).toLowerCase().includes(q)).sort(sorter);
+  const shop = R.ads.filter(a => !a.mapped && a.cost > 0), lim = limit('mk');
+  return `${pageHead('Iklan', 'Biaya, pendapatan & ROAS sebenarnya per produk')}
+  <div class="toolbar">${seg('adView', 'prod', AD_VIEWS)}</div>
+  <div class="grid g4" style="margin-bottom:24px">
+    ${metric('Biaya iklan', fRpS(t.spend), `${fRpS(t.costPpn)} termasuk PPN`)}
+    ${metric('Pendapatan iklan', fRpS(t.adRev), `${fN(t.adOrders)} pesanan dari iklan`)}
+    ${metric('ROAS', fX(t.roas), `Actual ROAS <b class="${t.aroas >= 1 ? 'pos' : 'neg'}">${fA(t.aroas)}</b>`)}
+    ${metric('Biaya per pesanan', fRpS(t.cpa), `AOV toko ${fRpS(R.F.aov)}`)}
+  </div>
+  <div class="toolbar">${seg('mkF', UI.mkF, opts)}</div>
+  <div class="toolbar">${searchBox('mkQ', 'Cari produk')}<span class="spacer"></span>${sortSel('mkSort', [['cost','Biaya terbesar'],['aroas','Actual ROAS terendah'],['profit','Net profit'],['rev','Pendapatan']])}</div>
+  <div class="list">${rows.slice(0, lim).map(p => `<div class="row tap" data-sheet="prod|${esc(p.kode)}">
+    <div class="r-main"><div class="r-t clamp1">${esc(p.nama)}</div><div class="r-s clamp1">${p.nAds} iklan · margin ${fPct(p.margin,0)}${p.hppSet ? '' : ' (HPP default)'} · ${fRpS(p.cpa)}/pesanan<span class="show-s"> · ROAS ${fX(p.roas)} → actual ${fA(p.aroas)}</span></div></div>
+    <div class="r-cols"><div class="r-col"><span>Biaya</span><b>${fRpS(p.spend)}</b></div><div class="r-col"><span>Pendapatan</span><b>${fRpS(p.adRev)}</b></div><div class="r-col"><span>Gross ROAS</span><b>${fX(p.roas)}</b></div><div class="r-col"><span>Actual ROAS</span><b class="${p.aroas >= 1 ? 'pos' : 'neg'}">${fA(p.aroas)}</b></div></div>
+    <div class="r-end" style="min-width:110px"><b class="${sgn(p.profit)}">${fRpS(p.profit)}</b><span class="r-s">net profit</span></div>${chev}</div>`).join('') || '<div class="empty">Tidak ada produk yang cocok.</div>'}
+  ${more('mk', rows.length, lim)}</div>
+  ${shop.length ? `<p class="foot">${shop.length} iklan level toko/grup (${fRpS(sum(shop, a => a.cost))}) tidak terhubung ke satu produk, jadi tidak masuk tabel ini.</p>` : ''}
+  <p class="foot"><b>Gross ROAS</b> = pendapatan iklan ÷ biaya iklan (angka di Seller Centre). <b>Actual ROAS</b> = laba kotor dari iklan (setelah HPP & potongan) ÷ (biaya iklan + PPN) — di atas 1,00× berarti iklan menghasilkan profit. <b>Net profit</b> = laba produk setelah HPP, potongan & iklan.</p>`;
+}
+
+/* ---------- keuangan ---------- */
+const stmt = L => `<div class="stmt">${L.map(x => x.k === 'h' ? `<div class="st-h">${esc(x.l)}</div>` : `<div class="st-${x.k}"><span>${esc(x.l)}</span><b class="${x.k === 'big' ? sgn(x.v) : ''}">${fRp(x.v)}</b></div>`).join('')}</div>`;
+const SEQ = ['var(--orange)','var(--pink)','var(--indigo)','var(--teal)','var(--purple)','var(--blue)','var(--brown)','var(--cyan)','var(--yellow)','var(--gray)'];
+const cardH = (t, sub) => `<h2 class="sec" style="margin:0 0 4px;font-size:18px">${t}</h2>${sub ? `<p class="cap" style="margin:0 0 18px">${sub}</p>` : ''}`;
+function vKeuangan(){
+  if (!R.products.length && !INC) return pageHead('Keuangan', 'Omzet, laba kotor, laba bersih & laporan keuangan') + emptyImport('prod');
+  const F = R.F, t = R.tot, prev = prevSnap(), fs = F.sales || 1;
+  const P = k => prev && prev.hasProd && prev.tot[k] != null ? prev.tot[k] : null;
+  const ratio = k => { const a = P(k), b = P('salesNet'); return a != null && b ? a / b : null; };
+  const vs = (cur, p, kind, good) => p == null ? '' : `<div class="vs">${dl(cur, p, kind, good)}<span>vs ${esc(prev.label)}</span></div>`;
+  const kpis = `<div class="grid g4">
+    ${metric('Omzet', fRpS(F.sales), `${fN(F.orders)} pesanan${vs(F.sales, P('salesNet'), 'rel', 1)}`)}
+    ${metric('Laba kotor', fRpS(F.gp), `Omzet − HPP${vs(F.gp, P('gp'), 'rel', 1)}`, sgn(F.gp))}
+    ${metric('Laba bersih', fRpS(F.net), `Setelah semua biaya${vs(F.net, P('net'), 'rp', 1)}`, sgn(F.net))}
+    ${metric('ROAS', t.spend ? fX(t.roas) : '—', `Actual ${fA(t.aroas)} · impas ${fX(t.bep)}${vs(t.roas, prev && prev.hasAds ? prev.tot.roas : null, 'x', 1)}`)}
+    ${metric('% Laba kotor', fPct(F.gpM), `Laba kotor ÷ omzet${vs(F.gpM, ratio('gp'), 'pp', 1)}`)}
+    ${metric('% Laba bersih', fPct(F.netM), `Laba bersih ÷ omzet${vs(F.netM, ratio('net'), 'pp', 1)}`, sgn(F.net))}
+    ${metric('AOV', fRpS(F.aov), `Rata-rata per pesanan${vs(F.aov, P('aov'), 'rel', 1)}`)}
+    ${metric('Biaya marketplace', fRpS(F.feeTot), `${fPct(F.feeTot / fs)} omzet · ${F.feeSrc === 'actual' ? 'aktual' : 'estimasi'}${vs(F.feeTot, P('fees'), 'rel', -1)}`)}
+  </div>`;
+  const feeCard = `<div class="card">${cardH('Potongan marketplace', `${F.feeSrc === 'actual' ? `Aktual dari ${esc(INC.file)}` : 'Estimasi dari persentase di Pengaturan'} · ${fPct(F.feeTot / fs)} omzet`)}
+    ${F.fees.length ? storage(F.fees.map((x,i) => ({l:x.l, v:x.v, c:SEQ[i % SEQ.length], t:fRpS(x.v)}))) : '<p class="cap">Tidak ada potongan.</p>'}
+    ${F.feeSrc === 'actual' ? '' : `<button class="btn sm" style="margin-top:18px" data-drop="inc">${ic('imp',15)} Impor laporan penghasilan untuk angka aktual</button>`}</div>`;
+  const stc = {Selesai:'green', Proses:'blue', Retur:'orange', Batal:'red'};
+  const ordCard = `<div class="card">${ORD ? cardH('Status pesanan', `${fN(ORD.n)} pesanan · ${esc(ORD.file)}`) + storage(Object.keys(stc).map(k => ({l:`${k} · ${fN(ORD.st[k].n)}`, v:ORD.st[k].n, c:`var(--${stc[k]})`, t:fPct(ORD.st[k].n / (ORD.n || 1))})))
+      + `<ul class="bd" style="margin-top:16px">${Object.keys(stc).map(k => `<li><span>Nilai ${k.toLowerCase()}</span><b>${fRpS(ORD.st[k].v)}</b></li>`).join('')}</ul>`
+    : cardH('Status pesanan', 'Rekap pesanan selesai, diproses, batal, dan retur.') + `<button class="drop" data-drop="ord"><span class="di">${ic('truck',22)}</span><span style="flex:1;min-width:0"><b>Impor daftar pesanan</b><small>Pesanan Saya → Ekspor · opsional</small></span><span class="cap">Pilih file</span></button>`}</div>`;
+  const dk = ORD ? Object.keys(ORD.days).sort() : [];
+  const daily = dk.length > 1 ? `<div class="card">${cardH('Tren harian', 'Omzet per hari, tanpa pesanan batal')}
+    ${barChart(dk.map((d,i) => { const o = ORD.days[d], v = o.v - (o.bv || 0); return {key:d, x: i % 5 === 0 || i === dk.length - 1 ? String(+d.slice(8)) : '', v, tip:`${+d.slice(8)} ${MO[+d.slice(5,7)-1]}\n${fRpS(v)} · ${fN(o.n - (o.bn || 0))} pesanan`}; }), {fmt:fRpS, color:() => 'var(--blue)', hi:[], label:false}).replace('class="bch"', 'class="bch dense"')}</div>` : '';
+  const L = histList().filter(x => x.hasProd).slice(-12);
+  const monthly = L.length ? `<div class="card">${cardH('Tren bulanan laba bersih', 'Dari riwayat periode tersimpan')}
+    ${barChart(L.map(x => ({key:x.key, x:x.short || x.label, v:x.tot.net, tip:`${x.label}\nLaba bersih: ${fRpS(x.tot.net)}\nOmzet: ${fRpS(x.tot.salesNet ?? x.tot.sales)}`})), {fmt:fRpS, color:v => v >= 0 ? 'var(--green)' : 'var(--red)', hi: R.snap ? [R.snap.key] : []})}</div>` : '';
+  const trends = daily || monthly ? `<div class="grid ${daily && monthly ? 'g2' : ''}" style="margin-top:16px">${daily}${monthly}</div>` : '';
+  const top = R.products.filter(p => p.sales > 0).sort((a,b) => b.sales - a.sales).slice(0, 10), mx = top.length ? top[0].sales : 1;
+  const topList = top.length ? `<h2 class="sec">Top produk <small>berdasarkan penjualan</small></h2><div class="list">${top.map((p,i) => `<div class="row tap" data-sheet="prod|${esc(p.kode)}"><span class="rank" style="--c:var(--${i < 3 ? 'blue' : 'gray'})">${i+1}</span>
+    <div class="r-main"><div class="r-t clamp1">${esc(p.nama)}</div><div class="r-s">${fN(p.units)} unit · ${fPct(p.sales / (t.sales || 1))} penjualan</div><div class="tbar"><i style="width:${p.sales / mx * 100}%"></i></div></div>
+    <div class="r-cols"><div class="r-col"><span>Penjualan</span><b>${fRpS(p.sales)}</b></div><div class="r-col"><span>Margin</span><b>${fPct(p.margin,0)}</b></div></div>
+    <div class="r-end" style="min-width:110px"><b class="${sgn(p.profit)}">${fRpS(p.profit)}</b><span class="r-s">laba bersih</span></div>${chev}</div>`).join('')}</div>` : '';
+  const reports = `<h2 class="sec">Laporan keuangan <small>${esc(R.snap ? R.snap.label : '')}</small></h2><div class="grid g2">
+    <div class="card">${cardH('Laba Rugi', `${F.basis === 'income' ? 'Basis dana cair' : 'Basis pesanan'}${F.feeSrc === 'est' ? ' · potongan estimasi' : ''}`)}${stmt(F.pl)}</div>
+    <div class="card">${cardH('Arus Kas', F.cashEst ? 'Dana cair diestimasi dari penjualan − potongan' : 'Dana cair dari laporan penghasilan')}${stmt(F.cf)}</div></div>
+    <p class="foot">Laba bersih = laba kotor − potongan marketplace − iklan (+PPN) − biaya operasional + pemasukan lain. Pembelian stok hanya masuk arus kas karena sudah dihitung lewat HPP. <a href="#" class="btn link" style="padding:0" data-go="biaya">Catat biaya</a></p>`;
+  return `${pageHead('Keuangan', [shopName(), R.snap ? R.snap.label : ''].filter(Boolean).map(esc).join(' · '), `<button class="btn" data-act="xlsx">${ic('dl',17)} Excel</button><button class="btn" data-act="report">${ic('doc',17)} PDF</button>`)}
+  <div class="toolbar">${seg('finBasis', F.basis, [{k:'order', l:'Berdasarkan pesanan'}, {k:'income', l:'Berdasarkan dana cair'}])}<span class="cap">${F.basis === 'income' ? `Dari laporan penghasilan · ${fN(INC.n)} pesanan dana cair` : `Dari laporan produk (${esc(S.basis)})${ORD ? ', dikurangi batal & retur' : ''}`}</span></div>
+  ${kpis}
+  <div class="grid g2" style="margin-top:16px">${feeCard}${ordCard}</div>
+  ${trends}${topList}${reports}`;
+}
+
+/* ---------- pengeluaran ---------- */
+function vBiaya(){
+  const F = R.F, pi = F.pi;
+  const today = new Date().toISOString().slice(0,10);
+  const defDate = pi && (today < pi.start || today > pi.end) ? pi.end : today;
+  const expRow = e => { const c = EXCAT[e.cat] || EXCAT.lain, inc = e.cat === 'income';
+    return `<div class="row ind"><span class="r-ic" style="--c:var(--${c[2]})">${ic(c[1],18,2)}</span><div class="r-main"><div class="r-t clamp1">${esc(e.note || c[0])}</div><div class="r-s clamp1">${e.rec ? '<span class="adtag" style="color:var(--blue-ink);background:var(--accent-soft)">Rutin</span>' : ''}${esc(c[0])} · ${fDate(new Date(e.date + 'T00:00:00'))}</div></div>
+      <div class="r-end" style="min-width:104px"><b class="${inc ? 'pos' : ''}">${inc ? '+' : ''}${fRp(e.amt)}</b></div><button class="xbtn" data-delexp="${esc(e.id)}" aria-label="Hapus transaksi" data-tip="Hapus">${ic('trash',15,2)}</button></div>`; };
+  const inIds = new Set(F.ex.map(e => e.id)), other = EXP.filter(e => !inIds.has(e.id)).sort((a,b) => b.date.localeCompare(a.date));
+  const opts = Object.entries(EXCAT).map(([k,v]) => `<option value="${k}" ${UI.exCat === k ? 'selected' : ''}>${v[0]}</option>`).join('');
+  return `${pageHead('Pengeluaran', `Biaya operasional & pemasukan di luar marketplace${pi ? ' · periode ' + esc(pi.label) : ''}`)}
+  <div class="grid g3" style="margin-bottom:20px">
+    ${metric('Biaya operasional', fRpS(F.opex), `${F.sales ? fPct(F.opex / F.sales) + ' omzet · ' : ''}mengurangi laba bersih`)}
+    ${metric('Pembelian stok', fRpS(F.stockBuy), 'Hanya di arus kas')}
+    ${metric('Pemasukan lain', fRpS(F.otherInc), 'Menambah laba bersih', F.otherInc ? 'pos' : '')}
+  </div>
+  <div class="card">${cardH('Catat transaksi', '')}
+    <div class="exform" style="margin-top:14px">
+      <label>Tanggal<input class="inp" type="date" id="exDate" value="${defDate}"></label>
+      <label>Kategori<select class="inp" id="exCat">${opts}</select></label>
+      <label class="full">Jumlah<span class="inp rp"><em>Rp</em><input id="exAmt" inputmode="numeric" placeholder="0" autocomplete="off"></span></label>
+      <label class="wide">Keterangan<input class="inp" id="exNote" maxlength="80" placeholder="mis. Gaji admin Oktober" autocomplete="off"></label>
+      <div class="end"><label class="switch"><input type="checkbox" id="exRec">Rutin tiap bulan</label><button class="btn primary" data-act="addExp">${ic('plus',16,2.2)} Tambah</button></div>
+    </div></div>
+  <p class="foot">Biaya rutin (gaji, sewa) cukup dicatat sekali — otomatis dihitung di periode itu dan seterusnya. Pembelian stok tidak mengurangi laba (sudah dihitung lewat HPP), hanya arus kas.</p>
+  ${F.opexBy.length > 1 ? `<div class="card" style="margin-top:24px">${cardH('Komposisi biaya operasional', `${fRpS(F.opex)} di periode ini`)}${storage(F.opexBy.map(x => ({l:x.l, v:x.v, c:`var(--${EXCAT[x.k][2]})`, t:fRpS(x.v)})))}</div>` : ''}
+  <h2 class="sec">${pi ? 'Periode ini' : 'Semua transaksi'} <small>${F.ex.length} transaksi</small></h2>
+  <div class="list">${F.ex.map(expRow).join('') || '<div class="empty">Belum ada transaksi di periode ini.</div>'}</div>
+  ${other.length ? `<h2 class="sec">Periode lain <small>${other.length} transaksi</small></h2><div class="list">${other.slice(0, limit('exo', 20)).map(expRow).join('')}${more('exo', other.length, limit('exo', 20))}</div>` : ''}`;
+}
+
+/* ---------- stores ---------- */
+const STORE_C = ['blue','orange','green','indigo','pink','teal','purple','brown'];
+const storeAv = (st, i, sz = 28) => `<span class="sav" style="--c:var(--${STORE_C[Math.max(0, i) % STORE_C.length]});width:${sz}px;height:${sz}px;font-size:${Math.round(sz * 0.45)}px">${esc((T(st.name) || '?').charAt(0).toUpperCase())}</span>`;
+function storeHist(id){ return id === STORES.cur ? histList() : Object.values(LS.get('st_' + id + '_hist', {}) || {}).sort((a,b) => a.start.localeCompare(b.start)); }
+function vSemua(){
+  const rows = STORES.list.map((st, i) => { const L = storeHist(st.id); return {st, i, L, last: L[L.length - 1] || null}; });
+  const has = rows.filter(r => r.last), tt = k => sum(has, r => r.last.tot[k] || 0);
+  const spend = tt('spend'), adRev = tt('adRev'), sales = tt('sales');
+  const per = {}; rows.forEach(r => r.L.forEach(x => { const o = per[x.key] || (per[x.key] = {key:x.key, start:x.start, x:x.short || x.label, label:x.label, net:0, sales:0, n:0}); o.net += x.tot.net || 0; o.sales += x.tot.sales || 0; o.n++; }));
+  const PL = Object.values(per).sort((a,b) => a.start.localeCompare(b.start)).slice(-12);
+  const c = r => `var(--${STORE_C[r.i % STORE_C.length]})`;
+  return `${pageHead('Semua toko', `${STORES.list.length} toko · periode terakhir tiap toko`, `<button class="btn" data-sheet="stores|">${ic('store',17)} Kelola toko</button>`)}
+  <div class="grid g4" style="margin-bottom:16px">
+    ${metric('Total omzet', fRpS(sales), `${has.length} dari ${rows.length} toko punya data`)}
+    ${metric('Total laba bersih', fRpS(tt('net')), `Margin ${fPct(sales ? tt('net') / sales : 0)}`, sgn(tt('net')))}
+    ${metric('Profit bersih iklan', fRpS(tt('adProfit')), 'Gabungan semua toko', sgn(tt('adProfit')))}
+    ${metric('Biaya iklan', fRpS(spend), `ROAS gabungan ${fX(spend ? adRev / spend : 0)}`)}
+  </div>
+  <div class="grid g2">
+    <div class="card">${cardH('Porsi omzet per toko', 'Periode terakhir tiap toko')}${has.length ? storage(has.map(r => ({l:r.st.name, v:r.last.tot.sales, c:c(r), t:fPct(r.last.tot.sales / (sales || 1), 0)}))) : '<p class="cap">Belum ada data.</p>'}</div>
+    <div class="card"><h2 class="sec" style="margin:0 0 2px;font-size:18px">Laba bersih gabungan</h2><p class="cap" style="margin:0">Per periode, semua toko</p>${PL.length ? barChart(PL.map(o => ({key:o.key, x:o.x, v:o.net, tip:`${o.label}\nLaba bersih: ${fRpS(o.net)}\nOmzet: ${fRpS(o.sales)}\n${o.n} toko`})), {fmt:fRpS, color:v => v >= 0 ? 'var(--green)' : 'var(--red)', hi:[PL[PL.length - 1].key]}) : '<p class="cap" style="margin-top:14px">Belum ada riwayat.</p>'}</div>
+  </div>
+  <h2 class="sec">Toko</h2>
+  <div class="list">${rows.map(r => `<div class="row tap" data-store="${esc(r.st.id)}">${storeAv(r.st, r.i, 34)}
+    <div class="r-main"><div class="r-t clamp1">${esc(r.st.name)}${r.st.id === STORES.cur ? ' <span class="pill c-blue" style="margin-left:6px;vertical-align:1px">Aktif</span>' : ''}</div><div class="r-s clamp1">${r.last ? `${esc(r.last.label)} · ROAS ${fX(r.last.tot.roas)}` : 'Belum ada laporan'}</div></div>
+    <div class="r-cols"><div class="r-col"><span>Omzet</span><b>${r.last ? fRpS(r.last.tot.sales) : '—'}</b></div><div class="r-col"><span>Profit iklan</span><b class="${r.last ? sgn(r.last.tot.adProfit) : ''}">${r.last ? fRpS(r.last.tot.adProfit) : '—'}</b></div></div>
+    <div class="r-end" style="min-width:110px"><b class="${r.last ? sgn(r.last.tot.net) : ''}">${r.last ? fRpS(r.last.tot.net) : '—'}</b><span class="r-s">laba bersih</span></div>${chev}</div>`).join('')}</div>
+  <p class="foot">Angka gabungan memakai periode terakhir yang tersimpan di tiap toko. Impor laporan periode yang sama di semua toko agar perbandingannya adil.</p>`;
+}
+const newStoreId = () => 's' + Date.now().toString(36) + Math.random().toString(36).slice(2,5);
+const resetUI = () => { Object.assign(UI, {hA:'', hB:'', lim:{}}); DIRTY = false; };
+function switchStore(id){
+  if (!STORES.list.some(x => x.id === id)) return;
+  flushSnap(); STORES.cur = id; saveStores(); loadStoreData(); resetUI(); closeSheet();
+  go(VIEW === 'semua' ? 'ringkasan' : VIEW); toast(`Beralih ke ${curStore().name}`);
+}
+function addStore(name){
+  flushSnap(); const id = newStoreId(); STORES.list.push({id, name}); STORES.cur = id; saveStores();
+  SL.set('settings', Object.assign({}, DEFAULTS, {shopName:name, onboarded:true}));
+  loadStoreData(); resetUI(); closeSheet(); go('ringkasan'); toast(`Toko “${name}” dibuat — impor laporannya`);
+}
+function delStore(id){
+  const st = STORES.list.find(x => x.id === id); if (!st || STORES.list.length < 2) return;
+  ask(`Hapus toko “${st.name}”?`, 'Laporan, HPP, stok, biaya, dan riwayat toko ini ikut terhapus. Tindakan ini tidak bisa dibatalkan.', 'Hapus toko', true).then(ok => { if (ok) doDelStore(id, st); });
+}
+function doDelStore(id, st){
+  clearTimeout(snapT); if (R && STORES.cur === id) R.snap = null;
+  STORE_KEYS.forEach(k => LS.del('st_' + id + '_' + k));
+  STORES.list = STORES.list.filter(x => x.id !== id); if (STORES.cur === id) STORES.cur = STORES.list[0].id; saveStores();
+  loadStoreData(); resetUI(); closeSheet(); go('ringkasan'); toast(`Toko “${st.name}” dihapus`);
+}
+const storePack = kind => ({app:'ads-profit-analyzer', v:3, kind, name:curStore().name, saved:new Date().toISOString(), settings:S, hpp:HPP, stock:STOCK, hist:HIST, raw:RAW, exp:EXP, inc:INC, ord:ORD});
+function applyPack(d){
+  S = Object.assign({}, DEFAULTS, d.settings || {}); HPP = d.hpp || {}; STOCK = d.stock || {}; if (d.hist) HIST = d.hist;
+  if (d.raw) RAW = d.raw; if (Array.isArray(d.exp)) EXP = d.exp; if ('inc' in d) INC = d.inc || null; if ('ord' in d) ORD = d.ord || null;
+  saveAll();
+}
+
+/* ---------- excel export ---------- */
+function exportXlsx(){
+  if (typeof XLSX === 'undefined'){ toast('Pembuat Excel belum termuat — periksa koneksi internet', false); return; }
+  if (!R.products.length && !R.ads.length && !INC){ toast('Impor laporan dulu', false); return; }
+  const F = R.F, lbl = R.snap ? R.snap.label : (fPeriod(R.A.period) || ''), wb = XLSX.utils.book_new(), shop = shopName() || curStore().name;
+  const head = t => [[`${t} — ${shop}`], ['Periode', lbl], ['Dibuat', fDate(new Date())], []];
+  const add = (name, aoa, cols) => { const ws = XLSX.utils.aoa_to_sheet(aoa); ws['!cols'] = cols.map(w => ({wch:w})); XLSX.utils.book_append_sheet(wb, ws, name); };
+  const R0 = v => Math.round(v || 0), R2 = v => isFinite(v) ? Math.round(v * 100) / 100 : '';
+  const st = L => L.map(x => x.k === 'h' ? [x.l.toUpperCase(), ''] : [(x.k === 'ind' ? '    ' : '') + x.l, R0(x.v)]);
+  add('Laba Rugi', [...head('Laporan Laba Rugi'), ['Basis', F.basis === 'income' ? 'Dana cair (laporan penghasilan)' : `Pesanan (${S.basis})`], ['Potongan marketplace', F.feeSrc === 'actual' ? 'Aktual' : 'Estimasi'], [], ['Keterangan','Rp'], ...st(F.pl)], [40, 18]);
+  add('Arus Kas', [...head('Laporan Arus Kas'), ['Keterangan','Rp'], ...st(F.cf)], [40, 18]);
+  add('Pengeluaran', [...head('Pengeluaran'), ['Tanggal','Kategori','Keterangan','Rutin','Jumlah (Rp)','Masuk periode ini'], ...EXP.slice().sort((a,b) => a.date.localeCompare(b.date)).map(e => [e.date, (EXCAT[e.cat] || EXCAT.lain)[0], e.note || '', e.rec ? 'Ya' : '', e.amt, F.ex.includes(e) ? 'Ya' : ''])], [12, 22, 34, 7, 14, 16]);
+  if (R.ads.length) add('Iklan', [...head('Keputusan per iklan'), ['Iklan','Mode','Status iklan','Biaya','Omzet','ROAS','Actual ROAS','BEP ROAS','Target ROAS','Profit bersih','Keputusan','Saran'], ...R.ads.slice().sort((a,b) => b.cost - a.cost).map(a => [a.name, a.mode, a.status, R0(a.cost), R0(a.rev), R2(a.roas), R2(a.aroas), R2(a.bep), a.tgt ? a.tgt.rec : '', R0(a.profit), ST[a.st].l, a.act])], [36, 18, 12, 12, 12, 8, 11, 9, 11, 13, 14, 70]);
+  if (R.products.length) add('Produk', [...head('Profit per produk'), ['Kode','Produk','Penjualan','Pesanan','Unit','HPP %','Margin %','Biaya iklan','Pendapatan iklan','Gross ROAS','Actual ROAS','Net profit','Status'], ...R.products.slice().sort((a,b) => b.sales - a.sales).map(p => [p.kode, p.nama, R0(p.sales), p.orders, p.units, R2(p.hpp * 100), R2(p.margin * 100), R0(p.spend), R0(p.adRev), R2(p.roas), R2(p.aroas), R0(p.profit), ST[p.st].l])], [14, 36, 13, 9, 8, 8, 9, 12, 15, 10, 11, 13, 18]);
+  if (R.priority.length) add('Restock', [...head('Prioritas restock'), ['Prioritas','Status','Produk','Variasi','SKU','Sisa hari','Stok efektif','Laku/hari','Qty restock','Modal (Rp)'], ...R.priority.map(i => [i.rank, ST[i.st].l, i.nama, i.vname, i.sku, R2(i.daysLeft), i.eff, R2(i.demand), i.qty, R0(i.modal)])], [9, 15, 32, 16, 16, 9, 11, 9, 11, 13]);
+  if (ORD && Object.keys(ORD.days).length) add('Harian', [...head('Pesanan harian'), ['Tanggal','Pesanan','Omzet (Rp)','Batal','Omzet batal (Rp)'], ...Object.keys(ORD.days).sort().map(d => { const o = ORD.days[d]; return [d, o.n, R0(o.v), o.bn || 0, R0(o.bv)]; })], [12, 10, 14, 8, 16]);
+  const buf = XLSX.write(wb, {bookType:'xlsx', type:'array'});
+  saveFile(`Laporan-${slug(shop)}-${slug(lbl)}.xlsx`, new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}), '', 'File Excel disimpan');
 }
 
 function vProduk(){
@@ -1425,6 +1861,7 @@ function vSetting(){
     <div>
       <div class="fgroup"><div class="ftitle">Toko</div><div class="form">
         ${fRow('shopName','Nama toko','','str', R.A.shop || 'Nama toko')}
+        <div class="frow" data-sheet="stores|" style="cursor:pointer"><span>Kelola toko</span><span class="muted" style="display:flex;align-items:center;gap:4px;padding-right:4px">${STORES.list.length} toko${chev}</span></div>
       </div></div>
       <div class="fgroup"><div class="ftitle">Profit iklan</div><div class="form">
         ${fRow('ppn','PPN atas biaya iklan','%')}
@@ -1442,8 +1879,9 @@ function vSetting(){
         ${fRow('layanan','Biaya layanan / transaksi','%')}
         ${fRow('affiliate','Komisi affiliate','%')}
         ${fRow('voucher','Voucher / ongkir ditanggung','%')}
-        <div class="frow total"><span>Total potongan</span><span style="padding-right:8px">${fPct(R.pot)}</span></div>
-      </div><p class="fnote">Persentase dari omzet. Contoh asumsi — bukan tarif resmi, cek Seller Centre.</p></div>
+        ${INC ? `<label class="frow"><span>Pakai potongan aktual dari laporan penghasilan</span><span class="switch"><input type="checkbox" data-set="actualFees|bool" ${S.actualFees !== false ? 'checked' : ''}></span></label>` : ''}
+        <div class="frow total"><span>Total potongan${R.incOk ? ' (aktual)' : ''}</span><span style="padding-right:8px">${fPct(R.pot)}</span></div>
+      </div><p class="fnote">${R.incOk ? `Memakai potongan aktual ${fPct(R.pot)} dari ${esc(INC.file)}. Persentase di atas hanya dipakai jika laporan penghasilan tidak ada.` : 'Persentase dari omzet. Contoh asumsi — bukan tarif resmi. Impor laporan penghasilan untuk memakai potongan aktual.'}</p></div>
     </div>
     <div>
       <div class="fgroup"><div class="ftitle">Forecast stok</div><div class="form">
@@ -1463,22 +1901,30 @@ function vSetting(){
 }
 function menuRows(){
   const r = (act, icn, c, t, s = '', danger = false) => `<div class="row ind tap" data-act="${act}"><span class="r-ic" style="--c:var(--${c})">${ic(icn,18,2)}</span><div class="r-main"><div class="r-t ${danger ? 'neg' : ''}">${t}</div>${s ? `<div class="r-s">${s}</div>` : ''}</div>${chev}</div>`;
-  return r('import','imp','blue','Impor laporan', 'Ganti laporan iklan atau produk')
-    + r('report','doc','teal','Ekspor laporan PDF', 'Profit iklan, target ROAS & restock')
-    + r('export','save','green','Simpan backup', 'HPP, stok, riwayat, dan pengaturan')
-    + r('restore','undo','indigo','Pulihkan dari backup')
+  return r('import','imp','blue','Impor laporan', 'Iklan, produk, penghasilan, atau pesanan')
+    + r('report','doc','teal','Ekspor laporan PDF', 'Laba rugi, arus kas, iklan & restock')
+    + r('xlsx','chart','green','Ekspor Excel', 'Laba rugi, arus kas, pengeluaran, iklan, produk')
+    + r('export','save','indigo','Simpan backup', 'Semua data toko ini')
+    + r('restore','undo','gray','Pulihkan dari backup', 'Menggantikan data toko ini')
     + r('demo','sparkles','purple','Muat data contoh')
     + r('theme','moon','gray','Tema terang / gelap')
-    + r('clearReports','calendar','orange','Mulai periode baru', 'Kosongkan laporan — riwayat, HPP & stok tetap')
-    + r('reset','trash','red','Hapus semua data', '', true);
+    + r('clearReports','calendar','orange','Mulai periode baru', 'Kosongkan laporan — riwayat, HPP, stok & biaya tetap')
+    + r('reset','trash','red','Hapus semua data', 'Semua toko di browser ini', true);
 }
 function vLainnya(){
   const r = (go, icn, c, t, s) => `<div class="row ind tap" data-go="${go}"><span class="r-ic" style="--c:var(--${c})">${ic(icn,18,2)}</span><div class="r-main"><div class="r-t">${t}</div><div class="r-s">${s}</div></div>${chev}</div>`;
+  const cs = curStore();
   return `${pageHead('Lainnya')}
   <div class="fgroup"><div class="list">
+    <div class="row ind tap" data-sheet="stores|">${storeAv(cs, STORES.list.indexOf(cs), 34)}<div class="r-main"><div class="r-t">${esc(cs.name)}</div><div class="r-s">${STORES.list.length} toko · ganti, tambah, atau bagikan ke tim</div></div>${chev}</div>
+    ${STORES.list.length > 1 ? r('semua','grid','indigo','Semua toko', 'Omzet, laba & iklan gabungan') : ''}
+  </div></div>
+  <div class="fgroup"><div class="list">
+    ${r('produk','bag','indigo','Produk', `${R.products.length} produk · profit per produk`)}
     ${r('riwayat','chart','purple','Riwayat', `${histList().length} periode tersimpan · bandingkan bulan ke bulan`)}
+    ${r('biaya','receipt','brown','Pengeluaran', `${R.F.ex.length} transaksi di periode ini`)}
     ${r('hpp','coin','pink','HPP Produk', `${R.hppFilled} dari ${R.products.length} produk diisi`)}
-    ${r('inputstok','archive','teal','Stok Gudang', `${R.stockFilled} dari ${R.items.length} SKU diisi`)}
+    ${r('inputstok','archive','cyan','Stok Gudang', `${R.stockFilled} dari ${R.items.length} SKU diisi`)}
     ${r('setting','gear','gray','Pengaturan', 'Nama toko, PPN, potongan, lead time')}
   </div></div>
   <div class="fgroup"><div class="list">${menuRows()}</div></div>`;
@@ -1499,7 +1945,7 @@ function reportHTML(){
     hasAds && kpi('ROAS iklan', fX(t.roas), `Titik impas ${fX(t.bep)}`, t.roas >= t.bep ? 'pos' : 'neg', d(t.roas, 'roas', 'x', 1, 'hasAds')),
     hasAds && kpi('Biaya iklan', fRpS(t.spend), `Omzet iklan ${fRpS(t.adRev)}`, '', d(t.spend, 'spend', 'rel', 0, 'hasAds')),
     hasProd && kpi('Penjualan toko', fRpS(t.sales), `${fN(t.orders)} pesanan · ${fN(t.units)} unit`, '', d(t.sales, 'sales', 'rel', 1, 'hasProd')),
-    hasProd && kpi('Profit bersih toko', fRpS(t.net), `Margin ${fPct(t.netMargin)}`, sgn(t.net), d(t.net, 'net', 'rp', 1, 'hasProd')),
+    hasProd && kpi('Laba bersih toko', fRpS(R.F.net), `Margin ${fPct(R.F.netM)} · setelah semua biaya`, sgn(R.F.net), d(R.F.net, 'net', 'rp', 1, 'hasProd')),
     hasProd && hasAds && kpi('TACOS', fPct(t.tacos), 'Biaya iklan ÷ total penjualan', '', d(t.tacos, 'tacos', 'pp', -1, 'hasProd'))
   ].filter(Boolean).join('');
   const verdict = !hasAds ? '' : t.adProfit >= 0
@@ -1525,27 +1971,40 @@ function reportHTML(){
   const cTbl = !cand.length ? '' : `<h2>Produk layak mulai diiklankan <small>laku, CVR ≥ ${fPct(+S.cvrMin)}, margin positif</small></h2><div class="rp-scroll"><table class="rp-tbl">
     <thead><tr><th>Produk</th><th>Penjualan</th><th>CVR</th><th>Margin</th><th>Target ROAS</th></tr></thead>
     <tbody>${cand.map(p => `<tr><td>${esc(p.nama)}</td><td>${fRpS(p.sales)}</td><td>${fPct(p.cvr)}</td><td>${fPct(p.margin,0)}</td><td><b style="color:var(--accent-ink)">${p.tgt ? fT(p.tgt.rec) : '—'}</b></td></tr>`).join('')}</tbody></table></div>`;
+  const F = R.F, stRows = L => L.map(x => x.k === 'h' ? `<tr class="h"><td colspan="2">${esc(x.l)}</td></tr>` : `<tr class="${x.k === 'row' ? 'r0' : x.k}"><td>${esc(x.l)}</td><td class="${x.k === 'big' ? sgn(x.v) : ''}">${fRp(x.v)}</td></tr>`).join('');
+  const finTbl = !(hasProd || INC) ? '' : `<div class="rp-2"><div><h2>Laba Rugi <small>${F.basis === 'income' ? 'basis dana cair' : 'basis pesanan'}${F.feeSrc === 'est' ? ' · potongan estimasi' : ''}</small></h2><table class="rp-tbl rp-st"><tbody>${stRows(F.pl)}</tbody></table></div>
+    <div><h2>Arus Kas <small>${F.cashEst ? 'dana cair estimasi' : 'dari laporan penghasilan'}</small></h2><table class="rp-tbl rp-st"><tbody>${stRows(F.cf)}</tbody></table></div></div>`;
   return `<div class="paper">
-    <header class="rp-h"><div><div class="rp-k">Laporan iklan & stok</div><h1>${esc(shopName() || 'Toko Anda')}</h1><div class="rp-s">Periode ${esc(lbl)} · dibuat ${fDate(new Date())}</div></div>
-      <div class="rp-brand"><span class="appicon">${APPICON(14)}</span>Ads Profit Analyzer Pro</div></header>
+    <header class="rp-h"><div><div class="rp-k">Laporan keuangan, iklan & stok</div><h1>${esc(shopName() || 'Toko Anda')}</h1><div class="rp-s">Periode ${esc(lbl)} · dibuat ${fDate(new Date())}</div></div>
+      <div class="rp-brand"><span class="appicon">${APPICON(14)}</span>Ads Profit Analyzer Pro · by Digital Pro</div></header>
     ${verdict ? `<p class="rp-say">${verdict}</p>` : ''}
     <div class="rp-kpis" style="margin-top:12px">${kpis}</div>
     ${todo.length ? `<h2>Yang perlu dilakukan</h2><ol class="rp-todo">${todo.map(a => `<li><b>${esc(a.t)}</b> <span>— ${esc(a.s)}</span></li>`).join('')}</ol>` : ''}
-    ${adTbl}${rsTbl}${cTbl}
+    ${finTbl}${adTbl}${rsTbl}${cTbl}
     <div class="rp-foot">Asumsi: PPN iklan ${fPct(+S.ppn,0)} · buffer scale ${fPct(+S.buffer,0)} · potongan marketplace ${fPct(R.pot)} · HPP default ${fPct(+S.hppDefault,0)} · lead time ${S.leadTime} hari · safety ${S.safety} hari · cover ${S.cover} hari.
-      HPP diisi untuk ${R.hppFilled} dari ${R.products.length} produk; stok diisi untuk ${R.stockFilled} dari ${R.items.length} SKU. Sumber: ${[RAW.adsFile, RAW.prodFile].filter(Boolean).map(esc).join(' & ')}.</div>
+      HPP diisi untuk ${R.hppFilled} dari ${R.products.length} produk; stok diisi untuk ${R.stockFilled} dari ${R.items.length} SKU. Biaya operasional ${fRpS(R.F.opex)} dari ${R.F.ex.length} transaksi tercatat. Sumber: ${[RAW.adsFile, RAW.prodFile, INC && INC.file, ORD && ORD.file].filter(Boolean).map(esc).join(' · ')}.</div>
   </div>`;
 }
 function openReport(){
-  if (!RAW.ads && !RAW.prod){ toast('Impor laporan dulu', false); return; }
+  if (!RAW.ads && !RAW.prod && !INC){ toast('Impor laporan dulu', false); return; }
   if (SHEET) closeSheet();
   $('#rptBody').innerHTML = reportHTML();
+  const h = HOSTED();
+  $('#rptGo').textContent = h ? 'Unduh laporan' : 'Simpan PDF';
+  $('#rptNote').innerHTML = h ? 'Klik <b>Unduh laporan</b>, buka filenya di browser, lalu klik <b>Simpan PDF</b> di bagian atas.' : 'Klik <b>Simpan PDF</b>, lalu pilih <b>Simpan sebagai PDF</b> di jendela cetak.';
   const r = $('#rpt'); r.classList.remove('hidden'); r.scrollTop = 0; document.body.style.overflow = 'hidden';
 }
 function closeReport(){ $('#rpt').classList.add('hidden'); document.body.style.overflow = ''; }
 function printReport(){
+  const ttl = ['Laporan', shopName(), R.snap ? R.snap.label : ''].filter(Boolean).join(' ');
+  if (HOSTED()){
+    const css = [...document.querySelectorAll('style')].map(x => x.textContent).join('\n');
+    const doc = `<!doctype html><html lang="id" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(ttl)}</title><style>${css}\n.rpt{position:static}</style></head><body><div class="rpt" id="rpt"><div class="rpt-bar"><b>${esc(ttl)}</b><button class="btn primary" onclick="window.print()">Simpan PDF</button></div><div class="rpt-body"><p class="rpt-note">Klik <b>Simpan PDF</b>, lalu pilih <b>Simpan sebagai PDF</b> di jendela cetak.</p>${$('#rptBody').outerHTML}</div></div></body></html>`;
+    saveFile(`${slug(ttl)}.html`, doc, 'text/html', 'Laporan disimpan — buka filenya untuk simpan PDF');
+    return;
+  }
   const old = document.title;
-  document.title = ['Laporan', shopName(), R.snap ? R.snap.label : ''].filter(Boolean).join(' ');
+  document.title = ttl;
   window.print();
   setTimeout(() => { document.title = old; }, 1000);
 }
@@ -1586,7 +2045,7 @@ const SHEETS = {
         ${targetGroup(a.tgt, a.roas, tgtAdvice(a) + (a.mapped ? '' : ' Dihitung dengan HPP default.'))}
         ${a.stock ? stockGroup(a.stock, a.flag) : ''}
         ${group('Hitungan profit', kv('Omzet iklan', fRp(a.rev)) + kv(`HPP ${fPct(a.hpp,0)} + potongan ${fPct(R.pot,0)}`, fRp(-a.rev * (1 - a.margin))) + kv(`Biaya iklan + PPN ${fPct(+S.ppn,0)}`, fRp(-a.costPpn)) + kv('<b style="color:var(--label)">Profit bersih</b>', fRp(a.profit), sgn(a.profit)), esc(a.note))}
-        ${group('Kinerja', kv('ROAS', fX(a.roas)) + kv('BEP ROAS (impas)', fX(a.bep)) + kv('Batas scale', fX(a.bep * (1 + +S.buffer))) + kv('ACOS', fPct(a.acos)) + kv('Margin sebelum iklan', fPct(a.margin), a.margin <= 0 ? 'neg' : ''))}
+        ${group('Kinerja', kv('ROAS', fX(a.roas)) + kv('Actual ROAS', fA(a.aroas), a.aroas >= 1 ? 'pos' : 'neg') + kv('BEP ROAS (impas)', fX(a.bep)) + kv('Batas scale', fX(a.bep * (1 + +S.buffer))) + kv('ACOS', fPct(a.acos)) + kv('Margin sebelum iklan', fPct(a.margin), a.margin <= 0 ? 'neg' : ''))}
         ${group('Funnel', kv('Dilihat', fN(a.views)) + kv('Klik', fN(a.clicks)) + kv('CTR', fPct(a.ctr,2), a.views && a.ctr < S.ctrMin ? 'neg' : '') + kv('Pesanan', fN(a.conv)) + kv('CVR', fPct(a.cvr,2), a.clicks && a.cvr < S.cvrMin ? 'neg' : '') + kv('Produk terjual', fN(a.sold)) + kv('Biaya per klik', fRp(a.cpc)))}`; },
       inputs: a.prod ? hppInputs(a.prod.kode) : '' };
   },
@@ -1599,7 +2058,7 @@ const SHEETS = {
         ${targetGroup(p.tgt, p.spend ? p.roas : null, p.tgt ? (p.spend ? `Untuk iklan GMV Max produk ini, isi target ROAS ${fT(p.tgt.rec)}. Di bawah ${fT(p.tgt.min)}, iklan rugi.` : `Kalau mulai iklan GMV Max, isi target ROAS ${fT(p.tgt.rec)}. Jangan di bawah ${fT(p.tgt.min)}.`) : 'Margin sudah negatif sebelum iklan — perbaiki harga atau HPP dulu.')}
         ${p.stock ? stockGroup(p.stock, p.flag) : ''}
         ${group('Hitungan profit', kv('Penjualan', fRp(p.sales)) + kv(`HPP ${fPct(p.hpp,1)}${p.hppSet ? '' : ' (default)'}`, fRp(-p.sales * p.hpp)) + kv(`Potongan ${fPct(R.pot,0)}`, fRp(-p.sales * R.pot)) + kv('Biaya iklan + PPN', fRp(-p.spend * (1 + +S.ppn))) + kv('<b style="color:var(--label)">Profit bersih</b>', fRp(p.profit), sgn(p.profit)))}
-        ${group('Kinerja', kv('Pesanan', fN(p.orders)) + kv('Unit terjual', fN(p.units)) + kv('Harga rata-rata', fRp(p.avg)) + kv('CTR produk', fPct(p.ctr,2)) + kv('CVR produk', fPct(p.cvr,2)) + kv('TACOS', fPct(p.tacos)) + kv('Porsi penjualan dari iklan', fPct(p.adShare)) + kv('BEP ROAS', fX(p.bep)))}
+        ${group('Kinerja', kv('Pesanan', fN(p.orders)) + kv('Unit terjual', fN(p.units)) + kv('Harga rata-rata', fRp(p.avg)) + kv('CTR produk', fPct(p.ctr,2)) + kv('CVR produk', fPct(p.cvr,2)) + kv('TACOS', fPct(p.tacos)) + kv('Porsi penjualan dari iklan', fPct(p.adShare)) + kv('BEP ROAS', fX(p.bep)) + (p.spend ? kv('Actual ROAS', fA(p.aroas), p.aroas >= 1 ? 'pos' : 'neg') + kv('Biaya iklan per pesanan', fRp(p.cpa)) : ''))}
         ${ads.length ? `<div class="fgroup"><div class="ftitle">Iklan untuk produk ini</div><div class="list">${ads.map(a => `<div class="row tap" data-sheet="ad|${a.idx}"><div class="r-main"><div class="r-t clamp1">${esc(a.name)}</div><div class="r-s">${esc(a.mode)} · ROAS ${fX(a.roas)}</div></div><div class="r-end"><b class="${sgn(a.profit)}">${fRpS(a.profit)}</b>${pill(a.st)}</div>${chev}</div>`).join('')}</div></div>` : ''}`; },
       inputs: hppInputs(kode) };
   },
@@ -1619,9 +2078,25 @@ const SHEETS = {
       inputs: stockInputs(key) };
   },
   import(){
-    return { head: `<div style="flex:1"><h3>Impor laporan</h3><div class="cap">Laporan Shopee untuk periode yang sama</div></div>`,
-      live: () => `${dropTiles()}<p class="fnote" style="padding:12px 2px 0">Laporan iklan: Iklan Shopee → Laporan → <b>Semua Laporan Iklan CPC</b> (CSV).<br>Laporan produk: Bisnis Saya → Performa Produk → <b>Unduh</b> (parentskudetail, XLSX).<br>File juga bisa diseret ke jendela ini.</p>
+    return { head: `<div style="flex:1"><h3>Impor laporan</h3><div class="cap">Laporan Shopee untuk periode yang sama · ${esc(curStore().name)}</div></div>`,
+      live: () => `${dropTiles()}<p class="fnote" style="padding:10px 2px 0">Laporan iklan: Iklan Shopee → Laporan → <b>Semua Laporan Iklan CPC</b> (CSV).<br>Laporan produk: Bisnis Saya → Performa Produk → <b>Unduh</b> (parentskudetail, XLSX).</p>
+        <h3 class="sub">Opsional · untuk laporan keuangan</h3>${dropTiles(['inc','ord'])}
+        <p class="fnote" style="padding:10px 2px 0">Laporan penghasilan: Keuangan → Penghasilan Saya → <b>Dana Dilepaskan</b> → Unduh (XLSX) — untuk potongan aktual & dana cair.<br>Daftar pesanan: Pesanan Saya → <b>Ekspor</b> (XLSX) — untuk rekap selesai, batal & retur. Data pembeli (nama, alamat, telepon) tidak dibaca dan tidak disimpan.<br>Jenis file dikenali otomatis, jadi file juga bisa diseret ke jendela ini.</p>
         <div class="fgroup"><div class="list">${menuRows()}</div></div>`, inputs:'' };
+  },
+  stores(){
+    const row = (act, icn, c, t, sub, danger) => `<div class="row ind tap" data-act="${act}"><span class="r-ic" style="--c:var(--${c})">${ic(icn,18,2)}</span><div class="r-main"><div class="r-t ${danger ? 'neg' : ''}">${t}</div><div class="r-s">${sub}</div></div>${chev}</div>`;
+    return { head: `<div style="flex:1"><h3>Toko</h3><div class="cap">Data tiap toko tersimpan terpisah di browser ini</div></div>`,
+      live: () => `<div class="list" style="margin-top:8px">${STORES.list.map((st,i) => { const L = storeHist(st.id), last = L[L.length - 1];
+        return `<div class="row tap" data-store="${esc(st.id)}">${storeAv(st, i, 34)}<div class="r-main"><div class="r-t clamp1">${esc(st.name)}</div><div class="r-s clamp1">${last ? `${esc(last.label)} · omzet ${fRpS(last.tot.sales)}` : 'Belum ada laporan'}</div></div>${st.id === STORES.cur ? `<span style="color:var(--accent);flex:none">${ic('check',20,2.4)}</span>` : chev}</div>`; }).join('')}
+        ${STORES.list.length > 1 ? `<div class="row ind tap" data-go="semua"><span class="r-ic" style="--c:var(--indigo)">${ic('grid',18,2)}</span><div class="r-main"><div class="r-t">Ringkasan semua toko</div><div class="r-s">Omzet, laba & iklan gabungan</div></div>${chev}</div>` : ''}</div>
+        <div class="fgroup"><div class="ftitle">Tambah toko</div><div class="addrow"><input id="newStore" placeholder="Nama toko baru" maxlength="60" autocomplete="off"><button class="btn primary" data-act="addStore">${ic('plus',16,2.2)} Tambah</button></div></div>
+        <div class="fgroup"><div class="ftitle">Tim</div><div class="list">
+          ${row('shareStore','share','green','Bagikan toko ke tim', `Unduh file “${esc(curStore().name)}” lengkap dengan laporan & biaya`)}
+          ${row('importStore','imp','blue','Impor toko dari file', 'Buka file toko dari anggota tim sebagai toko baru')}
+          ${STORES.list.length > 1 ? row('delStore','trash','red','Hapus toko ini', `Hapus “${esc(curStore().name)}” dan semua datanya`, true) : ''}
+        </div><p class="fnote">Kolaborasi tim secara real-time butuh server, sedangkan aplikasi ini menyimpan semua data hanya di perangkat Anda. Untuk bekerja bersama tim: bagikan file toko, lalu anggota tim mengimpornya di perangkat masing-masing. Ulangi setiap ada laporan baru.</p></div>`,
+      inputs:'' };
   }
 };
 function openSheet(type, id){
@@ -1646,8 +2121,8 @@ function closeSheet(){
 }
 
 /* ============================== render ============================== */
-const NAV_A = [['ringkasan','pie','Ringkasan','blue'],['iklan','megaphone','Iklan','orange'],['produk','bag','Produk','indigo'],['stok','restock','Stok & Restock','green'],['riwayat','chart','Riwayat','purple']];
-const NAV_B = [['hpp','coin','HPP Produk','pink'],['inputstok','archive','Stok Gudang','teal'],['setting','gear','Pengaturan','gray']];
+const NAV_A = [['ringkasan','pie','Ringkasan','blue'],['keuangan','wallet','Keuangan','teal'],['iklan','megaphone','Iklan','orange'],['produk','bag','Produk','indigo'],['stok','restock','Stok & Restock','green'],['riwayat','chart','Riwayat','purple']];
+const NAV_B = [['hpp','coin','HPP Produk','pink'],['inputstok','archive','Stok Gudang','cyan'],['biaya','receipt','Pengeluaran','brown'],['setting','gear','Pengaturan','gray']];
 const shopName = () => T(S.shopName) || (R && R.A.shop) || '';
 function navBadge(v){
   if (!R) return '';
@@ -1657,33 +2132,37 @@ function navBadge(v){
   if (v === 'hpp') return R.products.length ? `<span class="badge">${R.hppFilled}/${R.products.length}</span>` : '';
   if (v === 'riwayat'){ const n = histList().length; return n ? `<span class="badge">${n}</span>` : ''; }
   if (v === 'inputstok') return R.items.length ? `<span class="badge">${R.stockFilled}/${R.items.length}</span>` : '';
+  if (v === 'biaya') return R.F.ex.length ? `<span class="badge">${R.F.ex.length}</span>` : '';
   return '';
 }
 function renderChrome(){
   const nav = list => list.map(([v,i,l,c]) => `<button class="nav" data-go="${v}" ${VIEW === v ? 'aria-current="page"' : ''}><span class="nic" style="--c:var(--${c})">${ic(i,15,2.1)}</span><span>${l}</span>${navBadge(v)}</button>`).join('');
   $('#navA').innerHTML = nav(NAV_A); $('#navB').innerHTML = nav(NAV_B);
   $('#sbIcon').innerHTML = APPICON(22);
-  $('#sbShop').textContent = [shopName(), fPeriod(R.A.period)].filter(Boolean).join(' · ') || 'Shopee';
+  const cs = curStore();
+  $('#sbStore').innerHTML = `${storeAv(cs, STORES.list.indexOf(cs), 28)}<span style="flex:1;min-width:0"><b class="clamp1">${esc(cs.name)}</b><span class="s">${STORES.list.length > 1 ? STORES.list.length + ' toko · ketuk untuk ganti' : 'Kelola toko & tim'}</span></span><span style="color:var(--label-3)">${ic('updown',16,2)}</span>`;
   const fl = (ok, t, s) => `<div class="fileline"><span class="st ${ok ? 'ok' : ''}">${ok ? ic('check',12,3) : ''}</span><div style="min-width:0"><b>${t}</b><span class="clamp1">${s}</span></div></div>`;
   $('#fileCard').innerHTML = fl(!!RAW.ads, 'Laporan iklan', RAW.ads ? `${R.ads.length} iklan · ${esc(fPeriod(R.A.period) || RAW.adsFile)}` : 'Belum diimpor')
-    + fl(!!RAW.prod, 'Laporan produk', RAW.prod ? `${R.products.length} produk · ${R.items.length} SKU` : 'Belum diimpor');
-  const tabs = [['ringkasan','pie','Ringkasan'],['iklan','megaphone','Iklan'],['produk','bag','Produk'],['stok','restock','Restock'],['lainnya','ellipsis','Lainnya']];
-  const sub = ['hpp','inputstok','setting','lainnya','riwayat'];
+    + fl(!!RAW.prod, 'Laporan produk', RAW.prod ? `${R.products.length} produk · ${R.items.length} SKU` : 'Belum diimpor')
+    + (INC ? fl(true, 'Laporan penghasilan', `${fN(INC.n)} pesanan · ${fRpS(INC.total)}`) : '') + (ORD ? fl(true, 'Daftar pesanan', `${fN(ORD.n)} pesanan`) : '');
+  const tabs = [['ringkasan','pie','Ringkasan'],['keuangan','wallet','Keuangan'],['iklan','megaphone','Iklan'],['stok','restock','Restock'],['lainnya','ellipsis','Lainnya']];
+  const sub = ['hpp','inputstok','setting','lainnya','riwayat','produk','biaya','semua'];
   $('#tabbar').innerHTML = tabs.map(([v,i,l]) => { const cur = VIEW === v || (v === 'lainnya' && sub.includes(VIEW));
     const n = v === 'iklan' ? R.ads.filter(a => a.st === 'RUGI').length : v === 'stok' ? R.priority.length : 0;
     return `<button data-go="${v}" ${cur ? 'aria-current="page"' : ''}>${ic(i,24,1.7)}<span>${l}</span>${n ? `<span class="tb">${n}</span>` : ''}</button>`; }).join('');
 }
 function render(skipView){
   R = compute();
+  const cs = curStore(); if (cs && /^Toko \d+$/.test(cs.name) && !T(S.shopName) && R.A.shop){ cs.name = R.A.shop; saveStores(); }
   R.snap = makeSnap(R);
   if (R.snap) queueSnap();
   renderChrome();
   if (!skipView) renderView();
 }
 function renderView(){
-  const has = RAW.ads || RAW.prod;
-  const v = !has && !['setting','lainnya','riwayat'].includes(VIEW) ? vWelcome()
-    : ({ringkasan:vRingkasan, iklan:vIklan, produk:vProduk, stok:vStok, riwayat:vRiwayat, hpp:vHpp, inputstok:vInputStok, setting:vSetting, lainnya:vLainnya}[VIEW] || vRingkasan)();
+  const has = RAW.ads || RAW.prod || INC;
+  const v = !has && !['setting','lainnya','riwayat','biaya','semua'].includes(VIEW) ? vWelcome()
+    : ({ringkasan:vRingkasan, keuangan:vKeuangan, iklan:vIklan, produk:vProduk, stok:vStok, riwayat:vRiwayat, hpp:vHpp, inputstok:vInputStok, biaya:vBiaya, setting:vSetting, lainnya:vLainnya, semua:vSemua}[VIEW] || vRingkasan)();
   $('#view').innerHTML = v;
 }
 function go(v, f){
@@ -1693,22 +2172,37 @@ function go(v, f){
 }
 
 /* ============================== actions ============================== */
-async function loadFile(file, kind){
+async function loadFile(file, hint){
   try{
-    const rows = trimRows(await readTable(file, kind));
+    const got = await readAny(file, hint), kind = got.kind, rows = trimRows(got.rows);
     if (kind === 'ads'){
       const p = parseAds(rows); if (!p.ads.length) throw new Error('Tidak ada baris iklan di file ini');
       RAW.ads = rows; RAW.adsFile = file.name;
       toast(`${p.ads.length} iklan diimpor${p.period ? ' · ' + fPeriod(p.period) : ''}`);
-    } else {
+    } else if (kind === 'prod'){
       const p = parseProd(rows); if (!p.parents.length) throw new Error('Tidak ada produk di file ini');
       RAW.prod = rows; RAW.prodFile = file.name;
       toast(`${p.parents.length} produk · ${p.items.length} SKU diimpor`);
+    } else if (kind === 'inc'){
+      const p = parseInc(rows); if (!p || !p.n) throw new Error('Tidak ada pesanan di laporan penghasilan ini');
+      p.file = file.name; INC = p; SL.set('inc', INC);
+      toast(`Laporan penghasilan: ${fN(p.n)} pesanan · ${fRpS(p.total)} dana cair`);
+    } else {
+      const p = parseOrd(rows); if (!p || !p.n) throw new Error('Tidak ada pesanan di file ini');
+      p.file = file.name; ORD = p; SL.set('ord', ORD);
+      toast(`${fN(p.n)} pesanan diimpor · ${fN(p.st.Batal.n)} batal · ${fN(p.st.Retur.n)} retur`);
     }
-    if (!/-contoh\./.test(file.name)){ let n = 0; Object.keys(HIST).forEach(k => { if (HIST[k].demo){ delete HIST[k]; n++; } }); if (n) LS.set('hist', HIST); }
-    LS.set('raw', RAW); render(); refreshSheet();
+    if (!/-contoh\./.test(file.name)) purgeDemo();
+    if (kind === 'ads' || kind === 'prod') SL.set('raw', RAW);
+    render(); refreshSheet();
     if (!$('#onb').classList.contains('hidden')) renderOnb();
   } catch(e){ console.error(e); toast(e.message, false); }
+}
+function purgeDemo(){
+  let n = 0; Object.keys(HIST).forEach(k => { if (HIST[k].demo){ delete HIST[k]; n++; } }); if (n) SL.set('hist', HIST);
+  if (EXP.some(e => e.demo)){ EXP = EXP.filter(e => !e.demo); SL.set('exp', EXP); }
+  if (INC && /-contoh\./.test(INC.file || '')){ INC = null; SL.del('inc'); }
+  if (ORD && /-contoh\./.test(ORD.file || '')){ ORD = null; SL.del('ord'); }
 }
 async function importStock(file){
   try{
@@ -1735,29 +2229,73 @@ async function importStock(file){
       if (iLead >= 0 && T(r[iLead]) !== '') o.lead = num(r[iLead]);
       ok++;
     }
-    LS.set('stock', STOCK); render();
+    SL.set('stock', STOCK); render();
     toast(`Stok ${ok} SKU diperbarui${miss ? ` · ${miss} kode tidak cocok` : ''}`);
   } catch(e){ toast(e.message, false); }
 }
-function download(name, text, type = 'text/csv'){
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type: type + ';charset=utf-8'})); a.download = name;
+// hosted on claude.ai: files go through the viewer's save prompt; locally: a normal browser download
+const HOSTED = () => !!(window.claude && typeof window.claude.use === 'function');
+let DLNS;
+async function saveFile(name, data, type = 'text/csv', done = ''){
+  if (HOSTED()){
+    try{
+      if (DLNS === undefined) DLNS = await window.claude.use('downloads');
+      if (!DLNS){ toast('Simpan file tidak tersedia di tampilan ini', false); return false; }
+      await DLNS.save({filename: name, data});
+      if (done) toast(done); return true;
+    }catch(e){
+      const c = e && e.code;
+      if (c === 'declined') return false;
+      toast(c === 'rate_limited' ? 'Masih ada jendela simpan yang terbuka — selesaikan dulu' : 'File tidak bisa disimpan di tampilan ini', false); return false;
+    }
+  }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(data instanceof Blob ? data : new Blob([data], {type: type + ';charset=utf-8'})); a.download = name;
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  if (done) toast(done); return true;
 }
+const download = (name, text, type, done) => saveFile(name, text, type, done);
+// in-page confirmation (native confirm() is blocked when hosted)
+let ASKR = null;
+function ask(title, msg, ok = 'Lanjutkan', danger = false){
+  if (ASKR) ASKR(false);
+  $('#askT').textContent = title; $('#askM').textContent = msg;
+  const y = $('#askYes'); y.textContent = ok; y.className = 'btn ' + (danger ? 'danger' : 'primary');
+  $('#ask').classList.remove('hidden'); setTimeout(() => $('#askNo').focus(), 30);
+  return new Promise(res => { ASKR = v => { ASKR = null; $('#ask').classList.add('hidden'); res(v); }; });
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-ask]'); if (b && ASKR) ASKR(b.dataset.ask === '1'); });
+document.addEventListener('keydown', e => { if (ASKR && e.key === 'Escape'){ e.stopPropagation(); ASKR(false); } }, true);
 const csvRow = arr => arr.map(v => { const s = String(v ?? ''); return /[",;\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }).join(',');
 
-const hasUserData = () => !!(RAW.ads || RAW.prod || Object.keys(HPP).length || Object.keys(STOCK).length || Object.keys(HIST).some(k => !HIST[k].demo));
-const DEMO_CONFIRM = 'Data contoh akan menggantikan laporan, HPP, stok, dan riwayat yang tersimpan. Lanjutkan?';
+const hasUserData = () => !!(RAW.ads || RAW.prod || INC || ORD || EXP.length || Object.keys(HPP).length || Object.keys(STOCK).length || Object.keys(HIST).some(k => !HIST[k].demo));
+const askDemo = () => hasUserData() ? ask('Pakai data contoh?', 'Data contoh akan menggantikan laporan, HPP, stok, biaya, dan riwayat toko ini.', 'Pakai contoh', true) : Promise.resolve(true);
 const ACTS = {
   import(){ openSheet('import'); },
   closeSheet,
-  demo(){ if (hasUserData() && !confirm(DEMO_CONFIRM)) return; closeSheet(); demo(); },
+  demo(){ askDemo().then(ok => { if (ok){ closeSheet(); demo(); } }); },
   report: openReport, closeReport, printReport,
-  export(){ flushSnap(); download('ads-profit-backup.json', JSON.stringify({app:'ads-profit-analyzer', v:2, saved:new Date().toISOString(), settings:S, hpp:HPP, stock:STOCK, hist:HIST}, null, 1), 'application/json'); toast('Backup disimpan'); },
+  export(){ flushSnap(); download(`backup-${slug(curStore().name)}.json`, JSON.stringify(storePack('backup')), 'application/json', 'Backup disimpan'); },
   restore(){ $('#fBackup').click(); },
-  clearReports(){ if (!confirm('Mulai periode baru? Laporan saat ini dikosongkan, ringkasannya tetap tersimpan di Riwayat. HPP, stok, dan pengaturan juga tetap.')) return; flushSnap(); RAW = {ads:null, prod:null, adsFile:'', prodFile:''}; LS.set('raw', RAW); closeSheet(); go('ringkasan'); },
-  reset(){ if (!confirm('Hapus SEMUA data (laporan, HPP, stok, pengaturan) dari browser ini? Tindakan ini tidak bisa dibatalkan.')) return; ['raw','hpp','stock','settings','hist'].forEach(LS.del); S = Object.assign({}, DEFAULTS); HPP = {}; STOCK = {}; HIST = {}; clearTimeout(snapT); RAW = {ads:null, prod:null, adsFile:'', prodFile:''}; closeSheet(); go('ringkasan'); showOnb(); },
+  async clearReports(){ if (!await ask('Mulai periode baru?', 'Laporan saat ini (iklan, produk, penghasilan, pesanan) dikosongkan. Ringkasannya tetap tersimpan di Riwayat, dan HPP, stok, biaya, serta pengaturan tidak berubah.', 'Mulai periode baru')) return; flushSnap(); RAW = {ads:null, prod:null, adsFile:'', prodFile:''}; INC = null; ORD = null; SL.set('raw', RAW); SL.del('inc'); SL.del('ord'); closeSheet(); go('ringkasan'); },
+  async reset(){ if (!await ask('Hapus semua data?', 'Semua toko beserta laporan, HPP, stok, biaya, dan riwayatnya dihapus dari browser ini. Tindakan ini tidak bisa dibatalkan.', 'Hapus semua', true)) return;
+    clearTimeout(snapT); if (R) R.snap = null;
+    try{ Object.keys(localStorage).filter(k => k.startsWith('apa_') && k !== 'apa_theme').forEach(k => localStorage.removeItem(k)); sessionStorage.removeItem('apa_view'); }catch(e){}
+    location.reload(); },
   theme(){ const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); const nx = cur === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = nx; try{ localStorage.setItem('apa_theme', nx); }catch(e){} },
   importStock(){ $('#fStock').click(); },
+  xlsx: () => exportXlsx(),
+  stores(){ openSheet('stores'); },
+  addStore(){ const i = $('#newStore'), v = i ? T(i.value) : ''; if (!v){ toast('Isi nama toko dulu', false); if (i) i.focus(); return; } addStore(v); },
+  shareStore(){ flushSnap(); download(`toko-${slug(curStore().name)}.json`, JSON.stringify(storePack('store')), 'application/json', 'File toko disimpan — kirim ke anggota tim'); },
+  importStore(){ $('#fStore').click(); },
+  delStore(){ delStore(STORES.cur); },
+  addExp(){
+    const amt = num($('#exAmt').value), cat = $('#exCat').value, date = $('#exDate').value || new Date().toISOString().slice(0,10);
+    if (!(amt > 0)){ toast('Isi jumlah dulu', false); $('#exAmt').focus(); return; }
+    EXP.push({id: Date.now().toString(36) + Math.random().toString(36).slice(2,5), date, cat, amt, note: T($('#exNote').value), rec: $('#exRec').checked});
+    UI.exCat = cat; SL.set('exp', EXP); render(); toast(`${EXCAT[cat][0]} ${fRpS(amt)} dicatat`);
+    const a = $('#exAmt'); if (a) a.focus();
+  },
   tplStock(){ download('template-stok.csv', [csvRow(['Kode Variasi / Kode Produk','SKU','Nama','Variasi','Stok Saat Ini','Dalam Perjalanan','Lead Time']), ...R.items.map(i => csvRow([i.varId !== '-' ? i.varId : i.kode, i.sku, i.nama, i.vname, i.stok ?? '', (STOCK[i.key]||{}).otw ?? '', (STOCK[i.key]||{}).lead ?? '']))].join('\n')); },
   csvRestock(){ download(`restock-${new Date().toISOString().slice(0,10)}.csv`, [csvRow(['Prioritas','Status','Produk','Variasi','SKU','Kode Variasi/Produk','Sisa Hari','Perkiraan Habis','Stok Efektif','Permintaan/Hari','Reorder Point','Qty Restock','Estimasi Modal (Rp)','Lead Time']),
     ...R.priority.map(i => csvRow([i.rank, ST[i.st].l, i.nama, i.vname, i.sku, i.key, i.daysLeft.toFixed(1), i.outDate ? i.outDate.toISOString().slice(0,10) : '', i.eff, i.demand.toFixed(2), i.rop, i.qty, Math.round(i.modal), i.lead]))].join('\n')); }
@@ -1771,6 +2309,7 @@ function renderOnb(){
   let h;
   if (ONB === 0) h = `<div class="appicon">${APPICON(50)}</div>
     <h1>Ads Profit Analyzer<span class="pro">PRO</span></h1>
+    <p class="by">by Digital Pro</p>
     <p class="lead">Ketahui iklan mana yang benar-benar menghasilkan profit — dan stok mana yang harus dipesan lebih dulu.</p>
     ${FEATURES}
     <div class="onb-actions"><button class="btn primary lg" data-onb="next">Mulai</button></div>${dots}`;
@@ -1787,15 +2326,15 @@ function renderOnb(){
   $('#onbBody').innerHTML = `<div class="onb-card" style="animation:fadeUp .45s cubic-bezier(.2,.8,.3,1)">${h}</div>`;
   if (ONB === 1) setTimeout(() => { const i = $('#onbName'); if (i){ i.focus(); i.select(); } }, 60);
 }
-function finishOnb(){ S.onboarded = true; LS.set('settings', S); $('#onb').classList.add('hidden'); document.body.style.overflow = ''; go('ringkasan'); }
+function finishOnb(){ S.onboarded = true; SL.set('settings', S); $('#onb').classList.add('hidden'); document.body.style.overflow = ''; go('ringkasan'); }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-onb]'); if (!b) return;
   const a = b.dataset.onb;
   if (a === 'next'){ ONB = 1; renderOnb(); }
   else if (a === 'back'){ ONB = Math.max(0, ONB - 1); renderOnb(); }
-  else if (a === 'name'){ const v = T($('#onbName').value); if (!v) return; S.shopName = v; LS.set('settings', S); ONB = 2; renderOnb(); }
+  else if (a === 'name'){ const v = T($('#onbName').value); if (!v) return; S.shopName = v; SL.set('settings', S); curStore().name = v; saveStores(); ONB = 2; renderOnb(); }
   else if (a === 'done') finishOnb();
-  else if (a === 'demo'){ if (hasUserData() && !confirm(DEMO_CONFIRM)) return; demo(); finishOnb(); }
+  else if (a === 'demo'){ askDemo().then(ok => { if (ok){ demo(); finishOnb(); } }); }
 });
 document.addEventListener('input', e => { if (e.target.id === 'onbName'){ const btn = $('[data-onb="name"]'); if (btn) btn.disabled = !T(e.target.value); } });
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'onbName') $('[data-onb="name"]').click(); });
@@ -1842,9 +2381,29 @@ function demo(){
     lines.push([n+1, pi === '-' ? 'Iklan Produk Otomatis' : P[pi][0], st, 'Iklan Produk', kode, '-', mode, 'Semua Penempatan', '01/10/2026', 'Tidak Terbatas', views, clicks, '', conv, sold, rev, cost]);
   });
   RAW = {ads: trimRows(parseCSV(lines.map(csvRow).join('\n'))), prod: trimRows(prodRows), adsFile:'Data_Keseluruhan_Iklan_Shopee-contoh.csv', prodFile:'parentskudetail-contoh.xlsx'};
-  HPP = hpp; STOCK = stock; S.refDate = '2026-11-01';
+  HPP = hpp; STOCK = stock; S.refDate = '2026-11-01'; INC = null; ORD = null;
+  EXP = [
+    {id:'dx1', date:'2026-10-01', cat:'gaji', amt:6000000, note:'Gaji 2 admin & packing', rec:true, demo:true},
+    {id:'dx2', date:'2026-10-01', cat:'sewa', amt:2500000, note:'Sewa gudang', rec:true, demo:true},
+    {id:'dx3', date:'2026-10-08', cat:'packaging', amt:1800000, note:'Plastik, lakban & thank-you card', demo:true},
+    {id:'dx4', date:'2026-10-12', cat:'iklanluar', amt:1200000, note:'Iklan Instagram', demo:true},
+    {id:'dx5', date:'2026-10-15', cat:'stok', amt:25000000, note:'Restock gamis & pashmina', demo:true},
+    {id:'dx6', date:'2026-10-20', cat:'income', amt:3000000, note:'Penjualan reseller offline', demo:true}];
+  R = compute(); const t0 = R.tot;
+  const wts = []; for (let d = 1; d <= 31; d++) wts.push(1 + 0.35 * Math.sin(d / 2.6) + (d === 10 || d === 25 ? 0.9 : 0) + rnd() * 0.25);
+  const wsum = wts.reduce((a,b) => a + b, 0), odays = {};
+  wts.forEach((w, i) => { const n = Math.round(t0.orders * w / wsum), v = Math.round(t0.sales * w / wsum); odays[`2026-10-${pad2(i+1)}`] = {n, v, bn: Math.round(n * 0.04), bv: Math.round(v * 0.04)}; });
+  const oN = sum(Object.values(odays), d => d.n), oV = sum(Object.values(odays), d => d.v), ost = {};
+  [['Selesai',.88],['Proses',.06],['Retur',.02],['Batal',.04]].forEach(([k,f]) => ost[k] = {n: Math.round(oN * f), v: Math.round(oV * f)});
+  ORD = {file:'Order.all-contoh.xlsx', n:oN, v:oV, st:ost, days:odays, start:'2026-10-01', end:'2026-10-31'};
+  const base = t0.sales * 0.94, iN = Math.round(t0.orders * 0.9);
+  const fees = {admin: base * 0.065, layanan: base * 0.04, proses: iN * 1250, ams: base * 0.012, transaksi: 0, program: base * 0.015, kampanye: 0, lain: base * 0.002};
+  Object.keys(fees).forEach(k => fees[k] = Math.round(fees[k]));
+  INC = {file:'Income.dilepas-contoh.xlsx', n:iN, price: Math.round(base * 1.07), disc: Math.round(base * 0.07), refund: Math.round(base * 0.015), vouch: Math.round(base * 0.01), fees, days:{}, start:'2026-10-03', end:'2026-11-02'};
+  INC.feeTot = sum(FEE_KEYS, k => fees[k]); INC.other = -Math.round(base * 0.004);
+  INC.total = INC.price - INC.disc - INC.refund - INC.vouch - INC.feeTot + INC.other;
   R = compute(); const cur = makeSnap(R); HIST = cur ? demoHistory(cur) : {};
-  LS.set('raw', RAW); LS.set('settings', S); LS.set('hpp', HPP); LS.set('stock', STOCK); LS.set('hist', HIST);
+  saveAll();
   go('ringkasan'); toast('Data contoh dimuat');
 }
 
@@ -1868,7 +2427,9 @@ function demoHistory(cur){
     const unmapped = sum(ads.filter(a => !a.kode || a.kode === '-'), a => a.cost * (1 + ppn));
     ads.forEach(a => delete a.m);
     out[start + '_' + end] = { key: start + '_' + end, start, end, label, short, shop: cur.shop, demo: true, saved: new Date().toISOString(), days, hasAds: true, hasProd: true,
-      tot: { sales, orders: Math.round(cur.tot.orders * k), units: Math.round(cur.tot.units * k), spend, adRev, adProfit: sum(ads, a => a.profit), net: sum(prods, p => p.profit) - unmapped,
+      tot: { sales, orders: Math.round(cur.tot.orders * k), units: Math.round(cur.tot.units * k), spend, adRev, adProfit: sum(ads, a => a.profit),
+        net: sum(prods, p => p.profit) - unmapped - (cur.tot.opex || 0) * (0.9 + rnd() * 0.15) + (cur.tot.otherInc || 0) * rnd(),
+        gp: (cur.tot.gp || 0) * k * (0.95 + rnd() * 0.04), fees: (cur.tot.fees || 0) * k, opex: cur.tot.opex || 0, aov: (cur.tot.aov || 0) * (0.93 + rnd() * 0.1), salesNet: (cur.tot.salesNet || sales) * k,
         roas: spend ? adRev / spend : 0, bep: contrib > 0 ? adRev * (1 + ppn) / contrib : null, tacos: sales ? spend / sales : 0, acos: adRev ? spend / adRev : 0, adShare: sales ? adRev / sales : 0 },
       n: countBy(ads, 'st'), ads, prods };
   });
@@ -1880,24 +2441,41 @@ function demoHistory(cur){
 $('#fAds').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'ads'); e.target.value = ''; };
 $('#fProd').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'prod'); e.target.value = ''; };
 $('#fStock').onchange = e => { if (e.target.files[0]) importStock(e.target.files[0]); e.target.value = ''; };
+$('#fInc').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'inc'); e.target.value = ''; };
+$('#fOrd').onchange = e => { if (e.target.files[0]) loadFile(e.target.files[0], 'ord'); e.target.value = ''; };
+$('#fStore').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try{ const d = JSON.parse(await f.text()); if (!d || d.app !== 'ads-profit-analyzer') throw new Error('Bukan file toko dari aplikasi ini');
+    let name = T(d.name) || T(d.settings && d.settings.shopName) || 'Toko impor';
+    if (STORES.list.some(x => x.name === name)) name += ' (impor)';
+    flushSnap(); const id = newStoreId(); STORES.list.push({id, name}); STORES.cur = id; saveStores();
+    loadStoreData(); applyPack(d); S.onboarded = true; SL.set('settings', S); resetUI(); closeSheet(); go('ringkasan'); toast(`Toko “${name}” diimpor`); }
+  catch(err){ toast(err.message, false); }
+};
 $('#fBackup').onchange = async e => {
   const f = e.target.files[0]; e.target.value = ''; if (!f) return;
   try{ const d = JSON.parse(await f.text()); if (!d || d.app !== 'ads-profit-analyzer') throw new Error('Bukan file backup aplikasi ini');
-    S = Object.assign({}, DEFAULTS, d.settings || {}); HPP = d.hpp || {}; STOCK = d.stock || {}; if (d.hist) HIST = d.hist; LS.set('settings',S); LS.set('hpp',HPP); LS.set('stock',STOCK); LS.set('hist',HIST); render(); refreshSheet(); toast('Backup dipulihkan'); }
+    applyPack(d); render(); refreshSheet(); toast('Backup dipulihkan'); }
   catch(err){ toast(err.message, false); }
 };
 document.addEventListener('click', e => {
-  const dh = e.target.closest('[data-delhist]'); if (dh){ const k = dh.dataset.delhist, s = HIST[k]; if (s && confirm(`Hapus ringkasan periode ${s.label} dari riwayat?`)){ delete HIST[k]; LS.set('hist', HIST); render(); } return; }
+  const dh = e.target.closest('[data-delhist]'); if (dh){ const k = dh.dataset.delhist, s = HIST[k]; if (s) ask(`Hapus periode ${s.label}?`, 'Ringkasan periode ini dihapus dari Riwayat.', 'Hapus', true).then(ok => { if (ok){ delete HIST[k]; SL.set('hist', HIST); render(); } }); return; }
+  const de = e.target.closest('[data-delexp]'); if (de){ const x = EXP.find(y => y.id === de.dataset.delexp); if (x) ask('Hapus pengeluaran ini?', `“${x.note || (EXCAT[x.cat] || EXCAT.lain)[0]}” sebesar ${fRp(x.amt)}.`, 'Hapus', true).then(ok => { if (ok){ EXP = EXP.filter(y => y !== x); SL.set('exp', EXP); render(); } }); return; }
+  const so = e.target.closest('[data-store]'); if (so){ if (so.dataset.store === STORES.cur){ closeSheet(); if (VIEW === 'semua') go('ringkasan'); } else switchStore(so.dataset.store); return; }
   const a = e.target.closest('[data-act]'); if (a){ ACTS[a.dataset.act](); return; }
-  const d = e.target.closest('[data-drop]'); if (d){ (d.dataset.drop === 'ads' ? $('#fAds') : $('#fProd')).click(); return; }
+  const d = e.target.closest('[data-drop]'); if (d){ $({ads:'#fAds', prod:'#fProd', inc:'#fInc', ord:'#fOrd'}[d.dataset.drop] || '#fProd').click(); return; }
   const sh = e.target.closest('[data-sheet]'); if (sh){ const [t, ...rest] = sh.dataset.sheet.split('|'); openSheet(t, rest.join('|')); return; }
   const g = e.target.closest('[data-go]'); if (g){ e.preventDefault(); if (SHEET) closeSheet(); go(g.dataset.go, g.dataset.f ? JSON.parse(g.dataset.f) : null); return; }
-  const s = e.target.closest('[data-seg]'); if (s){ const [k,v] = s.dataset.seg.split('|'); UI[k] = v; renderView(); return; }
+  const s = e.target.closest('[data-seg]'); if (s){ const [k,v] = s.dataset.seg.split('|');
+    if (k === 'finBasis'){ if (v === 'income' && !INC){ toast('Impor laporan penghasilan dulu untuk basis dana cair', false); return; } S.finBasis = v; SL.set('settings', S); render(); return; }
+    UI[k] = v; renderView(); return; }
   const m = e.target.closest('[data-more]'); if (m){ UI.lim[m.dataset.more] = 1e9; renderView(); return; }
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !$('#rpt').classList.contains('hidden')){ closeReport(); return; }
   if (e.key === 'Escape' && SHEET) closeSheet();
+  if (e.key === 'Enter' && (e.target.id === 'exAmt' || e.target.id === 'exNote')){ e.preventDefault(); ACTS.addExp(); return; }
+  if (e.key === 'Enter' && e.target.id === 'newStore'){ e.preventDefault(); ACTS.addStore(); return; }
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"][data-sheet]')){ e.preventDefault(); e.target.click(); }
   if (e.key === 'Enter' && e.target.matches('input[data-hpp],input[data-stk]')){
     const attr = e.target.dataset.hpp ? 'hpp' : 'stk', f = e.target.dataset[attr].split('|')[1];
@@ -1921,7 +2499,7 @@ document.addEventListener('change', e => {
     o[f] = v === null ? null : (f === 'pct' ? v / 100 : v);
     if (!isNum(o.pct) && !isNum(o.rp)) delete HPP[k];
     t.closest('.fin') && t.closest('.fin').classList.toggle('set', v !== null);
-    LS.set('hpp', HPP); render(true);
+    SL.set('hpp', HPP); render(true);
     const p = R.pMap.get(k), der = document.querySelector(`[data-der="${CSS.escape(k)}"]`);
     if (p && der) der.textContent = hppDer(p);
     if (SHEET){ refreshSheet(); DIRTY = true; }
@@ -1932,7 +2510,7 @@ document.addEventListener('change', e => {
     o[f] = T(t.value) === '' ? null : num(t.value);
     if (!isNum(o.stok) && !isNum(o.otw) && !isNum(o.lead)) delete STOCK[k];
     t.closest('.fin') && t.closest('.fin').classList.toggle('set', T(t.value) !== '');
-    LS.set('stock', STOCK); render(true);
+    SL.set('stock', STOCK); render(true);
     const it = R.items.find(x => x.key === k), cell = document.querySelector(`[data-ist="${CSS.escape(k)}"]`);
     if (it && cell) cell.innerHTML = pill(it.st);
     if (SHEET){ refreshSheet(); DIRTY = true; }
@@ -1942,8 +2520,10 @@ document.addEventListener('change', e => {
     const [k,type] = t.dataset.set.split('|'); const raw = T(t.value);
     if (type === 'pct') S[k] = raw === '' ? DEFAULTS[k] : num(raw) / 100;
     else if (type === 'num') S[k] = raw === '' ? (k === 'periodOverride' ? '' : DEFAULTS[k]) : num(raw);
+    else if (type === 'bool') S[k] = t.checked;
     else S[k] = raw;
-    LS.set('settings', S); render(true);
+    if (k === 'shopName' && T(raw)){ curStore().name = T(raw); saveStores(); }
+    SL.set('settings', S); render(type !== 'bool');
     const tot = [...document.querySelectorAll('.frow.total span')][1]; if (tot) tot.textContent = fPct(R.pot);
   }
 });
@@ -1955,7 +2535,7 @@ document.addEventListener('dragleave', () => { if (--dragN <= 0){ dragN = 0; doc
 document.addEventListener('drop', e => {
   e.preventDefault(); dragN = 0; document.querySelectorAll('[data-drop]').forEach(x => x.classList.remove('over'));
   const d = e.target.closest('[data-drop]');
-  [...(e.dataTransfer && e.dataTransfer.files || [])].forEach(f => loadFile(f, d ? d.dataset.drop : (/\.csv$/i.test(f.name) || /iklan/i.test(f.name) ? 'ads' : 'prod')));
+  [...(e.dataTransfer && e.dataTransfer.files || [])].forEach(f => loadFile(f, d ? d.dataset.drop : null));
 });
 // tooltip (pointer devices only)
 const tip = $('#tip');
@@ -1977,5 +2557,3 @@ try{ const v = sessionStorage.getItem('apa_view'); if (v) VIEW = v; }catch(e){}
 render();
 if (!S.onboarded) showOnb();
 </script>
-</body>
-</html>
