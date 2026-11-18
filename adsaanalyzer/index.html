@@ -1,5 +1,5 @@
 <script src="/adsaanalyzer/cloud.js"></script>
-<title>Ads Profit Analyzer Pro by Digital Pro</title>
+<title>Ads Profit Analyzer Pro by Ilona Digital</title>
 <meta name="theme-color" content="#f5f5f7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -547,7 +547,7 @@ h3.sub{font-size:14px;font-weight:600;color:var(--label-2);margin:22px 0 10px 4p
   <aside class="sidebar">
     <div class="sb-app">
       <div class="appicon" id="sbIcon"></div>
-      <div style="min-width:0"><b>Ads Profit Analyzer<span class="pro">PRO</span></b><span id="sbShop">by Digital Pro</span></div>
+      <div style="min-width:0"><b>Ads Profit Analyzer<span class="pro">PRO</span></b><span id="sbShop">by Ilona Digital</span></div>
     </div>
     <button class="sb-store" id="sbStore" data-sheet="stores|" aria-label="Ganti toko"></button>
     <div class="sb-sec">Analisis</div>
@@ -1977,7 +1977,7 @@ function reportHTML(){
     <div><h2>Arus Kas <small>${F.cashEst ? 'dana cair estimasi' : 'dari laporan penghasilan'}</small></h2><table class="rp-tbl rp-st"><tbody>${stRows(F.cf)}</tbody></table></div></div>`;
   return `<div class="paper">
     <header class="rp-h"><div><div class="rp-k">Laporan keuangan, iklan & stok</div><h1>${esc(shopName() || 'Toko Anda')}</h1><div class="rp-s">Periode ${esc(lbl)} · dibuat ${fDate(new Date())}</div></div>
-      <div class="rp-brand"><span class="appicon">${APPICON(14)}</span>Ads Profit Analyzer Pro · by Digital Pro</div></header>
+      <div class="rp-brand"><span class="appicon">${APPICON(14)}</span>Ads Profit Analyzer Pro · by Ilona Digital</div></header>
     ${verdict ? `<p class="rp-say">${verdict}</p>` : ''}
     <div class="rp-kpis" style="margin-top:12px">${kpis}</div>
     ${todo.length ? `<h2>Yang perlu dilakukan</h2><ol class="rp-todo">${todo.map(a => `<li><b>${esc(a.t)}</b> <span>— ${esc(a.s)}</span></li>`).join('')}</ol>` : ''}
@@ -2310,7 +2310,7 @@ function renderOnb(){
   let h;
   if (ONB === 0) h = `<div class="appicon">${APPICON(50)}</div>
     <h1>Ads Profit Analyzer<span class="pro">PRO</span></h1>
-    <p class="by">by Digital Pro</p>
+    <p class="by">by Ilona Digital</p>
     <p class="lead">Ketahui iklan mana yang benar-benar menghasilkan profit — dan stok mana yang harus dipesan lebih dulu.</p>
     ${FEATURES}
     <div class="onb-actions"><button class="btn primary lg" data-onb="next">Mulai</button></div>${dots}`;
